@@ -23,412 +23,96 @@
       --white: #fffaf6;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--black); font-family: "DM Sans", sans-serif; overflow-x: hidden; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(246,240,232,.82); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(23,21,22,.08); }
+    .logo { font-family: "Playfair Display", serif; font-size: 25px; font-weight: 600; letter-spacing: 5px; }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { color: var(--black); text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+    .nav-button { border: 1px solid var(--black); padding: 11px 20px; border-radius: 30px; background: transparent; cursor: pointer; transition: .3s; }
+    .nav-button:hover { background: var(--black); color: white; }
 
-    body {
-      background: var(--cream);
-      color: var(--black);
-      font-family: "DM Sans", sans-serif;
-      overflow-x: hidden;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      padding: 20px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(246,240,232,.82);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(23,21,22,.08);
-    }
-
-    .logo {
-      font-family: "Playfair Display", serif;
-      font-size: 25px;
-      font-weight: 600;
-      letter-spacing: 5px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--black);
-      text-decoration: none;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .nav-button {
-      border: 1px solid var(--black);
-      padding: 11px 20px;
-      border-radius: 30px;
-      background: transparent;
-      cursor: pointer;
-      transition: .3s;
-    }
-
-    .nav-button:hover {
-      background: var(--black);
-      color: white;
-    }
-
-    .hero {
-      min-height: 100vh;
-      padding: 150px 7% 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 50px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: var(--pink);
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: .35;
-      right: -150px;
-      top: 80px;
-      z-index: -1;
-    }
-
-    .eyebrow {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 25px;
-      color: var(--wine);
-      font-weight: 700;
-    }
-
-    h1 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(55px, 7vw, 105px);
-      line-height: .88;
-      font-weight: 500;
-      letter-spacing: -4px;
-    }
-
+    .hero { min-height: 100vh; padding: 150px 7% 80px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 50px; position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; width: 600px; height: 600px; background: var(--pink); border-radius: 50%; filter: blur(80px); opacity: .35; right: -150px; top: 80px; z-index: -1; }
+    .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; color: var(--wine); font-weight: 700; }
+    h1 { font-family: "Playfair Display", serif; font-size: clamp(55px, 7vw, 105px); line-height: .88; font-weight: 500; letter-spacing: -4px; }
     h1 em { color: var(--wine); }
-
-    .hero-text {
-      max-width: 500px;
-      margin-top: 35px;
-      font-size: 18px;
-      line-height: 1.6;
-      color: #514a4c;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 15px;
-      margin-top: 35px;
-    }
-
-    .primary-btn, .secondary-btn {
-      padding: 16px 27px;
-      border-radius: 50px;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      font-size: 14px;
-      transition: .3s;
-    }
-
-    .primary-btn {
-      background: var(--black);
-      color: white;
-    }
-
-    .primary-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,0,0,.18);
-    }
-
-    .secondary-btn {
-      background: transparent;
-      border: 1px solid #aaa;
-    }
-
-    .hero-visual {
-      position: relative;
-      height: 650px;
-    }
-
-    .fashion-card {
-      position: absolute;
-      width: 310px;
-      height: 430px;
-      border-radius: 180px 180px 20px 20px;
-      overflow: hidden;
-      box-shadow: 0 25px 70px rgba(0,0,0,.15);
-    }
-
-    .card-main {
-      right: 10%;
-      top: 60px;
-      background: linear-gradient(140deg, rgba(60,20,45,.1), rgba(60,20,45,.6)), url("https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=85") center/cover;
-    }
-
-    .card-small {
-      width: 180px;
-      height: 240px;
-      right: 58%;
-      top: 360px;
-      border-radius: 100px 100px 15px 15px;
-      background: url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=500&q=85") center/cover;
-      transform: rotate(-8deg);
-    }
-
-    .floating {
-      position: absolute;
-      padding: 12px 18px;
-      background: rgba(255,250,246,.85);
-      backdrop-filter: blur(10px);
-      border-radius: 30px;
-      font-size: 13px;
-      box-shadow: 0 8px 25px rgba(0,0,0,.1);
-    }
-
+    .hero-text { max-width: 500px; margin-top: 35px; font-size: 18px; line-height: 1.6; color: #514a4c; }
+    .hero-buttons { display: flex; gap: 15px; margin-top: 35px; }
+    .primary-btn, .secondary-btn { padding: 16px 27px; border-radius: 50px; font-weight: 700; cursor: pointer; border: none; font-size: 14px; transition: .3s; }
+    .primary-btn { background: var(--black); color: white; }
+    .primary-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,.18); }
+    .secondary-btn { background: transparent; border: 1px solid #aaa; }
+    .hero-visual { position: relative; height: 650px; }
+    .fashion-card { position: absolute; width: 310px; height: 430px; border-radius: 180px 180px 20px 20px; overflow: hidden; box-shadow: 0 25px 70px rgba(0,0,0,.15); }
+    .card-main { right: 10%; top: 60px; background: linear-gradient(140deg, rgba(60,20,45,.1), rgba(60,20,45,.6)), url("https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=85") center/cover; }
+    .card-small { width: 180px; height: 240px; right: 58%; top: 360px; border-radius: 100px 100px 15px 15px; background: url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=500&q=85") center/cover; transform: rotate(-8deg); }
+    .floating { position: absolute; padding: 12px 18px; background: rgba(255,250,246,.85); backdrop-filter: blur(10px); border-radius: 30px; font-size: 13px; box-shadow: 0 8px 25px rgba(0,0,0,.1); }
     .tag-kibbe { top: 50px; left: 5%; }
     .tag-color { top: 270px; right: 0; }
     .tag-venus { bottom: 80px; left: 20%; }
 
-    .marquee {
-      background: var(--black);
-      color: white;
-      padding: 16px 0;
-      overflow: hidden;
-      white-space: nowrap;
-    }
+    .marquee { background: var(--black); color: white; padding: 16px 0; overflow: hidden; white-space: nowrap; }
+    .marquee-inner { display: inline-block; animation: scroll 18s linear infinite; font-family: "Playfair Display", serif; font-size: 22px; font-style: italic; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    .marquee-inner {
-      display: inline-block;
-      animation: scroll 18s linear infinite;
-      font-family: "Playfair Display", serif;
-      font-size: 22px;
-      font-style: italic;
-    }
+    .intro { padding: 140px 8%; text-align: center; max-width: 1100px; margin: auto; }
+    .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--wine); margin-bottom: 20px; }
+    .intro h2, .section-heading { font-family: "Playfair Display", serif; font-size: clamp(40px, 5vw, 70px); font-weight: 500; line-height: 1; }
+    .intro p { max-width: 720px; margin: 30px auto; font-size: 17px; line-height: 1.7; color: #625b5c; }
 
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    .intro {
-      padding: 140px 8%;
-      text-align: center;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .section-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--wine);
-      margin-bottom: 20px;
-    }
-
-    .intro h2, .section-heading {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(40px, 5vw, 70px);
-      font-weight: 500;
-      line-height: 1;
-    }
-
-    .intro p {
-      max-width: 650px;
-      margin: 30px auto;
-      font-size: 17px;
-      line-height: 1.7;
-      color: #625b5c;
-    }
-
-    .system {
-      padding: 100px 7%;
-      background: var(--white);
-    }
-
-    .system-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      margin-bottom: 60px;
-    }
-
-    .system-header p {
-      max-width: 350px;
-      line-height: 1.6;
-      color: #625b5c;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .system-card {
-      min-height: 430px;
-      padding: 35px;
-      border-radius: 25px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: .4s;
-    }
-
+    .system { padding: 100px 7%; background: var(--white); }
+    .system-header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 60px; }
+    .system-header p { max-width: 350px; line-height: 1.6; color: #625b5c; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .system-card { min-height: 430px; padding: 35px; border-radius: 25px; display: flex; flex-direction: column; justify-content: space-between; transition: .4s; }
     .system-card:hover { transform: translateY(-10px) rotate(-1deg); }
     .kibbe { background: #ead8dc; }
     .color { background: #d7d0e3; }
     .astro { background: #29202d; color: white; }
     .card-number { font-size: 12px; letter-spacing: 2px; }
+    .system-card h3 { font-family: "Playfair Display", serif; font-size: 42px; font-weight: 500; }
+    .system-card p { line-height: 1.6; font-size: 15px; opacity: .8; }
+    .card-symbol { font-size: 70px; font-family: "Playfair Display", serif; text-align: right; }
 
-    .system-card h3 {
-      font-family: "Playfair Display", serif;
-      font-size: 42px;
-      font-weight: 500;
-    }
-
-    .system-card p {
-      line-height: 1.6;
-      font-size: 15px;
-      opacity: .8;
-    }
-
-    .card-symbol {
-      font-size: 70px;
-      font-family: "Playfair Display", serif;
-      text-align: right;
-    }
+    /* Refined visual explanation of the current Kibbe framework */
+    .kibbe-guide { padding: 120px 7%; background: var(--cream); }
+    .guide-header { max-width: 760px; margin-bottom: 45px; }
+    .guide-header p { margin-top: 22px; color: #625b5c; line-height: 1.7; }
+    .kibbe-families { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .family { min-height: 210px; padding: 22px; border: 1px solid rgba(23,21,22,.12); border-radius: 22px; background: rgba(255,250,246,.72); display: flex; flex-direction: column; justify-content: space-between; transition: .3s; }
+    .family:hover { transform: translateY(-6px); }
+    .family-line { height: 72px; position: relative; display: flex; align-items: center; justify-content: center; }
+    .line-shape { display: block; width: 76px; height: 10px; border-radius: 999px; background: var(--wine); }
+    .vertical .line-shape { transform: rotate(90deg); height: 8px; width: 64px; }
+    .width .line-shape { width: 82px; }
+    .balance .line-shape { width: 56px; }
+    .petite .line-shape { width: 38px; height: 38px; border-radius: 50%; }
+    .curve .line-shape { width: 62px; height: 24px; border-radius: 50%; }
+    .family h4 { font-family: "Playfair Display", serif; font-size: 24px; font-weight: 500; }
+    .family p { margin-top: 7px; font-size: 12px; line-height: 1.5; color: #625b5c; }
+    .family small { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--wine); }
+    .type-note { margin-top: 28px; padding: 18px 20px; border-left: 3px solid var(--wine); background: rgba(255,250,246,.7); font-size: 13px; line-height: 1.6; color: #514a4c; }
 
     .experience { padding: 140px 7%; }
-
-    .experience-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 100px;
-      align-items: center;
-    }
-
-    .experience-copy p {
-      margin-top: 30px;
-      line-height: 1.7;
-      color: #625b5c;
-      max-width: 500px;
-    }
-
-    .steps {
-      margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    .step {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
-
-    .step-num {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--wine);
-      color: white;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-    }
-
+    .experience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+    .experience-copy p { margin-top: 30px; line-height: 1.7; color: #625b5c; max-width: 500px; }
+    .steps { margin-top: 40px; display: flex; flex-direction: column; gap: 25px; }
+    .step { display: flex; gap: 20px; align-items: flex-start; }
+    .step-num { width: 38px; height: 38px; border-radius: 50%; background: var(--wine); color: white; display: grid; place-items: center; flex-shrink: 0; }
     .step h4 { margin-bottom: 5px; }
     .step p { margin: 0; font-size: 14px; }
 
     .phone-wrapper { display: flex; justify-content: center; }
-
-    .phone {
-      width: 290px;
-      height: 590px;
-      background: #171516;
-      border: 8px solid #171516;
-      border-radius: 40px;
-      padding: 10px;
-      box-shadow: 0 30px 70px rgba(0,0,0,.2);
-      transform: rotate(4deg);
-    }
-
-    .phone-screen {
-      height: 100%;
-      border-radius: 30px;
-      overflow: hidden;
-      background: var(--cream);
-      padding: 25px 18px;
-    }
-
-    .phone-logo {
-      font-family: "Playfair Display", serif;
-      letter-spacing: 3px;
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .profile-circle {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin: auto;
-      background: url("https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80") center/cover;
-    }
-
-    .result-title {
-      text-align: center;
-      font-family: "Playfair Display", serif;
-      font-size: 27px;
-      margin-top: 18px;
-    }
-
-    .result-sub {
-      text-align: center;
-      font-size: 11px;
-      margin-top: 6px;
-      color: var(--wine);
-      letter-spacing: 1px;
-    }
-
-    .result-box {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 15px;
-      background: white;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
+    .phone { width: 290px; height: 590px; background: #171516; border: 8px solid #171516; border-radius: 40px; padding: 10px; box-shadow: 0 30px 70px rgba(0,0,0,.2); transform: rotate(4deg); }
+    .phone-screen { height: 100%; border-radius: 30px; overflow: hidden; background: var(--cream); padding: 25px 18px; }
+    .phone-logo { font-family: "Playfair Display", serif; letter-spacing: 3px; text-align: center; margin-bottom: 25px; }
+    .profile-circle { width: 100px; height: 100px; border-radius: 50%; margin: auto; background: url("https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80") center/cover; }
+    .result-title { text-align: center; font-family: "Playfair Display", serif; font-size: 27px; margin-top: 18px; }
+    .result-sub { text-align: center; font-size: 11px; margin-top: 6px; color: var(--wine); letter-spacing: 1px; }
+    .result-box { margin-top: 20px; padding: 15px; border-radius: 15px; background: white; font-size: 12px; line-height: 1.5; }
     .palette { display: flex; gap: 7px; margin-top: 12px; }
     .dot { width: 25px; height: 25px; border-radius: 50%; }
     .dot:nth-child(1) { background: #641f38; }
@@ -437,141 +121,55 @@
     .dot:nth-child(4) { background: #c9a66b; }
     .dot:nth-child(5) { background: #171516; }
 
-    .cta {
-      margin: 7%;
-      padding: 110px 30px;
-      background: var(--black);
-      color: white;
-      text-align: center;
-      border-radius: 30px;
-    }
+    .cta { margin: 7%; padding: 110px 30px; background: var(--black); color: white; text-align: center; border-radius: 30px; }
+    .cta h2 { font-family: "Playfair Display", serif; font-size: clamp(50px, 7vw, 95px); line-height: .9; font-weight: 500; }
+    .cta p { max-width: 500px; margin: 30px auto; color: #c9c0c3; line-height: 1.6; }
+    .cta button { padding: 16px 28px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; }
+    footer { padding: 30px 7%; display: flex; justify-content: space-between; font-size: 12px; border-top: 1px solid rgba(0,0,0,.1); }
 
-    .cta h2 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(50px, 7vw, 95px);
-      line-height: .9;
-      font-weight: 500;
-    }
-
-    .cta p {
-      max-width: 500px;
-      margin: 30px auto;
-      color: #c9c0c3;
-      line-height: 1.6;
-    }
-
-    .cta button {
-      padding: 16px 28px;
-      border: none;
-      border-radius: 50px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    footer {
-      padding: 30px 7%;
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      border-top: 1px solid rgba(0,0,0,.1);
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 200;
-      padding: 20px;
-    }
-
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
     .modal.active { display: flex; }
+    .modal-content { position: relative; max-width: 520px; width: 100%; background: var(--cream); padding: 55px; border-radius: 25px; text-align: center; }
+    .modal-content h2 { font-family: "Playfair Display", serif; font-size: 50px; line-height: .95; font-weight: 500; }
+    .modal-content p { margin: 25px auto; color: #625b5c; line-height: 1.6; }
+    .close { position: absolute; right: 20px; top: 15px; border: none; background: none; font-size: 30px; cursor: pointer; }
+    .email-input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #bbb; background: white; font-family: inherit; }
+    .modal-submit { margin-top: 12px; width: 100%; padding: 15px; border: none; border-radius: 10px; background: var(--black); color: white; font-weight: 700; cursor: pointer; }
+    .error { color: var(--wine); font-size: 12px; margin-top: 8px; display: none; }
+    .success { display: none; }
 
-    .modal-content {
-      position: relative;
-      max-width: 520px;
-      width: 100%;
-      background: var(--cream);
-      padding: 55px;
-      border-radius: 25px;
-      text-align: center;
-    }
-
-    .modal-content h2 {
-      font-family: "Playfair Display", serif;
-      font-size: 50px;
-      line-height: .95;
-      font-weight: 500;
-    }
-
-    .modal-content p {
-      margin: 25px auto;
-      color: #625b5c;
-      line-height: 1.6;
-    }
-
-    .close {
-      position: absolute;
-      right: 20px;
-      top: 15px;
-      border: none;
-      background: none;
-      font-size: 30px;
-      cursor: pointer;
-    }
-
-    .email-input {
-      width: 100%;
-      padding: 15px;
-      border-radius: 10px;
-      border: 1px solid #bbb;
-      margin-bottom: 12px;
-      font: inherit;
-    }
-
-    .modal-button {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 10px;
-      background: var(--black);
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    @media(max-width: 900px) {
-      .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-visual { margin-top: 20px; }
-      .card-main { right: 12%; }
-      .system-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    @media (max-width: 900px) {
+      .hero, .experience-grid { grid-template-columns: 1fr; }
+      .hero-visual { height: 540px; }
       .cards { grid-template-columns: 1fr; }
-      .experience-grid { grid-template-columns: 1fr; gap: 60px; }
-      footer { flex-direction: column; gap: 15px; }
+      .kibbe-families { grid-template-columns: 1fr 1fr; }
+      .system-header { flex-direction: column; align-items: flex-start; gap: 25px; }
+      .nav-links { display: none; }
     }
 
-    @media(max-width: 500px) {
-      h1 { letter-spacing: -2px; }
-      .hero { padding-left: 6%; padding-right: 6%; }
+    @media (max-width: 560px) {
+      .hero { padding: 130px 6% 60px; }
+      h1 { font-size: 58px; }
       .hero-buttons { flex-direction: column; }
-      .hero-visual { transform: scale(.85); margin-left: -25px; }
-      .system-card { min-height: 350px; }
-      .cta { margin: 20px; padding: 80px 20px; }
-      .modal-content { padding: 35px 25px; }
+      .fashion-card.card-main { right: 0; width: 260px; height: 370px; }
+      .card-small { left: 0; right: auto; top: 330px; }
+      .tag-color { right: -10px; }
+      .intro, .experience, .kibbe-guide { padding: 90px 6%; }
+      .kibbe-families { grid-template-columns: 1fr; }
+      .phone { transform: none; }
+      .modal-content { padding: 45px 25px; }
+      footer { flex-direction: column; gap: 10px; }
     }
   </style>
 </head>
-
 <body>
+
   <nav>
     <div class="logo">VÉNUS</div>
     <ul class="nav-links">
+      <li><a href="#sistema">Sistema</a></li>
       <li><a href="#como">Cómo funciona</a></li>
-      <li><a href="#sistema">El sistema</a></li>
-      <li><a href="#resultado">Tu resultado</a></li>
+      <li><a href="#resultado">Resultado</a></li>
     </ul>
     <button class="nav-button" onclick="openModal()">Entrar</button>
   </nav>
@@ -601,7 +199,7 @@
   <section class="intro">
     <div class="section-label">Not another personality test</div>
     <h2>Porque tu outfit también<br>cuenta quién eres.</h2>
-    <p>VÉNUS transforma datos sobre tu cuerpo, tus colores y tu carta astral en una identidad visual. No para decirte qué debes usar. Para ayudarte a descubrir qué se siente como tú.</p>
+    <p>Vestirte no es solo elegir prendas bonitas: es decidir qué líneas, colores y códigos visuales quieres comunicar. VÉNUS convierte esos criterios en una guía para que comprar, combinar y construir looks deje de sentirse como adivinar. No te dicta una estética: te da un sistema para construir la tuya.</p>
   </section>
 
   <section class="system" id="sistema">
@@ -625,11 +223,27 @@
         <div class="card-symbol">◐</div>
       </div>
       <div class="system-card astro">
-        <div class="card-number">03 / ENERGY</div>
-        <div><h3>Astrología</h3><p>Venus, Lilith y otros placements se convierten en referencias de estética, expresión y mood.</p></div>
+        <div class="card-number">03 / CÓDIGOS</div>
+        <div><h3>Astrología</h3><p>Venus y Lilith funcionan como variables de dirección estética: traducimos tus placements en códigos de sensualidad, contraste, feminidad y actitud.</p></div>
         <div class="card-symbol">☽</div>
       </div>
     </div>
+  </section>
+
+  <section class="kibbe-guide">
+    <div class="guide-header">
+      <div class="section-label">Cómo leemos la silueta</div>
+      <h2 class="section-heading">Kibbe no es una medida.<br><em>Es una línea visual.</em></h2>
+      <p>En lugar de reducir el cuerpo a peso, talla o proporciones aisladas, VÉNUS observa cómo se combinan estructura, verticalidad, anchura, balance, petite y curva para orientar las líneas de la ropa.</p>
+    </div>
+    <div class="kibbe-families">
+      <div class="family vertical"><div class="family-line"><span class="line-shape"></span></div><div><small>Familia</small><h4>Dramatic</h4><p>D + SD · verticalidad y líneas alargadas.</p></div></div>
+      <div class="family width"><div class="family-line"><span class="line-shape"></span></div><div><small>Familia</small><h4>Natural</h4><p>FN + SN · amplitud y líneas relajadas.</p></div></div>
+      <div class="family balance"><div class="family-line"><span class="line-shape"></span></div><div><small>Familia</small><h4>Classic</h4><p>DC + SC · equilibrio con un sesgo definido.</p></div></div>
+      <div class="family petite"><div class="family-line"><span class="line-shape"></span></div><div><small>Familia</small><h4>Gamine</h4><p>FG + SG · escala compacta y líneas interrumpidas.</p></div></div>
+      <div class="family curve"><div class="family-line"><span class="line-shape"></span></div><div><small>Familia</small><h4>Romantic</h4><p>TR + R · curva y líneas suaves.</p></div></div>
+    </div>
+    <div class="type-note"><strong>Nota:</strong> el sistema actual de David Kibbe suele trabajarse con 10 Image Identities; los tres tipos “puros” de la clasificación original —Natural, Classic y Gamine— se consideran descontinuados en el enfoque actual.</div>
   </section>
 
   <section class="experience" id="como">
@@ -639,9 +253,9 @@
         <h2 class="section-heading">Tu estilo.<br>Pero con<br><em>data.</em></h2>
         <p>Respondes unas preguntas, agregas tus datos y VÉNUS cruza los resultados para construir un perfil visual completamente personalizado.</p>
         <div class="steps">
-          <div class="step"><div class="step-num">1</div><div><h4>Haz los tests</h4><p>Silueta + color + astrología.</p></div></div>
-          <div class="step"><div class="step-num">2</div><div><h4>Descubre tu fórmula</h4><p>La app cruza tus resultados.</p></div></div>
-          <div class="step"><div class="step-num">3</div><div><h4>Construye tu aesthetic</h4><p>Looks, maquillaje, cabello y shopping.</p></div></div>
+          <div class="step"><div class="step-num">1</div><div><h4>Haz los tests</h4><p>Silueta + paleta + códigos astrológicos.</p></div></div>
+          <div class="step"><div class="step-num">2</div><div><h4>Descubre tu fórmula</h4><p>Cruza estructura, color y códigos para detectar patrones.</p></div></div>
+          <div class="step"><div class="step-num">3</div><div><h4>Construye tu aesthetic</h4><p>Recibes decisiones visuales: prendas, looks, makeup y cabello.</p></div></div>
         </div>
       </div>
 
@@ -654,7 +268,7 @@
             <div class="result-sub">SOFT GAMINE · DEEP AUTUMN · VENUS CANCER</div>
             <div class="result-box"><strong>Your colors</strong><div class="palette"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
             <div class="result-box"><strong>Your silhouettes</strong><p>Waist definition · cropped jackets · playful details · structured curves</p></div>
-            <div class="result-box"><strong>Your energy</strong><p>Romantic + mysterious + playful.</p></div>
+            <div class="result-box"><strong>Your codes</strong><p>Romantic · mysterious · playful · high contrast.</p></div>
           </div>
         </div>
       </div>
@@ -662,54 +276,58 @@
   </section>
 
   <section class="cta">
-    <div class="section-label" style="color:#d99ab4;">Ready?</div>
     <h2>Stop dressing<br>for everyone else.</h2>
-    <p>Empieza a construir una estética que se sienta como tu propia firma.</p>
-    <button onclick="openModal()">Quiero descubrir mi estilo ✦</button>
+    <p>Tu estilo no tiene que encajar en una estética que ya existe. VÉNUS combina tus datos para ayudarte a construir una que sí se sienta tuya.</p>
+    <button onclick="openModal()">Quiero mi fórmula →</button>
   </section>
 
-  <footer><div>© 2026 VÉNUS</div><div>Style is personal. The algorithm is just the beginning.</div></footer>
+  <footer><span>VÉNUS © 2026</span><span>Kibbe · Colorimetría · Astrología aplicada</span></footer>
 
   <div class="modal" id="modal">
     <div class="modal-content">
       <button class="close" onclick="closeModal()">×</button>
-      <div class="section-label">VÉNUS / EARLY ACCESS</div>
-      <h2>Tu aesthetic<br>te está esperando.</h2>
-      <p>Déjanos tu correo y sé de las primeras personas en probar VÉNUS.</p>
-      <input class="email-input" type="email" placeholder="tu@email.com">
-      <button class="modal-button" onclick="joinWaitlist()">Entrar a la waitlist →</button>
+      <div id="formView">
+        <h2>Tu estilo<br>empieza aquí.</h2>
+        <p>Déjanos tu email para ser parte de la primera versión de VÉNUS.</p>
+        <form id="waitlistForm">
+          <input class="email-input" id="email" type="email" placeholder="tu@email.com" required>
+          <div class="error" id="emailError">Escribe un email válido.</div>
+          <button class="modal-submit" type="submit">Entrar a la waitlist →</button>
+        </form>
+      </div>
+      <div class="success" id="successView"><h2>You're in. ✦</h2><p>Tu lugar está guardado. VÉNUS está en camino.</p></div>
     </div>
   </div>
 
   <script>
-    function openModal() { document.getElementById("modal").classList.add("active"); }
-    function closeModal() { document.getElementById("modal").classList.remove("active"); }
+    const modal = document.getElementById('modal');
+    const formView = document.getElementById('formView');
+    const successView = document.getElementById('successView');
+    const form = document.getElementById('waitlistForm');
+    const email = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
 
-    function joinWaitlist() {
-      const input = document.querySelector(".email-input");
-      if (!input.value || !input.value.includes("@")) {
-        input.style.borderColor = "#641f38";
-        return;
-      }
-      document.querySelector(".modal-content").innerHTML = `
-        <div class="section-label">YOU'RE IN ✦</div>
-        <h2>Welcome<br>to VÉNUS.</h2>
-        <p>Te avisaremos cuando tu nueva era esté lista para comenzar.</p>
-      `;
-    }
+    function openModal() { modal.classList.add('active'); }
+    function closeModal() { modal.classList.remove('active'); }
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    document.getElementById("modal").addEventListener("click", function(e) {
-      if(e.target === this) closeModal();
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!email.checkValidity()) { emailError.style.display = 'block'; return; }
+      emailError.style.display = 'none';
+      formView.style.display = 'none';
+      successView.style.display = 'block';
     });
 
-    document.addEventListener("mousemove", function(e) {
-      const tags = document.querySelectorAll(".floating");
-      const x = (window.innerWidth / 2 - e.clientX) / 80;
-      const y = (window.innerHeight / 2 - e.clientY) / 80;
-      tags.forEach((tag, index) => {
-        const factor = (index + 1) * .5;
-        tag.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+    document.querySelectorAll('.floating').forEach(tag => {
+      tag.addEventListener('mousemove', e => {
+        const rect = tag.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) * .15;
+        const y = (e.clientY - rect.top - rect.height / 2) * .15;
+        tag.style.transform = `translate(${x}px, ${y}px)`;
       });
+      tag.addEventListener('mouseleave', () => { tag.style.transform = ''; });
     });
   </script>
 </body>
