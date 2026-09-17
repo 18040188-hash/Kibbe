@@ -1,1 +1,256 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VÉNUS · Test de estilo</title><style>body{font-family:Arial,sans-serif;background:#f6f0e8;color:#171516;max-width:760px;margin:auto;padding:32px}h1{font-family:Georgia,serif;font-size:48px}section{background:#fffaf6;padding:28px;border-radius:22px;margin-top:24px}button{display:block;width:100%;text-align:left;padding:15px;margin:10px 0;border:1px solid #bbb;border-radius:12px;background:transparent;cursor:pointer;font-size:15px}button:hover,button.selected{background:#641f38;color:white}#result{display:none;background:#171516;color:white;border-radius:22px;padding:28px;margin-top:24px}strong{color:#d99ab4}.actions{display:flex;gap:12px}.actions button{background:#171516;color:white;text-align:center}.muted{color:#6b6265;line-height:1.6}</style></head><body><p>✦ VÉNUS / DIAGNÓSTICO VISUAL</p><h1>Construye tu fórmula de estilo.</h1><p class="muted">Este prototipo combina respuestas de silueta, color y códigos estéticos. El resultado es orientativo y no sustituye un análisis profesional.</p><section id="quiz"><div id="question"></div><div id="options"></div><div class="actions"><button id="back">← Atrás</button><button id="next">Siguiente →</button></div></section><div id="result"><p>✦ TU RESULTADO</p><h2 id="title"></h2><p><strong>Kibbe orientativo:</strong> <span id="kibbe"></span></p><p><strong>Colorimetría inicial:</strong> <span id="color"></span></p><p><strong>Códigos estéticos:</strong> <span id="codes"></span></p><p id="advice"></p><button id="restart">Repetir test ↻</button></div><script>const qs=[{q:'¿Qué línea visual te representa más?',o:[['dramatic','Alargada y angular'],['natural','Abierta y relajada'],['classic','Equilibrada y simétrica'],['gamine','Compacta y contrastante'],['romantic','Suave y curvilínea']]},{q:'¿Qué efecto quieres comunicar?',o:[['structured','Estructura y elegancia'],['relaxed','Naturalidad y comodidad'],['balanced','Pulcritud y refinamiento'],['playful','Juego y dinamismo'],['soft','Romanticismo y sensualidad']]},{q:'¿Qué paleta te atrae más?',o:[['deep','Borgoña, espresso y verde bosque'],['cool','Ciruela, azul tinta y plata'],['light','Crema, rosa suave y melocotón'],['bright','Rojo vivo, blanco y tonos nítidos']]},{q:'¿Qué código estético quieres explorar?',o:[['venus','Encanto, armonía y sensualidad'],['lilith','Misterio, independencia y contraste'],['both','Romanticismo con actitud rebelde'],['minimal','Claridad, control y simplicidad']]},{q:'¿Qué prenda elegirías primero?',o:[['jacket','Chaqueta corta y estructurada'],['dress','Vestido fluido con cintura marcada'],['knit','Tejidos suaves y capas relajadas'],['tailoring','Sastrería limpia y minimalista']]}];let i=0,a=[];const $=x=>document.getElementById(x);function draw(){ $('question').innerHTML='<h2>'+(i+1)+'. '+qs[i].q+'</h2>';$('options').innerHTML=qs[i].o.map(x=>'<button data-v="'+x[0]+'" class="'+(a[i]===x[0]?'selected':'')+'">'+x[1]+'</button>').join('');document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{a[i]=b.dataset.v;draw()});$('back').disabled=i===0;$('next').textContent=i===qs.length-1?'Ver resultado ✦':'Siguiente →'}$('next').onclick=()=>{if(!a[i])return alert('Selecciona una opción.');if(i<qs.length-1){i++;draw()}else finish()};$('back').onclick=()=>{if(i>0){i--;draw()}};function finish(){const k={dramatic:'Dramatic',natural:'Natural',classic:'Classic',gamine:'Gamine',romantic:'Romantic'};const c={deep:'Otoño profundo',cool:'Invierno profundo',light:'Primavera suave',bright:'Paleta nítida'};const z={venus:'Venus: encanto y armonía',lilith:'Lilith: misterio y contraste',both:'Romantic Rebel',minimal:'Modern Minimal'};$('title').textContent=a[3]==='both'?'Romantic Rebel':a[3]==='lilith'?'Dark Muse':a[3]==='venus'?'Soft Siren':'Modern Muse';$('kibbe').textContent=k[a[0]]||'Por explorar';$('color').textContent=c[a[2]]||'Por explorar';$('codes').textContent=z[a[3]]||'Por explorar';$('advice').textContent='Dirección sugerida: '+qs[4].o.find(x=>x[0]===a[4])[1]+'. Experimenta con proporciones, textura y contraste sin tratar el resultado como una regla rígida.';$('quiz').style.display='none';$('result').style.display='block'}$('restart').onclick=()=>{i=0;a=[];$('quiz').style.display='block';$('result').style.display='none';draw()};draw();</script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VÉNUS · Test de estilo</title>
+  <style>
+    :root {
+      --cream: #f6f0e8;
+      --ink: #171516;
+      --wine: #641f38;
+      --pink: #d99ab4;
+      --white: #fffaf6;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px 20px;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Arial, sans-serif;
+    }
+
+    main { max-width: 760px; margin: 0 auto; }
+    h1 { font: 500 48px Georgia, serif; line-height: 1; }
+    section {
+      margin-top: 24px;
+      padding: 28px;
+      border-radius: 22px;
+      background: var(--white);
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 15px;
+      border: 1px solid #bbb;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      font-size: 15px;
+      text-align: left;
+    }
+
+    button:hover,
+    button.selected {
+      background: var(--wine);
+      color: white;
+    }
+
+    button:disabled { opacity: .45; cursor: not-allowed; }
+    .actions { display: flex; gap: 12px; }
+    .actions button { background: var(--ink); color: white; text-align: center; }
+    .muted { color: #6b6265; line-height: 1.6; }
+    #result { display: none; background: var(--ink); color: white; }
+    strong { color: var(--pink); }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p>✦ VÉNUS / DIAGNÓSTICO VISUAL</p>
+    <h1>Construye tu fórmula de estilo.</h1>
+    <p class="muted">
+      Este prototipo combina respuestas de silueta, color y códigos estéticos.
+      El resultado es orientativo y no sustituye un análisis profesional.
+    </p>
+
+    <section id="quiz">
+      <div id="question"></div>
+      <div id="options"></div>
+      <div class="actions">
+        <button id="back" type="button">← Atrás</button>
+        <button id="next" type="button">Siguiente →</button>
+      </div>
+    </section>
+
+    <section id="result">
+      <p>✦ TU RESULTADO</p>
+      <h2 id="title"></h2>
+      <p><strong>Kibbe orientativo:</strong> <span id="kibbe"></span></p>
+      <p><strong>Colorimetría inicial:</strong> <span id="color"></span></p>
+      <p><strong>Códigos estéticos:</strong> <span id="codes"></span></p>
+      <p id="advice"></p>
+      <button id="restart" type="button">Repetir test ↻</button>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        question: '¿Qué línea visual te representa más?',
+        options: [
+          ['dramatic', 'Alargada y angular'],
+          ['natural', 'Abierta y relajada'],
+          ['classic', 'Equilibrada y simétrica'],
+          ['gamine', 'Compacta y contrastante'],
+          ['romantic', 'Suave y curvilínea']
+        ]
+      },
+      {
+        question: '¿Qué efecto quieres comunicar?',
+        options: [
+          ['structured', 'Estructura y elegancia'],
+          ['relaxed', 'Naturalidad y comodidad'],
+          ['balanced', 'Pulcritud y refinamiento'],
+          ['playful', 'Juego y dinamismo'],
+          ['soft', 'Romanticismo y sensualidad']
+        ]
+      },
+      {
+        question: '¿Qué paleta te atrae más?',
+        options: [
+          ['deep', 'Borgoña, espresso y verde bosque'],
+          ['cool', 'Ciruela, azul tinta y plata'],
+          ['light', 'Crema, rosa suave y melocotón'],
+          ['bright', 'Rojo vivo, blanco y tonos nítidos']
+        ]
+      },
+      {
+        question: '¿Qué código estético quieres explorar?',
+        options: [
+          ['venus', 'Encanto, armonía y sensualidad'],
+          ['lilith', 'Misterio, independencia y contraste'],
+          ['both', 'Romanticismo con actitud rebelde'],
+          ['minimal', 'Claridad, control y simplicidad']
+        ]
+      },
+      {
+        question: '¿Qué prenda elegirías primero?',
+        options: [
+          ['jacket', 'Chaqueta corta y estructurada'],
+          ['dress', 'Vestido fluido con cintura marcada'],
+          ['knit', 'Tejidos suaves y capas relajadas'],
+          ['tailoring', 'Sastrería limpia y minimalista']
+        ]
+      }
+    ];
+
+    let currentQuestion = 0;
+    let answers = [];
+
+    const $ = (id) => document.getElementById(id);
+
+    function renderQuestion() {
+      const current = questions[currentQuestion];
+
+      $('question').innerHTML =
+        `<h2>${currentQuestion + 1}. ${current.question}</h2>`;
+
+      $('options').innerHTML = current.options
+        .map(([value, label]) => `
+          <button
+            type="button"
+            data-value="${value}"
+            class="${answers[currentQuestion] === value ? 'selected' : ''}"
+          >
+            ${label}
+          </button>
+        `)
+        .join('');
+
+      document.querySelectorAll('[data-value]').forEach((button) => {
+        button.addEventListener('click', () => {
+          answers[currentQuestion] = button.dataset.value;
+          renderQuestion();
+        });
+      });
+
+      $('back').disabled = currentQuestion === 0;
+      $('next').textContent =
+        currentQuestion === questions.length - 1
+          ? 'Ver resultado ✦'
+          : 'Siguiente →';
+    }
+
+    function showResult() {
+      const kibbeTypes = {
+        dramatic: 'Dramatic',
+        natural: 'Natural',
+        classic: 'Classic',
+        gamine: 'Gamine',
+        romantic: 'Romantic'
+      };
+
+      const colorTypes = {
+        deep: 'Otoño profundo',
+        cool: 'Invierno profundo',
+        light: 'Primavera suave',
+        bright: 'Paleta nítida'
+      };
+
+      const aestheticCodes = {
+        venus: 'Venus: encanto y armonía',
+        lilith: 'Lilith: misterio y contraste',
+        both: 'Romantic Rebel',
+        minimal: 'Modern Minimal'
+      };
+
+      const code = answers[3];
+      const garment = questions[4].options.find(
+        ([value]) => value === answers[4]
+      );
+
+      $('title').textContent =
+        code === 'both' ? 'Romantic Rebel' :
+        code === 'lilith' ? 'Dark Muse' :
+        code === 'venus' ? 'Soft Siren' :
+        'Modern Muse';
+
+      $('kibbe').textContent = kibbeTypes[answers[0]] || 'Por explorar';
+      $('color').textContent = colorTypes[answers[2]] || 'Por explorar';
+      $('codes').textContent = aestheticCodes[code] || 'Por explorar';
+      $('advice').textContent =
+        `Dirección sugerida: ${garment ? garment[1] : 'explorar distintas prendas'}. ` +
+        'Experimenta con proporciones, textura y contraste sin tratar el resultado como una regla rígida.';
+
+      $('quiz').style.display = 'none';
+      $('result').style.display = 'block';
+    }
+
+    $('next').addEventListener('click', () => {
+      if (!answers[currentQuestion]) {
+        alert('Selecciona una opción.');
+        return;
+      }
+
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    $('back').addEventListener('click', () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+      }
+    });
+
+    $('restart').addEventListener('click', () => {
+      currentQuestion = 0;
+      answers = [];
+      $('quiz').style.display = 'block';
+      $('result').style.display = 'none';
+      renderQuestion();
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
