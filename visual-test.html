@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,28 +8,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-  href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;1,400
         &family=Playfair+Display:ital,wght@0,500;1,500&display=swap"
   rel="stylesheet"
 >
 <style>
 /* ── TOKENS ─────────────────────────────────────────────── */
 :root {
-  --wine:   #641f38;
-  --plum:   #40203f;
-  --wine-lt:#fdf0f4;
-  --wine-md:#e8b0c0;
-  --gold:   #c9a66b;
-  --cream:  #f6f0e8;
-  --black:  #171516;
-  --white:  #fffaf6;
-  --muted:  #7a6e70;
-  --border: rgba(23,21,22,.12);
-  --r:      14px;
+  --wine:    #641f38;
+  --plum:    #40203f;
+  --wine-lt: #fdf0f4;
+  --wine-md: #e8b0c0;
+  --gold:    #c9a66b;
+  --cream:   #f6f0e8;
+  --black:   #171516;
+  --white:   #fffaf6;
+  --muted:   #7a6e70;
+  --border:  rgba(23,21,22,.12);
+  --r:       14px;
 }
-
-/* ── RESET ───────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 html { scroll-behavior: smooth; }
 body {
   font-family: 'DM Sans', sans-serif;
@@ -47,7 +50,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(246,240,232,.9);
+  background: rgba(246,240,232,.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
@@ -75,16 +78,14 @@ nav {
 
 /* ── LAYOUT ──────────────────────────────────────────────── */
 main {
-  max-width: 560px;
+  max-width: 600px;
   margin: 0 auto;
-  padding: 100px 24px 80px;
+  padding: 100px 20px 80px;
   min-height: 100vh;
 }
 
-/* ── PROGRESS BAR ────────────────────────────────────────── */
-.progress-wrap {
-  margin-bottom: 32px;
-}
+/* ── PROGRESS ────────────────────────────────────────────── */
+.progress-wrap { margin-bottom: 28px; }
 .progress-meta {
   display: flex;
   justify-content: space-between;
@@ -123,11 +124,11 @@ main {
 /* ── SECTION HEADER ──────────────────────────────────────── */
 .section-intro {
   text-align: center;
-  padding: 20px 0 32px;
+  padding: 0 0 28px;
 }
 .section-icon {
-  font-size: 32px;
-  margin-bottom: 12px;
+  font-size: 30px;
+  margin-bottom: 10px;
   display: block;
 }
 .section-label {
@@ -139,21 +140,80 @@ main {
 }
 .section-title {
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.2;
   margin-bottom: 10px;
 }
 .section-sub {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--muted);
   line-height: 1.6;
-  max-width: 400px;
+  max-width: 420px;
   margin: 0 auto;
 }
 
+/* ── GENDER SELECTOR ─────────────────────────────────────── */
+.gender-screen {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 0;
+}
+.gender-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-top: 28px;
+}
+.gender-opt {
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 22px 12px;
+  cursor: pointer;
+  background: var(--white);
+  transition: .2s;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.gender-opt:hover {
+  border-color: var(--wine);
+  background: var(--wine-lt);
+}
+.gender-opt.selected {
+  border-color: var(--wine);
+  background: var(--wine-lt);
+}
+.gender-icon { font-size: 28px; margin-bottom: 8px; }
+.gender-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--black);
+}
+.gender-start {
+  margin-top: 28px;
+  background: var(--wine);
+  border: none;
+  border-radius: 30px;
+  padding: 14px 32px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  opacity: .35;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+.gender-start.on {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* ── QUESTION ────────────────────────────────────────────── */
-.question-block { margin-bottom: 36px; }
+.question-block { margin-bottom: 32px; }
 .q-text {
   font-size: 17px;
   font-weight: 500;
@@ -166,27 +226,28 @@ main {
   line-height: 1.5;
   margin-bottom: 16px;
 }
-
-/* ── OPTIONS GRID ────────────────────────────────────────── */
 .opt-grid {
   display: grid;
   gap: 10px;
 }
 .opt-grid.cols-2 { grid-template-columns: 1fr 1fr; }
 .opt-grid.cols-1 { grid-template-columns: 1fr; }
-
 .opt {
   border: 1.5px solid var(--border);
   border-radius: var(--r);
-  padding: 16px 14px 13px;
+  padding: 14px 12px 12px;
   cursor: pointer;
   background: var(--white);
-  transition: border-color .18s, background .18s;
+  transition: .18s;
   text-align: center;
   position: relative;
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
-.opt:hover { border-color: var(--wine-md); background: var(--wine-lt); }
+.opt:hover {
+  border-color: var(--wine-md);
+  background: var(--wine-lt);
+}
 .opt.selected {
   border-color: var(--wine);
   background: var(--wine-lt);
@@ -198,14 +259,12 @@ main {
   font-size: 9px;
   color: var(--wine);
 }
-
-/* visual inside opt */
 .opt-visual {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 70px;
-  margin-bottom: 10px;
+  height: 66px;
+  margin-bottom: 9px;
 }
 .opt-name {
   font-size: 13px;
@@ -219,8 +278,6 @@ main {
   color: var(--muted);
   line-height: 1.4;
 }
-
-/* color swatch option */
 .swatch-row {
   display: flex;
   gap: 4px;
@@ -229,31 +286,29 @@ main {
   flex-wrap: wrap;
 }
 .swatch {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: 1.5px solid rgba(0,0,0,.08);
   flex-shrink: 0;
 }
-
-/* horizontal option (for single-col) */
 .opt.horizontal {
   text-align: left;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   padding: 14px 16px;
 }
 .opt.horizontal .opt-visual {
   height: auto;
   margin: 0;
   flex-shrink: 0;
-  width: 40px;
+  width: 38px;
 }
 .opt.horizontal .opt-text { flex: 1; }
 .opt.horizontal .opt-name { margin-bottom: 2px; }
 
-/* ── NAVIGATION ──────────────────────────────────────────── */
+/* ── NAV BUTTONS ─────────────────────────────────────────── */
 .nav-btns {
   display: flex;
   gap: 10px;
@@ -265,7 +320,7 @@ main {
   background: none;
   border: 1px solid var(--border);
   border-radius: 30px;
-  padding: 12px 20px;
+  padding: 12px 18px;
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   cursor: pointer;
@@ -278,7 +333,7 @@ main {
   background: var(--wine);
   border: none;
   border-radius: 30px;
-  padding: 13px 20px;
+  padding: 13px 18px;
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -293,145 +348,534 @@ main {
   pointer-events: auto;
 }
 
-/* ── RESULT ──────────────────────────────────────────────── */
-.result-wrap { display: none; }
-.result-header {
+/* ── SELFIE MODULE ───────────────────────────────────────── */
+.selfie-wrap { display: none; }
+.selfie-upload-area {
+  border: 2px dashed var(--wine-md);
+  border-radius: var(--r);
+  padding: 28px 20px;
   text-align: center;
-  padding: 16px 0 28px;
+  cursor: pointer;
+  background: var(--white);
+  transition: .2s;
+  position: relative;
 }
-.result-badge {
-  display: inline-block;
+.selfie-upload-area:hover,
+.selfie-upload-area.drag {
+  border-color: var(--wine);
   background: var(--wine-lt);
-  color: var(--wine);
-  border: 1px solid var(--wine-md);
-  border-radius: 20px;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  padding: 5px 16px;
-  margin-bottom: 16px;
-  text-transform: uppercase;
 }
-.result-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 32px;
+.selfie-upload-area input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.upload-icon { font-size: 28px; margin-bottom: 8px; }
+.upload-label {
+  font-size: 14px;
   font-weight: 500;
-  font-style: italic;
-  line-height: 1.1;
-  margin-bottom: 6px;
+  color: var(--black);
+  margin-bottom: 4px;
 }
-.result-tagline {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 20px;
+.upload-sub { font-size: 12px; color: var(--muted); }
+.selfie-preview-wrap {
+  display: none;
+  margin-top: 14px;
+  position: relative;
 }
-.result-desc {
-  font-size: 15px;
-  line-height: 1.7;
-  color: #514a4c;
-  margin-bottom: 24px;
+.selfie-preview-wrap img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
 }
-
-/* formula chips */
-.formula-row {
+.selfie-remove {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: rgba(23,21,22,.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px; height: 30px;
+  font-size: 16px;
+  cursor: pointer;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 28px;
 }
-.formula-chip {
+.selfie-privacy {
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 12px;
   font-size: 12px;
-  padding: 6px 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.selfie-skip {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 8px 0;
+  display: block;
+  margin: 10px auto 0;
+}
+.analysis-state {
+  display: none;
+  text-align: center;
+  padding: 28px 0;
+}
+.analysis-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--wine);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin: 0 auto 14px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.analysis-label { font-size: 14px; color: var(--muted); }
+
+/* ── MOODBOARD RESULT ────────────────────────────────────── */
+.result-wrap { display: none; }
+
+/* cover header */
+.mb-cover {
+  background: var(--black);
+  border-radius: 18px;
+  padding: 32px 24px 28px;
+  text-align: center;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.mb-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 70% 30%,
+    rgba(100,31,56,.5) 0%,
+    transparent 70%
+  );
+}
+.mb-cover-eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--wine-md);
+  margin-bottom: 10px;
+  position: relative;
+}
+.mb-cover-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 500;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  position: relative;
+}
+.mb-cover-tagline {
+  font-size: 12px;
+  color: rgba(255,255,255,.55);
+  letter-spacing: 1px;
+  position: relative;
+}
+.formula-strip {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  position: relative;
+}
+.formula-chip {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 11px;
+  color: rgba(255,255,255,.8);
   display: flex;
   align-items: center;
   gap: 6px;
 }
 .chip-label {
+  color: var(--wine-md);
   font-size: 9px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--muted);
-}
-.chip-val {
-  font-weight: 500;
-  color: var(--wine);
 }
 
-/* result sections */
-.result-section {
+/* section heading */
+.mb-section {
+  margin-bottom: 16px;
+}
+.mb-section-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.mb-section-icon {
+  width: 28px; height: 28px;
+  background: var(--wine);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: white;
+  flex-shrink: 0;
+}
+.mb-section-title {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--wine);
+  font-weight: 500;
+}
+
+/* proportion diagram card */
+.proportion-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.proportion-inner {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.proportion-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.proportion-figure svg {
+  display: block;
+  margin: 0 auto;
+}
+.proportion-figure-label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 4px;
+}
+.proportion-rules { flex: 1; }
+.proportion-rule {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #514a4c;
+  align-items: flex-start;
+}
+.proportion-rule:last-child { border-bottom: none; }
+.pr-dot {
+  width: 6px; height: 6px;
+  background: var(--wine);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* garment chips grid */
+.garment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.garment-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px;
+}
+.garment-icon {
+  font-size: 22px;
+  margin-bottom: 8px;
+  display: block;
+}
+.garment-cat {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin-bottom: 6px;
+}
+.garment-list {
+  font-size: 12px;
+  color: #514a4c;
+  line-height: 1.8;
+}
+
+/* palette strip */
+.palette-strip {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--r);
   padding: 18px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
-.result-section-title {
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--wine);
+.palette-swatches {
+  display: flex;
+  gap: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 56px;
   margin-bottom: 12px;
 }
-.tip-list { list-style: none; }
-.tip-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 13px;
+.palette-swatch-block {
+  flex: 1;
+  position: relative;
+}
+.palette-swatch-block span {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  color: rgba(255,255,255,.7);
+  white-space: nowrap;
+  letter-spacing: .5px;
+}
+.palette-rule {
+  font-size: 12px;
   color: #514a4c;
-  line-height: 1.5;
+  line-height: 1.7;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
   padding: 5px 0;
   border-bottom: 1px solid var(--border);
 }
-.tip-item:last-child { border-bottom: none; }
-.tip-icon {
-  color: var(--wine);
+.palette-rule:last-child { border-bottom: none; }
+.palette-rule-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
   flex-shrink: 0;
-  margin-top: 2px;
-  font-size: 13px;
+  margin-top: 5px;
 }
-.avoid-icon { color: #b07020; }
-.result-section.avoids .result-section-title { color: #b07020; }
 
-/* color palette result */
-.palette-grid {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+/* image moodboard mosaic */
+.mosaic {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 16px;
 }
-.palette-block {
-  flex: 1;
-  min-width: 40px;
-  height: 48px;
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,.08);
+.mosaic.mosaic-2 {
+  grid-template-columns: 1fr 1fr;
 }
-.palette-names {
-  margin-top: 10px;
+.mosaic.mosaic-3 {
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.mosaic.mosaic-3 .mosaic-item:first-child {
+  grid-row: 1 / 3;
+}
+.mosaic-item {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: #1a1015;
+  min-height: 130px;
+}
+.mosaic-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: .85;
+  transition: opacity .3s;
+}
+.mosaic-item:hover img { opacity: 1; }
+.mosaic-cap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 20px 10px 8px;
+  background: linear-gradient(
+    transparent, rgba(23,21,22,.75)
+  );
   font-size: 11px;
+  color: rgba(255,255,255,.85);
+  line-height: 1.4;
+}
+
+/* reference celebrities */
+.celeb-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.celeb-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.celeb-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 1.5px solid var(--wine-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.celeb-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.celeb-name {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--black);
+  margin-bottom: 3px;
+}
+.celeb-why {
+  font-size: 12px;
   color: var(--muted);
+  line-height: 1.5;
+}
+
+/* makeup tips */
+.makeup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.makeup-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px;
+}
+.makeup-area {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin-bottom: 6px;
+}
+.makeup-tip {
+  font-size: 12px;
+  color: #514a4c;
   line-height: 1.6;
 }
 
-/* celeb pills */
-.celeb-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
+/* selfie analysis block */
+.selfie-analysis-card {
+  background: var(--wine-lt);
+  border: 1.5px solid var(--wine-md);
+  border-radius: var(--r);
+  padding: 18px;
+  margin-bottom: 16px;
 }
-.celeb-pill {
-  background: var(--cream);
-  border: 1px solid var(--border);
+.selfie-thumb {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--wine);
+  display: block;
+  margin: 0 auto 14px;
+}
+.face-shape-badge {
+  display: inline-block;
+  background: var(--wine);
+  color: white;
   border-radius: 20px;
-  font-size: 12px;
-  padding: 5px 12px;
-  color: var(--black);
+  font-size: 11px;
+  padding: 4px 14px;
+  margin: 0 auto 14px;
+  display: table;
 }
 
-/* restart */
+/* avoids */
+.avoids-card {
+  background: #fff8f0;
+  border: 1px solid #e8d8c0;
+  border-radius: var(--r);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.avoids-title {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #b07020;
+  margin-bottom: 10px;
+}
+.avoid-item {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  color: #514a4c;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  line-height: 1.5;
+  align-items: flex-start;
+}
+.avoid-item:last-child { border-bottom: none; }
+.avoid-x {
+  color: #b07020;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* quote */
+.quote-block {
+  border-left: 3px solid var(--wine);
+  padding: 12px 16px;
+  margin: 16px 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--black);
+  line-height: 1.6;
+  background: var(--white);
+  border-radius: 0 var(--r) var(--r) 0;
+}
+
+/* actions */
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
 .btn-restart {
   width: 100%;
   background: none;
@@ -442,7 +886,6 @@ main {
   font-size: 13px;
   color: var(--wine);
   cursor: pointer;
-  margin-top: 8px;
   transition: .2s;
 }
 .btn-restart:hover {
@@ -451,7 +894,6 @@ main {
 }
 .btn-home {
   display: block;
-  width: 100%;
   text-align: center;
   background: var(--black);
   border: none;
@@ -462,36 +904,33 @@ main {
   font-weight: 500;
   color: #fff;
   cursor: pointer;
-  margin-top: 10px;
   text-decoration: none;
   transition: .2s;
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
-@media (max-width: 480px) {
-  main { padding: 90px 16px 60px; }
-  .section-title { font-size: 24px; }
-  .opt-grid.cols-2 { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 360px) {
-  .opt-grid.cols-2 { grid-template-columns: 1fr; }
+@media (max-width: 420px) {
+  main { padding: 90px 14px 60px; }
+  .section-title { font-size: 22px; }
+  .gender-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .proportion-inner { grid-template-columns: 90px 1fr; gap: 12px; }
+  .garment-grid { grid-template-columns: 1fr; }
+  .makeup-grid  { grid-template-columns: 1fr; }
+  .mb-cover-name { font-size: 28px; }
 }
 </style>
 </head>
-
 <body>
 
-<!-- NAV -->
 <nav>
   <a class="logo" href="index.html">VÉNUS</a>
   <a class="nav-home" href="index.html">← Inicio</a>
 </nav>
 
 <main>
-  <!-- Progress -->
   <div class="progress-wrap">
     <div class="progress-meta">
-      <span id="prog-label">Módulo 1 de 3 — Tu silueta</span>
+      <span id="prog-label">Elige tu perfil</span>
       <span id="prog-pct">0%</span>
     </div>
     <div class="progress-track">
@@ -501,223 +940,2148 @@ main {
       <div class="section-dot active" id="sd0"></div>
       <div class="section-dot" id="sd1"></div>
       <div class="section-dot" id="sd2"></div>
+      <div class="section-dot" id="sd3"></div>
     </div>
   </div>
 
-  <!-- Quiz container -->
-  <div id="quiz-wrap"></div>
-
-  <!-- Result container -->
-  <div class="result-wrap" id="result-wrap"></div>
+  <div id="gender-screen"></div>
+  <div id="quiz-wrap" style="display:none"></div>
+  <div id="selfie-wrap" style="display:none"></div>
+  <div id="result-wrap" class="result-wrap"></div>
 </main>
 
 <script>
-/* ─────────────────────────────────────────────────────────
-   DATA — all quiz content
-───────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════ */
+let gender = null;  /* 'fem' | 'masc' | 'nb' */
+let modIdx = 0;
+let qIdx   = 0;
+const answers = {};
+let selfieDataURL  = null;
+let selfieAnalysis = null;
+let sampleAPI      = null;
 
-const MODULES = [
+/* ═══════════════════════════════════════════════════════════
+   GENDER SCREEN
+═══════════════════════════════════════════════════════════ */
+function renderGenderScreen() {
+  document.getElementById('gender-screen').innerHTML = `
+    <div class="gender-screen">
+      <div class="section-icon">✦</div>
+      <div class="section-label">Bienvenida / Bienvenido</div>
+      <div class="section-title">
+        El estilo no tiene género.<br>
+        <em style="font-family:'Playfair Display',serif;
+          font-weight:500;color:var(--wine)">
+          ¿Cómo te identificas?
+        </em>
+      </div>
+      <div class="section-sub" style="margin-top:8px">
+        Para personalizar las prendas y referencias
+        que más te encajan.
+      </div>
+      <div class="gender-grid">
+        <div class="gender-opt" onclick="selectGender('fem',this)">
+          <div class="gender-icon">◎</div>
+          <div class="gender-name">Ella / Her</div>
+        </div>
+        <div class="gender-opt" onclick="selectGender('masc',this)">
+          <div class="gender-icon">◈</div>
+          <div class="gender-name">Él / Him</div>
+        </div>
+        <div class="gender-opt" onclick="selectGender('nb',this)">
+          <div class="gender-icon">◐</div>
+          <div class="gender-name">Elle / Them</div>
+        </div>
+      </div>
+      <button class="gender-start" id="gender-start"
+        onclick="startQuiz()">
+        Comenzar el test →
+      </button>
+    </div>`;
+}
 
-  /* ── MODULE 0 — SILUETA (Kibbe) ── */
+function selectGender(g, el) {
+  gender = g;
+  document.querySelectorAll('.gender-opt')
+    .forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('gender-start').classList.add('on');
+}
+
+function startQuiz() {
+  if (!gender) return;
+  document.getElementById('gender-screen').style.display = 'none';
+  document.getElementById('quiz-wrap').style.display = 'block';
+  modIdx = 0; qIdx = 0;
+  renderQuestion();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODULES — gender-aware labels
+═══════════════════════════════════════════════════════════ */
+function getModules() {
+  const isMasc = gender === 'masc';
+
+  return [
+  /* ── M0: SILUETA ── */
   {
-    key: 'kibbe',
-    icon: '◈',
-    label: 'Tu silueta',
-    title: 'Tu cuerpo,\nen tus palabras.',
-    sub: 'Sin términos técnicos. Solo elige la opción\nque más se parezca a ti.',
-    questions: [
+    key:'kibbe', icon:'◈',
+    label:'Tu silueta',
+    title:'Tu cuerpo,\nen tus palabras.',
+    sub:'Sin términos técnicos. Elige la opción\nque más se parezca a ti.',
+    questions:[
       {
-        id: 'height',
-        text: '¿Cómo describes tu altura?',
-        hint: 'No importa el número — piensa en cómo te sientes en el espacio.',
-        cols: 2,
-        opts: [
+        id:'height',
+        text:'¿Cómo describes tu altura?',
+        hint:'No importa el número — piensa en cómo te sientes en el espacio.',
+        cols:2,
+        opts:[
           {
-            id: 'tall',
-            name: 'Alta',
-            desc: 'Las piernas se ven largas, el pantalón siempre te sobra',
-            visual: `<svg width="38" height="80" viewBox="0 0 38 80">
-              <ellipse cx="19" cy="8" rx="7" ry="7" fill="#641f38" opacity=".85"/>
-              <rect x="15" y="17" width="8" height="34" rx="3" fill="#641f38" opacity=".7"/>
-              <rect x="13" y="51" width="5" height="27" rx="2.5" fill="#641f38" opacity=".6"/>
-              <rect x="20" y="51" width="5" height="27" rx="2.5" fill="#641f38" opacity=".6"/>
+            id:'tall', name:'Alta / Alto',
+            desc:'Piernas largas, el pantalón siempre sobra',
+            visual:`<svg width="36" height="78" viewBox="0 0 36 78">
+              <ellipse cx="18" cy="7" rx="7" ry="7"
+                fill="#641f38" opacity=".85"/>
+              <rect x="14" y="16" width="8" height="32"
+                rx="3" fill="#641f38" opacity=".7"/>
+              <rect x="12" y="48" width="5" height="28"
+                rx="2.5" fill="#641f38" opacity=".6"/>
+              <rect x="19" y="48" width="5" height="28"
+                rx="2.5" fill="#641f38" opacity=".6"/>
             </svg>`
           },
           {
-            id: 'medium',
-            name: 'Mediana',
-            desc: 'Ni muy alta ni baja — estatura promedio',
-            visual: `<svg width="38" height="66" viewBox="0 0 38 66">
-              <ellipse cx="19" cy="7" rx="7" ry="7" fill="#641f38" opacity=".85"/>
-              <rect x="15" y="16" width="8" height="28" rx="3" fill="#641f38" opacity=".7"/>
-              <rect x="13" y="44" width="5" height="20" rx="2.5" fill="#641f38" opacity=".6"/>
-              <rect x="20" y="44" width="5" height="20" rx="2.5" fill="#641f38" opacity=".6"/>
+            id:'medium', name:'Mediana / Mediano',
+            desc:'Ni muy alta ni baja — estatura promedio',
+            visual:`<svg width="36" height="64" viewBox="0 0 36 64">
+              <ellipse cx="18" cy="7" rx="7" ry="7"
+                fill="#641f38" opacity=".85"/>
+              <rect x="14" y="16" width="8" height="26"
+                rx="3" fill="#641f38" opacity=".7"/>
+              <rect x="12" y="42" width="5" height="20"
+                rx="2.5" fill="#641f38" opacity=".6"/>
+              <rect x="19" y="42" width="5" height="20"
+                rx="2.5" fill="#641f38" opacity=".6"/>
             </svg>`
           },
           {
-            id: 'petite',
-            name: 'Petite / Pequeña',
-            desc: 'La ropa larga te queda grande, prefieres tallas XS',
-            visual: `<svg width="34" height="54" viewBox="0 0 34 54">
-              <ellipse cx="17" cy="6" rx="6" ry="6" fill="#641f38" opacity=".85"/>
-              <rect x="13" y="14" width="8" height="22" rx="3" fill="#641f38" opacity=".7"/>
-              <rect x="11" y="36" width="5" height="16" rx="2.5" fill="#641f38" opacity=".6"/>
-              <rect x="18" y="36" width="5" height="16" rx="2.5" fill="#641f38" opacity=".6"/>
+            id:'petite', name:'Petite / Compacto',
+            desc:'La ropa larga queda grande, prefieres XS o S',
+            visual:`<svg width="32" height="52" viewBox="0 0 32 52">
+              <ellipse cx="16" cy="6" rx="6" ry="6"
+                fill="#641f38" opacity=".85"/>
+              <rect x="12" y="14" width="8" height="20"
+                rx="3" fill="#641f38" opacity=".7"/>
+              <rect x="10" y="34" width="5" height="16"
+                rx="2.5" fill="#641f38" opacity=".6"/>
+              <rect x="17" y="34" width="5" height="16"
+                rx="2.5" fill="#641f38" opacity=".6"/>
             </svg>`
           },
           {
-            id: 'unsure',
-            name: 'No lo sé',
-            desc: 'Depende de la marca o nunca lo he pensado',
-            visual: `<svg width="38" height="66" viewBox="0 0 38 66">
-              <ellipse cx="19" cy="7" rx="7" ry="7" fill="#641f38" opacity=".85"/>
-              <rect x="15" y="16" width="8" height="28" rx="3" fill="#641f38" opacity=".5"/>
-              <rect x="13" y="44" width="5" height="20" rx="2.5" fill="#641f38" opacity=".4"/>
-              <rect x="20" y="44" width="5" height="20" rx="2.5" fill="#641f38" opacity=".4"/>
-              <text x="19" y="33" text-anchor="middle"
+            id:'unsure', name:'No lo sé',
+            desc:'Depende de la marca o no lo he pensado',
+            visual:`<svg width="36" height="64" viewBox="0 0 36 64">
+              <ellipse cx="18" cy="7" rx="7" ry="7"
+                fill="#641f38" opacity=".75"/>
+              <rect x="14" y="16" width="8" height="26"
+                rx="3" fill="#641f38" opacity=".45"/>
+              <rect x="12" y="42" width="5" height="20"
+                rx="2.5" fill="#641f38" opacity=".4"/>
+              <rect x="19" y="42" width="5" height="20"
+                rx="2.5" fill="#641f38" opacity=".4"/>
+              <text x="18" y="32" text-anchor="middle"
                 font-size="11" fill="white" opacity=".9">?</text>
             </svg>`
           }
         ]
       },
       {
-        id: 'shoulders',
-        text: 'Mirando de frente, ¿qué ves al comparar hombros y caderas?',
-        hint: 'Piensa en la línea de tus hombros y la de tus caderas.',
-        cols: 2,
-        opts: [
+        id:'shoulders',
+        text:'¿Cómo son tus hombros comparados con tus caderas?',
+        hint:'De frente — ¿qué línea domina más?',
+        cols:2,
+        opts:[
           {
-            id: 'straight',
-            name: 'Casi iguales',
-            desc: 'Hombros y caderas del mismo ancho — cuerpo en columna',
-            visual: `<svg width="54" height="72" viewBox="0 0 54 72">
-              <ellipse cx="27" cy="7" rx="7" ry="7" fill="#641f38" opacity=".85"/>
-              <path d="M10 18 Q27 14 44 18 L46 56 Q27 58 8 56 Z"
+            id:'straight', name:'Casi iguales',
+            desc:'Hombros y caderas del mismo ancho — columna',
+            visual:`<svg width="52" height="70" viewBox="0 0 52 70">
+              <ellipse cx="26" cy="7" rx="7" ry="7"
+                fill="#641f38" opacity=".85"/>
+              <path d="M10 18 Q26 14 42 18 L44 54
+                Q26 56 8 54 Z"
                 fill="#641f38" opacity=".65"/>
-              <rect x="13" y="56" width="8" height="14" rx="3"
-                fill="#641f38" opacity=".5"/>
-              <rect x="33" y="56" width="8" height="14" rx="3"
-                fill="#641f38" opacity=".5"/>
+              <rect x="12" y="54" width="8" height="14"
+                rx="3" fill="#641f38" opacity=".5"/>
+              <rect x="32" y="54" width="8" height="14"
+                rx="3" fill="#641f38" opacity=".5"/>
             </svg>`
           },
           {
-            id: 'wide-sh',
-            name: 'Hombros más anchos',
-            desc: 'Los hombros sobresalen más — forma de triángulo invertido',
-            visual: `<svg width="58" height="72" viewBox="0 0 58 72">
-              <ellipse cx="29" cy="7" rx="7" ry="7" fill="#641f38" opacity=".85"/>
-              <path d="M2 18 Q29 12 56 18 L48 56 Q29 60 10 56 Z"
+            id:'wide-sh', name:'Hombros más anchos',
+            desc:'Los hombros sobresalen — triángulo invertido',
+            visual:`<svg width="56" height="70" viewBox="0 0 56 70">
+              <ellipse cx="28" cy="7" rx="7" ry="7"
+                fill="#641f38" opacity=".85"/>
+              <path d="M2 18 Q28 12 54 18 L46 54
+                Q28 58 10 54 Z"
                 fill="#641f38" opacity=".65"/>
-              <rect x="14" y="56" width="8" height="14" rx="3"
-                fill="#641f38" opacity=".5"/>
-              <rect x="36" y="56" width="8" height="14" rx="3"
-                fill="#641f38" opacity=".5"/>
+              <rect x="14" y="54" width="8" height="14"
+                rx="3" fill="#641f38" opacity=".5"/>
+              <rect x="34" y="54" width="8" height="14"
+                rx="3" fill="#641f38" opacity=".5"/>
             </svg>`
           },
           {
-            id: 'wide-hip',
-            name: 'Caderas más anchas',
-            desc: 'Las caderas sobresalen más — forma de triángulo',
-            visual: `<svg width="58" height="72" viewBox="0 0 58 72">
-              <ellipse cx="29" cy="7" rx="7" ry="7" fill="#641f38" opacity=".85"/>
-              <path d="M12 18 Q29 14 46 18 L54 56 Q29 62 4 56 Z"
+            id:'wide-hip', name:'Caderas más anchas',
+            desc:'Las caderas sobresalen — forma de triángulo',
+            visual:`<svg width="56" height="70" viewBox="0 0 56 70">
+              <ellipse cx="28" cy="7" rx="7" ry="7"
+                fill="#641f38" opacity=".85"/>
+              <path d="M12 18 Q28 14 44 18 L52 54
+                Q28 62 4 54 Z"
                 fill="#641f38" opacity=".65"/>
-              <rect x="10" y="56" width="8" height="14" rx="3"
-                fill="#641f38" opacity=".5"/>
-              <rect x="40" y="56" width="8" height="14" rx="3"
-                fill="#641f38" opacity=".5"/>
+              <rect x="10" y="54" width="8" height="14"
+                rx="3" fill="#641f38" opacity=".5"/>
+              <rect x="38" y="54" width="8" height="14"
+                rx="3" fill="#641f38" opacity=".5"/>
             </svg>`
           },
           {
-            id: 'balanced',
-            name: 'Parecidos, con curva',
-            desc: 'Similar ancho arriba y abajo, pero con cintura entre ellos',
-            visual: `<svg width="54" height="72" viewBox="0 0 54 72">
-              <ellipse cx="27" cy="7" rx="7" ry="7" fill="#641f38" opacity=".85"/>
-              <path d="M8 18 Q27 12 46 18 L49 56 Q27 66 5 56 Z"
+            id:'balanced', name:'Parecidos, con curva',
+            desc:'Ancho similar arriba y abajo, cintura entre ellos',
+            visual:`<svg width="52" height="70" viewBox="0 0 52 70">
+              <ellipse cx="26" cy="7" rx="7" ry="7"
+                fill="#641f38" opacity=".85"/>
+              <path d="M8 18 Q26 12 44 18 L47 54
+                Q26 64 5 54 Z"
                 fill="#641f38" opacity=".65"/>
-              <rect x="12" y="56" width="8" height="14" rx="3"
-                fill="#641f38" opacity=".5"/>
-              <rect x="34" y="56" width="8" height="14" rx="3"
-                fill="#641f38" opacity=".5"/>
+              <rect x="12" y="54" width="8" height="14"
+                rx="3" fill="#641f38" opacity=".5"/>
+              <rect x="32" y="54" width="8" height="14"
+                rx="3" fill="#641f38" opacity=".5"/>
             </svg>`
           }
         ]
       },
       {
-        id: 'waist',
-        text: '¿Tu cintura se define sola?',
-        hint: 'Sin faja ni ropa ajustada — solo tu cuerpo natural de frente.',
-        cols: 2,
-        opts: [
+        id:'waist',
+        text:'¿Tu cintura se define sola?',
+        hint:'Sin faja ni ropa ajustada — tu cuerpo natural de frente.',
+        cols:2,
+        opts:[
           {
-            id: 'yes',
-            name: 'Sí, se ve clara',
-            desc: 'Hay una entrada visible entre el busto y las caderas',
-            visual: `<svg width="50" height="72" viewBox="0 0 50 72">
-              <path d="M10 6 Q25 2 40 6 L42 26 Q25 33 8 26 Z"
+            id:'yes', name:'Sí, se ve clara',
+            desc:'Entrada visible entre torso y caderas',
+            visual:`<svg width="48" height="70" viewBox="0 0 48 70">
+              <path d="M10 6 Q24 2 38 6 L40 26
+                Q24 33 8 26 Z"
                 fill="#641f38" opacity=".7"/>
-              <path d="M8 26 Q25 33 42 26 L42 50 Q25 60 8 50 Z"
+              <path d="M8 26 Q24 33 40 26 L40 50
+                Q24 60 8 50 Z"
                 fill="#641f38" opacity=".6"/>
-              <rect x="12" y="50" width="9" height="20" rx="3"
-                fill="#641f38" opacity=".5"/>
-              <rect x="29" y="50" width="9" height="20" rx="3"
-                fill="#641f38" opacity=".5"/>
+              <rect x="12" y="50" width="9" height="18"
+                rx="3" fill="#641f38" opacity=".5"/>
+              <rect x="27" y="50" width="9" height="18"
+                rx="3" fill="#641f38" opacity=".5"/>
             </svg>`
           },
           {
-            id: 'slight',
-            name: 'Un poco',
-            desc: 'Hay un ligero estrechamiento pero no es muy marcado',
-            visual: `<svg width="50" height="72" viewBox="0 0 50 72">
-              <path d="M10 6 Q25 2 40 6 L42 26 Q25 31 8 26 Z"
+            id:'slight', name:'Un poco',
+            desc:'Ligero estrechamiento, no muy marcado',
+            visual:`<svg width="48" height="70" viewBox="0 0 48 70">
+              <path d="M10 6 Q24 2 38 6 L40 26
+                Q24 30 8 26 Z"
                 fill="#641f38" opacity=".7"/>
-              <path d="M8 26 Q25 31 42 26 L42 50 Q25 58 8 50 Z"
+              <path d="M8 26 Q24 30 40 26 L40 50
+                Q24 57 8 50 Z"
                 fill="#641f38" opacity=".6"/>
-              <rect x="12" y="50" width="9" height="20" rx="3"
-                fill="#641f38" opacity=".5"/>
-              <rect x="29" y="50" width="9" height="20" rx="3"
-                fill="#641f38" opacity=".5"/>
+              <rect x="12" y="50" width="9" height="18"
+                rx="3" fill="#641f38" opacity=".5"/>
+              <rect x="27" y="50" width="9" height="18"
+                rx="3" fill="#641f38" opacity=".5"/>
             </svg>`
           },
           {
-            id: 'no',
-            name: 'No realmente',
-            desc: 'El torso baja en línea bastante recta, sin entrada visible',
-            visual: `<svg width="50" height="72" viewBox="0 0 50 72">
-              <path d="M10 6 Q25 2 40 6 L41 26 Q25 28 9 26 Z"
+            id:'no', name:'No realmente',
+            desc:'Torso bastante recto, sin entrada visible',
+            visual:`<svg width="48" height="70" viewBox="0 0 48 70">
+              <path d="M10 6 Q24 2 38 6 L39 26
+                Q24 27 9 26 Z"
                 fill="#641f38" opacity=".7"/>
-              <path d="M9 26 Q25 28 41 26 L41 50 Q25 53 9 50 Z"
+              <path d="M9 26 Q24 27 39 26 L39 50
+                Q24 52 9 50 Z"
                 fill="#641f38" opacity=".6"/>
-              <rect x="12" y="50" width="9" height="20" rx="3"
-                fill="#641f38" opacity=".5"/>
-              <rect x="29" y="50" width="9" height="20" rx="3"
-                fill="#641f38" opacity=".5"/>
+              <rect x="12" y="50" width="9" height="18"
+                rx="3" fill="#641f38" opacity=".5"/>
+              <rect x="27" y="50" width="9" height="18"
+                rx="3" fill="#641f38" opacity=".5"/>
             </svg>`
           },
           {
-            id: 'dk',
-            name: 'No lo sé',
-            desc: 'Nunca lo he observado con atención',
-            visual: `<svg width="50" height="72" viewBox="0 0 50 72">
-              <rect x="9" y="6" width="32" height="64" rx="8"
-                fill="#641f38" opacity=".55"/>
-              <text x="25" y="42" text-anchor="middle"
+            id:'dk', name:'No lo sé',
+            desc:'Nunca lo he observado con atención',
+            visual:`<svg width="48" height="70" viewBox="0 0 48 70">
+              <rect x="9" y="6" width="30" height="62"
+                rx="8" fill="#641f38" opacity=".5"/>
+              <text x="24" y="40" text-anchor="middle"
                 font-size="16" fill="white" opacity=".8">?</text>
             </svg>`
           }
         ]
       },
       {
-        id: 'texture',
-        text: '¿Cómo describirías la energía visual de tus rasgos?',
-        hint: 'Piensa en tus facciones, tu cuerpo, lo que proyectas en una foto.',
-        cols: 2,
-        opts: [
+        id:'texture',
+        text:'¿Cómo describirías la energía visual de tus rasgos?',
+        hint:'Facciones, cuerpo, lo que proyectas en una foto.',
+        cols:2,
+        opts:[
           {
-            id: 'sharp',
-            name: 'Con estructura y ángulos',
-            desc: 'Pómulos, mandíbula o hombros que proyectan — rasgos definidos',
-            visual: `<svg width="54" height="64" viewBox="0 0 54 64">
-              <polygon points="27,4 50,28 40,62 14,62 4,28"
-                fill="#64
+            id:'sharp', name:'Con ángulos y estructura',
+            desc:'Pómulos, mandíbula u hombros definidos',
+            visual:`<svg width="52" height="62" viewBox="0 0 52 62">
+              <polygon points="26,4 48,28 38,60 14,60 4,28"
+                fill="#641f38" opacity=".7"/>
+              <line x1="14" y1="26" x2="38" y2="26"
+                stroke="white" stroke-width="1.5"/>
+            </svg>`
+          },
+          {
+            id:'soft', name:'Suave y redondeado',
+            desc:'Facciones delicadas, curvas naturales',
+            visual:`<svg width="52" height="62" viewBox="0 0 52 62">
+              <ellipse cx="26" cy="33" rx="22" ry="27"
+                fill="#641f38" opacity=".7"/>
+              <ellipse cx="26" cy="27" rx="9" ry="7"
+                fill="white" opacity=".15"/>
+            </svg>`
+          },
+          {
+            id:'mix', name:'Mezcla de los dos',
+            desc:'Algo de ángulo y algo de suavidad',
+            visual:`<svg width="52" height="62" viewBox="0 0 52 62">
+              <path d="M8 36 Q26 2 44 36
+                Q40 62 26 62 Q12 62 8 36 Z"
+                fill="#641f38" opacity=".7"/>
+            </svg>`
+          },
+          {
+            id:'compact', name:'Compacto, todo junto',
+            desc:'Rasgos pequeños, cuerpo armónico',
+            visual:`<svg width="48" height="52" viewBox="0 0 48 52">
+              <rect x="8" y="6" width="32" height="42"
+                rx="10" fill="#641f38" opacity=".7"/>
+              <rect x="16" y="18" width="16" height="8"
+                rx="4" fill="white" opacity=".2"/>
+            </svg>`
+          }
+        ]
+      }
+    ]
+  },
+
+  /* ── M1: COLORIMETRÍA ── */
+  {
+    key:'color', icon:'◐',
+    label:'Tu paleta',
+    title:'El color\nque te hace brillar.',
+    sub:'Tu paleta no es tu color favorito —\nes el que armoniza con tu piel.',
+    questions:[
+      {
+        id:'skin',
+        text:'¿Cómo es tu tono de piel?',
+        hint:'Mira tu muñeca bajo luz natural.',
+        cols:2,
+        opts:[
+          {
+            id:'fair', name:'Clara / Pálida',
+            desc:'Rosada o muy pálida — venas visibles',
+            visual:`<svg width="48" height="48" viewBox="0 0 48 48">
+              <ellipse cx="24" cy="24" rx="20" ry="20"
+                fill="#f5e0d5" stroke="#d4b8ab"
+                stroke-width="1.5"/>
+            </svg>`
+          },
+          {
+            id:'light', name:'Media clara',
+            desc:'Ni muy pálida ni oscura, se broncea poco',
+            visual:`<svg width="48" height="48" viewBox="0 0 48 48">
+              <ellipse cx="24" cy="24" rx="20" ry="20"
+                fill="#e8c5a8" stroke="#c9a880"
+                stroke-width="1.5"/>
+            </svg>`
+          },
+          {
+            id:'medium', name:'Morena / Olivácea',
+            desc:'Piel cálida u olivácea, se broncea fácil',
+            visual:`<svg width="48" height="48" viewBox="0 0 48 48">
+              <ellipse cx="24" cy="24" rx="20" ry="20"
+                fill="#c49060" stroke="#a07040"
+                stroke-width="1.5"/>
+            </svg>`
+          },
+          {
+            id:'deep', name:'Oscura / Profunda',
+            desc:'Piel rica y profunda — muy bronceada o negra',
+            visual:`<svg width="48" height="48" viewBox="0 0 48 48">
+              <ellipse cx="24" cy="24" rx="20" ry="20"
+                fill="#7a4830" stroke="#5a3018"
+                stroke-width="1.5"/>
+            </svg>`
+          }
+        ]
+      },
+      {
+        id:'undertone',
+        text:'¿Qué ves en las venas de tu muñeca?',
+        hint:'Bajo luz natural, no del teléfono.',
+        cols:2,
+        opts:[
+          {
+            id:'warm', name:'Verdosas o amarillas',
+            desc:'Subtono cálido — el oro te favorece',
+            visual:`<svg width="52" height="42" viewBox="0 0 52 42">
+              <rect x="4" y="8" width="44" height="26"
+                rx="11" fill="#e8c898"/>
+              <path d="M10 21 Q20 15 26 21 Q32 27 42 21"
+                stroke="#7a9040" stroke-width="2" fill="none"/>
+            </svg>`
+          },
+          {
+            id:'cool', name:'Azules o moradas',
+            desc:'Subtono frío — la plata te sienta mejor',
+            visual:`<svg width="52" height="42" viewBox="0 0 52 42">
+              <rect x="4" y="8" width="44" height="26"
+                rx="11" fill="#d8c8d8"/>
+              <path d="M10 21 Q20 15 26 21 Q32 27 42 21"
+                stroke="#5060a0" stroke-width="2" fill="none"/>
+            </svg>`
+          },
+          {
+            id:'neutral', name:'Mezcla de ambas',
+            desc:'Subtono neutro — oro y plata te van',
+            visual:`<svg width="52" height="42" viewBox="0 0 52 42">
+              <rect x="4" y="8" width="44" height="26"
+                rx="11" fill="#dcc8b0"/>
+              <path d="M10 21 Q20 15 26 21 Q32 27 42 21"
+                stroke="#608070" stroke-width="2" fill="none"/>
+            </svg>`
+          },
+          {
+            id:'dk', name:'Es difícil de ver',
+            desc:'No puedo distinguirlo bien',
+            visual:`<svg width="52" height="42" viewBox="0 0 52 42">
+              <rect x="4" y="8" width="44" height="26"
+                rx="11" fill="#c8b898" opacity=".7"/>
+              <text x="26" y="25" text-anchor="middle"
+                font-size="13" fill="#7a6850">?</text>
+            </svg>`
+          }
+        ]
+      },
+      {
+        id:'contrast',
+        text:'Contraste entre cabello, piel y ojos naturales',
+        hint:'Cabello sin teñir — ¿cuánto contrasta con tu piel?',
+        cols:1,
+        opts:[
+          {
+            id:'high', name:'Alto contraste',
+            desc:'Cabello muy oscuro sobre piel clara, o combinaciones muy opuestas',
+            visual:`<svg width="44" height="30" viewBox="0 0 44 30">
+              <rect x="0" y="0" width="22" height="30"
+                rx="0" fill="#1a1410"/>
+              <rect x="22" y="0" width="22" height="30"
+                rx="0" fill="#f5e8da"/>
+            </svg>`
+          },
+          {
+            id:'medium', name:'Contraste medio',
+            desc:'Diferencia visible pero no extrema',
+            visual:`<svg width="44" height="30" viewBox="0 0 44 30">
+              <rect x="0" y="0" width="22" height="30"
+                fill="#7a5840"/>
+              <rect x="22" y="0" width="22" height="30"
+                fill="#e0c8a8"/>
+            </svg>`
+          },
+          {
+            id:'low', name:'Contraste suave',
+            desc:'Cabello, piel y ojos en tonos similares',
+            visual:`<svg width="44" height="30" viewBox="0 0 44 30">
+              <rect x="0" y="0" width="22" height="30"
+                fill="#b89870"/>
+              <rect x="22" y="0" width="22" height="30"
+                fill="#e8d8c0"/>
+            </svg>`
+          }
+        ]
+      },
+      {
+        id:'reaction',
+        text:'¿Qué pasa cuando usas algo muy pastel o brillante?',
+        hint:'Tu reacción más honesta.',
+        cols:1,
+        opts:[
+          {
+            id:'washes', name:'Me veo apagado/a o cansado/a',
+            desc:'Los tonos suaves me hacen parecer sin vida',
+            visual:`<svg width="40" height="40" viewBox="0 0 40 40">
+              <ellipse cx="20" cy="20" rx="18" ry="18"
+                fill="#e8e0d8"/>
+              <text x="20" y="26" text-anchor="middle"
+                font-size="15">😶</text>
+            </svg>`
+          },
+          {
+            id:'flatters', name:'Me veo bien o mejor',
+            desc:'Los colores claros me iluminan y refrescan',
+            visual:`<svg width="40" height="40" viewBox="0 0 40 40">
+              <ellipse cx="20" cy="20" rx="18" ry="18"
+                fill="#fde8b0"/>
+              <text x="20" y="26" text-anchor="middle"
+                font-size="15">✨</text>
+            </svg>`
+          },
+          {
+            id:'depends', name:'Depende del color exacto',
+            desc:'Algunos sientan bien, otros no',
+            visual:`<svg width="40" height="40" viewBox="0 0 40 40">
+              <ellipse cx="20" cy="20" rx="18" ry="18"
+                fill="#e0d0e8"/>
+              <text x="20" y="26" text-anchor="middle"
+                font-size="15">🤔</text>
+            </svg>`
+          }
+        ]
+      }
+    ]
+  },
+
+  /* ── M2: ENERGÍA / VIBE ── */
+  {
+    key:'astro', icon:'☽',
+    label:'Tu energía',
+    title:'La energía\nque llevas puesta.',
+    sub:'Define los códigos de personalidad y actitud\nque ya tienes en ti.',
+    questions:[
+      {
+        id:'attract',
+        text:'¿Qué quieres proyectar cuando te vistes?',
+        hint:'Lo que realmente quieres — no lo que crees que debes.',
+        cols:2,
+        opts:[
+          {
+            id:'romantic', name:'Ternura y romanticismo',
+            desc:'Delicado/a, soñador/a, con algo de nostalgia',
+            visual:`<svg width="46" height="46" viewBox="0 0 46 46">
+              <path d="M23 38 C7 26 5 12 15 10
+                C19 9 23 13 23 13 C23 13 27 9 31 10
+                C41 12 39 26 23 38Z"
+                fill="#c9a66b" opacity=".8"/>
+            </svg>`
+          },
+          {
+            id:'power', name:'Poder y seguridad',
+            desc:'Fuerte, seguro/a, con presencia que no pasa desapercibida',
+            visual:`<svg width="46" height="46" viewBox="0 0 46 46">
+              <polygon points="23,6 40,40 6,40"
+                fill="#641f38" opacity=".8"/>
+            </svg>`
+          },
+          {
+            id:'mystery', name:'Misterio y profundidad',
+            desc:'Que genere curiosidad, que no te lean a primera vista',
+            visual:`<svg width="46" height="46" viewBox="0 0 46 46">
+              <circle cx="23" cy="23" r="18"
+                fill="#40203f" opacity=".8"/>
+              <path d="M15 23 Q23 13 31 23"
+                stroke="white" stroke-width="1.5" fill="none"/>
+            </svg>`
+          },
+          {
+            id:'free', name:'Libertad y autenticidad',
+            desc:'Natural, sin esfuerzo, que se vea como realmente eres',
+            visual:`<svg width="46" height="46" viewBox="0 0 46 46">
+              <circle cx="23" cy="23" r="18"
+                fill="#c9a66b" opacity=".5"/>
+              <path d="M13 28 Q23 15 33 28"
+                stroke="#641f38" stroke-width="2" fill="none"/>
+            </svg>`
+          }
+        ]
+      },
+      {
+        id:'vibe',
+        text:'¿Con cuál palabra te identificas más?',
+        hint:'Primera reacción — sin pensar demasiado.',
+        cols:2,
+        opts:[
+          {
+            id:'ethereal', name:'Etéreo/a',
+            desc:'Ligero/a, intangible, otro mundo',
+            visual:`<svg width="46" height="46" viewBox="0 0 46 46">
+              <ellipse cx="23" cy="23" rx="20" ry="16"
+                fill="#d0c8e0" opacity=".7"/>
+              <ellipse cx="23" cy="21" rx="10" ry="8"
+                fill="white" opacity=".4"/>
+            </svg>`
+          },
+          {
+            id:'sensual', name:'Sensual',
+            desc:'Consciente del cuerpo, que se perciba sin decirlo',
+            visual:`<svg width="46" height="46" viewBox="0 0 46 46">
+              <path d="M11 36 Q23 8 35 36"
+                stroke="#641f38" stroke-width="3" fill="none"/>
+              <circle cx="23" cy="36" r="5"
+                fill="#641f38" opacity=".7"/>
+            </svg>`
+          },
+          {
+            id:'rebel', name:'Rebelde',
+            desc:'Que rompa reglas, que no quepa en ninguna caja',
+            visual:`<svg width="46" height="46" viewBox="0 0 46 46">
+              <rect x="10" y="10" width="26" height="26"
+                rx="4" fill="#40203f" opacity=".7"
+                transform="rotate(15 23 23)"/>
+            </svg>`
+          },
+          {
+            id:'classic', name:'Clásico/a',
+            desc:'Atemporal, elegante, que nunca pase de moda',
+            visual:`<svg width="46" height="46" viewBox="0 0 46 46">
+              <rect x="12" y="12" width="22" height="22"
+                rx="2" fill="#c9a66b" opacity=".7"/>
+              <rect x="18" y="18" width="10" height="10"
+                rx="1" fill="white" opacity=".4"/>
+            </svg>`
+          }
+        ]
+      },
+      {
+        id:'color_energy',
+        text:'¿Cuál paleta de colores te llama más?',
+        hint:'La que sientes que es más tuya.',
+        cols:2,
+        opts:[
+          {
+            id:'dark', name:'Oscuros y profundos',
+            desc:'Burdeos, negro, ciruela, verde botella',
+            swatches:['#2d0e18','#641f38','#40203f',
+                      '#1a3020','#0d1a30']
+          },
+          {
+            id:'warm', name:'Cálidos y terrosos',
+            desc:'Camel, terracota, marrón, naranja quemado',
+            swatches:['#c9813d','#a05028','#d4a050',
+                      '#8a6030','#d0a870']
+          },
+          {
+            id:'soft', name:'Suaves y polvosos',
+            desc:'Rosa viejo, lavanda, malva, nude, azul pizarra',
+            swatches:['#d4a0b0','#b8a8c8','#c8a8b8',
+                      '#d0b898','#98a8b8']
+          },
+          {
+            id:'neutral', name:'Neutros y limpios',
+            desc:'Blanco roto, gris, beige, crema, negro',
+            swatches:['#ece8e0','#c8c4bc','#a0988c',
+                      '#605850','#181410']
+          }
+        ]
+      },
+      {
+        id:'style_ref',
+        text:'Si pudieras tomar el estilo de alguien, ¿a quién?',
+        hint:'Solo por el vibe visual — ropa, actitud, estética.',
+        cols:1,
+        opts: isMasc ? [
+          {
+            id:'timothee',
+            name:'Timothée Chalamet — andrógino y artístico',
+            desc:'Siluetas inusuales, layering, mezcla de géneros en ropa',
+            visual:`<svg width="36" height="36" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16" fill="#1a1018"/>
+              <text x="18" y="23" text-anchor="middle"
+                font-size="14">🎭</text>
+            </svg>`
+          },
+          {
+            id:'zac',
+            name:'Zac Efron — deportivo clásico, cuerpo atlético',
+            desc:'Ropa casual elevada, colores neutros, proporciones',
+            visual:`<svg width="36" height="36" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16" fill="#304060"/>
+              <text x="18" y="23" text-anchor="middle"
+                font-size="14">⚡</text>
+            </svg>`
+          },
+          {
+            id:'bad-bunny',
+            name:'Bad Bunny — atrevido y sin reglas de género',
+            desc:'Colores intensos, estampados, ropa que desafía lo convencional',
+            visual:`<svg width="36" height="36" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16" fill="#c030a0"/>
+              <text x="18" y="23" text-anchor="middle"
+                font-size="14">🐰</text>
+            </svg>`
+          },
+          {
+            id:'ryan',
+            name:'Ryan Gosling — elegante y cool sin esfuerzo',
+            desc:'Trajes bien cortados o casual sofisticado, minimalista',
+            visual:`<svg width="36" height="36" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16" fill="#c9a66b"/>
+              <text x="18" y="23" text-anchor="middle"
+                font-size="14">✦</text>
+            </svg>`
+          },
+          {
+            id:'none-m', name:'Ninguno — quiero mi propio estilo',
+            desc:'Tomo referentes de varios y los mezclo',
+            visual:`<svg width="36" height="36" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16"
+                fill="#641f38" opacity=".7"/>
+              <text x="18" y="23" text-anchor="middle"
+                font-size="14">◈</text>
+            </svg>`
+          }
+        ] : [
+          {
+            id:'sabrina',
+            name:'Sabrina Carpenter — dulce con actitud',
+            desc:'Coordinados, colores nude y pastel, muy femenino y coqueto',
+            visual:`<svg width="36" height="36" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16" fill="#f0d8c8"/>
+              <text x="18" y="23" text-anchor="middle"
+                font-size="14">🎀</text>
+            </svg>`
+          },
+          {
+            id:'bella',
+            name:'Bella Hadid — editorial y oscuro',
+            desc:'Alto contraste, siluetas dramáticas, muy parisino',
+            visual:`<svg width="36" height="36" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16" fill="#1a1018"/>
+              <text x="18" y="23" text-anchor="middle"
+                font-size="14">🖤</text>
+            </svg>`
+          },
+          {
+            id:'dua',
+            name:'Dua Lipa — atrevida y colorida',
+            desc:'Estampados, colores intensos, volumen con personalidad',
+            visual:`<svg width="36" height="36" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16" fill="#c030a0"/>
+              <text x="18" y="23" text-anchor="middle"
+                font-size="14">💜</text>
+            </svg>`
+          },
+          {
+            id:'zendaya',
+            name:'Zendaya — versátil y poderosa',
+            desc:'Desde lo casual hasta haute couture, siempre impacta',
+            visual:`<svg width="36" height="36" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16" fill="#8a4820"/>
+              <text x="18" y="23" text-anchor="middle"
+                font-size="14">✨</text>
+            </svg>`
+          },
+          {
+            id:'none',
+            name:'Ninguna — quiero mi propio estilo',
+            desc:'Tomo referentes de varias y las mezclo',
+            visual:`<svg width="36" height="36" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="16"
+                fill="#641f38" opacity=".7"/>
+              <text x="18" y="23" text-anchor="middle"
+                font-size="14">✦</text>
+            </svg>`
+          }
+        ]
+      }
+    ]
+  }
+  ];
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROGRESS HELPERS
+═══════════════════════════════════════════════════════════ */
+function totalQuestions() {
+  return getModules().reduce((s,m) => s + m.questions.length, 0);
+}
+function answeredCount() {
+  return Object.keys(answers).length;
+}
+function updateProgress() {
+  const mods   = getModules();
+  const total  = totalQuestions();
+  const done   = answeredCount();
+  const pct    = Math.round((done / total) * 100);
+  const labels = [
+    'Módulo 1 de 3 — Tu silueta',
+    'Módulo 2 de 3 — Tu paleta',
+    'Módulo 3 de 3 — Tu energía'
+  ];
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent  = pct + '%';
+  document.getElementById('prog-label').textContent =
+    labels[modIdx] || '';
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('sd'+i);
+    if (!el) continue;
+    el.className = 'section-dot' +
+      (i < modIdx ? ' done' : i === modIdx ? ' active' : '');
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RENDER QUESTION
+═══════════════════════════════════════════════════════════ */
+function renderQuestion() {
+  const mods = getModules();
+  const mod  = mods[modIdx];
+  const q    = mod.questions[qIdx];
+  const isFirst    = modIdx === 0 && qIdx === 0;
+  const isFirstMod = qIdx === 0;
+  let html = '';
+
+  if (isFirstMod) {
+    html += `
+      <div class="section-intro">
+        <span class="section-icon">${mod.icon}</span>
+        <div class="section-label">${mod.label}</div>
+        <div class="section-title">
+          ${mod.title.replace('\n','<br>')}
+        </div>
+        <div class="section-sub">
+          ${mod.sub.replace('\n','<br>')}
+        </div>
+      </div>`;
+  }
+
+  const gridCls = q.cols === 1 ? 'cols-1' : 'cols-2';
+  html += `<div class="question-block">
+    <div class="q-text">${q.text}</div>
+    <div class="q-hint">${q.hint}</div>
+    <div class="opt-grid ${gridCls}">`;
+
+  q.opts.forEach(opt => {
+    const sel = answers[q.id] === opt.id ? ' selected' : '';
+    const isH = q.cols === 1;
+    const vis  = opt.swatches
+      ? `<div class="swatch-row">
+          ${opt.swatches.map(c =>
+            `<div class="swatch" style="background:${c}"></div>`
+          ).join('')}
+        </div>`
+      : (opt.visual || '');
+
+    if (isH) {
+      html += `
+        <div class="opt horizontal${sel}"
+          onclick="selectOpt('${q.id}','${opt.id}')"
+          role="button" tabindex="0">
+          <div class="opt-visual">${vis}</div>
+          <div class="opt-text">
+            <div class="opt-name">${opt.name}</div>
+            <div class="opt-desc">${opt.desc}</div>
+          </div>
+        </div>`;
+    } else {
+      html += `
+        <div class="opt${sel}"
+          onclick="selectOpt('${q.id}','${opt.id}')"
+          role="button" tabindex="0">
+          <div class="opt-visual">${vis}</div>
+          <div class="opt-name">${opt.name}</div>
+          <div class="opt-desc">${opt.desc}</div>
+        </div>`;
+    }
+  });
+
+  html += `</div></div>`;
+  html += `
+    <div class="nav-btns">
+      ${!isFirst
+        ? `<button class="btn-back" onclick="goBack()">← Atrás</button>`
+        : ''}
+      <button class="btn-next ${answers[q.id]?'on':''}"
+        id="btn-next" onclick="goNext()">
+        ${isLastQuestion() ? 'Siguiente paso ✦' : 'Continuar →'}
+      </button>
+    </div>`;
+
+  document.getElementById('quiz-wrap').innerHTML = html;
+  updateProgress();
+
+  document.querySelectorAll('.opt').forEach(el => {
+    el.addEventListener('keydown', e => {
+      if (e.key==='Enter'||e.key===' ') el.click();
+    });
+  });
+}
+
+function isLastQuestion() {
+  const mods = getModules();
+  const last = mods[mods.length - 1];
+  return modIdx === mods.length - 1 &&
+    qIdx === last.questions.length - 1;
+}
+
+function selectOpt(qId, optId) {
+  answers[qId] = optId;
+  renderQuestion();
+}
+
+function goNext() {
+  const mods = getModules();
+  const mod  = mods[modIdx];
+  const q    = mod.questions[qIdx];
+  if (!answers[q.id]) return;
+  if (isLastQuestion()) {
+    showSelfieModule();
+    return;
+  }
+  if (qIdx < mod.questions.length - 1) {
+    qIdx++;
+  } else {
+    modIdx++;
+    qIdx = 0;
+  }
+  renderQuestion();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function goBack() {
+  const mods = getModules();
+  if (qIdx > 0) {
+    qIdx--;
+  } else if (modIdx > 0) {
+    modIdx--;
+    qIdx = mods[modIdx].questions.length - 1;
+  }
+  renderQuestion();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SELFIE MODULE
+═══════════════════════════════════════════════════════════ */
+function showSelfieModule() {
+  document.getElementById('quiz-wrap').style.display = 'none';
+  document.getElementById('selfie-wrap').style.display = 'block';
+  document.getElementById('prog-fill').style.width = '92%';
+  document.getElementById('prog-pct').textContent  = '92%';
+  document.getElementById('prog-label').textContent =
+    'Opcional — Análisis de rostro';
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('sd'+i);
+    if (el) el.className = 'section-dot done';
+  }
+  window.scrollTo({ top:0, behavior:'smooth' });
+
+  document.getElementById('selfie-wrap').innerHTML = `
+    <div class="section-intro">
+      <span class="section-icon">◉</span>
+      <div class="section-label">Paso extra — opcional</div>
+      <div class="section-title" style="font-size:24px">
+        Análisis visual<br>de tu rostro
+      </div>
+      <div class="section-sub">
+        Sube una selfie y Claude analizará tus rasgos
+        para darte referencias de personas famosas
+        con rasgos similares y técnicas de maquillaje
+        o grooming personalizadas.
+      </div>
+    </div>
+
+    <div class="selfie-upload-area" id="upload-area"
+      ondragover="event.preventDefault();
+        this.classList.add('drag')"
+      ondragleave="this.classList.remove('drag')"
+      ondrop="handleDrop(event)">
+      <input type="file" accept="image/*"
+        id="selfie-input"
+        onchange="handleFileSelect(event)">
+      <div class="upload-icon">◈</div>
+      <div class="upload-label">
+        Sube una selfie de frente
+      </div>
+      <div class="upload-sub">
+        Sin filtros, buena luz natural — JPG, PNG o WEBP
+      </div>
+    </div>
+
+    <div class="selfie-preview-wrap" id="preview-wrap">
+      <img id="selfie-preview" src="" alt="Tu selfie">
+      <button class="selfie-remove"
+        onclick="removeSelfie()">×</button>
+    </div>
+
+    <div class="selfie-privacy">
+      <span style="font-size:14px;flex-shrink:0">🔒</span>
+      <span>
+        Tu imagen se procesa con la API de Anthropic
+        y no se guarda en ningún servidor externo.
+        Solo se usa para este análisis.
+      </span>
+    </div>
+
+    <div class="analysis-state" id="analysis-state">
+      <div class="analysis-spinner"></div>
+      <div class="analysis-label" id="analysis-label">
+        Analizando tus rasgos…
+      </div>
+    </div>
+
+    <div class="nav-btns" style="margin-top:18px">
+      <button class="btn-back" onclick="backToQuiz()">
+        ← Atrás
+      </button>
+      <button class="btn-next on" id="selfie-btn"
+        onclick="handleSelfieNext()">
+        Ver mi moodboard ✦
+      </button>
+    </div>
+    <button class="selfie-skip" onclick="skipSelfie()">
+      Saltar este paso →
+    </button>
+  `;
+}
+
+function handleFileSelect(e) {
+  const f = e.target.files[0];
+  if (f) loadImageFile(f);
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-area')
+    .classList.remove('drag');
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('image/')) loadImageFile(f);
+}
+function loadImageFile(file) {
+  const r = new FileReader();
+  r.onload = ev => {
+    selfieDataURL = ev.target.result;
+    document.getElementById('selfie-preview').src =
+      selfieDataURL;
+    document.getElementById('preview-wrap')
+      .style.display = 'block';
+    document.getElementById('upload-area')
+      .style.display = 'none';
+  };
+  r.readAsDataURL(file);
+}
+function removeSelfie() {
+  selfieDataURL = null;
+  document.getElementById('selfie-preview').src = '';
+  document.getElementById('preview-wrap').style.display = 'none';
+  document.getElementById('upload-area').style.display = 'block';
+  document.getElementById('selfie-input').value = '';
+}
+function backToQuiz() {
+  const mods = getModules();
+  document.getElementById('selfie-wrap').style.display = 'none';
+  document.getElementById('quiz-wrap').style.display = 'block';
+  modIdx = mods.length - 1;
+  qIdx   = mods[modIdx].questions.length - 1;
+  renderQuestion();
+  updateProgress();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+function skipSelfie() {
+  selfieDataURL  = null;
+  selfieAnalysis = null;
+  showMoodboard();
+}
+async function handleSelfieNext() {
+  if (!selfieDataURL) { skipSelfie(); return; }
+  await analyzeSelfie();
+}
+async function initSample() {
+  if (sampleAPI) return sampleAPI;
+  if (!window.claude) return null;
+  try { sampleAPI = await claude.use('sample'); }
+  catch(e) { sampleAPI = null; }
+  return sampleAPI;
+}
+async function analyzeSelfie() {
+  const btn   = document.getElementById('selfie-btn');
+  const state = document.getElementById('analysis-state');
+  const label = document.getElementById('analysis-label');
+  btn.disabled = true;
+  btn.textContent = 'Analizando…';
+  state.style.display = 'block';
+
+  const msgs = [
+    'Reconociendo tu forma de rostro…',
+    'Buscando referencias…',
+    'Preparando técnicas personalizadas…',
+    'Casi listo…'
+  ];
+  let mi = 0;
+  const iv = setInterval(() => {
+    if (mi < msgs.length-1) {
+      mi++; label.textContent = msgs[mi];
+    }
+  }, 2200);
+
+  try {
+    const api = await initSample();
+    if (!api) {
+      selfieAnalysis = null;
+      clearInterval(iv);
+      showMoodboard();
+      return;
+    }
+    const b64  = selfieDataURL.split(',')[1];
+    const mime = selfieDataURL.split(';')[0].split(':')[1];
+    const prompt = buildAnalysisPrompt();
+    const res = await api.json(
+      [{ role:'user', content:[
+        {
+          type:'image',
+          source:{ type:'base64', media_type:mime, data:b64 }
+        },
+        { type:'text', text:prompt }
+      ]}],
+      { modelTier:'default' }
+    );
+    selfieAnalysis = res;
+  } catch(e) {
+    console.warn('Selfie analysis error:', e);
+    selfieAnalysis = null;
+  }
+  clearInterval(iv);
+  showMoodboard();
+}
+function buildAnalysisPrompt() {
+  const k = calcKibbe();
+  const s = calcSeason();
+  const v = calcVibe();
+  const gLabel = gender === 'masc'
+    ? 'hombre' : gender === 'nb'
+    ? 'persona no binaria' : 'mujer';
+  return `Eres un experto en análisis de imagen personal,
+maquillaje, grooming y referentes de estilo.
+Analiza esta selfie de frente. La persona se identifica
+como ${gLabel}. Responde SOLO con JSON válido, sin texto
+extra, sin bloques de código.
+
+Perfil ya calculado:
+- Silueta Kibbe: ${k}
+- Paleta de color: ${s}
+- Estética: ${v}
+
+JSON exacto a devolver:
+{
+  "faceShape": "forma de rostro en español",
+  "keyFeatures": ["rasgo 1","rasgo 2","rasgo 3"],
+  "celebrities": [
+    {"name":"Nombre","why":"por qué (1-2 líneas)"},
+    {"name":"Nombre","why":"por qué (1-2 líneas)"},
+    {"name":"Nombre","why":"por qué (1-2 líneas)"}
+  ],
+  "makeupTips": [
+    {"area":"Ojos","tip":"técnica para estos rasgos"},
+    {"area":"Cejas","tip":"forma y técnica ideal"},
+    {"area":"Labios","tip":"técnica y colores"},
+    {"area":"Contorno","tip":"luz y sombra específica"}
+  ],
+  "styleNote":"cómo el rostro complementa el perfil (2-3 líneas)"
+}`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESULT ENGINE
+═══════════════════════════════════════════════════════════ */
+function calcKibbe() {
+  const h  = answers['height']    || 'medium';
+  const sh = answers['shoulders'] || 'straight';
+  const w  = answers['waist']     || 'slight';
+  const t  = answers['texture']   || 'mix';
+  if (h==='tall'&&(sh==='straight'||sh==='wide-sh')&&t==='sharp')
+    return 'dramatic';
+  if (h==='tall'&&t==='soft') return 'soft-dramatic';
+  if (h==='petite'&&t==='compact') return 'gamine';
+  if (h==='petite'&&t==='soft') return 'soft-gamine';
+  if (sh==='balanced'&&w==='yes') return 'soft-classic';
+  if (sh==='balanced'&&w!=='yes') return 'dramatic-classic';
+  if (t==='soft'&&w==='yes') return 'romantic';
+  if (t==='soft') return 'theatrical-romantic';
+  if (sh==='wide-sh'&&t!=='sharp') return 'flamboyant-natural';
+  if (sh==='wide-sh') return 'soft-natural';
+  return 'soft-classic';
+}
+function calcSeason() {
+  const sk = answers['skin']      || 'medium';
+  const ut = answers['undertone'] || 'warm';
+  const co = answers['contrast']  || 'medium';
+  const re = answers['reaction']  || 'depends';
+  if (ut==='warm'&&co==='high') return 'autumn-deep';
+  if (ut==='warm'&&co==='low')  return 'autumn-soft';
+  if (ut==='warm'&&re==='washes') return 'spring-warm';
+  if (ut==='warm') return 'spring-true';
+  if (ut==='cool'&&co==='high') return 'winter-true';
+  if (ut==='cool'&&sk==='fair') return 'summer-cool';
+  if (ut==='cool') return 'winter-soft';
+  if (co==='high') return 'winter-clear';
+  if (re==='flatters') return 'spring-light';
+  return 'summer-soft';
+}
+function calcVibe() {
+  const at = answers['attract']      || 'mystery';
+  const vi = answers['vibe']         || 'ethereal';
+  const ce = answers['color_energy'] || 'dark';
+  if (at==='mystery'&&ce==='dark')     return 'dark-romantic';
+  if (at==='power'&&ce==='dark')       return 'femme-fatale';
+  if (at==='romantic'&&vi==='ethereal') return 'whimsical-goth';
+  if (at==='romantic'&&vi==='classic') return 'romantic-academia';
+  if (at==='free'&&vi==='rebel')       return 'indie-bohemian';
+  if (at==='power'&&vi==='sensual')    return 'power-goth';
+  if (vi==='classic') return 'dark-academia';
+  return 'romantic-mystery';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESULT DATA
+═══════════════════════════════════════════════════════════ */
+const KIBBE_DATA = {
+  'dramatic':{
+    name:'Dramatic',
+    tagline:'Verticalidad · Estructura · Presencia',
+    desc:'Tu cuerpo tiene una línea vertical poderosa. Las siluetas largas y limpias son las que más te favorecen.',
+    figureDesc:'Línea larga y vertical dominante',
+    proportionRules:[
+      'Respetar la verticalidad — no cortarla visualmente',
+      'Colores sólidos o estampados grandes sin interrupciones',
+      'Siluetas simples con corte impecable',
+      'Telas que caigan: satén, seda, crepé'
+    ],
+    garments:{
+      tops:['Blusas de escote V o U','Tops sin muchos detalles','Cuellos altos que alarguen'],
+      bottoms:['Pantalones de pernera recta','Faldas largas y fluidas','Trajes de una pieza'],
+      outerwear:['Abrigos tipo columna','Trencas largas'],
+      accessories:['Piezas grandes y dramáticas','Cinturones anchos']
+    },
+    avoids:[
+      'Prendas muy cortas que corten la proporción',
+      'Volumen excesivo o capas superpuestas',
+      'Detalles pequeños y recargados',
+      'Estampados muy pequeños o diminutos'
+    ],
+    celebs:['Angelina Jolie','Iman','Cate Blanchett'],
+    svgFigure:`<svg width="90" height="160" viewBox="0 0 90 160">
+      <ellipse cx="45" cy="14" rx="13" ry="13" fill="#641f38" opacity=".85"/>
+      <rect x="36" y="30" width="18" height="60"
+        rx="5" fill="#641f38" opacity=".7"/>
+      <rect x="32" y="90" width="10" height="68"
+        rx="4" fill="#641f38" opacity=".6"/>
+      <rect x="48" y="90" width="10" height="68"
+        rx="4" fill="#641f38" opacity=".6"/>
+      <line x1="28" y1="50" x2="62" y2="50"
+        stroke="#c9a66b" stroke-width="1" opacity=".6"
+        stroke-dasharray="4,3"/>
+      <line x1="32" y1="88" x2="58" y2="88"
+        stroke="#c9a66b" stroke-width="1" opacity=".6"
+        stroke-dasharray="4,3"/>
+    </svg>`
+  },
+  'soft-dramatic':{
+    name:'Soft Dramatic',
+    tagline:'Dramática con curva · Sensual · Poderosa',
+    desc:'Combinas verticalidad con curvas naturales. Necesitas siluetas que honren ambas.',
+    figureDesc:'Vertical con curva pronunciada',
+    proportionRules:[
+      'Siluetas que marquen la curva sin oprimirla',
+      'Escotes pronunciados y telas fluidas',
+      'Monocromáticos que alarguen la figura',
+      'Drapeados y recortes estratégicos'
+    ],
+    garments:{
+      tops:['Tops con drapeado','Escotes profundos o pronunciados','Blusas fluidas ceñidas'],
+      bottoms:['Faldas con vuelo suave','Pantalones de tiro alto y pierna amplia'],
+      outerwear:['Gabardinas largas','Abrigos con cinturón'],
+      accessories:['Joyería llamativa','Bolsos estructurados']
+    },
+    avoids:[
+      'Ropa holgada que borre la forma',
+      'Líneas demasiado rectas sin curva',
+      'Prendas demasiado cortas'
+    ],
+    celebs:['Sofia Loren','Halle Berry','Salma Hayek'],
+    svgFigure:`<svg width="90" height="160" viewBox="0 0 90 160">
+      <ellipse cx="45" cy="14" rx="13" ry="13" fill="#641f38" opacity=".85"/>
+      <path d="M28 30 Q45 24 62 30 L66 72
+        Q45 84 24 72 Z" fill="#641f38" opacity=".7"/>
+      <path d="M24 72 Q45 84 66 72 L62 118
+        Q45 128 28 118 Z" fill="#641f38" opacity=".65"/>
+      <rect x="30" y="118" width="10" height="40"
+        rx="4" fill="#641f38" opacity=".55"/>
+      <rect x="50" y="118" width="10" height="40"
+        rx="4" fill="#641f38" opacity=".55"/>
+    </svg>`
+  },
+  'gamine':{
+    name:'Flamboyant Gamine',
+    tagline:'Compacta · Contraste · Dinámica',
+    desc:'Cuerpo compacto lleno de contraste. Mezclar, contrastar y jugar es lo que te funciona.',
+    figureDesc:'Compacta con contraste visual fuerte',
+    proportionRules:[
+      'Mezcla de texturas y colores que contrasten',
+      'Cortes geométricos y líneas limpias',
+      'Quiebre visual entre arriba y abajo',
+      'Prendas cortas que definan el torso'
+    ],
+    garments:{
+      tops:['Crop tops','Camisas con nudo','Tops con detalle geométrico'],
+      bottoms:['Minifaldas','Pantalones de tiro alto cortos','Shorts de sastre'],
+      outerwear:['Blazers oversized cropped','Chaquetas de cuero cortas'],
+      accessories:['Muchos anillos','Botas que definan el tobillo']
+    },
+    avoids:[
+      'Ropa muy larga sin quiebre visual',
+      'Líneas de arriba a abajo sin interrupción',
+      'Prendas muy voluminosas sin estructura'
+    ],
+    celebs:['Audrey Hepburn','Jean Seberg','Winona Ryder'],
+    svgFigure:`<svg width="80" height="130" viewBox="0 0 80 130">
+      <ellipse cx="40" cy="11" rx="11" ry="11" fill="#641f38" opacity=".85"/>
+      <rect x="30" y="24" width="20" height="38"
+        rx="5" fill="#641f38" opacity=".7"/>
+      <rect x="28" y="62" width="10" height="66"
+        rx="4" fill="#641f38" opacity=".6"/>
+      <rect x="42" y="62" width="10" height="66"
+        rx="4" fill="#641f38" opacity=".6"/>
+      <line x1="26" y1="62" x2="54" y2="62"
+        stroke="#c9a66b" stroke-width="1.5"
+        stroke-dasharray="4,3"/>
+    </svg>`
+  },
+  'soft-gamine':{
+    name:'Soft Gamine',
+    tagline:'Pequeña · Femenina · Con actitud',
+    desc:'Compacta y con rasgos suaves. Sabrina Carpenter es tu referente. Prendas que respeten tu escala y tu feminidad.',
+    figureDesc:'Pequeña, curvilínea y compacta',
+    proportionRules:[
+      'Prendas cortas que respeten tu escala',
+      'Cinturas marcadas o cropped que definan',
+      'Detalles femeninos: lazos, cuellos, botones',
+      'Contraste visual entre arriba y abajo'
+    ],
+    garments:{
+      tops:['Blusas con lazos o volantes','Tops cropped con cuello','Camisas anudadas'],
+      bottoms:['Faldas midi o mini','Pantalones de tiro alto','Jeans rectos de cintura alta'],
+      outerwear:['Blazers cortos estructurados','Chaquetas de punto'],
+      accessories:['Accesorios pequeños y delicados','Zapatos con punta fina']
+    },
+    avoids:[
+      'Ropa muy larga que tape completamente',
+      'Líneas sin quiebre de arriba a abajo',
+      'Prendas oversize sin forma'
+    ],
+    celebs:['Sabrina Carpenter','Kylie Minogue','Dolly Parton'],
+    svgFigure:`<svg width="80" height="126" viewBox="0 0 80 126">
+      <ellipse cx="40" cy="11" rx="11" ry="11" fill="#641f38" opacity=".85"/>
+      <path d="M30 24 Q40 20 50 24 L52 52
+        Q40 58 28 52 Z" fill="#641f38" opacity=".7"/>
+      <path d="M28 52 Q40 58 52 52 L54 84
+        Q40 92 26 84 Z" fill="#641f38" opacity=".65"/>
+      <rect x="28" y="84" width="10" height="40"
+        rx="4" fill="#641f38" opacity=".55"/>
+      <rect x="42" y="84" width="10" height="40"
+        rx="4" fill="#641f38" opacity=".55"/>
+    </svg>`
+  },
+  'soft-classic':{
+    name:'Soft Classic',
+    tagline:'Equilibrio · Elegancia suave · Armonía',
+    desc:'Proporciones equilibradas con suavidad natural. La armonía es tu superpoder.',
+    figureDesc:'Equilibrada y armónica',
+    proportionRules:[
+      'Mantener el equilibrio natural de proporciones',
+      'Cintura marcada o sugerida',
+      'Cortes tailored con un toque femenino',
+      'Evitar romper la armonía con piezas extremas'
+    ],
+    garments:{
+      tops:['Blusas con cuello redondeado','Tops de seda o crepé','Camisas clasicas bien cortadas'],
+      bottoms:['Pantalones de pernera recta','Faldas a la rodilla','Conjuntos coordinados'],
+      outerwear:['Blazers estructurados','Gabardinas clásicas'],
+      accessories:['Joyería delicada','Bolsos estructurados medianos']
+    },
+    avoids:[
+      'Ropa muy oversize que borre la forma',
+      'Asimetrías extremas y llamativas',
+      'Estampados muy grandes o muy geométricos'
+    ],
+    celebs:['Natalie Portman','Kate Middleton','Amal Clooney'],
+    svgFigure:`<svg width="86" height="150" viewBox="0 0 86 150">
+      <ellipse cx="43" cy="13" rx="12" ry="12" fill="#641f38" opacity=".85"/>
+      <path d="M29 27 Q43 22 57 27 L60 68
+        Q43 76 26 68 Z" fill="#641f38" opacity=".7"/>
+      <path d="M26 68 Q43 76 60 68 L57 108
+        Q43 116 29 108 Z" fill="#641f38" opacity=".65"/>
+      <rect x="30" y="108" width="10" height="40"
+        rx="4" fill="#641f38" opacity=".55"/>
+      <rect x="46" y="108" width="10" height="40"
+        rx="4" fill="#641f38" opacity=".55"/>
+    </svg>`
+  },
+  'dramatic-classic':{
+    name:'Dramatic Classic',
+    tagline:'Equilibrio · Estructura · Autoridad',
+    desc:'Proporciones equilibradas con presencia natural fuerte. La ropa bien cortada es tu mejor aliada.',
+    figureDesc:'Estructurada y equilibrada',
+    proportionRules:[
+      'Estructuras bien cortadas y tailored',
+      'Líneas limpias y siluetas definidas',
+      'Paleta sobria y poderosa',
+      'Proporciones simétricas y equilibradas'
+    ],
+    garments:{
+      tops:['Blusas con cuello estructurado','Tops de punto fino','Camisas con botones'],
+      bottoms:['Pantalones de vestir','Faldas con corte línea A','Pantalones palazzo'],
+      outerwear:['Abrigos estructurados','Blazers de sastre'],
+      accessories:['Accesorios simples de calidad','Relojes clásicos']
+    },
+    avoids:[
+      'Demasiados elementos decorativos juntos',
+      'Ropa que se vea casual sin intención',
+      'Estampados muy llamativos'
+    ],
+    celebs:['Grace Kelly','Carolyn Bessette-Kennedy','Ali MacGraw'],
+    svgFigure:`<svg width="86" height="150" viewBox="0 0 86 150">
+      <ellipse cx="43" cy="13" rx="12" ry="12" fill="#641f38" opacity=".85"/>
+      <path d="M24 27 Q43 20 62 27 L64 70
+        Q43 74 22 70 Z" fill="#641f38" opacity=".7"/>
+      <path d="M22 70 Q43 74 64 70 L62 110
+        Q43 116 26 110 Z" fill="#641f38" opacity=".65"/>
+      <rect x="30" y="110" width="10" height="38"
+        rx="4" fill="#641f38" opacity=".55"/>
+      <rect x="46" y="110" width="10" height="38"
+        rx="4" fill="#641f38" opacity=".55"/>
+    </svg>`
+  },
+  'romantic':{
+    name:'Romantic',
+    tagline:'Curva · Suavidad · Feminidad intensa',
+    desc:'Curvas pronunciadas y rasgos suaves. La ropa que intenta ocultar tus curvas trabaja en tu contra.',
+    figureDesc:'Curvas pronunciadas, cintura marcada',
+    proportionRules:[
+      'Siempre marcar la cintura — es tu mejor herramienta',
+      'Telas fluidas que sigan la curva, no que la opriman',
+      'Escotes suaves y redondeados',
+      'Evitar líneas rectas que contradigan tu forma'
+    ],
+    garments:{
+      tops:['Tops wrap','Blusas con escote corazón','Tops con drapeado'],
+      bottoms:['Faldas midi con vuelo','Pantalones de tiro alto ceñidos','Faldas lápiz'],
+      outerwear:['Abrigos con cinturón','Chaquetas que acentúen la cintura'],
+      accessories:['Cinturones finos','Bolsos pequeños y femeninos']
+    },
+    avoids:[
+      'Prendas muy estructuradas y rígidas',
+      'Líneas rectas sin curva',
+      'Demasiado volumen en caderas y busto'
+    ],
+    celebs:['Marilyn Monroe','Christina Hendricks','Scarlett Johansson'],
+    svgFigure:`<svg width="92" height="152" viewBox="0 0 92 152">
+      <ellipse cx="46" cy="13" rx="12" ry="12" fill="#641f38" opacity=".85"/>
+      <path d="M28 28 Q46 22 64 28 L68 66
+        Q46 80 24 66 Z" fill="#641f38" opacity=".7"/>
+      <path d="M24 66 Q46 80 68 66 L72 108
+        Q46 122 20 108 Z" fill="#641f38" opacity=".65"/>
+      <rect x="28" y="108" width="12" height="42"
+        rx="5" fill="#641f38" opacity=".55"/>
+      <rect x="52" y="108" width="12" height="42"
+        rx="5" fill="#641f38" opacity=".55"/>
+    </svg>`
+  },
+  'theatrical-romantic':{
+    name:'Theatrical Romantic',
+    tagline:'Curva · Drama suave · Seducción',
+    desc:'Curvas intensas con algo más de ángulo. Puedes usar elementos un poco más dramáticos pero siempre respetando la curva.',
+    figureDesc:'Curvilínea con algo de angular',
+    proportionRules:[
+      'Drapeados que marquen la cintura',
+      'Telas de cuerpo medio — ni rígidas ni muy fluidas',
+      'Detalles dramáticos pero focalizados',
+      'Colores de alto contraste o profundos'
+    ],
+    garments:{
+      tops:['Tops con recortes estratégicos','Blusas con detalle dramático'],
+      bottoms:['Faldas midi con abertura','Pantalones de corte cigarette'],
+      outerwear:['Blazers con solapa amplia','Capas dramáticas'],
+      accessories:['Joyería de impacto','Bolsos llamativos']
+    },
+    avoids:[
+      'Ropa holgada sin forma',
+      'Líneas completamente rectas'
+    ],
+    celebs:['Sofia Vergara','Ana de Armas','Eva Longoria'],
+    svgFigure:`<svg width="92" height="152" viewBox="0 0 92 152">
+      <ellipse cx="46" cy="13" rx="12" ry="12" fill="#641f38" opacity=".85"/>
+      <path d="M26 28 Q46 20 66 28 L70 64
+        Q46 78 22 64 Z" fill="#641f38" opacity=".7"/>
+      <path d="M22 64 Q46 78 70 64 L74 106
+        Q46 120 18 106 Z" fill="#641f38" opacity=".65"/>
+      <rect x="26" y="106" width="12" height="44"
+        rx="5" fill="#641f38" opacity=".55"/>
+      <rect x="54" y="106" width="12" height="44"
+        rx="5" fill="#641f38" opacity=".55"/>
+    </svg>`
+  },
+  'flamboyant-natural':{
+    name:'Flamboyant Natural',
+    tagline:'Amplitud · Movimiento · Energía libre',
+    desc:'Estructura ancha y relajada. Los mejores looks acompañan tu energía sin forzar formas.',
+    figureDesc:'Ancha, relajada, con movimiento',
+    proportionRules:[
+      'Ropa con movimiento y texturas naturales',
+      'Capas y superposiciones de largo variado',
+      'Silueta ligeramente holgada pero con forma',
+      'Evitar todo lo que se sienta forzado o rígido'
+    ],
+    garments:{
+      tops:['Camisas de lino holgadas','Blusas con textura','Tops de punto grueso'],
+      bottoms:['Jeans wide leg','Pantalones de lino amplios','Faldas midi fluidas'],
+      outerwear:['Abrigos de paño','Chaquetas de cuero gastado'],
+      accessories:['Accesorios artesanales','Bolsos de cuero natural']
+    },
+    avoids:[
+      'Ropa muy ajustada y estructurada',
+      'Hombros muy marcados o con relleno',
+      'Looks muy simétricos y formales'
+    ],
+    celebs:['Jennifer Aniston','Julia Roberts','Brooke Shields'],
+    svgFigure:`<svg width="96" height="152" viewBox="0 0 96 152">
+      <ellipse cx="48" cy="13" rx="13" ry="13" fill="#641f38" opacity=".85"/>
+      <path d="M18 28 Q48 20 78 28 L76 72
+        Q48 76 20 72 Z" fill="#641f38" opacity=".7"/>
+      <path d="M20 72 Q48 76 76 72 L72 112
+        Q48 116 24 112 Z" fill="#641f38" opacity=".65"/>
+      <rect x="28" y="112" width="12" height="38"
+        rx="5" fill="#641f38" opacity=".55"/>
+      <rect x="56" y="112" width="12" height="38"
+        rx="5" fill="#641f38" opacity=".55"/>
+    </svg>`
+  },
+  'soft-natural':{
+    name:'Soft Natural',
+    tagline:'Natural · Curva suave · Relajada',
+    desc:'Cuerpo natural y relajado con algo de curva suave. Ropa que fluya con el cuerpo.',
+    figureDesc:'Natural, algo curvilínea, relajada',
+    proportionRules:[
+      'Siluetas fluidas y naturales',
+      'Prendas que se muevan con el cuerpo',
+      'Texturas interesantes y capas suaves',
+      'Colores cálidos y terrosos'
+    ],
+    garments:{
+      tops:['Tops de punto suave','Blusas boho','Camisas de algodón'],
+      bottoms:['Faldas boho midi','Jeans de corte recto','Pantalones cargo relajados'],
+      outerwear:['Chaquetas de punto','Abrigos de paño suave'],
+      accessories:['Joyería boho artesanal','Bolsos de paja o mimbre']
+    },
+    avoids:[
+      'Líneas muy rígidas y estructuradas',
+      'Ropa muy ceñida que quite movimiento'
+    ],
+    celebs:['Cameron Diaz','Drew Barrymore','Reese Witherspoon'],
+    svgFigure:`<svg width="90" height="150" viewBox="0 0 90 150">
+      <ellipse cx="45" cy="13" rx="12" ry="12" fill="#641f38" opacity=".85"/>
+      <path d="M22 28 Q45 22 68 28 L66 70
+        Q45 78 24 70 Z" fill="#641f38" opacity=".7"/>
+      <path d="M24 70 Q45 78 66 70 L64 110
+        Q45 118 26 110 Z" fill="#641f38" opacity=".65"/>
+      <rect x="30" y="110" width="10" height="38"
+        rx="4" fill="#641f38" opacity=".55"/>
+      <rect x="50" y="110" width="10" height="38"
+        rx="4" fill="#641f38" opacity=".55"/>
+    </svg>`
+  }
+};
+
+const SEASON_DATA = {
+  'autumn-deep':{
+    name:'Otoño Profundo',
+    palette:['#2d1810','#641f38','#8b4513','#c9813d','#d4a050'],
+    paletteNames:['Cacao','Vino','Teja','Cobre','Mostaza'],
+    rules:[
+      'Oscuros y ricos — nunca pasteles ni colores lavados',
+      'Dorado antiguo y cobre como metales principales',
+      'Contraste visible pero no extremo',
+      'Telas con textura: terciopelo, cuero, lana gruesa'
+    ]
+  },
+  'autumn-soft':{
+    name:'Otoño Suave',
+    palette:['#c8905a','#a07848','#d4b080','#906848','#7a5838'],
+    paletteNames:['Camel','Arena','Trigo','Cacao claro','Sienne'],
+    rules:[
+      'Tonos medios cálidos y apagados',
+      'Evita el negro puro — usa marrón oscuro o chocolate',
+      'Metales dorados y cobrizos',
+      'Estampados naturales: tartán, flores pequeñas'
+    ]
+  },
+  'spring-warm':{
+    name:'Primavera Cálida',
+    palette:['#e8c080','#d4904a','#e0b060','#c8784a','#f0d090'],
+    paletteNames:['Dorado','Coral','Durazno','Naranja teja','Crema'],
+    rules:[
+      'Colores cálidos y luminosos — no apagados',
+      'Coral, durazno, dorado brillante como protagonistas',
+      'Dorado amarillo, no rosado',
+      'Evita los tonos fríos y los grises'
+    ]
+  },
+  'spring-true':{
+    name:'Primavera Verdadera',
+    palette:['#f0c880','#e8a060','#f0d8a0','#c8904a','#e0b870'],
+    paletteNames:['Dorado cálido','Melocotón','Crema cálida','Camel','Amarillo'],
+    rules:[
+      'Colores brillantes y claros',
+      'Coral, amarillo, verde limón, turquesa cálido',
+      'Sin negro — usa camel o marrón como neutro',
+      'Dorado y latón como metales'
+    ]
+  },
+  'winter-true':{
+    name:'Invierno Verdadero',
+    palette:['#0d0818','#181028','#641f38','#d0c8d8','#f0f0f8'],
+    paletteNames:['Negro','Azul noche','Carmesí','Lavanda','Blanco puro'],
+    rules:[
+      'Colores fríos y de alto contraste',
+      'Negro, blanco puro, rojo carmesí, royal blue',
+      'Plateado, no dorado',
+      'Evita los tonos cálidos y terrosos'
+    ]
+  },
+  'winter-soft':{
+    name:'Invierno Suave',
+    palette:['#40283a','#604868','#8878a0','#c0b0c8','#e8e0f0'],
+    paletteNames:['Ciruela','Morado','Malva','Lavanda','Lila suave'],
+    rules:[
+      'Fríos y de media intensidad',
+      'Ciruela, malva, lavanda, gris azulado',
+      'Plateado como metal principal',
+      'Contraste medio — ni muy alto ni bajo'
+    ]
+  },
+  'winter-clear':{
+    name:'Invierno Brillante',
+    palette:['#100818','#1a0828','#c81840','#60a0d8','#f0f0f8'],
+    paletteNames:['Negro','Azul índigo','Fucsia','Azul cielo','Blanco'],
+    rules:[
+      'Colores puros y brillantes',
+      'Negro-blanco como base, joyas de color como acento',
+      'Plateado brillante',
+      'Contraste alto y limpio'
+    ]
+  },
+  'summer-cool':{
+    name:'Verano Frío',
+    palette:['#b0b8d0','#9098c0','#d0c8d8','#a8a0b8','#f0f0f8'],
+    paletteNames:['Azul hielo','Lavanda med.','Rosa gris','Lila','Blanco frío'],
+    rules:[
+      'Tonos fríos pero suaves',
+      'Rosa viejo, lavanda, azul polvoriento, malva',
+      'Plateado como metal',
+      'Evita los tonos cálidos y el negro puro'
+    ]
+  },
+  'summer-soft':{
+    name:'Verano Suave',
+    palette:['#c0b0c0','#d0c0c8','#e0d0d8','#b8a8b0','#908098'],
+    paletteNames:['Rosa empolvado','Malva','Nude frío','Rosa ash','Lila gris'],
+    rules:[
+      'Todo en tonos suaves y apagados',
+      'Rosa empolvado, lila, azul grisáceo',
+      'Sin colores saturados ni muy brillantes',
+      'Plateado y perla como metales'
+    ]
+  },
+  'spring-light':{
+    name:'Primavera Clara',
+    palette:['#f8e8c0','#f0c898','#f8d8b0','#e8b888','#f0e0c8'],
+    paletteNames:['Vainilla','Melocotón claro','Crema','Albaricoque','Beige cálido'],
+    rules:[
+      'Colores muy claros y cálidos',
+      'Casi pasteles pero con un toque dorado',
+      'Dorado claro como metal',
+      'Evita los oscuros y los colores fríos'
+    ]
+  }
+};
+
+const VIBE_DATA = {
+  'dark-romantic':{
+    name:'Dark Romantic',
+    tagline:'Misterio · Sensualidad · Profundidad',
+    desc:'Tu estética vive entre lo oscuro y lo femenino. Telas ricas, colores profundos, detalles que cuentan una historia.',
+    elements:['Terciopelo y encaje','Vino, ciruela, negro, burdeos','Joyas vintage y oscuras','Labios intensos como firma'],
+    moodImages:[
+      { q:'dark romantic fashion aesthetic editorial dark', cap:'Estética oscura y sensual' },
+      { q:'dark romantic velvet dress wine color', cap:'Terciopelo y burdeos' },
+      { q:'dark academia jewelry vintage ring', cap:'Joyas con historia' }
+    ],
+    quote:'"No se trata de seguir una estética, sino de crear tu propia historia."'
+  },
+  'femme-fatale':{
+    name:'Femme Fatale',
+    tagline:'Poder · Seducción · Autoridad visual',
+    desc:'Tu energía es magnética sin intentarlo. Menos es más, pero ese "menos" tiene que ser perfecto.',
+    elements:['Satén y seda','Negro, rojo, ciruela profundo','Siluetas que envuelvan','Delineado cat eye como firma'],
+    moodImages:[
+      { q:'femme fatale fashion black satin dress editorial', cap:'Seda y poder' },
+      { q:'dark power fashion editorial dramatic', cap:'Presencia dramática' },
+      { q:'red lips black dress classic femme', cap:'Clásico y poderoso' }
+    ],
+    quote:'"Tu mirada es tu poder."'
+  },
+  'whimsical-goth':{
+    name:'Whimsical Goth',
+    tagline:'Fantasía · Oscuridad suave · Etéreo',
+    desc:'Lo oscuro pero soñador. Tu estética mezcla lo gótico con algo mágico, como un cuento de hadas con filtro oscuro.',
+    elements:['Tules y gasas oscuras','Negro con plateado o morado','Accesorios con luna y estrellas','Lentillas sutiles'],
+    moodImages:[
+      { q:'whimsigoth fashion dark fairy aesthetic', cap:'Hada oscura' },
+      { q:'ethereal gothic tulle black dress', cap:'Etéreo y oscuro' },
+      { q:'mystical moon stars jewelry aesthetic', cap:'Accesorios mágicos' }
+    ],
+    quote:'"Eres clásica, oscura y etérea."'
+  },
+  'romantic-academia':{
+    name:'Romantic Academia',
+    tagline:'Intelectual · Clásica · Con profundidad',
+    desc:'La biblioteca como pasarela. Mezcla lo romántico con lo académico — libros, telas de calidad, colores ricos.',
+    elements:['Tweed, tartán, terciopelo','Burdeos, camel, crema, bosque','Capas con intención','Accesorios literarios'],
+    moodImages:[
+      { q:'dark academia fashion tweed vintage library', cap:'Academia oscura' },
+      { q:'romantic academia plaid blazer aesthetic', cap:'Romántico y académico' },
+      { q:'vintage literary aesthetic books fashion', cap:'Literario y sensual' }
+    ],
+    quote:'"El contraste cuenta historias."'
+  },
+  'indie-bohemian':{
+    name:'Indie Bohemian',
+    tagline:'Libertad · Autenticidad · Sin reglas',
+    desc:'Tu estilo no sigue un manual — se construye momento a momento. Mezclas lo vintage con lo nuevo.',
+    elements:['Denim vintage y flanela','Tierra, ocre, verde botella','Joyería artesanal','Capas y texturas mezcladas'],
+    moodImages:[
+      { q:'indie boho vintage fashion aesthetic denim', cap:'Indie y libre' },
+      { q:'bohemian jewelry artisan layered necklaces', cap:'Joyería artesanal' },
+      { q:'vintage thrift aesthetic fashion grunge soft', cap:'Vintage y auténtico' }
+    ],
+    quote:'"Eres tu mejor versión."'
+  },
+  'power-goth':{
+    name:'Power Goth',
+    tagline:'Fuerza · Oscuridad · Sin disculpas',
+    desc:'Oscuro, poderoso y sin necesidad de explicaciones. Tu estilo intimida y atrae al mismo tiempo.',
+    elements:['Cuero y metal','Negro absoluto con plata','Botas con estructura','Delineado oscuro'],
+    moodImages:[
+      { q:'gothic fashion black leather editorial dark', cap:'Cuero y poder' },
+      { q:'dark goth aesthetic fashion boots silver', cap:'Oscuro sin disculpas' },
+      { q:'industrial goth fashion editorial', cap:'Industrial y poderoso' }
+    ],
+    quote:'"Tu eres tu mejor versión."'
+  },
+  'dark-academia':{
+    name:'Dark Academia',
+    tagline:'Saber · Nostalgia · Elegancia oscura',
+    desc:'Colores de biblioteca antigua, telas con historia. Tu estilo tiene una narrativa intelectual y oscura.',
+    elements:['Lana, tweed, cuero gastado','Marrón oscuro, burdeos, negro','Anteojos como accesorio clave','Cuadernos de cuero'],
+    moodImages:[
+      { q:'dark academia fashion aesthetic plaid coat', cap:'Academia clásica' },
+      { q:'dark academia library vintage books fashion', cap:'Intelectual y oscuro' },
+      { q:'vintage glasses aesthetic dark academia', cap:'Los detalles importan' }
+    ],
+    quote:'"El contraste cuenta historias."'
+  },
+  'romantic-mystery':{
+    name:'Romantic Mystery',
+    tagline:'Enigma · Feminidad · Contraste',
+    desc:'Tu estilo tiene capas — literal y metafóricamente. Combinas lo suave con lo oscuro, lo femenino con lo misterioso.',
+    elements:['Encaje + cuero, seda + lana','Paleta de medias tintas oscuras','Capas que se descubren','Accesorios con simbolismo'],
+    moodImages:[
+      { q:'romantic dark fashion aesthetic mystery lace', cap:'Romántico y misterioso' },
+      { q:'dark feminine fashion editorial layers', cap:'Capas con intención' },
+      { q:'gothic romantic jewelry aesthetic', cap:'Accesorios con simbolismo' }
+    ],
+    quote:'"Eres tu mejor versión."'
+  }
+};
+
+/* ═══════════════════════════════════════════════════════════
+   MOODBOARD RENDER
+═══════════════════════════════════════════════════════════ */
+function showMoodboard() {
+  document.getElementById('selfie-wrap').style.display = 'none';
+  document.getElementById('result-wrap').style.display = 'block';
+
+  document.getElementById('prog-fill').style.width = '100%';
+  document.getElementById('prog-pct').textContent  = '100%';
+  document.getElementById('prog-label').textContent = 'Tu moodboard VÉNUS';
+  for (let i=0; i<4; i++) {
+    const el = document.getElementById('sd'+i);
+    if (el) el.className = 'section-dot done';
+  }
+
+  const kibbe  = calcKibbe();
+  const season = calcSeason();
+  const vibe   = calcVibe();
+  const kd = KIBBE_DATA[kibbe]   || KIBBE_DATA['soft-classic'];
+  const sd = SEASON_DATA[season] || SEASON_DATA['autumn-soft'];
+  const vd = VIBE_DATA[vibe]     || VIBE_DATA['romantic-mystery'];
+
+  const isMasc = gender === 'masc';
+  const pronoun = isMasc ? 'Tu' : 'Tu';
+
+  /* palette swatches */
+  const swatchHTML = sd.palette.map((c,i) =>
+    `<div class="palette-swatch-block" style="background:${c}">
+      <span>${sd.paletteNames[i]||''}</span>
+    </div>`
+  ).join('');
+
+  /* garment sections */
+  const garmentCards = Object.entries(kd.garments).map(([cat,items]) => {
+    const icons = {
+      tops:'👕', bottoms:'👖', outerwear:'🧥', accessories:'💍'
+    };
+    const labels = {
+      tops: isMasc ? 'Torso' : 'Tops',
+      bottoms: isMasc ? 'Parte baja' : 'Faldas / Pantalones',
+      outerwear:'Outerwear',
+      accessories: isMasc ? 'Accesorios' : 'Accesorios'
+    };
+    return `
+      <div class="garment-card">
+        <span class="garment-icon">${icons[cat]||'✦'}</span>
+        <div class="garment-cat">${labels[cat]||cat}</div>
+        <div class="garment-list">${items.join('<br>')}</div>
+      </div>`;
+  }).join('');
+
+  /* proportion rules */
+  const propRules = kd.proportionRules.map(r =>
+    `<div class="proportion-rule">
+      <div class="pr-dot"></div><span>${r}</span>
+    </div>`
+  ).join('');
+
+  /* palette rules */
+  const palRules = sd.rules.map((r,i) =>
+    `<div class="palette-rule">
+      <div class="palette-rule-dot"
+        style="background:${sd.palette[i%sd.palette.length]}">
+      </div>
+      <span>${r}</span>
+    </div>`
+  ).join('');
+
+  /* celeb cards */
+  const celebCards = kd.celebs.map(c =>
+    `<div class="celeb-card">
+      <div class="celeb-avatar">${c.charAt(0)}</div>
+      <div>
+        <div class="celeb-name">${c}</div>
+        <div class="celeb-why">
+          Referente con tu tipo de silueta y proporciones
+        </div>
+      </div>
+    </div>`
+  ).join('');
+
+  /* vibe elements */
+  const vibeItems = vd.elements.map(e =>
+    `<div class="proportion-rule">
+      <div class="pr-dot"></div><span>${e}</span>
+    </div>`
+  ).join('');
+
+  /* avoids */
+  const avoidsHTML = kd.avoids.map(a =>
+    `<div class="avoid-item">
+      <span class="avoid-x">×</span><span>${a}</span>
+    </div>`
+  ).join('');
+
+  /* selfie analysis block */
+  let selfieHTML = '';
+  if (selfieAnalysis) {
+    const sa = selfieAnalysis;
+    const featuresHTML = (sa.keyFeatures||[]).map(f =>
+      `<div class="proportion-rule">
+        <div class="pr-dot"></div><span>${f}</span>
+      </div>`
+    ).join('');
+    const selfCelebs = (sa.celebrities||[]).map(c =>
+      `<div class="celeb-card" style="margin-bottom:8px">
+        <div class="celeb-avatar">${c.name.charAt(0)}</div>
+        <div>
+          <div class="celeb-name">${c.name}</div>
+          <div class="celeb-why">${c.why}</div>
+        </div>
+      </div>`
+    ).join('');
+    const makeupCards = (sa.makeupTips||[]).map(t =>
+      `<div class="makeup-card">
+        <div class="makeup-area">${t.area}</div>
+        <div class="makeup-tip">${t.tip}</div>
+      </div>`
+    ).join('');
+
+    selfieHTML = `
+      <div class="selfie-analysis-card">
+        ${selfieDataURL
+          ? `<img class="selfie-thumb"
+              src="${selfieDataURL}" alt="Tu foto">`
+          : ''}
+        <div class="mb-section-head">
+          <div class="mb-section-icon">◉</div>
+          <div class="mb-section-title">
+            Análisis de tu rostro
+          </div>
+        </div>
+        ${sa.faceShape
+          ? `<div class="face-shape-badge">
+              Forma de rostro: ${sa.faceShape}
+            </div>`
+          : ''}
+        <div style="margin:12px 0">${featuresHTML}</div>
+        <div class="mb-section-head" style="margin-top:14px">
+          <div class="mb-section-icon"
+            style="background:var(--plum)">✦</div>
+          <div class="mb-section-title">
+            Referentes con tus rasgos
+          </div>
+        </div>
+        <div style="margin-top:10px">${selfCelebs}</div>
+        <div class="mb-section-head" style="margin-top:14px">
+          <div class="mb-section-icon"
+            style="background:var(--plum)">◐</div>
+          <div class="mb-section-title">
+            ${isMasc
+              ? 'Grooming y maquillaje'
+              : 'Técnicas de maquillaje'}
+            para tu rostro
+          </div>
+        </div>
+        <div class="makeup-grid"
+          style="margin-top:10px">${makeupCards}</div>
+        ${sa.styleNote
+          ? `<div class="quote-block" style="margin-top:14px">
+              ${sa.styleNote}
+            </div>`
+          : ''}
+      </div>`;
+  }
+
+  /* Unsplash image search URLs (keyword-based) */
+  function unsplashURL(q) {
+    const enc = encodeURIComponent(q);
+    return `https://source.unsplash.com/400x500/?${enc}`;
+  }
+
+  const moodImgs = vd.moodImages || [];
+  const mosaicHTML = moodImgs.length >= 3
+    ? `<div class="mosaic mosaic-3">
+        <div class="mosaic-item">
+          <img src="${unsplashURL(moodImgs[0].q)}"
+            alt="${moodImgs[0].cap}" loading="lazy">
+          <div class="mosaic-cap">${moodImgs[0].cap}</div>
+        </div>
+        <div class="mosaic-item">
+          <img src="${unsplashURL(moodImgs[1].q)}"
+            alt="${moodImgs[1].cap}" loading="lazy">
+          <div class="mosaic-cap">${moodImgs[1].cap}</div>
+        </div>
+        <div class="mosaic-item">
+          <img src="${unsplashURL(moodImgs[2].q)}"
+            alt="${moodImgs[2].cap}" loading="lazy">
+          <div class="mosaic-cap">${moodImgs[2].cap}</div>
+        </div>
+      </div>`
+    : '';
+
+  document.getElementById('result-wrap').innerHTML = `
+
+    <!-- COVER -->
+    <div class="mb-cover">
+      <div class="mb-cover-eyebrow">✦ Tu fórmula VÉNUS</div>
+      <div class="mb-cover-name">${vd.name}</div>
+      <div class="mb-cover-tagline">${vd.tagline}</div>
+      <div class="formula-strip">
+        <div class="formula-chip">
+          <span class="chip-label">Silueta</span>
+          ${kd.name}
+        </div>
+        <div class="formula-chip">
+          <span class="chip-label">Paleta</span>
+          ${sd.name}
+        </div>
+        <div class="formula-chip">
+          <span class="chip-label">Vibe</span>
+          ${vd.name}
+        </div>
+      </div>
+    </div>
+
+    <!-- SELFIE ANALYSIS (if exists) -->
+    ${selfieHTML}
+
+    <!-- SECTION: SILUETA Y PROPORCIONES -->
+    <div class="mb-section">
+      <div class="mb-section-head">
+        <div class="mb-section-icon">◈</div>
+        <div class="mb-section-title">
+          Tu silueta — ${kd.name}
+        </div>
+      </div>
+      <div class="proportion-card">
+        <div class="proportion-inner">
+          <div class="proportion-figure">
+            ${kd.svgFigure}
+            <div class="proportion-figure-label">
+              ${kd.figureDesc}
+            </div>
+          </div>
+          <div class="proportion-rules">
+            <div style="font-size:13px;color:#514a4c;
+              margin-bottom:10px;line-height:1.5">
+              ${kd.desc}
+            </div>
+            ${propRules}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: PRENDAS -->
+    <div class="mb-section">
+      <div class="mb-section-head">
+        <div class="mb-section-icon">👗</div>
+        <div class="mb-section-title">
+          Prendas que te favorecen
+        </div>
+      </div>
+      <div class="garment-grid">${garmentCards}</div>
+    </div>
+
+    <!-- SECTION: EVITAR -->
+    <div class="avoids-card">
+      <div class="avoids-title">Mejor evitar</div>
+      ${avoidsHTML}
+    </div>
+
+    <!-- SECTION: PALETA -->
+    <div class="mb-section">
+      <div class="mb-section-head">
+        <div class="mb-section-icon">◐</div>
+        <div class="mb-section-title">
+          Tu paleta — ${sd.name}
+        </div>
+      </div>
+      <div class="palette-strip">
+        <div class="palette-swatches">${swatchHTML}</div>
+        ${palRules}
+      </div>
+    </div>
+
+    <!-- SECTION: MOODBOARD IMAGES -->
+    ${mosaicHTML ? `
+    <div class="mb-section">
+      <div class="mb-section-head">
+        <div class="mb-section-icon">◎</div>
+        <div class="mb-section-title">
+          Referencias de estilo
+        </div>
+      </div>
+      ${mosaicHTML}
+    </div>` : ''}
+
+    <!-- SECTION: ENERGÍA / VIBE -->
+    <div class="mb-section">
+      <div class="mb-section-head">
+        <div class="mb-section-icon">☽</div>
+        <div class="mb-section-title">
+          Tu energía — ${vd.name}
+        </div>
+      </div>
+      <div class="proportion-card">
+        <div style="font-size:13px;color:#514a4c;
+          line-height:1.5;margin-bottom:12px">
+          ${vd.desc}
+        </div>
+        ${vibeItems}
+      </div>
+    </div>
+
+    <!-- SECTION: REFERENCIAS CELEBS -->
+    <div class="mb-section">
+      <div class="mb-section-head">
+        <div class="mb-section-icon">✦</div>
+        <div class="mb-section-title">
+          Referencias con tu silueta
+        </div>
+      </div>
+      <div class="celeb-cards">${celebCards}</div>
+    </div>
+
+    <!-- QUOTE -->
+    <div class="quote-block">${vd.quote}</div>
+
+    <!-- ACTIONS -->
+    <div class="result-actions">
+      <button class="btn-restart" onclick="restart()">
+        ← Hacer el test de nuevo
+      </button>
+      <a class="btn-home" href="index.html">
+        Ir a VÉNUS →
+      </a>
+    </div>
+  `;
+
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESTART
+═══════════════════════════════════════════════════════════ */
+function restart() {
+  modIdx = 0; qIdx = 0;
+  gender = null;
+  selfieDataURL  = null;
+  selfieAnalysis = null;
+  Object.keys(answers).forEach(k => delete answers[k]);
+
+  document.getElementById('result-wrap').style.display = 'none';
+  document.getElementById('selfie-wrap').style.display = 'none';
+  document.getElementById('quiz-wrap').style.display   = 'none';
+  document.getElementById('gender-screen').style.display = 'block';
+
+  document.getElementById('prog-fill').style.width = '0%';
+  document.getElementById('prog-pct').textContent  = '0%';
+  document.getElementById('prog-label').textContent = 'Elige tu perfil';
+  for (let i=0; i<4; i++) {
+    const el = document.getElementById('sd'+i);
+    if (el) el.className = 'section-dot'+(i===0?' active':'');
+  }
+  renderGenderScreen();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+/* ── START ─────────────────────────────────────────────── */
+renderGenderScreen();
+</script>
+</body>
+</html>
