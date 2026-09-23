@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>VÉNUS — Glow Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;1,400
+        &family=Playfair+Display:ital,wght@0,500;1,500&display=swap"
+  rel="stylesheet"
+>
+<style>
+/* ── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --wine:    #641f38;
+  --plum:    #40203f;
+  --wine-lt: #fdf0f4;
+  --wine-md: #e8b0c0;
+  --gold:    #c9a66b;
+  --cream:   #f6f0e8;
+  --black:   #171516;
+  --white:   #fffaf6;
+  --muted:   #7a6e70;
+  --border:  rgba(23,21,22,.1);
+  --success: #1a6e3c;
+  --warn:    #b07020;
+  --r:       12px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bot: env(safe-area-inset-bottom, 0px);
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+}
+html, body {
+  height: 100%;
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--black);
+  overflow: hidden;
+}
+
+/* ── SHELL ───────────────────────────────────────────────── */
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ── TOP BAR ─────────────────────────────────────────────── */
+.topbar {
+  flex-shrink: 0;
+  padding: calc(var(--safe-top) + 12px) 20px 12px;
+  background: rgba(246,240,232,.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topbar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  font-weight: 500;
+  color: var(--black);
+}
+.topbar-tag {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--wine);
+  background: var(--wine-lt);
+  border: 1px solid var(--wine-md);
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+/* ── SCROLL AREA ─────────────────────────────────────────── */
+.scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 16px calc(var(--safe-bot) + 80px);
+}
+
+/* ── BOTTOM NAV ──────────────────────────────────────────── */
+.bottom-nav {
+  flex-shrink: 0;
+  display: flex;
+  border-top: 1px solid var(--border);
+  background: rgba(246,240,232,.96);
+  backdrop-filter: blur(14px);
+  padding-bottom: var(--safe-bot);
+}
+.nav-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 12px 4px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  -webkit-tap-highlight-color: transparent;
+  transition: .15s;
+}
+.nav-btn .nav-icon {
+  font-size: 20px;
+  color: var(--muted);
+  line-height: 1;
+  transition: .15s;
+}
+.nav-btn .nav-label {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .5px;
+  transition: .15s;
+}
+.nav-btn.active .nav-icon,
+.nav-btn.active .nav-label {
+  color: var(--wine);
+}
+.nav-btn.active .nav-icon {
+  transform: translateY(-1px);
+}
+
+/* ── SECTIONS ────────────────────────────────────────────── */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── CARDS ───────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin-bottom: 10px;
+}
+.card-body {
+  font-size: 14px;
+  color: #514a4c;
+  line-height: 1.6;
+}
+
+/* ── SECTION HEADER ──────────────────────────────────────── */
+.sec-head {
+  margin-bottom: 18px;
+}
+.sec-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin-bottom: 6px;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.sec-sub {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── PLAN ─────────────────────────────────────────────────── */
+.plan-week {
+  margin-bottom: 16px;
+}
+.plan-week-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 0 4px;
+}
+.plan-week-num {
+  width: 28px; height: 28px;
+  background: var(--wine);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 500; color: white;
+  flex-shrink: 0;
+}
+.plan-week-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--black);
+}
+.plan-week-sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+.plan-task {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px;
+  margin-bottom: 8px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: .15s;
+}
+.plan-task:active { opacity: .8; }
+.plan-task.done {
+  opacity: .6;
+  background: var(--cream);
+}
+.plan-task.done .task-name {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+.task-check {
+  width: 22px; height: 22px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center; justify-content: center;
+  font-size: 11px;
+  margin-top: 1px;
+  transition: .15s;
+  color: transparent;
+}
+.plan-task.done .task-check {
+  background: var(--wine);
+  border-color: var(--wine);
+  color: white;
+}
+.task-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--black);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+.task-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.plan-progress {
+  background: var(--border);
+  border-radius: 4px;
+  height: 4px;
+  margin: 14px 0 20px;
+  overflow: hidden;
+}
+.plan-progress-fill {
+  height: 100%;
+  background: var(--wine);
+  border-radius: 4px;
+  transition: width .4s ease;
+}
+
+/* ── ANTES / DESPUÉS ──────────────────────────────────────── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.compare-slot {
+  border-radius: var(--r);
+  border: 2px dashed var(--wine-md);
+  background: var(--wine-lt);
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+  transition: .2s;
+}
+.compare-slot:hover { border-color: var(--wine); }
+.compare-slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--r) - 2px);
+}
+.compare-slot input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.slot-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+.slot-icon {
+  font-size: 24px;
+  color: var(--wine);
+  position: relative;
+  z-index: 1;
+}
+.compare-slot.has-img .slot-label,
+.compare-slot.has-img .slot-icon { display: none; }
+.slot-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(23,21,22,.7));
+  padding: 20px 10px 8px;
+  font-size: 11px;
+  color: white;
+  text-align: center;
+  display: none;
+  z-index: 2;
+}
+.compare-slot.has-img .slot-overlay { display: block; }
+.change-note-wrap { margin-bottom: 16px; }
+.change-note-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.change-note {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--black);
+  background: var(--white);
+  resize: none;
+  min-height: 70px;
+  outline: none;
+  transition: border-color .2s;
+}
+.change-note:focus { border-color: var(--wine); }
+.ai-reflection {
+  background: var(--wine-lt);
+  border: 1px solid var(--wine-md);
+  border-radius: var(--r);
+  padding: 14px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: #514a4c;
+  line-height: 1.6;
+  display: none;
+}
+.ai-reflection.show { display: block; }
+.ai-reflection-head {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin-bottom: 8px;
+}
+
+/* ── DIARIO ───────────────────────────────────────────────── */
+.diary-composer {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.diary-composer-head {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.diary-mood-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.mood-chip {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: .15s;
+  user-select: none;
+}
+.mood-chip.selected {
+  background: var(--wine-lt);
+  border-color: var(--wine);
+  color: var(--wine);
+}
+.diary-textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--black);
+  background: var(--cream);
+  resize: none;
+  min-height: 80px;
+  outline: none;
+  transition: border-color .2s;
+  margin-bottom: 10px;
+}
+.diary-textarea:focus { border-color: var(--wine); }
+.diary-photo-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.diary-photo-thumb {
+  width: 60px; height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+.diary-photo-add {
+  width: 60px; height: 60px;
+  border-radius: 8px;
+  border: 1.5px dashed var(--wine-md);
+  background: var(--wine-lt);
+  display: flex;
+  align-items: center; justify-content: center;
+  font-size: 20px;
+  color: var(--wine);
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.diary-photo-add input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.btn-primary {
+  width: 100%;
+  background: var(--wine);
+  border: none;
+  border-radius: 30px;
+  padding: 13px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: .2s;
+}
+.btn-primary:active { opacity: .85; }
+.btn-secondary {
+  width: 100%;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+  margin-top: 8px;
+  transition: .2s;
+}
+.btn-secondary:active { opacity: .7; }
+.diary-entries { margin-top: 4px; }
+.entry-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.entry-date {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: .5px;
+}
+.entry-mood-badge {
+  font-size: 11px;
+  background: var(--wine-lt);
+  color: var(--wine);
+  border: 1px solid var(--wine-md);
+  border-radius: 20px;
+  padding: 2px 10px;
+}
+.entry-text {
+  font-size: 13px;
+  color: #514a4c;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  white-space: pre-wrap;
+}
+.entry-photos {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+}
+.entry-photo {
+  width: 64px; height: 64px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.entry-ai {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.5;
+}
+.entry-delete {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px;
+  margin-top: 6px;
+  display: block;
+  transition: color .15s;
+}
+.entry-delete:hover { color: var(--wine); }
+
+/* ── CHAT ─────────────────────────────────────────────────── */
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.msg {
+  max-width: 88%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.msg.user {
+  background: var(--wine);
+  color: white;
+  align-self: flex-end;
+  border-radius: 16px 16px 4px 16px;
+}
+.msg.ai {
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--black);
+  align-self: flex-start;
+  border-radius: 4px 16px 16px 16px;
+}
+.msg.thinking {
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-style: italic;
+  align-self: flex-start;
+  border-radius: 4px 16px 16px 16px;
+}
+.chat-form {
+  display: flex;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 6px 6px 6px 16px;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+}
+.chat-input {
+  flex: 1;
+  border: none;
+  background: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--black);
+  outline: none;
+  min-width: 0;
+}
+.chat-input::placeholder { color: var(--muted); }
+.chat-send {
+  background: var(--wine);
+  border: none;
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: .15s;
+}
+.chat-send:active { transform: scale(.95); }
+.chat-prompts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.prompt-chip {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--black);
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition: .15s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.prompt-chip:hover {
+  border-color: var(--wine-md);
+  background: var(--wine-lt);
+}
+.prompt-icon { color: var(--wine); font-size: 14px; }
+
+/* ── LOADING ──────────────────────────────────────────────── */
+.loading-dot {
+  display: inline-block;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.loading-dot:nth-child(2) { animation-delay: .2s; }
+.loading-dot:nth-child(3) { animation-delay: .4s; }
+@keyframes pulse {
+  0%, 80%, 100% { opacity: .3; }
+  40% { opacity: 1; }
+}
+
+/* ── TOAST ────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: calc(var(--safe-bot) + 80px);
+  left: 50%; transform: translateX(-50%) translateY(10px);
+  background: var(--black);
+  color: white;
+  font-size: 13px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  opacity: 0;
+  pointer-events: none;
+  transition: .3s;
+  white-space: nowrap;
+  z-index: 999;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── MISC ─────────────────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+}
+.empty-state-icon { font-size: 32px; margin-bottom: 10px; }
+.empty-state-text { font-size: 14px; line-height: 1.5; }
+.stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px;
+}
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--wine);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: .5px;
+}
+
+/* ── ONBOARDING ───────────────────────────────────────────── */
+.onboard {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--cream);
+  z-index: 200;
+  overflow-y: auto;
+  padding: 40px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.onboard.hidden { display: none; }
+.onboard-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 32px;
+  color: var(--black);
+}
+.onboard-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  color: var(--black);
+}
+.onboard-sub {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+.onboard-field-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  letter-spacing: .5px;
+}
+.onboard-field {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--black);
+  background: var(--white);
+  margin-bottom: 20px;
+  outline: none;
+  transition: border-color .2s;
+}
+.onboard-field:focus { border-color: var(--wine); }
+.onboard-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.onboard-chip {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: .15s;
+}
+.onboard-chip.selected {
+  background: var(--wine-lt);
+  border-color: var(--wine);
+  color: var(--wine);
+}
+.btn-wine {
+  width: 100%;
+  background: var(--wine);
+  border: none;
+  border-radius: 30px;
+  padding: 15px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: .2s;
+}
+.btn-wine:active { opacity: .85; }
+</style>
+</head>
+<body>
+
+<!-- ONBOARDING -->
+<div class="onboard" id="onboard">
+  <div class="onboard-logo">VÉNUS</div>
+  <div class="onboard-title">Tu espacio<br>de transformación.</div>
+  <div class="onboard-sub">
+    Antes de empezar, cuéntanos un poco sobre ti
+    para que tu experiencia sea completamente personal.
+  </div>
+  <div class="onboard-field-label">¿Cómo te llamas?</div>
+  <input class="onboard-field" id="ob-name"
+    type="text" placeholder="Tu nombre"
+    autocomplete="off">
+  <div class="onboard-field-label">
+    ¿Cuál es tu fórmula VÉNUS?<br>
+    <span style="font-size:11px;color:var(--muted)">
+      Si ya hiciste el test, pégala aquí (ej: Soft Gamine · Otoño Profundo · Dark Romantic)
+    </span>
+  </div>
+  <input class="onboard-field" id="ob-formula"
+    type="text" placeholder="Mi fórmula…"
+    autocomplete="off">
+  <div class="onboard-field-label">
+    ¿Cuál es tu intención principal?
+  </div>
+  <div class="onboard-chips" id="ob-chips">
+    <div class="onboard-chip"
+      onclick="toggleChip(this)">Limpiar mi closet</div>
+    <div class="onboard-chip"
+      onclick="toggleChip(this)">Construir mi estilo</div>
+    <div class="onboard-chip"
+      onclick="toggleChip(this)">Aceptar mi cuerpo</div>
+    <div class="onboard-chip"
+      onclick="toggleChip(this)">Dejar de comprar sin criterio</div>
+    <div class="onboard-chip"
+      onclick="toggleChip(this)">Aprender maquillaje</div>
+    <div class="onboard-chip"
+      onclick="toggleChip(this)">Explorar mi identidad</div>
+  </div>
+  <button class="btn-wine" onclick="finishOnboard()">
+    Comenzar mi glow up ✦
+  </button>
+</div>
+
+<!-- SHELL -->
+<div class="shell" id="shell">
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-logo">VÉNUS</div>
+    <div class="topbar-tag" id="topbar-tag">Glow Up</div>
+  </div>
+
+  <!-- SCROLL AREA -->
+  <div class="scroll-area" id="scroll-area">
+
+    <!-- ── INICIO ── -->
+    <div class="section active" id="sec-inicio">
+      <div class="sec-head">
+        <div class="sec-label">Tu progreso</div>
+        <div class="sec-title" id="home-greeting">
+          Hola ✦
+        </div>
+        <div class="sec-sub" id="home-formula"></div>
+      </div>
+
+      <div class="stat-row" id="stat-row">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-tasks">0</div>
+          <div class="stat-label">Tareas completadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-entries">0</div>
+          <div class="stat-label">Entradas en el diario</div>
+        </div>
+      </div>
+
+      <div class="plan-progress">
+        <div class="plan-progress-fill"
+          id="home-progress" style="width:0%"></div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <div class="card-title">Próxima tarea</div>
+        <div class="card-body" id="next-task-text">
+          —
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Tu intención</div>
+        <div class="card-body" id="home-intention">—</div>
+      </div>
+    </div>
+
+    <!-- ── PLAN ── -->
+    <div class="section" id="sec-plan">
+      <div class="sec-head">
+        <div class="sec-label">Tu hoja de ruta</div>
+        <div class="sec-title">Plan de transición</div>
+        <div class="sec-sub">
+          4 semanas para construir tu estilo con intención.
+          Toca cada tarea para marcarla.
+        </div>
+      </div>
+      <div class="plan-progress" style="margin-bottom:16px">
+        <div class="plan-progress-fill"
+          id="plan-progress" style="width:0%"></div>
+      </div>
+      <div id="plan-container"></div>
+    </div>
+
+    <!-- ── ANTES / DESPUÉS ── -->
+    <div class="section" id="sec-compare">
+      <div class="sec-head">
+        <div class="sec-label">Tu transformación</div>
+        <div class="sec-title">Antes &amp; Después</div>
+        <div class="sec-sub">
+          Sube fotos para ver tu evolución visual.
+          La IA leerá tu cambio y te dará una reflexión.
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-slot" id="slot-before"
+          onclick="document.getElementById('file-before').click()">
+          <div class="slot-label">ANTES</div>
+          <div class="slot-icon">+</div>
+          <input type="file" id="file-before"
+            accept="image/*"
+            onchange="handleComparePhoto('before',this)">
+          <img id="img-before" src="" alt="">
+          <div class="slot-overlay">Antes</div>
+        </div>
+        <div class="compare-slot" id="slot-after"
+          onclick="document.getElementById('file-after').click()">
+          <div class="slot-label">DESPUÉS</div>
+          <div class="slot-icon">+</div>
+          <input type="file" id="file-after"
+            accept="image/*"
+            onchange="handleComparePhoto('after',this)">
+          <img id="img-after" src="" alt="">
+          <div class="slot-overlay">Después</div>
+        </div>
+      </div>
+
+      <div class="change-note-wrap">
+        <div class="change-note-label">
+          ¿Qué cambió en ti? (no solo en tu look)
+        </div>
+        <textarea class="change-note" id="change-note"
+          placeholder="Cuéntanos sobre tu transformación…"
+          rows="3"></textarea>
+      </div>
+
+      <button class="btn-primary"
+        id="btn-reflect"
+        onclick="generateReflection()">
+        Generar reflexión con IA ✦
+      </button>
+
+      <div class="ai-reflection" id="ai-reflection">
+        <div class="ai-reflection-head">
+          ✦ Reflexión VÉNUS
+        </div>
+        <div id="ai-reflection-text"></div>
+      </div>
+    </div>
+
+    <!-- ── DIARIO ── -->
+    <div class="section" id="sec-diary">
+      <div class="sec-head">
+        <div class="sec-label">Tu proceso</div>
+        <div class="sec-title">Diario de estilo</div>
