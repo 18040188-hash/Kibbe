@@ -1272,6 +1272,7 @@ async function init() {
   } catch(e) { console.warn('Cap init:', e); }
 
   await loadProfile();
+  applyVenuSFormulaHandoff();
 
   if (!profile.name) {
     document.getElementById('onboard').classList.remove('hidden');
@@ -1291,7 +1292,47 @@ async function loadProfile() {
   } catch(e) {}
 }
 
+function applyVenuSFormulaHandoff() {
+  try {
+    const raw = localStorage.getItem('venusGlowUpProfile');
+    if (!raw) return false;
+    const handoff = JSON.parse(raw);
+    if (!handoff || !handoff.formula) return false;
+
+    profile = {
+      ...profile,
+      formula: handoff.formula,
+      venus: {
+        kibbe: handoff.kibbe || '',
+        season: handoff.season || '',
+        vibe: handoff.vibe || '',
+        gender: handoff.gender || ''
+      }
+    };
+
+    const formulaInput = document.getElementById('ob-formula');
+    if (formulaInput) {
+      formulaInput.value = handoff.formula;
+      formulaInput.readOnly = true;
+      formulaInput.setAttribute('aria-readonly', 'true');
+      formulaInput.style.background = 'var(--wine-lt)';
+      formulaInput.style.borderColor = 'var(--wine-md)';
+    }
+
+    const label = document.querySelector('#ob-formula')?.previousElementSibling;
+    if (label) {
+      label.innerHTML = `Tu fórmula VÉNUS <span style="font-size:11px;color:var(--success)">· Detectada automáticamente ✦</span><br>
+        <span style="font-size:11px;color:var(--muted)">Tomada directamente de tu resultado del test VÉNUS.</span>`;
+    }
+    return true;
+  } catch (e) {
+    console.warn('No se pudo recuperar la fórmula VÉNUS:', e);
+    return false;
+  }
+}
+
 async function loadAll() {
+  applyVenuSFormulaHandoff();
   renderHomeHeader();
   await loadPlanState();
   renderPlan();
@@ -1318,7 +1359,23 @@ function finishOnboard() {
     return;
   }
 
-  profile = { name, formula, intentions: chips };
+  // La fórmula procedente del test tiene prioridad sobre cualquier edición manual.
+  const handoff = (() => {
+    try { return JSON.parse(localStorage.getItem('venusGlowUpProfile') || 'null'); }
+    catch(e) { return null; }
+  })();
+  const finalFormula = handoff?.formula || formula;
+  profile = {
+    name,
+    formula: finalFormula,
+    intentions: chips,
+    venus: handoff ? {
+      kibbe: handoff.kibbe || '',
+      season: handoff.season || '',
+      vibe: handoff.vibe || '',
+      gender: handoff.gender || ''
+    } : (profile.venus || {})
+  };
   if (DB) {
     DB.doc('profile').set(profile).catch(() => {});
   }
