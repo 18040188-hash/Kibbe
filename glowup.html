@@ -997,4 +997,816 @@ html, body {
     <div class="section" id="sec-diary">
       <div class="sec-head">
         <div class="sec-label">Tu proceso</div>
-        <div class="sec-title">Diario de estilo</div>
+        <div class="sec-title">Diario de estilo</div>        <div class="sec-sub">
+          Registra cómo te sientes con tu ropa cada día.
+          Con el tiempo verás patrones.
+        </div>
+      </div>
+
+      <!-- Composer -->
+      <div class="diary-composer">
+        <div class="diary-composer-head">
+          ¿Cómo te sientes hoy con tu estilo?
+        </div>
+        <div class="diary-mood-row" id="mood-row">
+          <div class="mood-chip"
+            onclick="selectMood(this,'🌟 En mi mejor versión')">
+            🌟 En mi mejor versión
+          </div>
+          <div class="mood-chip"
+            onclick="selectMood(this,'😌 Cómoda y segura')">
+            😌 Cómoda
+          </div>
+          <div class="mood-chip"
+            onclick="selectMood(this,'🤍 Natural y sin esfuerzo')">
+            🤍 Natural
+          </div>
+          <div class="mood-chip"
+            onclick="selectMood(this,'🖤 Experimental')">
+            🖤 Experimental
+          </div>
+          <div class="mood-chip"
+            onclick="selectMood(this,'😕 No me encuentro hoy')">
+            😕 No me encuentro
+          </div>
+        </div>
+        <div class="diary-photo-row" id="diary-photo-row">
+          <div class="diary-photo-add"
+            title="Añadir foto">
+            +
+            <input type="file" accept="image/*" multiple
+              onchange="handleDiaryPhotos(this)">
+          </div>
+        </div>
+        <textarea class="diary-textarea" id="diary-text"
+          placeholder="¿Qué te pusiste? ¿Cómo te hizo sentir? ¿Qué aprendiste hoy sobre tu estilo?"
+          rows="3"></textarea>
+        <button class="btn-primary"
+          onclick="saveDiaryEntry()">
+          Guardar entrada ✦
+        </button>
+        <button class="btn-secondary"
+          onclick="saveWithAI()">
+          Guardar y pedir reflexión de IA
+        </button>
+      </div>
+
+      <!-- Entries -->
+      <div class="diary-entries" id="diary-entries"></div>
+    </div>
+
+    <!-- ── CHAT ── -->
+    <div class="section" id="sec-chat">
+      <div class="sec-head">
+        <div class="sec-label">Tu asistente</div>
+        <div class="sec-title">Consulta VÉNUS</div>
+        <div class="sec-sub">
+          Pregúntame lo que quieras sobre tu estilo,
+          tu closet, compras o maquillaje.
+          Recuerdo tu fórmula.
+        </div>
+      </div>
+
+      <div class="chat-prompts" id="chat-prompts">
+        <div class="chat-prompts-label"
+          style="font-size:11px;color:var(--muted);
+            letter-spacing:1px;text-transform:uppercase;
+            margin-bottom:4px">
+          Preguntas frecuentes
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chat-messages"></div>
+
+      <div class="chat-form">
+        <input class="chat-input" id="chat-input"
+          type="text"
+          placeholder="Escribe tu pregunta…"
+          onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="chat-send" onclick="sendChat()">
+          ↑
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /scroll-area -->
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" id="nav-inicio"
+      onclick="showSection('inicio')">
+      <span class="nav-icon">◎</span>
+      <span class="nav-label">Inicio</span>
+    </button>
+    <button class="nav-btn" id="nav-plan"
+      onclick="showSection('plan')">
+      <span class="nav-icon">◈</span>
+      <span class="nav-label">Plan</span>
+    </button>
+    <button class="nav-btn" id="nav-compare"
+      onclick="showSection('compare')">
+      <span class="nav-icon">◐</span>
+      <span class="nav-label">Evolución</span>
+    </button>
+    <button class="nav-btn" id="nav-diary"
+      onclick="showSection('diary')">
+      <span class="nav-icon">◉</span>
+      <span class="nav-label">Diario</span>
+    </button>
+    <button class="nav-btn" id="nav-chat"
+      onclick="showSection('chat')">
+      <span class="nav-icon">✦</span>
+      <span class="nav-label">Consulta</span>
+    </button>
+  </nav>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   STATE & CAPABILITIES
+═══════════════════════════════════════════════════════════ */
+let DB   = null;
+let SMP  = null;
+let ASET = null;
+
+let profile = {
+  name: '', formula: '', intentions: []
+};
+let planState   = {};
+let diaryPhotos = [];
+let selectedMood = '';
+let comparePhotos = { before: null, after: null };
+let chatHistory = [];
+
+const PLAN_WEEKS = [
+  {
+    num: 1,
+    title: 'Reconoce lo que tienes',
+    sub: 'Auditoría del closet actual',
+    tasks: [
+      {
+        id: 't1',
+        name: 'Vacía tu closet completo',
+        desc: 'Saca todo y ponlo en un lugar visible'
+      },
+      {
+        id: 't2',
+        name: 'Prueba cada prenda',
+        desc: '¿La usas? ¿Te hace sentir bien? ¿Funciona con tu fórmula?'
+      },
+      {
+        id: 't3',
+        name: 'Crea tres pilas',
+        desc: 'Sí definitivo · Dudas · Fuera (donar/vender)'
+      },
+      {
+        id: 't4',
+        name: 'Fotografía lo que conservas',
+        desc: 'Para tener un inventario visual de tu closet real'
+      }
+    ]
+  },
+  {
+    num: 2,
+    title: 'Entiende tu fórmula',
+    sub: 'Estudio de tu perfil VÉNUS',
+    tasks: [
+      {
+        id: 't5',
+        name: 'Revisa tu silueta Kibbe',
+        desc: '¿Qué líneas te favorecen? Nota qué tienes y qué te falta'
+      },
+      {
+        id: 't6',
+        name: 'Explora tu paleta de colores',
+        desc: '¿Cuántas prendas en tu closet están en tu paleta?'
+      },
+      {
+        id: 't7',
+        name: 'Define 3 palabras de tu estética',
+        desc: 'Ej: oscuro · romántico · intelectual — escríbelas en el diario'
+      },
+      {
+        id: 't8',
+        name: 'Crea tu moodboard físico o digital',
+        desc: 'Recortes, capturas, referencias — todo lo que te llama'
+      }
+    ]
+  },
+  {
+    num: 3,
+    title: 'Compra con criterio',
+    sub: 'Construye lo que te falta',
+    tasks: [
+      {
+        id: 't9',
+        name: 'Identifica los 5 básicos que te faltan',
+        desc: 'Prendas versátiles que funcionen con tu fórmula'
+      },
+      {
+        id: 't10',
+        name: 'Define tu presupuesto por pieza',
+        desc: 'Invierte más en lo que más usas'
+      },
+      {
+        id: 't11',
+        name: 'Haz una lista antes de ir de compras',
+        desc: 'Solo compras lo que está en la lista — sin excepciones'
+      },
+      {
+        id: 't12',
+        name: 'Prueba antes de comprar',
+        desc: '¿Se combina con al menos 3 cosas que ya tienes?'
+      }
+    ]
+  },
+  {
+    num: 4,
+    title: 'Integra y celebra',
+    sub: 'Tu nuevo estilo, consolidado',
+    tasks: [
+      {
+        id: 't13',
+        name: 'Arma 7 outfits completos',
+        desc: 'Uno por día de la semana — fotografíalos en el diario'
+      },
+      {
+        id: 't14',
+        name: 'Sube tu foto de "después"',
+        desc: 'Para comparar con tu foto de antes en la sección Evolución'
+      },
+      {
+        id: 't15',
+        name: 'Escribe tu reflexión final',
+        desc: '¿Qué aprendiste sobre ti? ¿Qué cambió?'
+      },
+      {
+        id: 't16',
+        name: 'Comparte tu fórmula con alguien',
+        desc: 'Enseñar es la mejor manera de integrar lo aprendido'
+      }
+    ]
+  }
+];
+
+const CHAT_PROMPTS = [
+  { icon: '👗', text: '¿Qué me pongo para una cena importante?' },
+  { icon: '🛍️', text: '¿Merece la pena comprar esta prenda?' },
+  { icon: '💄', text: '¿Qué técnica de maquillaje me conviene?' },
+  { icon: '🪞', text: '¿Por qué este outfit no me funciona?' },
+  { icon: '✂️', text: '¿Qué corte de pelo me favorecería?' },
+  { icon: '🎨', text: '¿Este color va con mi paleta?' }
+];
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════ */
+async function init() {
+  try {
+    DB   = await claude.use('db');
+    SMP  = await claude.use('sample');
+    ASET = await claude.use('assets');
+  } catch(e) { console.warn('Cap init:', e); }
+
+  await loadProfile();
+
+  if (!profile.name) {
+    document.getElementById('onboard').classList.remove('hidden');
+    document.getElementById('shell').style.display = 'none';
+  } else {
+    document.getElementById('onboard').classList.add('hidden');
+    document.getElementById('shell').style.display = 'flex';
+    await loadAll();
+  }
+}
+
+async function loadProfile() {
+  if (!DB) return;
+  try {
+    const snap = await DB.doc('profile').get();
+    if (snap.exists) profile = snap.data();
+  } catch(e) {}
+}
+
+async function loadAll() {
+  renderHomeHeader();
+  await loadPlanState();
+  renderPlan();
+  renderPlanProgress();
+  renderHome();
+  renderDiary();
+  renderChatPrompts();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ONBOARDING
+═══════════════════════════════════════════════════════════ */
+function toggleChip(el) {
+  el.classList.toggle('selected');
+}
+function finishOnboard() {
+  const name    = document.getElementById('ob-name').value.trim();
+  const formula = document.getElementById('ob-formula').value.trim();
+  const chips   = [...document.querySelectorAll('#ob-chips .onboard-chip.selected')]
+    .map(c => c.textContent.trim());
+
+  if (!name) {
+    showToast('Escribe tu nombre para continuar');
+    return;
+  }
+
+  profile = { name, formula, intentions: chips };
+  if (DB) {
+    DB.doc('profile').set(profile).catch(() => {});
+  }
+
+  document.getElementById('onboard').classList.add('hidden');
+  document.getElementById('shell').style.display = 'flex';
+  loadAll();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════════ */
+function showSection(id) {
+  document.querySelectorAll('.section')
+    .forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn')
+    .forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id)
+    .classList.add('active');
+  document.getElementById('nav-' + id)
+    .classList.add('active');
+  document.getElementById('scroll-area').scrollTop = 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HOME
+═══════════════════════════════════════════════════════════ */
+function renderHomeHeader() {
+  const hour = new Date().getHours();
+  const greet = hour < 13 ? 'Buenos días'
+    : hour < 20 ? 'Buenas tardes' : 'Buenas noches';
+  document.getElementById('home-greeting').textContent =
+    greet + ', ' + (profile.name || '') + ' ✦';
+  document.getElementById('home-formula').textContent =
+    profile.formula
+      ? 'Tu fórmula: ' + profile.formula
+      : 'Completa el test VÉNUS para ver tu fórmula.';
+  document.getElementById('home-intention').textContent =
+    profile.intentions?.length
+      ? profile.intentions.join(' · ')
+      : 'Sin intención registrada aún.';
+}
+
+function renderHome() {
+  const all   = PLAN_WEEKS.flatMap(w => w.tasks);
+  const done  = all.filter(t => planState[t.id]).length;
+  const pct   = Math.round((done / all.length) * 100);
+
+  document.getElementById('stat-tasks').textContent = done;
+  document.getElementById('home-progress').style.width = pct + '%';
+
+  const nextTask = all.find(t => !planState[t.id]);
+  document.getElementById('next-task-text').textContent =
+    nextTask ? nextTask.name : '¡Todas las tareas completadas! 🎉';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PLAN
+═══════════════════════════════════════════════════════════ */
+async function loadPlanState() {
+  if (!DB) return;
+  try {
+    const snap = await DB.doc('planState').get();
+    if (snap.exists) planState = snap.data();
+  } catch(e) {}
+}
+
+function savePlanState() {
+  if (DB) DB.doc('planState').set(planState).catch(() => {});
+}
+
+function toggleTask(id) {
+  planState[id] = !planState[id];
+  savePlanState();
+  renderPlan();
+  renderPlanProgress();
+  renderHome();
+
+  const allDone = PLAN_WEEKS
+    .flatMap(w => w.tasks)
+    .every(t => planState[t.id]);
+  if (planState[id] && allDone) {
+    showToast('¡Completaste el plan! 🎉');
+  }
+}
+
+function renderPlan() {
+  const c = document.getElementById('plan-container');
+  c.innerHTML = '';
+  PLAN_WEEKS.forEach(week => {
+    const done = week.tasks.filter(t => planState[t.id]).length;
+    const div  = document.createElement('div');
+    div.className = 'plan-week';
+    div.innerHTML = `
+      <div class="plan-week-head">
+        <div class="plan-week-num">${week.num}</div>
+        <div>
+          <div class="plan-week-title">${week.title}</div>
+          <div class="plan-week-sub">
+            ${week.sub} — ${done}/${week.tasks.length}
+          </div>
+        </div>
+      </div>
+      ${week.tasks.map(t => `
+        <div class="plan-task${planState[t.id] ? ' done' : ''}"
+          onclick="toggleTask('${t.id}')">
+          <div class="task-check">
+            ${planState[t.id] ? '✓' : ''}
+          </div>
+          <div>
+            <div class="task-name">${t.name}</div>
+            <div class="task-desc">${t.desc}</div>
+          </div>
+        </div>`).join('')}
+    `;
+    c.appendChild(div);
+  });
+}
+
+function renderPlanProgress() {
+  const all  = PLAN_WEEKS.flatMap(w => w.tasks);
+  const done = all.filter(t => planState[t.id]).length;
+  const pct  = Math.round((done / all.length) * 100);
+  document.getElementById('plan-progress').style.width = pct + '%';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ANTES / DESPUÉS
+═══════════════════════════════════════════════════════════ */
+function handleComparePhoto(slot, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    comparePhotos[slot] = ev.target.result;
+    const img  = document.getElementById('img-' + slot);
+    const wrap = document.getElementById('slot-' + slot);
+    img.src = ev.target.result;
+    wrap.classList.add('has-img');
+  };
+  reader.readAsDataURL(file);
+}
+
+async function generateReflection() {
+  if (!SMP) {
+    showToast('IA no disponible en este momento');
+    return;
+  }
+  const note = document.getElementById('change-note').value.trim();
+  const hasBefore = !!comparePhotos.before;
+  const hasAfter  = !!comparePhotos.after;
+
+  const btn = document.getElementById('btn-reflect');
+  btn.textContent = 'Generando…';
+  btn.disabled = true;
+
+  const refEl = document.getElementById('ai-reflection');
+  const txtEl = document.getElementById('ai-reflection-text');
+  refEl.classList.add('show');
+  txtEl.textContent = '…';
+
+  try {
+    const contextNote = note
+      ? `La persona escribió: "${note}".` : '';
+    const photoNote = (hasBefore && hasAfter)
+      ? 'La persona subió fotos de antes y después.'
+      : hasBefore ? 'La persona subió una foto de antes.'
+      : hasAfter  ? 'La persona subió una foto de después.'
+      : 'No subió fotos todavía.';
+
+    const formula = profile.formula
+      || 'sin fórmula definida aún';
+
+    const prompt = `Eres VÉNUS, un asistente de imagen personal
+cálido y perspicaz. La persona tiene la fórmula: ${formula}.
+${photoNote} ${contextNote}
+Escribe una reflexión breve (3-4 oraciones) sobre su
+transformación de estilo. Sé específica, empática y celebra
+el proceso. Menciona que la transformación interna siempre
+precede a la visual. No uses emojis.`;
+
+    const res = await SMP(prompt, {
+      onText: ({ text }) => {
+        txtEl.textContent = text;
+      }
+    });
+    txtEl.textContent = res.text;
+  } catch(e) {
+    txtEl.textContent =
+      'No se pudo generar la reflexión. Intenta de nuevo.';
+  }
+
+  btn.textContent = 'Regenerar reflexión ✦';
+  btn.disabled = false;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DIARIO
+═══════════════════════════════════════════════════════════ */
+function selectMood(el, mood) {
+  selectedMood = mood;
+  document.querySelectorAll('.mood-chip')
+    .forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function handleDiaryPhotos(input) {
+  const files = [...input.files];
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      diaryPhotos.push(ev.target.result);
+      renderDiaryPhotoRow();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderDiaryPhotoRow() {
+  const row = document.getElementById('diary-photo-row');
+  const thumbs = diaryPhotos.map(src =>
+    `<img class="diary-photo-thumb" src="${src}" alt="">`
+  ).join('');
+  const addBtn = `
+    <div class="diary-photo-add" title="Añadir foto">
+      +
+      <input type="file" accept="image/*" multiple
+        onchange="handleDiaryPhotos(this)">
+    </div>`;
+  row.innerHTML = thumbs + addBtn;
+}
+
+async function saveDiaryEntry(withAI = false) {
+  const text = document.getElementById('diary-text').value.trim();
+  if (!text && !selectedMood) {
+    showToast('Escribe algo o elige un estado de ánimo');
+    return;
+  }
+
+  const entry = {
+    id:     Date.now().toString(),
+    date:   new Date().toLocaleDateString('es-ES', {
+              day:'numeric', month:'long', year:'numeric'
+            }),
+    mood:   selectedMood,
+    text,
+    photos: [...diaryPhotos],
+    aiNote: ''
+  };
+
+  if (withAI && SMP) {
+    try {
+      const formula = profile.formula || 'sin fórmula aún';
+      const prompt  = `Eres VÉNUS. La persona tiene la fórmula
+${formula}. Hoy anotó en su diario de estilo:
+"${text}" (estado: ${selectedMood || 'no especificado'}).
+Da una observación corta (2 oraciones) que ayude a
+conectar lo que sintió con su proceso de construcción
+de estilo. Sé cálida y concreta. Sin emojis.`;
+      const res = await SMP(prompt);
+      entry.aiNote = res.text;
+    } catch(e) {}
+  }
+
+  if (DB) {
+    try {
+      await DB.doc('diary/' + entry.id).set(entry);
+    } catch(e) {}
+  }
+
+  document.getElementById('diary-text').value = '';
+  selectedMood = '';
+  diaryPhotos  = [];
+  document.querySelectorAll('.mood-chip')
+    .forEach(c => c.classList.remove('selected'));
+  renderDiaryPhotoRow();
+  await renderDiary();
+  updateDiaryStat();
+  showToast('Entrada guardada ✦');
+}
+
+async function saveWithAI() {
+  await saveDiaryEntry(true);
+}
+
+async function renderDiary() {
+  const container = document.getElementById('diary-entries');
+
+  if (!DB) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">◉</div>
+        <div class="empty-state-text">
+          El diario guarda tus entradas<br>
+          en esta sesión.
+        </div>
+      </div>`;
+    return;
+  }
+
+  let entries = [];
+  try {
+    const snap = await DB.collection('diary')
+      .orderBy('id', 'desc')
+      .limit(30)
+      .get();
+    snap.forEach(d => entries.push(d.data()));
+  } catch(e) {}
+
+  updateDiaryStat(entries.length);
+
+  if (!entries.length) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">◉</div>
+        <div class="empty-state-text">
+          Aún no hay entradas.<br>
+          Empieza registrando cómo te sientes hoy.
+        </div>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = entries.map(e => `
+    <div class="entry-card" id="ec-${e.id}">
+      <div class="entry-header">
+        <div class="entry-date">${e.date}</div>
+        ${e.mood
+          ? `<div class="entry-mood-badge">${e.mood}</div>`
+          : ''}
+      </div>
+      ${e.text
+        ? `<div class="entry-text">${e.text}</div>`
+        : ''}
+      ${e.photos?.length
+        ? `<div class="entry-photos">
+            ${e.photos.map(p =>
+              `<img class="entry-photo" src="${p}" alt="">`
+            ).join('')}
+          </div>`
+        : ''}
+      ${e.aiNote
+        ? `<div class="entry-ai">✦ ${e.aiNote}</div>`
+        : ''}
+      <button class="entry-delete"
+        onclick="deleteEntry('${e.id}')">
+        Eliminar entrada
+      </button>
+    </div>`
+  ).join('');
+}
+
+function updateDiaryStat(n) {
+  if (n !== undefined) {
+    document.getElementById('stat-entries').textContent = n;
+  }
+}
+
+async function deleteEntry(id) {
+  if (!DB) return;
+  try {
+    await DB.doc('diary/' + id).delete();
+    const el = document.getElementById('ec-' + id);
+    if (el) el.remove();
+    showToast('Entrada eliminada');
+    await renderDiary();
+  } catch(e) {}
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CHAT
+═══════════════════════════════════════════════════════════ */
+function renderChatPrompts() {
+  const c = document.getElementById('chat-prompts');
+  const existing = c.querySelector('.chat-prompts-label');
+  c.innerHTML = '';
+  if (existing) c.appendChild(existing);
+
+  const label = document.createElement('div');
+  label.style.cssText =
+    'font-size:11px;color:var(--muted);letter-spacing:1px;' +
+    'text-transform:uppercase;margin-bottom:8px';
+  label.textContent = 'Preguntas frecuentes';
+  c.appendChild(label);
+
+  CHAT_PROMPTS.forEach(p => {
+    const btn = document.createElement('div');
+    btn.className = 'prompt-chip';
+    btn.innerHTML =
+      `<span class="prompt-icon">${p.icon}</span>
+       <span>${p.text}</span>`;
+    btn.onclick = () => {
+      document.getElementById('chat-input').value = p.text;
+      sendChat();
+      c.style.display = 'none';
+    };
+    c.appendChild(btn);
+  });
+}
+
+function addChatMsg(role, text) {
+  const wrap = document.getElementById('chat-messages');
+  const div  = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.textContent = text;
+  if (role === 'thinking') {
+    div.innerHTML =
+      'Pensando<span class="loading-dot">.</span>' +
+      '<span class="loading-dot">.</span>' +
+      '<span class="loading-dot">.</span>';
+  }
+  div.id = 'msg-' + Date.now();
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+  return div;
+}
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const text  = input.value.trim();
+  if (!text) return;
+  input.value = '';
+
+  document.getElementById('chat-prompts').style.display = 'none';
+  addChatMsg('user', text);
+  chatHistory.push({ role: 'user', content: text });
+
+  if (!SMP) {
+    addChatMsg('ai',
+      'El asistente no está disponible. Recarga la página.');
+    return;
+  }
+
+  const thinking = addChatMsg('thinking', '');
+
+  try {
+    const formula = profile.formula || 'sin fórmula definida';
+    const name    = profile.name    || 'la persona';
+    const system  =
+      `Eres VÉNUS, asistente experto en imagen personal,
+moda, colorimetría, Kibbe y estilo de vida.
+La persona se llama ${name} y su fórmula es: ${formula}.
+Responde de forma cálida, concisa y práctica.
+Habla directamente a la persona usando "tú" o "te".
+Máximo 3-4 oraciones por respuesta. Sin emojis.`;
+
+    const msgs = [
+      { role: 'user', content: system + '\n\n' +
+        chatHistory.map(m =>
+          m.role + ': ' + m.content
+        ).join('\n')
+      }
+    ];
+
+    let fullText = '';
+    const res = await SMP(msgs, {
+      onText: ({ text: t }) => {
+        fullText = t;
+        thinking.textContent = t;
+      }
+    });
+
+    chatHistory.push({ role: 'assistant', content: res.text });
+    thinking.className = 'msg ai';
+    thinking.textContent = res.text;
+  } catch(e) {
+    thinking.className = 'msg ai';
+    thinking.textContent =
+      'No pude responder en este momento. Intenta de nuevo.';
+  }
+
+  document.getElementById('chat-messages').scrollTop = 99999;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════════════════ */
+let toastTimeout;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+/* ── BOOT ─── */
+init();
+</script>
+</body>
+</html>
