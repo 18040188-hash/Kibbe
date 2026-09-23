@@ -2741,6 +2741,22 @@ function showMoodboard() {
   const kd = KIBBE_DATA[kibbe]   || KIBBE_DATA['soft-classic'];
   const sd = SEASON_DATA[season] || SEASON_DATA['autumn-soft'];
   const vd = VIBE_DATA[vibe]     || VIBE_DATA['romantic-mystery'];
+  
+  // Puente VÉNUS → Glow Up: guarda la fórmula estructurada
+  // para que Glow Up pueda recibirla automáticamente.
+  try {
+    localStorage.setItem('venusGlowUpProfile', JSON.stringify({
+      version: 1,
+      gender,
+      kibbe: kd.name,
+      season: sd.name,
+      vibe: vd.name,
+      formula: `${kd.name} · ${sd.name} · ${vd.name}`,
+      createdAt: new Date().toISOString()
+    }));
+  } catch (e) {
+    console.warn('No se pudo guardar el puente VÉNUS → Glow Up:', e);
+  }
 
   const isMasc = gender === 'masc';
   const pronoun = isMasc ? 'Tu' : 'Tu';
@@ -3042,6 +3058,10 @@ function showMoodboard() {
 
     <!-- ACTIONS -->
     <div class="result-actions">
+      <a class="btn-home" href="glowup.html" onclick="prepareGlowUp()">
+        Continuar con mi Glow Up ✦
+      </a>
+
       <button class="btn-restart" onclick="restart()">
         ← Hacer el test de nuevo
       </button>
@@ -3057,6 +3077,27 @@ function showMoodboard() {
 /* ═══════════════════════════════════════════════════════════
    RESTART
 ═══════════════════════════════════════════════════════════ */
+function prepareGlowUp() {
+  // El perfil ya quedó guardado en showMoodboard().
+  // Mantener este handler ligero evita depender de parámetros en la URL.
+  try {
+    const saved = localStorage.getItem('venusGlowUpProfile');
+    if (!saved) {
+      const kibbe = calcKibbe();
+      const season = calcSeason();
+      const vibe = calcVibe();
+      const kd = KIBBE_DATA[kibbe] || KIBBE_DATA['soft-classic'];
+      const sd = SEASON_DATA[season] || SEASON_DATA['autumn-soft'];
+      const vd = VIBE_DATA[vibe] || VIBE_DATA['romantic-mystery'];
+      localStorage.setItem('venusGlowUpProfile', JSON.stringify({
+        version: 1, gender, kibbe: kd.name, season: sd.name, vibe: vd.name,
+        formula: `${kd.name} · ${sd.name} · ${vd.name}`,
+        createdAt: new Date().toISOString()
+      }));
+    }
+  } catch (e) {}
+}
+
 function restart() {
   modIdx = 0; qIdx = 0;
   gender = null;
