@@ -822,51 +822,610 @@ html, body {
   transition: .2s;
 }
 .btn-wine:active { opacity: .85; }
+
+/* ═══════════════════════════════════════════════════════
+   VISUAL UPGRADE LAYER
+═══════════════════════════════════════════════════════ */
+
+/* ── Animated gradient background ── */
+body {
+  background: linear-gradient(
+    135deg,
+    #f6f0e8 0%,
+    #f2e8f0 50%,
+    #f6f0e8 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+}
+@keyframes gradientShift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* ── Section fade-in ── */
+.section.active {
+  animation: fadeUp .35s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── TOPBAR upgrade ── */
+.topbar {
+  background: rgba(246,240,232,.88);
+  border-bottom: none;
+  box-shadow: 0 1px 0 rgba(23,21,22,.06),
+              0 4px 20px rgba(23,21,22,.04);
+}
+.topbar-logo {
+  font-size: 19px;
+  letter-spacing: 5px;
+  background: linear-gradient(135deg, var(--black) 0%, var(--wine) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── NAV upgrade — liquid indicator ── */
+.bottom-nav {
+  background: rgba(246,240,232,.94);
+  border-top: none;
+  box-shadow: 0 -1px 0 rgba(23,21,22,.06),
+              0 -4px 24px rgba(23,21,22,.05);
+  position: relative;
+}
+.nav-indicator {
+  position: absolute;
+  top: 0;
+  height: 2px;
+  background: var(--wine);
+  border-radius: 0 0 3px 3px;
+  transition: left .3s cubic-bezier(.34,1.56,.64,1),
+              width .3s cubic-bezier(.34,1.56,.64,1);
+}
+.nav-btn {
+  padding: 14px 4px 11px;
+}
+.nav-btn.active .nav-icon {
+  transform: translateY(-2px) scale(1.15);
+}
+.nav-btn .nav-label {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: .4px;
+}
+
+/* ── HOME hero card ── */
+.home-hero {
+  background: var(--black);
+  border-radius: 20px;
+  padding: 24px 20px 22px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.home-hero::before {
+  content: '';
+  position: absolute;
+  width: 260px; height: 260px;
+  background: radial-gradient(
+    circle,
+    rgba(100,31,56,.55) 0%,
+    transparent 70%
+  );
+  top: -60px; right: -60px;
+  pointer-events: none;
+}
+.home-hero::after {
+  content: '✦';
+  position: absolute;
+  font-size: 120px;
+  color: rgba(255,255,255,.03);
+  bottom: -20px; left: 10px;
+  font-family: 'Playfair Display', serif;
+  pointer-events: none;
+  line-height: 1;
+}
+.home-hero-label {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--wine-md);
+  margin-bottom: 8px;
+  position: relative;
+}
+.home-hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 500;
+  color: white;
+  line-height: 1.15;
+  margin-bottom: 6px;
+  position: relative;
+}
+.home-hero-formula {
+  font-size: 12px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.5;
+  position: relative;
+}
+.home-hero-progress {
+  margin-top: 18px;
+  position: relative;
+}
+.hero-pct {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 6px;
+}
+.hero-bar {
+  height: 3px;
+  background: rgba(255,255,255,.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.hero-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--wine) 0%, var(--gold) 100%);
+  border-radius: 3px;
+  transition: width .8s cubic-bezier(.22,1,.36,1);
+}
+
+/* ── STAT cards upgrade ── */
+.stat-card {
+  border-radius: 16px;
+  background: var(--white);
+  border: none;
+  box-shadow: 0 1px 3px rgba(23,21,22,.06),
+              0 4px 12px rgba(23,21,22,.04);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--wine), var(--gold));
+  border-radius: 16px 16px 0 0;
+}
+.stat-num {
+  font-size: 32px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+/* ── CARD upgrade ── */
+.card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(23,21,22,.06),
+              0 4px 12px rgba(23,21,22,.04);
+  transition: transform .2s, box-shadow .2s;
+}
+.card:active {
+  transform: scale(.99);
+}
+
+/* ── PLAN task upgrade ── */
+.plan-task {
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(23,21,22,.06),
+              0 2px 8px rgba(23,21,22,.04);
+  transition: transform .18s, box-shadow .18s, opacity .18s;
+}
+.plan-task:hover {
+  transform: translateX(3px);
+  box-shadow: 0 2px 8px rgba(23,21,22,.1),
+              -3px 0 0 0 var(--wine);
+}
+.plan-task.done {
+  box-shadow: none;
+  transform: none;
+}
+.task-check {
+  border-radius: 8px;
+  border-width: 1.5px;
+}
+.plan-task.done .task-check {
+  animation: checkPop .25s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes checkPop {
+  from { transform: scale(0.6); }
+  to   { transform: scale(1); }
+}
+.plan-week-num {
+  background: linear-gradient(135deg, var(--wine), var(--plum));
+  box-shadow: 0 2px 8px rgba(100,31,56,.3);
+}
+
+/* ── COMPARE slots upgrade ── */
+.compare-slot {
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(23,21,22,.08);
+  transition: box-shadow .2s, transform .2s;
+}
+.compare-slot:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(23,21,22,.12);
+}
+.compare-slot.has-img {
+  border-style: solid;
+  border-color: var(--wine-md);
+}
+
+/* ── DIARY composer upgrade ── */
+.diary-composer {
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(23,21,22,.07);
+  padding: 18px;
+}
+.diary-textarea {
+  border-radius: 12px;
+}
+.mood-chip {
+  border-radius: 24px;
+  font-size: 11.5px;
+  transition: transform .15s, background .15s, border-color .15s;
+}
+.mood-chip:active { transform: scale(.96); }
+
+/* ── ENTRY cards upgrade ── */
+.entry-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(23,21,22,.06),
+              0 4px 12px rgba(23,21,22,.04);
+  transition: box-shadow .2s;
+  animation: fadeUp .3s ease both;
+}
+
+/* ── CHAT upgrade ── */
+.msg {
+  border-radius: 18px;
+  box-shadow: 0 1px 4px rgba(23,21,22,.06);
+  animation: msgIn .25s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.msg.user {
+  background: linear-gradient(135deg, var(--wine), var(--plum));
+  border-radius: 18px 18px 4px 18px;
+}
+.msg.ai {
+  border: none;
+  background: var(--white);
+  border-radius: 4px 18px 18px 18px;
+}
+.chat-form {
+  border-radius: 28px;
+  box-shadow: 0 2px 12px rgba(23,21,22,.1);
+  border: none;
+  background: var(--white);
+  padding: 8px 8px 8px 18px;
+}
+.chat-send {
+  background: linear-gradient(135deg, var(--wine), var(--plum));
+  box-shadow: 0 2px 8px rgba(100,31,56,.35);
+  border-radius: 50%;
+  transition: transform .15s, box-shadow .15s;
+}
+.chat-send:active {
+  transform: scale(.92);
+  box-shadow: 0 1px 4px rgba(100,31,56,.3);
+}
+.prompt-chip {
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(23,21,22,.06),
+              0 2px 8px rgba(23,21,22,.04);
+  transition: transform .15s, box-shadow .15s;
+}
+.prompt-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(23,21,22,.1);
+}
+
+/* ── AI REFLECTION upgrade ── */
+.ai-reflection {
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--wine-lt), #f5e8f2);
+  box-shadow: 0 2px 12px rgba(100,31,56,.1);
+  border-left: 3px solid var(--wine);
+}
+
+/* ── ONBOARD multi-step ── */
+.ob-step {
+  display: none;
+  animation: fadeUp .4s cubic-bezier(.22,1,.36,1) both;
+}
+.ob-step.active { display: flex; flex-direction: column; }
+.ob-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+.ob-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: .3s;
+}
+.ob-dot.active {
+  background: var(--wine);
+  width: 20px;
+  border-radius: 3px;
+}
+.ob-dot.done { background: var(--wine-md); }
+.onboard {
+  background: linear-gradient(160deg, #f6f0e8 0%, #f0e8f0 100%);
+  padding: 48px 28px 56px;
+}
+.onboard-logo {
+  font-size: 24px;
+  letter-spacing: 6px;
+  margin-bottom: 36px;
+  background: linear-gradient(135deg, var(--black) 0%, var(--wine) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.onboard-title {
+  font-size: 30px;
+}
+.onboard-field {
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: inset 0 1px 3px rgba(23,21,22,.05);
+}
+.onboard-chip {
+  border-radius: 24px;
+  padding: 9px 16px;
+  transition: transform .15s, background .15s;
+}
+.onboard-chip.selected {
+  transform: scale(1.04);
+}
+.btn-wine {
+  border-radius: 30px;
+  padding: 16px;
+  font-size: 15px;
+  letter-spacing: .5px;
+  box-shadow: 0 4px 20px rgba(100,31,56,.35);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-wine:active {
+  transform: scale(.98);
+  box-shadow: 0 2px 10px rgba(100,31,56,.25);
+}
+
+/* ── PLAN progress bar upgrade ── */
+.plan-progress {
+  background: rgba(23,21,22,.06);
+  border-radius: 6px;
+  height: 5px;
+}
+.plan-progress-fill {
+  background: linear-gradient(90deg, var(--wine), var(--gold));
+  border-radius: 6px;
+  transition: width .6s cubic-bezier(.22,1,.36,1);
+}
+.home-progress-bar {
+  height: 5px;
+  background: rgba(23,21,22,.06);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+/* ── BUTTONS upgrade ── */
+.btn-primary {
+  border-radius: 28px;
+  letter-spacing: .3px;
+  background: linear-gradient(135deg, var(--wine), var(--plum));
+  box-shadow: 0 3px 14px rgba(100,31,56,.3);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-primary:active {
+  transform: scale(.98);
+  box-shadow: 0 1px 6px rgba(100,31,56,.25);
+}
+.btn-secondary {
+  border-radius: 28px;
+  transition: border-color .15s, color .15s;
+}
+.btn-secondary:hover {
+  border-color: var(--wine);
+  color: var(--wine);
+}
+
+/* ── SEC headers upgrade ── */
+.sec-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.sec-label::before {
+  content: '✦';
+  color: var(--wine);
+  font-size: 8px;
+}
+.sec-title {
+  font-size: 24px;
+}
+
+/* ── Scrollbar ── */
+.scroll-area::-webkit-scrollbar { width: 0; }
+
+/* ── NEXT TASK card ── */
+#next-task-card {
+  background: linear-gradient(135deg, var(--wine-lt), #f2eaf4);
+  border: none;
+  border-left: 3px solid var(--wine);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(100,31,56,.08);
+  margin-bottom: 12px;
+  padding: 16px;
+}
+.next-task-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin-bottom: 6px;
+}
+.next-task-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--black);
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+.next-task-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ── Intention pill ── */
+.intention-pill {
+  display: inline-block;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  color: var(--black);
+  margin: 3px 3px 3px 0;
+  box-shadow: 0 1px 4px rgba(23,21,22,.05);
+}
+
+/* ── Quote card in home ── */
+.home-quote {
+  border: none;
+  border-radius: 16px;
+  background: var(--black);
+  padding: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.home-quote::before {
+  content: '"';
+  position: absolute;
+  font-family: 'Playfair Display', serif;
+  font-size: 100px;
+  color: rgba(255,255,255,.05);
+  top: -10px; left: 10px;
+  line-height: 1;
+}
+.home-quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: rgba(255,255,255,.85);
+  line-height: 1.5;
+  position: relative;
+}
+.home-quote-source {
+  font-size: 11px;
+  color: rgba(255,255,255,.35);
+  margin-top: 8px;
+  letter-spacing: 1px;
+  position: relative;
+}
+
 </style>
 </head>
 <body>
 
-<!-- ONBOARDING -->
+<!-- ONBOARDING multi-step -->
 <div class="onboard" id="onboard">
   <div class="onboard-logo">VÉNUS</div>
-  <div class="onboard-title">Tu espacio<br>de transformación.</div>
-  <div class="onboard-sub">
-    Antes de empezar, cuéntanos un poco sobre ti
-    para que tu experiencia sea completamente personal.
+
+  <div class="ob-dots" id="ob-dots">
+    <div class="ob-dot active" id="od0"></div>
+    <div class="ob-dot" id="od1"></div>
+    <div class="ob-dot" id="od2"></div>
   </div>
-  <div class="onboard-field-label">¿Cómo te llamas?</div>
-  <input class="onboard-field" id="ob-name"
-    type="text" placeholder="Tu nombre"
-    autocomplete="off">
-  <div class="onboard-field-label">
-    ¿Cuál es tu fórmula VÉNUS?<br>
-    <span style="font-size:11px;color:var(--muted)">
-      Si ya hiciste el test, pégala aquí (ej: Soft Gamine · Otoño Profundo · Dark Romantic)
-    </span>
+
+  <!-- Step 0 -->
+  <div class="ob-step active" id="ob-step-0">
+    <div class="onboard-title">Tu espacio<br>de transformación.</div>
+    <div class="onboard-sub">
+      Bienvenida a VÉNUS. Vamos a personalizar
+      tu experiencia en tres pasos rápidos.
+    </div>
+    <div class="onboard-field-label">¿Cómo te llamas?</div>
+    <input class="onboard-field" id="ob-name"
+      type="text" placeholder="Tu nombre…"
+      autocomplete="off"
+      onkeydown="if(event.key==='Enter')obNext(0)">
+    <button class="btn-wine" onclick="obNext(0)">
+      Continuar →
+    </button>
   </div>
-  <input class="onboard-field" id="ob-formula"
-    type="text" placeholder="Mi fórmula…"
-    autocomplete="off">
-  <div class="onboard-field-label">
-    ¿Cuál es tu intención principal?
+
+  <!-- Step 1 -->
+  <div class="ob-step" id="ob-step-1">
+    <div class="onboard-title" id="ob-title-1">
+      Hola ✦<br>¿Cuál es tu fórmula?
+    </div>
+    <div class="onboard-sub">
+      Si ya hiciste el test VÉNUS, pégala aquí.
+      Si no, puedes dejarla en blanco y completarla después.
+    </div>
+    <div class="onboard-field-label">Tu fórmula VÉNUS</div>
+    <input class="onboard-field" id="ob-formula"
+      type="text"
+      placeholder="Ej: Soft Gamine · Otoño Profundo · Dark Romantic"
+      autocomplete="off"
+      onkeydown="if(event.key==='Enter')obNext(1)">
+    <button class="btn-wine" onclick="obNext(1)">
+      Continuar →
+    </button>
+    <button class="btn-secondary" style="margin-top:10px"
+      onclick="obNext(1)">
+      No tengo fórmula aún →
+    </button>
   </div>
-  <div class="onboard-chips" id="ob-chips">
-    <div class="onboard-chip"
-      onclick="toggleChip(this)">Limpiar mi closet</div>
-    <div class="onboard-chip"
-      onclick="toggleChip(this)">Construir mi estilo</div>
-    <div class="onboard-chip"
-      onclick="toggleChip(this)">Aceptar mi cuerpo</div>
-    <div class="onboard-chip"
-      onclick="toggleChip(this)">Dejar de comprar sin criterio</div>
-    <div class="onboard-chip"
-      onclick="toggleChip(this)">Aprender maquillaje</div>
-    <div class="onboard-chip"
-      onclick="toggleChip(this)">Explorar mi identidad</div>
+
+  <!-- Step 2 -->
+  <div class="ob-step" id="ob-step-2">
+    <div class="onboard-title">¿Qué quieres<br>transformar?</div>
+    <div class="onboard-sub">
+      Elige una o varias — esta es tu intención
+      durante el glow up.
+    </div>
+    <div class="onboard-chips" id="ob-chips">
+      <div class="onboard-chip"
+        onclick="toggleChip(this)">Limpiar mi closet</div>
+      <div class="onboard-chip"
+        onclick="toggleChip(this)">Construir mi estilo</div>
+      <div class="onboard-chip"
+        onclick="toggleChip(this)">Aceptar mi cuerpo</div>
+      <div class="onboard-chip"
+        onclick="toggleChip(this)">Comprar con criterio</div>
+      <div class="onboard-chip"
+        onclick="toggleChip(this)">Aprender maquillaje</div>
+      <div class="onboard-chip"
+        onclick="toggleChip(this)">Explorar mi identidad</div>
+    </div>
+    <button class="btn-wine" onclick="finishOnboard()">
+      Comenzar mi glow up ✦
+    </button>
   </div>
-  <button class="btn-wine" onclick="finishOnboard()">
-    Comenzar mi glow up ✦
-  </button>
 </div>
 
 <!-- SHELL -->
@@ -882,14 +1441,26 @@ html, body {
 
     <!-- ── INICIO ── -->
     <div class="section active" id="sec-inicio">
-      <div class="sec-head">
-        <div class="sec-label">Tu progreso</div>
-        <div class="sec-title" id="home-greeting">
+      <!-- HERO -->
+      <div class="home-hero" id="home-hero">
+        <div class="home-hero-label">Tu proceso VÉNUS</div>
+        <div class="home-hero-name" id="home-greeting">
           Hola ✦
         </div>
-        <div class="sec-sub" id="home-formula"></div>
+        <div class="home-hero-formula" id="home-formula"></div>
+        <div class="home-hero-progress">
+          <div class="hero-pct">
+            <span>Progreso del plan</span>
+            <span id="hero-pct-num">0%</span>
+          </div>
+          <div class="hero-bar">
+            <div class="hero-bar-fill"
+              id="home-progress" style="width:0%"></div>
+          </div>
+        </div>
       </div>
 
+      <!-- STATS -->
       <div class="stat-row" id="stat-row">
         <div class="stat-card">
           <div class="stat-num" id="stat-tasks">0</div>
@@ -901,21 +1472,28 @@ html, body {
         </div>
       </div>
 
-      <div class="plan-progress">
-        <div class="plan-progress-fill"
-          id="home-progress" style="width:0%"></div>
+      <!-- NEXT TASK -->
+      <div id="next-task-card">
+        <div class="next-task-label">Próxima tarea</div>
+        <div class="next-task-name" id="next-task-text">—</div>
+        <div class="next-task-desc" id="next-task-desc"></div>
       </div>
 
+      <!-- INTENTION PILLS -->
       <div class="card" style="margin-bottom:12px">
-        <div class="card-title">Próxima tarea</div>
-        <div class="card-body" id="next-task-text">
-          —
+        <div class="card-title">Tu intención</div>
+        <div class="card-body">
+          <div id="home-intention"></div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-title">Tu intención</div>
-        <div class="card-body" id="home-intention">—</div>
+      <!-- QUOTE -->
+      <div class="home-quote" id="home-quote">
+        <div class="home-quote-text" id="home-quote-text">
+          No se trata de seguir una estética,<br>
+          sino de crear tu propia historia.
+        </div>
+        <div class="home-quote-source">VÉNUS</div>
       </div>
     </div>
 
@@ -997,7 +1575,8 @@ html, body {
     <div class="section" id="sec-diary">
       <div class="sec-head">
         <div class="sec-label">Tu proceso</div>
-        <div class="sec-title">Diario de estilo</div>        <div class="sec-sub">
+        <div class="sec-title">Diario de estilo</div>
+        <div class="sec-sub">
           Registra cómo te sientes con tu ropa cada día.
           Con el tiempo verás patrones.
         </div>
@@ -1272,7 +1851,6 @@ async function init() {
   } catch(e) { console.warn('Cap init:', e); }
 
   await loadProfile();
-  applyVenuSFormulaHandoff();
 
   if (!profile.name) {
     document.getElementById('onboard').classList.remove('hidden');
@@ -1292,48 +1870,12 @@ async function loadProfile() {
   } catch(e) {}
 }
 
-function applyVenuSFormulaHandoff() {
-  try {
-    const raw = localStorage.getItem('venusGlowUpProfile');
-    if (!raw) return false;
-    const handoff = JSON.parse(raw);
-    if (!handoff || !handoff.formula) return false;
-
-    profile = {
-      ...profile,
-      formula: handoff.formula,
-      venus: {
-        kibbe: handoff.kibbe || '',
-        season: handoff.season || '',
-        vibe: handoff.vibe || '',
-        gender: handoff.gender || ''
-      }
-    };
-
-    const formulaInput = document.getElementById('ob-formula');
-    if (formulaInput) {
-      formulaInput.value = handoff.formula;
-      formulaInput.readOnly = true;
-      formulaInput.setAttribute('aria-readonly', 'true');
-      formulaInput.style.background = 'var(--wine-lt)';
-      formulaInput.style.borderColor = 'var(--wine-md)';
-    }
-
-    const label = document.querySelector('#ob-formula')?.previousElementSibling;
-    if (label) {
-      label.innerHTML = `Tu fórmula VÉNUS <span style="font-size:11px;color:var(--success)">· Detectada automáticamente ✦</span><br>
-        <span style="font-size:11px;color:var(--muted)">Tomada directamente de tu resultado del test VÉNUS.</span>`;
-    }
-    return true;
-  } catch (e) {
-    console.warn('No se pudo recuperar la fórmula VÉNUS:', e);
-    return false;
-  }
-}
-
 async function loadAll() {
-  applyVenuSFormulaHandoff();
   renderHomeHeader();
+  setTimeout(() => {
+    const btn = document.getElementById('nav-inicio');
+    if (btn) moveNavIndicator(btn);
+  }, 100);
   await loadPlanState();
   renderPlan();
   renderPlanProgress();
@@ -1345,6 +1887,37 @@ async function loadAll() {
 /* ═══════════════════════════════════════════════════════════
    ONBOARDING
 ═══════════════════════════════════════════════════════════ */
+let obCurrentStep = 0;
+
+function obNext(step) {
+  document.getElementById('ob-step-' + step)
+    .classList.remove('active');
+  const next = step + 1;
+  const nextEl = document.getElementById('ob-step-' + next);
+  if (!nextEl) return;
+  nextEl.classList.add('active');
+  obCurrentStep = next;
+  updateObDots(next);
+
+  if (next === 1) {
+    const name = document.getElementById('ob-name')
+      .value.trim() || '';
+    if (name) {
+      document.getElementById('ob-title-1').innerHTML =
+        'Hola, ' + name + ' ✦<br>¿Cuál es tu fórmula?';
+    }
+  }
+}
+
+function updateObDots(active) {
+  for (let i = 0; i < 3; i++) {
+    const d = document.getElementById('od' + i);
+    if (!d) continue;
+    d.className = 'ob-dot' +
+      (i < active ? ' done' : i === active ? ' active' : '');
+  }
+}
+
 function toggleChip(el) {
   el.classList.toggle('selected');
 }
@@ -1359,23 +1932,7 @@ function finishOnboard() {
     return;
   }
 
-  // La fórmula procedente del test tiene prioridad sobre cualquier edición manual.
-  const handoff = (() => {
-    try { return JSON.parse(localStorage.getItem('venusGlowUpProfile') || 'null'); }
-    catch(e) { return null; }
-  })();
-  const finalFormula = handoff?.formula || formula;
-  profile = {
-    name,
-    formula: finalFormula,
-    intentions: chips,
-    venus: handoff ? {
-      kibbe: handoff.kibbe || '',
-      season: handoff.season || '',
-      vibe: handoff.vibe || '',
-      gender: handoff.gender || ''
-    } : (profile.venus || {})
-  };
+  profile = { name, formula, intentions: chips };
   if (DB) {
     DB.doc('profile').set(profile).catch(() => {});
   }
@@ -1395,9 +1952,25 @@ function showSection(id) {
     .forEach(b => b.classList.remove('active'));
   document.getElementById('sec-' + id)
     .classList.add('active');
-  document.getElementById('nav-' + id)
-    .classList.add('active');
+  const activeBtn = document.getElementById('nav-' + id);
+  activeBtn.classList.add('active');
   document.getElementById('scroll-area').scrollTop = 0;
+  moveNavIndicator(activeBtn);
+}
+
+function moveNavIndicator(activeBtn) {
+  let ind = document.getElementById('nav-indicator');
+  if (!ind) {
+    ind = document.createElement('div');
+    ind.id = 'nav-indicator';
+    ind.className = 'nav-indicator';
+    document.querySelector('.bottom-nav').appendChild(ind);
+  }
+  const rect = activeBtn.getBoundingClientRect();
+  const navRect = document.querySelector('.bottom-nav')
+    .getBoundingClientRect();
+  ind.style.left  = (rect.left - navRect.left) + 'px';
+  ind.style.width = rect.width + 'px';
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1413,23 +1986,40 @@ function renderHomeHeader() {
     profile.formula
       ? 'Tu fórmula: ' + profile.formula
       : 'Completa el test VÉNUS para ver tu fórmula.';
-  document.getElementById('home-intention').textContent =
-    profile.intentions?.length
-      ? profile.intentions.join(' · ')
-      : 'Sin intención registrada aún.';
+  const intentEl = document.getElementById('home-intention');
+  if (intentEl) {
+    if (profile.intentions?.length) {
+      intentEl.innerHTML = profile.intentions.map(i =>
+        `<span class="intention-pill">${i}</span>`
+      ).join('');
+    } else {
+      intentEl.textContent = 'Sin intención registrada aún.';
+    }
+  }
 }
 
 function renderHome() {
-  const all   = PLAN_WEEKS.flatMap(w => w.tasks);
-  const done  = all.filter(t => planState[t.id]).length;
-  const pct   = Math.round((done / all.length) * 100);
+  const all  = PLAN_WEEKS.flatMap(w => w.tasks);
+  const done = all.filter(t => planState[t.id]).length;
+  const pct  = Math.round((done / all.length) * 100);
 
   document.getElementById('stat-tasks').textContent = done;
   document.getElementById('home-progress').style.width = pct + '%';
 
+  const pctEl = document.getElementById('hero-pct-num');
+  if (pctEl) pctEl.textContent = pct + '%';
+
   const nextTask = all.find(t => !planState[t.id]);
-  document.getElementById('next-task-text').textContent =
-    nextTask ? nextTask.name : '¡Todas las tareas completadas! 🎉';
+  const nameEl = document.getElementById('next-task-text');
+  const descEl = document.getElementById('next-task-desc');
+  if (nextTask) {
+    if (nameEl) nameEl.textContent = nextTask.name;
+    if (descEl) descEl.textContent = nextTask.desc;
+  } else {
+    if (nameEl) nameEl.textContent =
+      '¡Todas las tareas completadas! 🎉';
+    if (descEl) descEl.textContent = '';
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
