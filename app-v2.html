@@ -908,6 +908,29 @@ main {
   transition: .2s;
 }
 
+
+/* ── INSPIRATION HUB ─────────────────────────────────────── */
+.inspiration-hub{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:18px;margin:18px 0}
+.inspiration-intro{margin-bottom:14px}.inspiration-kicker{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--wine);margin-bottom:5px}
+.inspiration-title{font-family:'Playfair Display',serif;font-size:22px;line-height:1.2;margin-bottom:6px}
+.inspiration-copy{font-size:12px;color:var(--muted);line-height:1.55}
+.reference-gallery{display:grid;grid-template-columns:1.15fr 1fr 1fr;grid-auto-rows:150px;gap:6px;margin:14px 0}
+.reference-tile{position:relative;overflow:hidden;border-radius:10px;background:#1a1015}
+.reference-tile:first-child{grid-row:span 2}
+.reference-tile img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9;transition:transform .3s,opacity .3s}
+.reference-tile:hover img{transform:scale(1.035);opacity:1}
+.reference-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(23,21,22,.78));pointer-events:none}
+.reference-tile span{position:absolute;z-index:1;left:9px;right:9px;bottom:8px;color:#fff;font-size:10px;line-height:1.3}
+.reference-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.reference-btn{display:flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:10px 12px;border-radius:24px;border:1px solid var(--border);text-decoration:none;font:500 12px 'DM Sans',sans-serif;cursor:pointer;transition:.2s}
+.reference-btn.pinterest{background:#fff1f4;color:#8d1735;border-color:#edc1cd}.reference-btn.alta{background:#f4eef7;color:var(--plum);border-color:#d7c8df}
+.reference-btn:hover{transform:translateY(-1px)}
+.reference-searches{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
+.reference-searches a{display:block;padding:9px 10px;border-radius:9px;background:var(--cream);color:var(--black);text-decoration:none;font-size:11px;line-height:1.3;border:1px solid var(--border)}
+.reference-searches a:hover{border-color:var(--wine-md);background:var(--wine-lt)}
+.alta-note{font-size:10px;color:var(--muted);line-height:1.45;margin-top:9px}
+@media(max-width:520px){.reference-gallery{grid-template-columns:1fr 1fr;grid-auto-rows:135px}.reference-tile:first-child{grid-row:span 2}.reference-actions,.reference-searches{grid-template-columns:1fr}}
+
 /* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 420px) {
   main { padding: 90px 14px 60px; }
@@ -2902,32 +2925,58 @@ function showMoodboard() {
       </div>`;
   }
 
-  /* Unsplash image search URLs (keyword-based) */
-  function unsplashURL(q) {
-    const enc = encodeURIComponent(q);
-    return `https://source.unsplash.com/400x500/?${enc}`;
-  }
 
-  const moodImgs = vd.moodImages || [];
-  const mosaicHTML = moodImgs.length >= 3
-    ? `<div class="mosaic mosaic-3">
-        <div class="mosaic-item">
-          <img src="${unsplashURL(moodImgs[0].q)}"
-            alt="${moodImgs[0].cap}" loading="lazy">
-          <div class="mosaic-cap">${moodImgs[0].cap}</div>
-        </div>
-        <div class="mosaic-item">
-          <img src="${unsplashURL(moodImgs[1].q)}"
-            alt="${moodImgs[1].cap}" loading="lazy">
-          <div class="mosaic-cap">${moodImgs[1].cap}</div>
-        </div>
-        <div class="mosaic-item">
-          <img src="${unsplashURL(moodImgs[2].q)}"
-            alt="${moodImgs[2].cap}" loading="lazy">
-          <div class="mosaic-cap">${moodImgs[2].cap}</div>
-        </div>
-      </div>`
-    : '';
+  /* ── PERSONALIZED INSPIRATION HUB ─────────────────────── */
+  const pinBase = 'https://www.pinterest.com/search/pins/?q=';
+  const formulaQuery = `${vd.name} ${kd.name} ${sd.name}`;
+  const faceQuery = selfieAnalysis && selfieAnalysis.faceShape
+    ? `maquillaje ${selfieAnalysis.faceShape} ${vd.name}`
+    : `maquillaje ${vd.name} ${sd.name}`;
+  const pinLinks = [
+    ['Outfits', `${formulaQuery} outfits`],
+    ['Cortes de cabello', `${formulaQuery} haircut hairstyle`],
+    ['Maquillaje', faceQuery],
+    ['Accesorios', `${formulaQuery} jewelry accessories`]
+  ];
+  const inspirationPhotos = [
+    ['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85','Siluetas y styling'],
+    ['https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85','Texturas y feminidad'],
+    ['https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=85','Capas y proporciones'],
+    ['https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=85','Editorial y actitud'],
+    ['https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=700&q=85','Color y prendas'],
+    ['https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=85','Inspiración de armario']
+  ];
+  const galleryHTML = inspirationPhotos.map(([src,cap]) =>
+    `<a class="reference-tile" href="${pinBase}${encodeURIComponent(`${formulaQuery} ${cap}`)}" target="_blank" rel="noopener noreferrer">
+      <img src="${src}" alt="${cap}" loading="lazy"><span>${cap}</span>
+    </a>`
+  ).join('');
+  const pinSearchHTML = pinLinks.map(([label,q]) =>
+    `<a href="${pinBase}${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`
+  ).join('');
+  function copyAltaFormula(){
+    const text = `Mi fórmula VÉNUS: ${kd.name} · ${sd.name} · ${vd.name}. Quiero usarla como referencia para crear outfits, explorar cortes y desarrollar mi estilo personal.`;
+    const done = () => { const b=document.getElementById('alta-copy-btn'); if(b){b.textContent='✓ Fórmula copiada';setTimeout(()=>b.textContent='Copiar fórmula para ALTA',1800);} };
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(()=>window.prompt('Copia esta fórmula para ALTA:',text));
+    else window.prompt('Copia esta fórmula para ALTA:',text);
+  }
+  const inspirationHTML = `
+    <div class="inspiration-hub">
+      <div class="inspiration-intro">
+        <div class="inspiration-kicker">Tu universo visual</div>
+        <div class="inspiration-title">Más referencias para llevar tu fórmula a la vida</div>
+        <div class="inspiration-copy">VÉNUS define tu dirección; ahora puedes explorar más looks, cortes, maquillaje y accesorios a partir de tu resultado.</div>
+      </div>
+      <div class="reference-gallery">${galleryHTML}</div>
+      <div class="reference-actions">
+        <a class="reference-btn pinterest" href="${pinBase}${encodeURIComponent(formulaQuery+' fashion style')}" target="_blank" rel="noopener noreferrer">⌁ Explorar en Pinterest</a>
+        <a class="reference-btn alta" href="https://www.altadaily.com/" target="_blank" rel="noopener noreferrer">✦ Abrir ALTA</a>
+      </div>
+      <div class="reference-searches">${pinSearchHTML}</div>
+      <button id="alta-copy-btn" class="reference-btn alta" style="width:100%;margin-top:9px" onclick="copyAltaFormula()">Copiar fórmula para ALTA</button>
+      <div class="alta-note">ALTA funciona como estilista y armario digital; VÉNUS no necesita tus credenciales. La fórmula se pasa manualmente para mantener separadas ambas apps.</div>
+    </div>`;
+
 
   document.getElementById('result-wrap').innerHTML = `
 
@@ -3012,20 +3061,9 @@ function showMoodboard() {
         ${palRules}
       </div>
     </div>
-
-    <!-- SECTION: MOODBOARD IMAGES -->
-    ${mosaicHTML ? `
-    <div class="mb-section">
-      <div class="mb-section-head">
-        <div class="mb-section-icon">◎</div>
-        <div class="mb-section-title">
-          Referencias de estilo
-        </div>
-      </div>
-      ${mosaicHTML}
-    </div>` : ''}
-
-    <!-- SECTION: ENERGÍA / VIBE -->
+    <!-- SECTION: INSPIRACIÓN PERSONALIZADA -->
+    ${inspirationHTML}
+<!-- SECTION: ENERGÍA / VIBE -->
     <div class="mb-section">
       <div class="mb-section-head">
         <div class="mb-section-icon">☽</div>
