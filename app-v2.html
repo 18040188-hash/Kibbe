@@ -909,6 +909,7 @@ main {
 }
 
 
+.venus-actions-extra{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.venus-actions-extra .reference-btn{width:100%;background:var(--cream);color:var(--wine);border:1px solid var(--border);font:inherit;font-size:12px;padding:10px;border-radius:10px;cursor:pointer}.venus-actions-extra .reference-btn:hover{background:var(--wine-lt);border-color:var(--wine)}@media(max-width:480px){.venus-actions-extra{grid-template-columns:1fr}}
 /* ── INSPIRATION HUB ─────────────────────────────────────── */
 .inspiration-hub{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:18px;margin:18px 0}
 .inspiration-intro{margin-bottom:14px}.inspiration-kicker{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--wine);margin-bottom:5px}
@@ -2954,7 +2955,18 @@ function showMoodboard() {
   const pinSearchHTML = pinLinks.map(([label,q]) =>
     `<a href="${pinBase}${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`
   ).join('');
-  function copyAltaFormula(){
+  function saveVenusLook(){
+  const profile={style:vd.name,kibbe:kd.name,season:sd.name,savedAt:new Date().toISOString()};
+  try{localStorage.setItem("venusSavedLook",JSON.stringify(profile));}catch(e){}
+  const el=document.getElementById("venus-action-feedback");
+  if(el)el.textContent="♡ Tu fórmula quedó guardada en este dispositivo.";
+}
+async function shareVenusLook(){
+  const text="Mi fórmula VÉNUS: "+kd.name+" · "+sd.name+" · "+vd.name+".";
+  const el=document.getElementById("venus-action-feedback");
+  try{if(navigator.share){await navigator.share({title:"Mi fórmula VÉNUS",text});}else if(navigator.clipboard){await navigator.clipboard.writeText(text);if(el)el.textContent="Fórmula copiada. Ya puedes compartirla donde quieras.";}else if(el)el.textContent=text;}catch(e){if(el)el.textContent="Puedes compartir: "+text;}
+}
+function copyAltaFormula(){
     const text = `Mi fórmula VÉNUS: ${kd.name} · ${sd.name} · ${vd.name}. Quiero usarla como referencia para crear outfits, explorar cortes y desarrollar mi estilo personal.`;
     const done = () => { const b=document.getElementById('alta-copy-btn'); if(b){b.textContent='✓ Fórmula copiada';setTimeout(()=>b.textContent='Copiar fórmula para ALTA',1800);} };
     if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(()=>window.prompt('Copia esta fórmula para ALTA:',text));
@@ -2975,6 +2987,8 @@ function showMoodboard() {
       <div class="reference-searches">${pinSearchHTML}</div>
       <button id="alta-copy-btn" class="reference-btn alta" style="width:100%;margin-top:9px" onclick="copyAltaFormula()">Copiar fórmula para ALTA</button>
       <div class="alta-note">ALTA funciona como estilista y armario digital; VÉNUS no necesita tus credenciales. La fórmula se pasa manualmente para mantener separadas ambas apps.</div>
+      <div class="venus-actions-extra"><button class="reference-btn" type="button" onclick="saveVenusLook()">♡ Guardar mi fórmula</button><button class="reference-btn" type="button" onclick="shareVenusLook()">↗ Compartir resultado</button></div>
+      <div id="venus-action-feedback" class="alta-note" aria-live="polite"></div>
     </div>`;
 
 
