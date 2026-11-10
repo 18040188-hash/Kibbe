@@ -1001,8 +1001,38 @@ button.is-loading:after{content:"";position:absolute;width:13px;height:13px;left
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
+<style id="venus-cinematic-reveal">
+#venus-reveal{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 70% 30%,#554234 0%,#211d1c 42%,#121110 100%);color:#f1ebdd;display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .65s ease}
+#venus-reveal.active{opacity:1;pointer-events:auto}
+.venus-reveal-card{width:min(560px,100%);text-align:left;border:1px solid rgba(201,166,107,.4);padding:clamp(28px,7vw,58px);background:rgba(24,21,19,.62);box-shadow:0 20px 70px rgba(0,0,0,.25);transform:translateY(18px) rotateX(5deg);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+#venus-reveal.active .venus-reveal-card{transform:translateY(0) rotateX(0)}
+.venus-reveal-kicker{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#c9a66b}
+.venus-reveal-title{font:500 clamp(38px,8vw,66px)/1 'Bodoni Moda',serif;margin:20px 0 12px}
+.venus-reveal-sub{color:#d4c9b9;font-size:13px;line-height:1.6}
+.venus-reveal-seal{display:inline-block;margin-top:24px;padding:8px 12px;border:1px solid #a34f38;color:#e0ad91;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+.venus-reveal-swatches{display:flex;gap:7px;margin-top:28px}
+.venus-reveal-swatches i{height:44px;flex:1;transform:scaleY(.08);transform-origin:bottom;opacity:0;animation:venus-swatch .55s ease forwards}
+.venus-reveal-swatches i:nth-child(2){animation-delay:.12s}.venus-reveal-swatches i:nth-child(3){animation-delay:.24s}.venus-reveal-swatches i:nth-child(4){animation-delay:.36s}.venus-reveal-swatches i:nth-child(5){animation-delay:.48s}.venus-reveal-swatches i:nth-child(6){animation-delay:.6s}
+.venus-reveal-continue{margin-top:30px;background:#a34f38;color:#f1ebdd;border:0;padding:13px 20px;letter-spacing:1px;text-transform:uppercase;font-size:10px;cursor:pointer}
+.venus-reveal-continue:focus-visible{outline:3px solid #c9a66b;outline-offset:4px}
+.venus-save-panel{margin:14px 0 8px}.venus-save-panel label{display:block;font-size:11px;margin-bottom:7px;color:var(--muted)}.venus-save-panel label span{opacity:.7}
+.venus-save-panel input{width:100%;max-width:360px;padding:12px;border:1px solid var(--border);background:var(--cream);color:var(--black);font:inherit;border-radius:2px}
+#venus-profile-link{display:inline-block;margin-top:12px}
+@keyframes venus-swatch{to{transform:scaleY(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){#venus-reveal,.venus-reveal-card,.venus-reveal-swatches i{transition:none;animation:none;transform:none;opacity:1}}
+</style>
 </head>
 <body>
+<div id="venus-reveal" role="dialog" aria-modal="true" aria-labelledby="venus-reveal-title">
+  <div class="venus-reveal-card">
+    <div class="venus-reveal-kicker">VÉNUS · Tu identidad toma forma</div>
+    <h2 class="venus-reveal-title" id="venus-reveal-title">Tu universo está escrito.</h2>
+    <p class="venus-reveal-sub" id="venus-reveal-copy">Una fórmula propia entre silueta, color y energía.</p>
+    <div class="venus-reveal-seal" id="venus-reveal-seal">Venus / Lilith</div>
+    <div class="venus-reveal-swatches" id="venus-reveal-swatches"></div>
+    <button class="venus-reveal-continue" type="button" onclick="closeVenusReveal()">Descubrir mi resultado</button>
+  </div>
+</div>
 
 <nav>
   <a class="logo" href="index.html">VÉNUS</a>
@@ -1936,6 +1966,17 @@ function goNext() {
   }
   renderQuestion();
   window.scrollTo({ top:0, behavior:'smooth' });
+  const reveal=document.getElementById('venus-reveal');
+  const swatches=document.getElementById('venus-reveal-swatches');
+  document.getElementById('venus-reveal-title').textContent=vd.name;
+  document.getElementById('venus-reveal-copy').textContent=`${kd.name} · ${sd.name}. ${vd.tagline}`;
+  document.getElementById('venus-reveal-seal').textContent='Venus / Lilith · '+vd.name;
+  swatches.innerHTML=sd.palette.map(c=>`<i style="background:${c}"></i>`).join('');
+  reveal.classList.add('active');
+}
+function closeVenusReveal(){
+  const reveal=document.getElementById('venus-reveal');
+  if(reveal)reveal.classList.remove('active');
 }
 
 function goBack() {
@@ -3013,16 +3054,37 @@ function showMoodboard() {
   const pinSearchHTML = pinLinks.map(([label,q]) =>
     `<a href="${pinBase}${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`
   ).join('');
-  function saveVenusLook(){
-  const profile={style:vd.name,kibbe:kd.name,season:sd.name,savedAt:new Date().toISOString()};
-  try{localStorage.setItem("venusSavedLook",JSON.stringify(profile));}catch(e){}
+  window.venusCurrentProfile = {
+  version:2, gender, kibbe:kd.name, season:sd.name, vibe:vd.name,
+  formula:`${kd.name} · ${sd.name} · ${vd.name}`,
+  palette:sd.palette, paletteNames:sd.paletteNames,
+  tagline:vd.tagline, vibeDescription:vd.desc,
+  garments:kd.garments, quote:vd.quote,
+  createdAt:new Date().toISOString()
+};
+window.saveVenusLook = function(){
+  const profile={...window.venusCurrentProfile};
+  const nameInput=document.getElementById("venus-display-name");
+  profile.displayName=(nameInput?.value||"").trim().slice(0,28);
+  try{
+    localStorage.setItem("venusSavedLook",JSON.stringify(profile));
+    localStorage.setItem("venusGlowUpProfile",JSON.stringify(profile));
+    localStorage.setItem("venusLevelTest", "1");
+  }catch(e){}
   const el=document.getElementById("venus-action-feedback");
-  if(el)el.textContent="♡ Tu fórmula quedó guardada en este dispositivo.";
-}
-async function shareVenusLook(){
-  const text="Mi fórmula VÉNUS: "+kd.name+" · "+sd.name+" · "+vd.name+".";
+  if(el)el.textContent="Tu identidad quedó guardada en este dispositivo.";
+  const btn=document.getElementById("venus-profile-link");
+  if(btn)btn.hidden=false;
+};
+window.shareVenusLook = async function(){
+  const p=window.venusCurrentProfile||{};
+  const text="Mi fórmula VÉNUS: "+p.formula+".";
   const el=document.getElementById("venus-action-feedback");
-  try{if(navigator.share){await navigator.share({title:"Mi fórmula VÉNUS",text});}else if(navigator.clipboard){await navigator.clipboard.writeText(text);if(el)el.textContent="Fórmula copiada. Ya puedes compartirla donde quieras.";}else if(el)el.textContent=text;}catch(e){if(el)el.textContent="Puedes compartir: "+text;}
+  try{
+    if(navigator.share) await navigator.share({title:"Mi fórmula VÉNUS",text});
+    else if(navigator.clipboard){await navigator.clipboard.writeText(text);if(el)el.textContent="Fórmula copiada. Ya puedes compartirla.";}
+    else if(el)el.textContent=text;
+  }catch(e){if(el)el.textContent="Puedes compartir: "+text;}
 }
 function copyAltaFormula(){
     const text = `Mi fórmula VÉNUS: ${kd.name} · ${sd.name} · ${vd.name}. Quiero usarla como referencia para crear outfits, explorar cortes y desarrollar mi estilo personal.`;
@@ -3045,7 +3107,12 @@ function copyAltaFormula(){
       <div class="reference-searches">${pinSearchHTML}</div>
       <button id="alta-copy-btn" class="reference-btn alta" style="width:100%;margin-top:9px" onclick="copyAltaFormula()">Copiar fórmula para ALTA</button>
       <div class="alta-note">ALTA funciona como estilista y armario digital; VÉNUS no necesita tus credenciales. La fórmula se pasa manualmente para mantener separadas ambas apps.</div>
-      <div class="venus-actions-extra"><button class="reference-btn" type="button" onclick="saveVenusLook()">♡ Guardar mi fórmula</button><button class="reference-btn" type="button" onclick="shareVenusLook()">↗ Compartir resultado</button></div>
+      <div class="venus-save-panel">
+        <label for="venus-display-name">Tu nombre para tu tarjeta <span>(opcional)</span></label>
+        <input id="venus-display-name" maxlength="28" placeholder="¿Cómo quieres aparecer?" autocomplete="nickname">
+      </div>
+      <div class="venus-actions-extra"><button class="reference-btn" type="button" onclick="saveVenusLook()">Guardar mi identidad VÉNUS</button><button class="reference-btn" type="button" onclick="shareVenusLook()">Compartir resultado</button></div>
+      <a id="venus-profile-link" class="reference-btn" href="perfil.html" hidden>Ver mi perfil VÉNUS →</a>
       <div id="venus-action-feedback" class="alta-note" aria-live="polite"></div>
     </div>`;
 
