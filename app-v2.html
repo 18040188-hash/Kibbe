@@ -1037,6 +1037,15 @@ button.is-loading:after{content:"";position:absolute;width:13px;height:13px;left
 .opt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:480px){.opt-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.opt{min-width:0;padding:12px 9px}.opt-visual svg{max-width:100%;height:auto}.opt-name{font-size:13px}.opt-desc{font-size:11px;line-height:1.4}}
 @media(prefers-reduced-motion:reduce){.opt{transition:none}}
+</style><style>
+.venus-explanation{margin:22px 0;padding:20px;background:#fff8e9;border:1px solid #17131b;box-shadow:6px 6px 0 #284be8;color:#17131b}
+.venus-explanation p{font-size:13px;line-height:1.65;margin:10px 0}
+.venus-confidence{margin-top:16px;padding-top:14px;border-top:1px solid rgba(23,19,27,.25)}
+.venus-confidence>span{font:11px monospace;text-transform:uppercase;letter-spacing:1px}
+.venus-confidence strong{float:right;color:#e52b50;font-family:monospace}
+.venus-confidence-track{height:8px;background:#ddd4c9;margin:10px 0;overflow:hidden}
+.venus-confidence-track i{display:block;height:100%;background:#284be8}
+.venus-confidence small{font-size:10px;line-height:1.5;color:#514a4c}
 </style></head>
 <body>
 <div id="venus-reveal" role="dialog" aria-modal="true" aria-labelledby="venus-reveal-title">
@@ -1989,6 +1998,9 @@ function goNext() {
   if (qIdx < mod.questions.length - 1) {
     qIdx++;
   } else {
+    if(modIdx===0 && !answers.kibbeTie && venusNeedsTieBreak()){
+      venusShowTieBreak();saveTestProgress();return;
+    }
     modIdx++;
     qIdx = 0;
   }
@@ -2248,6 +2260,38 @@ JSON exacto a devolver:
 }`;
 }
 
+function venusNeedsTieBreak(){
+  const h=answers.height, sh=answers.shoulders, t=answers.texture, w=answers.waist;
+  const sharpSignals=(h==='tall'?1:0)+(sh==='wide-sh'||sh==='straight'?1:0)+(t==='sharp'?1:0);
+  const softSignals=(t==='soft'?2:0)+(w==='yes'?1:0)+(sh==='balanced'?1:0);
+  return Math.abs(sharpSignals-softSignals)<=1 && !(h==='petite'&&t==='compact');
+}
+function venusShowTieBreak(){
+ const host=document.getElementById('quiz-wrap');
+ host.innerHTML=`<div class="section-intro"><div class="section-label">Desempate · Silueta</div><div class="section-title">Una última comparación</div><p class="section-sub">Tus respuestas combinan señales de líneas definidas y suaves. Esta pregunta ayuda a decidir qué rasgo domina visualmente.</p></div>
+ <div class="question-block"><div class="q-text">Al probar una prenda de líneas rectas y otra de líneas curvas, ¿cuál suele integrarse mejor con tu silueta?</div><div class="q-hint">Compara prendas de ajuste parecido y observa el conjunto, no si una te gusta más. Si ninguna domina, elige “ambas”.</div><div class="opt-grid cols-1">
+ <button class="opt horizontal" type="button" onclick="venusSetTie('defined')"><div class="opt-text"><div class="opt-name">Líneas rectas y definidas</div><div class="opt-desc">Blazers rectos, cortes limpios y estructura se ven naturales en mí.</div></div></button>
+ <button class="opt horizontal" type="button" onclick="venusSetTie('soft')"><div class="opt-text"><div class="opt-name">Líneas curvas y suaves</div><div class="opt-desc">Drapeados, curvas y formas redondeadas se integran mejor.</div></div></button>
+ <button class="opt horizontal" type="button" onclick="venusSetTie('mixed')"><div class="opt-text"><div class="opt-name">Ambas por igual / no estoy segura/o</div><div class="opt-desc">No identifico una dirección dominante.</div></div></button></div></div>`;
+}
+function venusSetTie(value){
+ answers.kibbeTie=value;
+ if(value==='defined') answers.texture='sharp';
+ if(value==='soft') answers.texture='soft';
+ saveTestProgress();
+ modIdx=1;qIdx=0;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
+}
+function venusResultExplanation(){
+ const labels={height:{tall:'estatura alta',medium:'estatura media',petite:'estatura petite'},shoulders:{straight:'hombros y caderas de ancho similar', 'wide-sh':'hombros más anchos','wide-hip':'caderas más anchas',balanced:'proporciones equilibradas'},waist:{yes:'cintura definida',slight:'cintura ligeramente definida',no:'torso más recto'},texture:{sharp:'líneas angulosas',soft:'líneas suaves',mix:'mezcla de líneas',compact:'estructura compacta'},skin:{fair:'piel clara',light:'piel media clara',medium:'piel media u olivácea',deep:'piel profunda'},undertone:{warm:'indicio cálido',cool:'indicio frío',neutral:'indicio neutro',dk:'subtono no concluyente'},contrast:{high:'contraste alto',medium:'contraste medio',low:'contraste bajo'},reaction:{washes:'los pasteles tienden a apagar',flatters:'los colores claros iluminan',depends:'la reacción depende del color'}};
+ const explain=(keys)=>keys.filter(k=>answers[k]&&labels[k]?.[answers[k]]).map(k=>labels[k][answers[k]]);
+ const body=explain(['height','shoulders','waist','texture']);
+ const color=explain(['skin','undertone','contrast','reaction']);
+ const confidenceKeys=['height','shoulders','waist','texture'];
+ const answered=confidenceKeys.filter(k=>answers[k]&&answers[k]!=='unsure'&&answers[k]!=='dk').length;
+ const coherence=Math.round(60+(answered/4)*25+(answers.kibbeTie?10:0));
+ const score=Math.min(95,coherence);
+ return `<section class="venus-explanation" aria-labelledby="venus-explain-title"><div class="mb-section-head"><div class="mb-section-title" id="venus-explain-title">Cómo llegamos a esta hipótesis</div></div><p><strong>Silueta:</strong> Tus respuestas describen ${body.join(', ')||'señales todavía insuficientes'}. El algoritmo las combina para proponer ${KIBBE_DATA[calcKibbe()]?.name||calcKibbe()}.</p><p><strong>Color:</strong> Registraste ${color.join(', ')||'señales todavía insuficientes'}. La estación es una orientación inicial; los colores deben comprobarse junto al rostro en luz natural.</p><p><strong>Qué quedó menos respaldado:</strong> Las categorías que dependen de señales opuestas a las que elegiste quedan como alternativas menos probables, no como tipos “descartados” de forma definitiva. Kibbe requiere valorar línea, proporción y caída de prendas en conjunto.</p><div class="venus-confidence"><span>Coherencia de respuestas</span><strong>${score}/100</strong><div class="venus-confidence-track"><i style="width:${score}%"></i></div><small>Este indicador mide consistencia del cuestionario, no precisión científica ni certeza del diagnóstico.</small></div></section>`;
+}
 /* ═══════════════════════════════════════════════════════════
    RESULT ENGINE
 ═══════════════════════════════════════════════════════════ */
@@ -3167,6 +3211,7 @@ function copyAltaFormula(){
         </div>
       </div>
     </div>
+    ${venusResultExplanation()}
 
     <!-- SELFIE ANALYSIS (if exists) -->
     ${selfieHTML}
