@@ -64,3 +64,10 @@ La experiencia se acerca más a una revista independiente: el test se presenta c
 La galería de inspiración del resultado utiliza una selección más coherente de fotografía de moda editorial alojada en Unsplash. En el test visual, las imágenes dejaron de depender del endpoint aleatorio retirado `source.unsplash.com` y usan identificadores estables de imágenes. Los textos alternativos y captions siguen siendo específicos de cada resultado. El tratamiento fotográfico es selectivo: monocromo, contraste y sepia moderados, sin aplicar un filtro idéntico a todas las imágenes.
 
 En Glow Up, el panel principal adopta una presentación de archivo/editorial mientras conserva la navegación inferior y las interacciones de seguimiento. La capa visual no modifica los datos, cálculos ni el almacenamiento local del producto.
+
+
+## Dirección editorial impresa — Part 07
+
+La portada ahora funciona como una cubierta editorial a doble página: fotografía a sangre en una página y bloque negro tipográfico en la otra, con lomo central, folios, marcas de corte, cruces, créditos de imagen y microtipografía. El resto de la home continúa con spreads asimétricos, departamentos visuales y un cierre de contraportada. La textura combina grano fotográfico y papel gris, con acentos rojo oscuro y plata; las imágenes de Unsplash reciben tratamientos monocromos de alto contraste y duotono discreto.
+
+El mismo archivo `styles.css` se carga desde la portada, el test, el archivo visual, Glow Up y el perfil. En escritorio, el sistema conserva la lectura enfrentada; en móvil, cada spread se convierte en una secuencia vertical para evitar columnas comprimidas. Se mantienen HTML, CSS y JavaScript vanilla, sin nuevas dependencias de ejecución. La lógica de preguntas, resultados y cálculo del test no se modifica en esta entrega.
