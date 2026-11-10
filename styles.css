@@ -1,0 +1,87 @@
+/* VÉNUS — shared editorial system
+   Reference study: Chrome Hearts Magazine, PDF pages 1–7.
+   Translation: blackletter display accents, contrasting editorial serif,
+   compact sans captions, broken grids, image-led spreads, print-like rules,
+   paper grain and variable density. No test logic lives in this file. */
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap');
+:root{
+ --v-paper:#e9e6dc;--v-paper-light:#f5f2e9;--v-ink:#191816;--v-muted:#666158;
+ --v-rule:rgba(25,24,22,.28);--v-accent:#702b31;--v-olive:#68644e;
+ --v-white:#fbf9f2;--v-display:'UnifrakturMaguntia',Georgia,serif;
+ --v-editorial:'Cormorant Garamond',Georgia,serif;--v-body:'DM Sans',Arial,sans-serif;
+ --v-gutter:clamp(18px,4vw,64px);--v-max:1440px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--v-body);background:var(--v-paper);color:var(--v-ink)}
+body::before{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+a{color:inherit;text-underline-offset:4px;text-decoration-thickness:1px}
+a:hover{color:var(--v-accent)}
+:focus-visible{outline:2px solid var(--v-accent)!important;outline-offset:4px!important}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+img{max-width:100%}
+.v-skip{position:absolute;left:-9999px;top:8px;z-index:2000;background:var(--v-ink);color:var(--v-white);padding:12px}
+.v-skip:focus{left:8px}
+.v-masthead,.top,.topbar,nav{background:var(--v-paper)!important;color:var(--v-ink);backdrop-filter:none!important;box-shadow:none!important;border-bottom:1px solid var(--v-rule)!important}
+.logo,.topbar-logo,.onboard-logo{font-family:var(--v-display)!important;font-weight:400!important;letter-spacing:.02em!important}
+nav .logo,.top .logo,.topbar-logo{font-size:clamp(25px,3vw,38px)!important}
+.nav-home,.top a,.topbar-tag{font-family:var(--v-body)!important;font-size:10px!important;letter-spacing:.14em!important;text-transform:uppercase}
+h1,h2,h3,.section-title,.section-heading,.onboard-title,.home-hero-name,.story-title,.mb-cover-name,.venus-reveal-title{font-family:var(--v-editorial)!important;font-weight:600!important;letter-spacing:-.035em}
+h1 em,h2 em,.section-title em{color:var(--v-accent)}
+.eyebrow,.section-label,.section-sub,.section-intro,.card-number,.mb-cover-eyebrow,.mb-section-head,.mb-section-title,.story-kicker,.story-footer,.sec-label,.home-hero-label,.topbar-tag,.nav-label,.chip-label{font-family:var(--v-body)!important;text-transform:uppercase;letter-spacing:.16em!important;font-size:9px!important}
+button,.btn,.btn-primary,.btn-next,.gender-start,.reference-btn,.btn-wine,.btn-secondary,.chat-send,.nav-btn{border-radius:0!important;box-shadow:none!important;transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .18s ease}
+button:hover,.btn:hover,.btn-primary:hover,.btn-next:hover,.gender-start:hover,.reference-btn:hover,.btn-wine:hover,.btn-secondary:hover{transform:translateY(-2px);box-shadow:none!important}
+input,textarea,select{border-radius:0!important;box-shadow:none!important}
+.card,.gender-opt,.opt,.garment-card,.palette-swatch-block,.reference-tile,.celeb-card,.makeup-card,.proportion-card,.avoids-card,.quote-block,.story,.compare-slot,.stat-card,.next-task-card,.entry-card,.task-card,.card-content{border-radius:0!important;box-shadow:none!important}
+.card,.gender-opt,.opt,.garment-card,.palette-swatch-block,.reference-tile,.celeb-card,.makeup-card,.proportion-card,.avoids-card,.quote-block,.story,.compare-slot,.stat-card,.entry-card{border:1px solid var(--v-rule)!important}
+nav a,.nav-home,.top a,.nav-btn,.bottom-nav a{transition:color .18s ease}
+nav a:hover,.nav-home:hover,.top a:hover{color:var(--v-accent)}
+/* Test and result pages */
+nav{border-bottom:1px solid var(--v-rule)!important}
+.progress-track,.hero-bar{border-radius:0!important;background:rgba(25,24,22,.16)!important}
+.progress-fill,.hero-bar-fill{border-radius:0!important;background:var(--v-accent)!important}
+.section-dot{border-radius:0!important}
+.gender-screen,.section-intro,.question-block,.selfie-upload-area,.mb-section,.inspiration-hub{background:transparent!important}
+.gender-opt,.opt{background:var(--v-paper-light)!important}
+.gender-opt.selected,.opt.selected,.opt:focus-visible{border-color:var(--v-accent)!important;background:#e4ddd0!important}
+.gender-start,.btn-next,.btn-primary,.reference-btn,.btn-wine{background:var(--v-ink)!important;color:var(--v-white)!important;border:1px solid var(--v-ink)!important}
+.btn-back,.btn-secondary,.btn-home,.btn-restart{background:transparent!important;color:var(--v-ink)!important;border:1px solid var(--v-rule)!important}
+.mb-cover,.venus-reveal-card,.story{background:var(--v-ink)!important;color:var(--v-paper-light)!important;border:1px solid var(--v-ink)!important}
+.mb-cover-eyebrow,.story-kicker,.story-footer{color:#d2c6ad!important}
+.formula-chip{border-radius:0!important;border:1px solid var(--v-rule)!important}
+.palette-swatches i,.venus-reveal-swatches i,.story-swatches i{border-radius:0!important}
+.result-actions{gap:10px}
+.venus-reveal{backdrop-filter:none!important}
+.venus-reveal-title{font-family:var(--v-editorial)!important}
+.inspiration-hub,.venus-save-panel{border-top:1px solid var(--v-rule)!important;border-radius:0!important}
+.reference-tile img,.mosaic-item img,.celeb-avatar,.selfie-thumb{filter:saturate(.78) contrast(1.05)}
+/* Glow Up app shell: preserve its fixed-height interaction model */
+html:has(.shell),body:has(.shell){background:var(--v-paper)!important}
+.shell{background:var(--v-paper)!important;border-left:1px solid var(--v-rule);border-right:1px solid var(--v-rule)}
+.topbar{border-bottom:1px solid var(--v-rule)!important}
+.bottom-nav{background:var(--v-paper)!important;border-top:1px solid var(--v-rule)!important;box-shadow:none!important}
+.nav-btn.active,.nav-btn[aria-current="page"]{color:var(--v-accent)!important}
+.stat-card,.card,.next-task-card,.diary-composer,.chat-form{background:var(--v-paper-light)!important}
+.chat-messages .msg{border-radius:0!important}
+.toast{border-radius:0!important}
+/* Profile */
+.top{padding-inline:var(--v-gutter)!important}
+.layout{max-width:var(--v-max)!important}
+.story{position:relative}
+.story-title{font-size:clamp(42px,6vw,76px)!important}
+.btn{background:var(--v-ink)!important;color:var(--v-white)!important;border:1px solid var(--v-ink)!important}
+.btn.alt{background:transparent!important;color:var(--v-ink)!important}
+/* Respect motion preferences */
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media(min-width:768px){
+ .layout{grid-template-columns:1.05fr .8fr!important}
+ .story{min-height:680px}
+}
+@media(max-width:767px){
+ .layout{grid-template-columns:1fr!important;gap:24px!important;padding:32px 18px 56px!important}
+ .story{min-height:480px!important;position:relative!important}
+ .top{padding:14px 18px!important}
+ .result-actions,.actions{flex-wrap:wrap}
+ .result-actions button,.actions button{flex:1 1 140px}
+}
