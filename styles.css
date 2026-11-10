@@ -350,3 +350,187 @@ body:not(.venus-home) .progress-fill{background:var(--v-red)!important}
 @media(max-width:760px){
  body:not(.venus-home) main{padding-left:14px!important;padding-right:14px!important}
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   VÉNUS / ISSUE 08 — PUNK BAROQUE
+   Acid color, romantic ornament, tactile print and editorial motion.
+   Shared across the complete experience. Functional quiz logic untouched.
+═══════════════════════════════════════════════════════════════ */
+:root{
+ --v-paper:#f0e8d8;--v-paper-light:#fff8e9;--v-ink:#17131b;
+ --v-accent:#e52b50;--v-muted:#615565;--v-rule:rgba(23,19,27,.34);
+ --v-cherry:#e52b50;--v-cobalt:#284be8;--v-acid:#d8f34b;
+ --v-fuchsia:#f05aa8;--v-gold:#c59a43;--v-wine:#671b37;
+ --v-bluewash:#dce4ff;--v-pinkwash:#f9dce8;
+}
+html{scroll-behavior:smooth}
+body{
+ background-color:var(--v-paper)!important;
+ background-image:
+  radial-gradient(ellipse at 12% 18%,rgba(240,90,168,.12),transparent 28%),
+  radial-gradient(ellipse at 88% 42%,rgba(40,75,232,.10),transparent 30%),
+  repeating-linear-gradient(0deg,rgba(23,19,27,.018) 0 1px,transparent 1px 4px)!important;
+}
+body::before{opacity:.16!important;mix-blend-mode:multiply}
+a:hover{color:var(--v-cherry)!important}
+:focus-visible{outline-color:var(--v-cobalt)!important}
+h1 em,h2 em,.section-title em{color:var(--v-cherry)!important}
+nav,.top,.topbar,.v-masthead,.journal-masthead{
+ background:var(--v-paper)!important;border-bottom:2px solid var(--v-ink)!important;
+}
+nav::after{color:var(--v-cherry)!important}
+.logo,.topbar-logo,.onboard-logo,.journal-logo{ text-shadow:2px 2px 0 var(--v-fuchsia),-1px -1px 0 var(--v-acid) }
+.nav-home,.top a,.topbar-tag{border-color:var(--v-cherry)!important}
+button,.btn,.btn-primary,.btn-next,.gender-start,.reference-btn,.btn-wine,.btn-secondary,.chat-send,.nav-btn{
+ transition:transform .28s cubic-bezier(.2,.8,.2,1),background-color .25s,color .25s,border-color .25s!important;
+}
+.gender-start,.btn-next,.btn-primary,.reference-btn,.btn-wine,.btn,.btn-primary{
+ background:var(--v-cherry)!important;border-color:var(--v-cherry)!important;color:#fff8e9!important;
+}
+.gender-start:hover,.btn-next:hover,.btn-primary:hover,.reference-btn:hover,.btn-wine:hover,.btn:hover{
+ background:var(--v-cobalt)!important;border-color:var(--v-cobalt)!important;transform:translate(-3px,-3px) rotate(-1deg)!important;
+}
+.btn-back,.btn-secondary,.btn-home,.btn-restart,.btn.alt{
+ border:1px solid var(--v-ink)!important;background:var(--v-acid)!important;color:var(--v-ink)!important;
+}
+.card,.gender-opt,.opt,.garment-card,.palette-swatch-block,.reference-tile,.celeb-card,.makeup-card,.proportion-card,.avoids-card,.quote-block,.story,.compare-slot,.stat-card,.entry-card{
+ border-color:rgba(23,19,27,.42)!important;
+}
+.gender-opt,.opt,.card,.garment-card,.reference-tile,.celeb-card,.makeup-card,.proportion-card,.avoids-card,.stat-card,.entry-card{
+ background-color:var(--v-paper-light)!important;
+}
+.gender-opt.selected,.opt.selected,.opt:hover{background:var(--v-pinkwash)!important;border-color:var(--v-cherry)!important}
+.progress-track,.hero-bar{background:rgba(23,19,27,.15)!important}
+.progress-fill,.hero-bar-fill{background:var(--v-cobalt)!important}
+.section-dot.active,.section-dot.done{background:var(--v-fuchsia)!important}
+.section-label,.section-intro .section-label,.eyebrow,.mb-cover-eyebrow{color:var(--v-cherry)!important}
+.question-block{position:relative}
+.question-block::before{
+ content:"✳";position:absolute;right:4px;top:20px;color:var(--v-fuchsia);
+ font:clamp(24px,4vw,42px) Georgia,serif;transform:rotate(-12deg);opacity:.85;
+}
+.q-text{max-width:90%}
+.opt{position:relative;overflow:hidden}
+.opt::before{
+ content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
+ background:var(--v-acid);transform:scaleY(0);transform-origin:bottom;transition:transform .25s;
+}
+.opt:hover::before,.opt.selected::before{transform:scaleY(1)}
+.opt.selected::after{color:var(--v-cherry)!important}
+.gender-opt:nth-child(3n+1){background:linear-gradient(135deg,var(--v-bluewash),transparent 75%)!important}
+.gender-opt:nth-child(3n+2){background:linear-gradient(135deg,var(--v-pinkwash),transparent 75%)!important}
+.gender-opt:nth-child(3n){background:linear-gradient(135deg,#eff4c8,transparent 75%)!important}
+.mb-cover,.story,.venus-reveal-card{
+ background-color:var(--v-ink)!important;
+ background-image:
+  radial-gradient(circle at 82% 18%,rgba(240,90,168,.55),transparent 24%),
+  radial-gradient(circle at 15% 85%,rgba(40,75,232,.55),transparent 32%),
+  repeating-linear-gradient(135deg,rgba(255,255,255,.045) 0 1px,transparent 1px 7px)!important;
+ border:2px solid var(--v-ink)!important;
+}
+.mb-cover::before,.story::before{
+ content:"✳";position:absolute;left:-18px;bottom:-70px;color:var(--v-acid);
+ font:clamp(150px,25vw,330px)/1 Georgia,serif;opacity:.12;transform:rotate(-18deg);pointer-events:none;
+}
+.mb-cover-name,.story-title{color:var(--v-paper-light)!important;text-shadow:3px 3px 0 var(--v-cherry)}
+.mb-cover-eyebrow,.story-kicker,.story-footer{color:var(--v-acid)!important}
+.mb-cover-tagline{color:#f4c5d9!important}
+.formula-chip{background:rgba(255,248,233,.09)!important;border-color:rgba(255,248,233,.4)!important;color:var(--v-paper-light)!important}
+.chip-label{color:var(--v-acid)!important}
+.mb-section{position:relative;padding-top:clamp(24px,4vw,48px)!important}
+.mb-section-head{border-bottom:2px solid var(--v-ink)!important;padding-bottom:12px!important}
+.mb-section-icon{background:var(--v-cherry)!important;color:#fff!important}
+.mb-section:nth-of-type(odd) .mb-section-icon{background:var(--v-cobalt)!important}
+.mb-section-title{color:var(--v-ink)!important}
+.palette-swatches i,.palette-swatch-block{border:1px solid rgba(23,19,27,.25)!important}
+.quote-block{
+ background:var(--v-acid)!important;color:var(--v-ink)!important;
+ border:2px solid var(--v-ink)!important;font:italic 600 clamp(24px,4vw,42px)/1.08 var(--v-editorial)!important;
+ padding:clamp(24px,5vw,54px)!important;transform:rotate(-1deg);
+}
+.mosaic{align-items:start}
+.mosaic-item{overflow:hidden;border:1px solid var(--v-ink)!important;background:var(--v-ink)}
+.mosaic-item:nth-child(2){transform:translateY(22px) rotate(1.5deg)}
+.mosaic-item:nth-child(3){transform:translateY(-8px) rotate(-1deg)}
+.mosaic-item img,.reference-tile img,.department-card img,.spread-photo img,.cover-image img,.closing-image img{
+ transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s!important;
+}
+.mosaic-item:hover img,.reference-tile:hover img,.department-card:hover img{
+ transform:scale(1.055) rotate(.6deg)!important;filter:saturate(1.25) contrast(1.08)!important;
+}
+.reference-tile img,.mosaic-item img,.celeb-avatar,.selfie-thumb{filter:saturate(.95) contrast(1.08)!important}
+.palette-swatch-block:nth-child(3n+1){outline:2px solid var(--v-cherry);outline-offset:2px}
+.palette-swatch-block:nth-child(3n+2){outline:2px solid var(--v-cobalt);outline-offset:2px}
+.palette-swatch-block:nth-child(3n){outline:2px solid var(--v-acid);outline-offset:2px}
+/* Landing page: a colorful, tactile editorial object */
+.journal-masthead{position:relative}
+.journal-logo{color:var(--v-cherry)!important}
+.masthead-center span,.masthead-issue{color:var(--v-cobalt)!important}
+.cover-spread{border:2px solid var(--v-ink);box-shadow:10px 10px 0 var(--v-cherry),20px 20px 0 rgba(40,75,232,.22)}
+.cover-image{position:relative}
+.cover-image::after,.closing-image::after,.spread-photo::after{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(135deg,rgba(229,43,80,.22),transparent 42%,rgba(40,75,232,.22));
+ mix-blend-mode:color;
+}
+.cover-black{background:var(--v-ink)!important}
+.cover-venus{color:var(--v-acid)!important;text-shadow:4px 4px 0 var(--v-cherry)}
+.cover-title-line{color:var(--v-fuchsia)!important}
+.cover-deck{color:#f5dce6!important}
+.cover-bottom a{background:var(--v-acid)!important;color:var(--v-ink)!important;padding:10px 12px}
+.cross-glyph,.closing-cross{color:var(--v-fuchsia)!important}
+.ticker-strip{background:var(--v-acid)!important;color:var(--v-ink)!important;border-block:2px solid var(--v-ink)!important}
+.editorial-spread{background:var(--v-bluewash);border:1px solid var(--v-ink)}
+.spread-copy{background:var(--v-paper-light)}
+.spread-copy h2 em{color:var(--v-cherry)}
+.departments{background:var(--v-paper);padding-block:clamp(36px,7vw,88px)}
+.department-heading{border-bottom:2px solid var(--v-ink)!important}
+.department-heading h2{color:var(--v-cobalt)}
+.department-card{border:1px solid var(--v-ink)!important;background:var(--v-ink)!important;color:var(--v-paper-light)!important;position:relative}
+.department-card:nth-child(2){background:var(--v-cherry)!important}
+.department-card:nth-child(3){background:var(--v-cobalt)!important}
+.department-card:nth-child(4){background:var(--v-wine)!important}
+.department-card img{mix-blend-mode:screen;opacity:.78;filter:grayscale(.25) contrast(1.1)!important}
+.department-card h3{color:var(--v-paper-light)!important;text-shadow:2px 2px 0 rgba(0,0,0,.45)}
+.department-number,.department-link{color:var(--v-acid)!important}
+.closing-spread{border:2px solid var(--v-ink);box-shadow:-10px 10px 0 var(--v-cobalt)}
+.closing-copy{background:var(--v-cherry)!important;color:#fff8e9!important}
+.closing-copy h2{color:#fff8e9!important}
+.closing-copy p,.closing-copy small{color:#ffe4ed!important}
+.closing-copy a{display:inline-block;background:var(--v-acid);color:var(--v-ink)!important;padding:12px 14px}
+.journal-footer{background:var(--v-ink)!important;color:var(--v-acid)!important;border-top:3px solid var(--v-fuchsia)!important}
+/* Glow Up: distinct departments, same visual grammar */
+.shell{background:var(--v-paper)!important}
+.topbar-logo{color:var(--v-cherry)!important}
+.bottom-nav{background:var(--v-ink)!important;color:var(--v-paper-light)!important;border-top:2px solid var(--v-fuchsia)!important}
+.bottom-nav a,.bottom-nav button,.nav-btn{color:var(--v-paper-light)!important}
+.nav-btn.active,.nav-btn[aria-current="page"]{color:var(--v-acid)!important}
+.stat-card,.next-task-card,.diary-composer,.chat-form{background:var(--v-paper-light)!important;border:1px solid var(--v-ink)!important}
+.task-card:nth-child(odd),.next-task-card{border-left:5px solid var(--v-cherry)!important}
+.toast{background:var(--v-acid)!important;color:var(--v-ink)!important;border:1px solid var(--v-ink)!important}
+/* Entrance choreography: restrained, quick, and disabled for reduced motion */
+@keyframes venus-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes venus-stamp{0%{opacity:0;transform:scale(1.16) rotate(-8deg)}70%{transform:scale(.96) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes venus-marquee{to{background-position:-200% 0}}
+.journal-main>.spread,.departments,.department-card,.section-intro,.question-block,.mb-cover,.mb-section,.story{
+ animation:venus-rise .65s both;
+}
+.cover-black h1{animation:venus-stamp .8s .12s both}
+.ticker-strip{background-image:linear-gradient(90deg,transparent,var(--v-fuchsia),transparent)!important;background-size:200% 100%;animation:venus-marquee 12s linear infinite}
+@media(hover:hover){
+ .department-card:hover{transform:translateY(-7px) rotate(-.7deg);box-shadow:7px 7px 0 var(--v-acid)!important}
+ .cover-image:hover img,.closing-image:hover img{transform:scale(1.035)}
+}
+@media(max-width:767px){
+ .cover-spread,.closing-spread{box-shadow:5px 5px 0 var(--v-cherry),10px 10px 0 rgba(40,75,232,.2)}
+ .department-grid{gap:12px!important}
+ .department-card:nth-child(2){transform:rotate(.4deg)}
+ .department-card:nth-child(3){transform:rotate(-.4deg)}
+ .mosaic-item:nth-child(2),.mosaic-item:nth-child(3){transform:none}
+ .question-block::before{font-size:24px;right:0}
+}
+@media(prefers-reduced-motion:reduce){
+ .journal-main>.spread,.departments,.department-card,.section-intro,.question-block,.mb-cover,.mb-section,.story,.cover-black h1,.ticker-strip{animation:none!important}
+ .mosaic-item:nth-child(2),.mosaic-item:nth-child(3){transform:none}
+}
