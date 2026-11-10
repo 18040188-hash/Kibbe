@@ -85,3 +85,122 @@ html:has(.shell),body:has(.shell){background:var(--v-paper)!important}
  .result-actions,.actions{flex-wrap:wrap}
  .result-actions button,.actions button{flex:1 1 140px}
 }
+
+/* ── VÉNUS / issue 02: magazine-first layer ─────────────────────
+   A publication with interactive departments, not a dashboard skin.
+   Shared by the landing page, test, profile and Glow Up. */
+:root{
+ --v-paper:#e8e4d9;--v-paper-light:#f3f0e7;--v-ink:#171615;
+ --v-accent:#6f252d;--v-muted:#655f58;--v-rule:rgba(23,22,21,.32);
+ --v-display:'UnifrakturMaguntia',Georgia,serif;
+ --v-editorial:'Cormorant Garamond',Georgia,serif;
+ --v-body:'DM Sans',Arial,sans-serif;
+}
+body{background-color:var(--v-paper)!important}
+body::before{opacity:.09}
+nav{min-height:68px!important;padding:12px var(--v-gutter)!important;background:var(--v-paper)!important;backdrop-filter:none!important;border-bottom:1px solid var(--v-ink)!important}
+nav::after{content:"INDEPENDENT STYLE JOURNAL  /  ISSUE 02";font:9px var(--v-body);letter-spacing:.16em;color:var(--v-muted)}
+.logo,.topbar-logo,.onboard-logo{font-family:var(--v-display)!important;font-size:clamp(28px,3.5vw,40px)!important;letter-spacing:.02em!important}
+.nav-home{border:0!important;border-radius:0!important;border-bottom:1px solid var(--v-ink)!important;padding:7px 0!important;background:transparent!important;font:9px var(--v-body)!important;letter-spacing:.14em!important;text-transform:uppercase}
+main{max-width:1120px!important;padding:42px var(--v-gutter) 80px!important}
+.progress-wrap{grid-column:1;align-self:start;position:sticky;top:92px;margin:10px 0 0;padding:20px 16px 20px 0;border-top:1px solid var(--v-ink);border-bottom:1px solid var(--v-rule)}
+.progress-wrap::before{content:"CONTENTS  /  01—04";display:block;margin-bottom:18px;font:9px var(--v-body);letter-spacing:.16em;color:var(--v-accent)}
+.progress-meta{font:9px var(--v-body)!important;text-transform:uppercase;letter-spacing:.12em!important;color:var(--v-muted)!important}
+.progress-track,.progress-fill,.section-dot{border-radius:0!important}
+.progress-track{height:3px!important;background:rgba(23,22,21,.15)!important}
+.progress-fill{background:var(--v-accent)!important}
+.section-dots{gap:3px!important}
+.section-dot{height:4px!important;background:rgba(23,22,21,.14)!important}
+.section-dot.active,.section-dot.done{background:var(--v-accent)!important}
+#gender-screen,#quiz-wrap,#selfie-wrap{grid-column:2;max-width:760px;width:100%;margin-left:auto}
+#result-wrap{grid-column:1/-1;width:100%}
+.section-icon{display:none!important}
+.section-intro,.gender-screen{text-align:left!important;align-items:flex-start!important;justify-content:flex-start!important;padding:30px 0 38px!important;min-height:0!important}
+.section-label{font:9px var(--v-body)!important;letter-spacing:.18em!important;color:var(--v-accent)!important}
+.section-title{font:600 clamp(38px,5.2vw,68px)/.92 var(--v-editorial)!important;letter-spacing:-.035em!important;max-width:700px;margin:10px 0 14px!important}
+.section-sub{font:13px/1.75 var(--v-body)!important;color:var(--v-muted)!important;margin:0!important;max-width:520px!important}
+.gender-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;width:100%;border-top:1px solid var(--v-rule);border-bottom:1px solid var(--v-rule);margin-top:30px!important}
+.gender-opt{border:0!important;border-right:1px solid var(--v-rule)!important;padding:24px 12px!important;background:transparent!important;text-align:left!important}
+.gender-opt:last-child{border-right:0!important}
+.gender-opt.selected{background:#ded8ca!important;outline:1px solid var(--v-accent)}
+.gender-icon{font:32px var(--v-editorial)!important;color:var(--v-accent)}
+.gender-name{font:10px var(--v-body)!important;letter-spacing:.1em!important;text-transform:uppercase}
+.gender-start,.btn-next,.btn-back,.btn-secondary,.btn-primary,.btn-wine{border-radius:0!important;box-shadow:none!important;text-transform:uppercase!important;letter-spacing:.12em!important;font:10px var(--v-body)!important;padding:14px 20px!important}
+.gender-start,.btn-next,.btn-primary,.btn-wine{background:var(--v-ink)!important;border:1px solid var(--v-ink)!important;color:var(--v-paper-light)!important}
+.btn-back,.btn-secondary{background:transparent!important;border:1px solid var(--v-rule)!important;color:var(--v-ink)!important}
+.question-block{padding:24px 0 28px!important;margin:0!important;border-top:1px solid var(--v-rule)}
+.q-text{font:600 clamp(25px,3.2vw,39px)/1.05 var(--v-editorial)!important;letter-spacing:-.02em!important;margin-bottom:9px!important}
+.q-hint{font:12px/1.7 var(--v-body)!important;color:var(--v-muted)!important;max-width:600px}
+.opt-grid{gap:0!important;border-top:1px solid var(--v-rule)}
+.opt{border:0!important;border-bottom:1px solid var(--v-rule)!important;border-radius:0!important;background:transparent!important;padding:15px 12px!important;text-align:left!important}
+.opt:hover,.opt.selected{background:#ded8ca!important;border-color:var(--v-rule)!important}
+.opt.selected::after{content:"SELECTED";font:8px var(--v-body);letter-spacing:.13em;top:50%;right:12px;transform:translateY(-50%);color:var(--v-accent)}
+.opt-name{font:600 18px var(--v-editorial)!important}
+.opt-desc{font:11px/1.5 var(--v-body)!important;color:var(--v-muted)!important}
+.opt.horizontal{padding:14px 12px!important}
+.swatch{border-radius:0!important}
+.selfie-upload-area{border:1px dashed var(--v-accent)!important;border-radius:0!important;background:transparent!important}
+.nav-btns{border-top:1px solid var(--v-ink)!important;padding-top:18px!important}
+.mb-cover{border-radius:0!important;box-shadow:none!important;background:var(--v-ink)!important;border:1px solid var(--v-ink)!important;padding:clamp(28px,6vw,76px)!important;min-height:390px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.mb-cover::after{content:"VÉNUS  /  PERSONAL STYLE JOURNAL";position:absolute;right:20px;top:20px;writing-mode:vertical-rl;font:8px var(--v-body);letter-spacing:.18em;color:rgba(243,240,231,.58)}
+.mb-cover-name{font:400 clamp(52px,10vw,126px)/.84 var(--v-display)!important;letter-spacing:0!important;max-width:850px}
+.mb-cover-tagline{font:italic 500 clamp(20px,3vw,34px) var(--v-editorial)!important;max-width:600px}
+.mb-cover-eyebrow,.mb-section-head,.mb-section-title,.chip-label{font:9px var(--v-body)!important;letter-spacing:.16em!important;text-transform:uppercase}
+.mb-section{border-top:1px solid var(--v-ink)!important;padding:28px 0!important;margin-top:28px!important}
+.mb-section-head{display:flex!important;align-items:baseline!important;gap:16px!important}
+.mb-section-icon{font:italic 18px var(--v-editorial)!important;color:var(--v-accent)}
+.mb-section-title{font:600 clamp(27px,4vw,43px) var(--v-editorial)!important;letter-spacing:-.02em!important;text-transform:none!important}
+.proportion-card,.garment-card,.makeup-card,.quote-block,.reference-tile,.palette-swatch-block{border-radius:0!important;box-shadow:none!important}
+.mosaic{gap:6px!important}
+.mosaic-item{border-radius:0!important;overflow:hidden;position:relative}
+.mosaic-item img{filter:grayscale(.55) contrast(1.12) sepia(.14)!important;transition:filter .35s ease,transform .5s ease}
+.mosaic-item:hover img{filter:grayscale(.1) contrast(1.08)!important;transform:scale(1.025)}
+.mosaic-cap{font:8px var(--v-body)!important;letter-spacing:.13em!important;text-transform:uppercase!important}
+.result-actions button{border-radius:0!important}
+.topbar{background:var(--v-paper)!important;backdrop-filter:none!important;border-bottom:1px solid var(--v-ink)!important}
+.topbar::after{content:"FIELD NOTES  /  PERSONAL ARCHIVE";font:8px var(--v-body);letter-spacing:.14em;color:var(--v-muted)}
+.shell{max-width:620px!important;border-inline:1px solid var(--v-rule)!important}
+.scroll-area{background:var(--v-paper)!important}
+.home-hero{border-radius:0!important;background:var(--v-ink)!important;box-shadow:none!important}
+.home-hero::before{display:none!important}
+.home-hero::after{content:"V";font:150px var(--v-display)!important;color:rgba(255,255,255,.08)!important}
+.stat-card,.card,.plan-task,.next-task-card{border-radius:0!important;box-shadow:none!important;border:1px solid var(--v-rule)!important;background:var(--v-paper-light)!important}
+.stat-card::before{display:none!important}
+.bottom-nav{background:var(--v-paper)!important;backdrop-filter:none!important;border-top:1px solid var(--v-ink)!important;box-shadow:none!important}
+.nav-btn .nav-icon{display:none!important}
+.nav-btn .nav-label{font:8px var(--v-body)!important;letter-spacing:.12em!important;text-transform:uppercase}
+.top,.layout{background:transparent!important}
+.story{border-radius:0!important;box-shadow:none!important}
+.story-title{font:400 clamp(50px,7vw,88px)/.88 var(--v-display)!important}
+.v-colophon{display:block;padding:20px var(--v-gutter);border-top:1px solid var(--v-ink);font:8px var(--v-body);letter-spacing:.16em;text-transform:uppercase;color:var(--v-muted)}
+@media(min-width:768px){
+ body:has(.progress-wrap) main{display:grid;grid-template-columns:minmax(190px,.32fr) minmax(0,1fr);column-gap:clamp(30px,5vw,90px);align-items:start}
+ body:has(.progress-wrap) .progress-wrap{grid-column:1}
+ body:has(.progress-wrap) #gender-screen,body:has(.progress-wrap) #quiz-wrap,body:has(.progress-wrap) #selfie-wrap{grid-column:2}
+ body:has(.progress-wrap) #result-wrap{grid-column:1/-1}
+}
+@media(max-width:767px){
+ nav{min-height:58px!important;padding:10px 18px!important}
+ nav::after{font-size:7px;max-width:120px;text-align:right}
+ main{padding:28px 18px 60px!important}
+ .progress-wrap{position:relative!important;top:auto!important;margin:0 0 20px!important;padding:12px 0!important;border-bottom:1px solid var(--v-rule)}
+ .progress-wrap::before{margin-bottom:8px}
+ #gender-screen,#quiz-wrap,#selfie-wrap{grid-column:1!important}
+ #result-wrap{grid-column:1!important}
+ .gender-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .gender-opt{padding:18px 7px!important}
+ .gender-name{font-size:8px!important}
+ .section-intro,.gender-screen{padding:18px 0 26px!important}
+ .section-title{font-size:clamp(36px,10vw,52px)!important}
+ .question-block{padding:18px 0 22px!important}
+ .opt-grid.cols-2{grid-template-columns:1fr 1fr!important}
+ .opt{padding:12px 9px!important}
+ .opt-name{font-size:16px!important}
+ .mb-cover{min-height:320px!important;padding:24px!important}
+ .mb-cover-name{font-size:clamp(46px,13vw,70px)!important}
+ .mb-section{padding:20px 0!important}
+ .mosaic{grid-template-columns:1fr 1fr!important}
+ .mosaic-item:first-child{grid-column:1/-1}
+ .topbar::after{font-size:7px}
+}
+@media(prefers-reduced-motion:reduce){.mosaic-item img{transition:none!important}}
