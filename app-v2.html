@@ -2267,10 +2267,10 @@ JSON exacto a devolver:
 }
 
 function venusNeedsTieBreak(){
-  const h=answers.height, sh=answers.shoulders, t=answers.texture, w=answers.waist;
-  const sharpSignals=(h==='tall'?1:0)+(sh==='wide-sh'||sh==='straight'?1:0)+(t==='sharp'?1:0);
-  const softSignals=(t==='soft'?2:0)+(w==='yes'?1:0)+(sh==='balanced'?1:0);
-  return Math.abs(sharpSignals-softSignals)<=1 && !(h==='petite'&&t==='compact');
+  if(answers.kibbeTie)return false;
+  const scores=calcKibbeScores();
+  const ranked=Object.values(scores).sort((a,b)=>b-a);
+  return ranked.length>1 && ranked[0]>0 && ranked[0]-ranked[1]<=1;
 }
 function venusShowTieBreak(){
  const host=document.getElementById('quiz-wrap');
@@ -2301,23 +2301,29 @@ function venusResultExplanation(){
 /* ═══════════════════════════════════════════════════════════
    RESULT ENGINE
 ═══════════════════════════════════════════════════════════ */
-function calcKibbe() {
-  const h  = answers['height']    || 'medium';
-  const sh = answers['shoulders'] || 'straight';
-  const w  = answers['waist']     || 'slight';
-  const t  = answers['texture']   || 'mix';
-  if (h==='tall'&&(sh==='straight'||sh==='wide-sh')&&t==='sharp')
-    return 'dramatic';
-  if (h==='tall'&&t==='soft') return 'soft-dramatic';
-  if (h==='petite'&&t==='compact') return 'gamine';
-  if (h==='petite'&&t==='soft') return 'soft-gamine';
-  if (sh==='balanced'&&w==='yes') return 'soft-classic';
-  if (sh==='balanced'&&w!=='yes') return 'dramatic-classic';
-  if (t==='soft'&&w==='yes') return 'romantic';
-  if (t==='soft') return 'theatrical-romantic';
-  if (sh==='wide-sh'&&t!=='sharp') return 'flamboyant-natural';
-  if (sh==='wide-sh') return 'soft-natural';
-  return 'soft-classic';
+function calcKibbeScores(){
+ const h=answers.height,sh=answers.shoulders,w=answers.waist,t=answers.texture;
+ const score={dramatic:0,'soft-dramatic':0,'flamboyant-natural':0,'soft-natural':0,'dramatic-classic':0,'soft-classic':0,gamine:0,'soft-gamine':0,romantic:0,'theatrical-romantic':0};
+ if(h==='tall'){score.dramatic+=2;score['soft-dramatic']+=2;score['flamboyant-natural']+=1}
+ if(h==='petite'){score.gamine+=2;score['soft-gamine']+=2}
+ if(sh==='wide-sh'){score['flamboyant-natural']+=2;score['soft-natural']+=2;score['soft-dramatic']+=1}
+ if(sh==='straight'){score.dramatic+=1;score['dramatic-classic']+=1}
+ if(sh==='balanced'){score['soft-classic']+=2;score['dramatic-classic']+=2}
+ if(sh==='wide-hip'){score.romantic+=1;score['soft-gamine']+=1}
+ if(w==='yes'){score.romantic+=2;score['theatrical-romantic']+=1;score['soft-classic']+=1;score['soft-gamine']+=1}
+ if(w==='no'){score.dramatic+=1;score['dramatic-classic']+=1}
+ if(t==='sharp'){score.dramatic+=2;score['dramatic-classic']+=1;score['theatrical-romantic']+=1;score.gamine+=1}
+ if(t==='soft'){score.romantic+=2;score['soft-dramatic']+=2;score['soft-natural']+=1;score['soft-gamine']+=2;score['theatrical-romantic']+=2}
+ if(t==='mix'){score['soft-classic']+=1;score['flamboyant-natural']+=1;score['dramatic-classic']+=1;score.gamine+=1}
+ if(t==='compact'){score.gamine+=2;score['soft-gamine']+=1}
+ if(answers.kibbeTie==='defined'){score.dramatic+=2;score['dramatic-classic']+=1;score['flamboyant-natural']+=1}
+ if(answers.kibbeTie==='soft'){score.romantic+=2;score['soft-gamine']+=1;score['soft-dramatic']+=1}
+ if(answers.kibbeTie==='mixed'){score['soft-classic']+=1;score['dramatic-classic']+=1}
+ return score;
+}
+function calcKibbe(){
+ const scores=calcKibbeScores();
+ return Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];
 }
 function calcSeason() {
   const sk = answers['skin']      || 'medium';
