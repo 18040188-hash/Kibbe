@@ -534,3 +534,33 @@ button,.btn,.btn-primary,.btn-next,.gender-start,.reference-btn,.btn-wine,.btn-s
  .journal-main>.spread,.departments,.department-card,.section-intro,.question-block,.mb-cover,.mb-section,.story,.cover-black h1,.ticker-strip{animation:none!important}
  .mosaic-item:nth-child(2),.mosaic-item:nth-child(3){transform:none}
 }
+
+
+/* Editorial image plates inside the tools, not just on the cover */
+.gender-screen::before{
+ content:"";display:block;width:100%;height:clamp(150px,23vw,245px);margin:0 0 26px;
+ background:
+  linear-gradient(115deg,rgba(229,43,80,.22),rgba(40,75,232,.18)),
+  url("https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1500&q=88") center 38%/cover;
+ border:1px solid var(--v-ink);box-shadow:8px 8px 0 var(--v-acid);
+ filter:saturate(1.1) contrast(1.08);
+}
+.shell .section.active::before{
+ content:"";display:block;height:104px;margin:0 0 18px;
+ background:
+  linear-gradient(90deg,rgba(229,43,80,.28),rgba(40,75,232,.15)),
+  url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=82") center 42%/cover;
+ border:1px solid var(--v-ink);box-shadow:5px 5px 0 var(--v-fuchsia);
+}
+.layout>section:first-child::before{
+ content:"";display:block;height:150px;margin-bottom:24px;
+ background:
+  linear-gradient(120deg,rgba(229,43,80,.2),rgba(40,75,232,.15)),
+  url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85") center/cover;
+ border:1px solid var(--v-ink);box-shadow:7px 7px 0 var(--v-acid);
+}
+@media(max-width:767px){
+ .gender-screen::before{height:160px;margin-bottom:20px}
+ .shell .section.active::before{height:82px}
+ .layout>section:first-child::before{height:120px}
+}
