@@ -938,6 +938,12 @@ main {
 .venus-confidence-track{height:8px;background:#ddd4c9;margin:10px 0;overflow:hidden}
 .venus-confidence-track i{display:block;height:100%;background:#284be8}
 .venus-confidence small{font-size:10px;line-height:1.5;color:#514a4c}
+</style><style>
+.opt[data-question="reaction"] .opt-visual{width:100%;height:42px;display:flex;align-items:center;justify-content:center}
+.opt[data-question="reaction"] .opt-visual::before{content:"";display:block;width:100%;height:24px;background:linear-gradient(90deg,#e8c9b5 0 25%,#d9a5b5 25% 50%,#d9d5ed 50% 75%,#f0df9d 75%);border:1px solid rgba(0,0,0,.25)}
+.opt[data-question="reaction"]:nth-child(2) .opt-visual::before{background:linear-gradient(90deg,#f5e6c8 0 25%,#f4b4c8 25% 50%,#c5d8f4 50% 75%,#e9e7a5 75%)}
+.opt[data-question="reaction"]:nth-child(3) .opt-visual::before{background:linear-gradient(90deg,#e8c9b5 0 25%,#f0b0b4 25% 50%,#7e2f48 50% 75%,#3150a0 75%)}
+.opt[aria-pressed="true"]{outline:2px solid #17131b;outline-offset:2px}
 </style></head>
 <body>
 
@@ -1813,7 +1819,7 @@ function renderQuestion() {
 
     if (isH) {
       html += `
-        <div class="opt horizontal${sel}"
+        <div class="opt horizontal${sel}" data-question="${q.id}" aria-pressed="${answers[q.id] === opt.id}"
           onclick="selectOpt('${q.id}','${opt.id}')"
           role="button" tabindex="0">
           <div class="opt-visual">${vis}</div>
@@ -1824,7 +1830,7 @@ function renderQuestion() {
         </div>`;
     } else {
       html += `
-        <div class="opt${sel}"
+        <div class="opt${sel}" data-question="${q.id}" aria-pressed="${answers[q.id] === opt.id}"
           onclick="selectOpt('${q.id}','${opt.id}')"
           role="button" tabindex="0">
           <div class="opt-visual">${vis}</div>
