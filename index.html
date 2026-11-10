@@ -1,317 +1,158 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VÉNUS — Tu estilo, escrito en las estrellas</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e9e6dc">
+<meta name="description" content="VÉNUS cruza silueta, color y expresión personal para ayudarte a construir un estilo propio.">
+<title>VÉNUS — Archivo de estilo personal</title>
+<link rel="stylesheet" href="styles.css">
 <style>
-:root {
---cream: #f6f0e8;
---black: #171516;
---wine: #641f38;
---plum: #40203f;
---pink: #d99ab4;
---lavender: #c7b6d9;
---gold: #c9a66b;
---white: #fffaf6;
+:root{--paper:#e9e6dc;--ink:#191816;--accent:#702b31;--rule:rgba(25,24,22,.3)}
+body{margin:0;background:var(--paper);color:var(--ink);overflow-x:hidden}
+a{text-decoration:none}
+.site-head{height:76px;padding:0 var(--v-gutter);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;border-bottom:1px solid var(--rule);position:relative;z-index:3}
+.site-mark{font:400 36px var(--v-display);letter-spacing:.02em}
+.site-nav{display:flex;gap:clamp(14px,3vw,42px);align-items:center}
+.site-nav a,.head-index{font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+.head-index{text-align:right}
+.hero{max-width:var(--v-max);margin:auto;padding:clamp(44px,7vw,100px) var(--v-gutter) 70px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(260px,.92fr);gap:clamp(22px,4vw,70px);align-items:center;min-height:690px}
+.hero-copy{position:relative;z-index:1}
+.kicker,.caption,.micro,.section-no{font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+.kicker{display:flex;gap:12px;align-items:center;margin-bottom:25px}
+.kicker:before{content:"";width:34px;border-top:1px solid var(--accent)}
+.hero h1{font:600 clamp(58px,9vw,132px)/.79 var(--v-editorial);letter-spacing:-.055em;margin:0;max-width:780px}
+.hero h1 span{display:block}
+.hero h1 .blackletter{font:400 .76em/.92 var(--v-display);letter-spacing:0;margin-left:clamp(18px,7vw,110px);color:var(--accent)}
+.hero-deck{max-width:440px;margin:32px 0 28px 9%;font-size:14px;line-height:1.85;color:var(--v-muted)}
+.hero-actions{display:flex;align-items:center;gap:22px;margin-left:9%;flex-wrap:wrap}
+.action-main{background:var(--ink);color:var(--v-white);padding:15px 22px;border:1px solid var(--ink);font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+.action-text{font-size:10px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--accent);padding:0 0 5px}
+.hero-art{position:relative;min-height:560px;display:grid;grid-template-columns:1fr .64fr;grid-template-rows:1fr .55fr;gap:10px;align-items:stretch}
+.image-main{grid-column:1/3;grid-row:1/3;position:relative;overflow:hidden;background:#aaa}
+.image-main img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:grayscale(.75) contrast(1.12);mix-blend-mode:multiply}
+.image-main:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(112,43,49,.14),transparent 58%);mix-blend-mode:multiply}
+.image-inset{position:absolute;z-index:2;width:43%;height:36%;right:-3%;bottom:8%;border:8px solid var(--paper);overflow:hidden;background:#a59b87}
+.image-inset img{width:100%;height:100%;object-fit:cover;filter:sepia(.42) contrast(1.1)}
+.art-caption{position:absolute;left:12px;bottom:12px;z-index:3;color:white;text-shadow:0 1px 5px #000;font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.art-index{position:absolute;top:14px;right:14px;z-index:3;color:white;font-size:10px;writing-mode:vertical-rl;letter-spacing:.14em}
+.ticker{border-block:1px solid var(--rule);padding:13px var(--v-gutter);display:flex;justify-content:space-between;gap:18px;overflow:hidden;white-space:nowrap;font:italic 500 18px var(--v-editorial)}
+.section{max-width:var(--v-max);margin:auto;padding:clamp(65px,9vw,130px) var(--v-gutter)}
+.section-head{display:grid;grid-template-columns:100px 1fr .7fr;gap:22px;align-items:start;border-top:1px solid var(--rule);padding-top:15px;margin-bottom:54px}
+.section-no{color:var(--accent);padding-top:9px}
+.section-head h2{font:600 clamp(42px,6.2vw,88px)/.88 var(--v-editorial);margin:0;max-width:800px}
+.section-head p{font-size:12px;line-height:1.8;color:var(--v-muted);max-width:290px;margin:6px 0 0 auto}
+.system-grid{display:grid;grid-template-columns:1fr 1.18fr .82fr;gap:12px;align-items:start}
+.system-piece{min-height:370px;padding:18px;border:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.system-piece:nth-child(2){margin-top:65px;min-height:430px;background:#ded9cb}
+.system-piece:nth-child(3){margin-top:18px;min-height:330px;background:#262522;color:#f5f2e9}
+.piece-no{font-size:9px;letter-spacing:.15em}
+.piece-title{font:600 clamp(35px,4vw,58px)/.9 var(--v-editorial);margin:0}
+.piece-copy{max-width:260px;font-size:12px;line-height:1.75}
+.piece-glyph{font:400 60px var(--v-display);text-align:right;color:var(--accent)}
+.system-piece:nth-child(3) .piece-glyph{color:#d3c7ad}
+.editorial-note{display:grid;grid-template-columns:1.2fr .8fr;gap:8%;align-items:center;margin-top:100px}
+.note-image{height:420px;position:relative;overflow:hidden;background:#b8b1a2}
+.note-image img{width:100%;height:100%;object-fit:cover;filter:sepia(.32) saturate(.72) contrast(1.08)}
+.note-copy{padding:30px 0}
+.note-copy h3{font:600 clamp(36px,5vw,66px)/.9 var(--v-editorial);margin:15px 0 24px}
+.note-copy p{font-size:13px;line-height:1.9;color:var(--v-muted);max-width:380px}
+.index-list{border-top:1px solid var(--rule)}
+.index-row{display:grid;grid-template-columns:80px 1fr auto;gap:15px;align-items:center;padding:20px 0;border-bottom:1px solid var(--rule)}
+.index-row .num{font-size:10px;color:var(--accent);letter-spacing:.12em}
+.index-row h3{font:600 clamp(26px,4vw,44px) var(--v-editorial);margin:0}
+.index-row a{font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.final-spread{background:var(--ink);color:var(--v-paper-light);padding:clamp(42px,7vw,90px) var(--v-gutter);display:grid;grid-template-columns:1.2fr .8fr;gap:35px;align-items:end}
+.final-spread h2{font:400 clamp(58px,9vw,126px)/.82 var(--v-display);margin:0}
+.final-spread p{font-size:12px;line-height:1.8;max-width:370px;color:#d2cbbd}
+.final-spread a{display:inline-block;margin-top:20px;padding:14px 20px;border:1px solid #d2cbbd;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.site-foot{padding:24px var(--v-gutter);display:grid;grid-template-columns:1fr auto 1fr;gap:15px;border-top:1px solid var(--rule);font-size:9px;letter-spacing:.13em;text-transform:uppercase}
+.site-foot span:nth-child(2){text-align:center}.site-foot span:last-child{text-align:right}
+@media(max-width:767px){
+ .site-head{height:64px;grid-template-columns:1fr auto}.site-nav{gap:12px}.site-nav a{font-size:8px}.head-index{display:none}
+ .hero{min-height:0;padding-top:55px;grid-template-columns:minmax(0,1fr) minmax(105px,.55fr);gap:12px;align-items:center}
+ .hero h1{font-size:clamp(49px,12vw,82px);line-height:.83}
+ .hero h1 .blackletter{margin-left:8px;font-size:.82em}
+ .hero-deck,.hero-actions{margin-left:0;grid-column:1/3}
+ .hero-deck{font-size:12px;margin-top:20px;max-width:320px}
+ .hero-art{min-height:360px;grid-column:2;grid-row:1/2;margin-top:30px}
+ .image-inset{width:56%;height:30%;right:-8%;border-width:5px}
+ .hero-copy{grid-column:1;grid-row:1}
+ .hero-actions{grid-row:2;gap:16px}
+ .ticker{font-size:15px}
+ .section{padding-block:72px}
+ .section-head{grid-template-columns:42px 1fr;gap:12px;margin-bottom:32px}
+ .section-head p{grid-column:2;margin:0;max-width:300px}
+ .section-head h2{font-size:clamp(40px,10vw,65px)}
+ .system-grid{grid-template-columns:1fr 1fr;gap:8px}
+ .system-piece{min-height:250px;padding:13px}
+ .system-piece:nth-child(2){margin-top:35px;min-height:280px}
+ .system-piece:nth-child(3){grid-column:1/3;margin:0;min-height:200px}
+ .piece-title{font-size:34px}.piece-copy{font-size:11px}
+ .editorial-note{grid-template-columns:1fr .8fr;gap:16px;margin-top:60px}
+ .note-image{height:280px}.note-copy{padding:0}.note-copy h3{font-size:34px}
+ .note-copy p{font-size:11px}
+ .index-row{grid-template-columns:36px 1fr auto;gap:8px;padding:16px 0}
+ .index-row h3{font-size:26px}.index-row a{font-size:8px}
+ .final-spread{grid-template-columns:1fr;gap:20px}
+ .final-spread h2{font-size:70px}
+ .site-foot{grid-template-columns:1fr 1fr}.site-foot span:nth-child(2){text-align:right}.site-foot span:last-child{grid-column:1/3;text-align:left}
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { background: var(--cream); color: var(--black); font-family: "DM Sans", sans-serif; overflow-x: hidden; }
-nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(246,240,232,.82); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(23,21,22,.08); }
-.logo { font-family: "Playfair Display", serif; font-size: 25px; font-weight: 600; letter-spacing: 5px; }
-.nav-links { display: flex; gap: 30px; list-style: none; }
-.nav-links a { color: var(--black); text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
-.nav-button { border: 1px solid var(--black); padding: 11px 20px; border-radius: 30px; background: transparent; cursor: pointer; transition: .3s; }
-.nav-button:hover { background: var(--black); color: white; }
-.hero { min-height: 100vh; padding: 150px 7% 80px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 50px; position: relative; overflow: hidden; }
-.hero::before { content: ""; position: absolute; width: 600px; height: 600px; background: var(--pink); border-radius: 50%; filter: blur(80px); opacity: .35; right: -150px; top: 80px; z-index: -1; }
-.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; color: var(--wine); font-weight: 700; }
-h1 { font-family: "Playfair Display", serif; font-size: clamp(55px, 7vw, 105px); line-height: .88; font-weight: 500; letter-spacing: -4px; }
-h1 em { color: var(--wine); }
-.hero-text { max-width: 500px; margin-top: 35px; font-size: 18px; line-height: 1.6; color: #514a4c; }
-.hero-buttons { display: flex; gap: 15px; margin-top: 35px; flex-wrap: wrap; }
-.primary-btn, .secondary-btn, .test-btn { padding: 16px 27px; border-radius: 50px; font-weight: 700; cursor: pointer; border: none; font-size: 14px; transition: .3s; text-decoration: none; display: inline-flex; align-items: center; }
-.primary-btn { background: var(--black); color: white; }
-.primary-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,.18); }
-.secondary-btn { background: transparent; border: 1px solid #aaa; color: var(--black); }
-.secondary-btn:hover { border-color: var(--black); }
-.test-btn { background: var(--wine); color: white; }
-.test-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(100,31,56,.3); }
-.hero-visual { position: relative; height: 650px; }
-.fashion-card { position: absolute; width: 310px; height: 430px; border-radius: 180px 180px 20px 20px; overflow: hidden; box-shadow: 0 25px 70px rgba(0,0,0,.15); }
-.card-main { right: 10%; top: 60px; background: linear-gradient(140deg, rgba(60,20,45,.1), rgba(60,20,45,.6)), url("https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=85") center/cover; }
-.card-small { width: 180px; height: 240px; right: 58%; top: 360px; border-radius: 100px 100px 15px 15px; background: url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=500&q=85") center/cover; transform: rotate(-8deg); }
-.floating { position: absolute; padding: 12px 18px; background: rgba(255,250,246,.85); backdrop-filter: blur(10px); border-radius: 30px; font-size: 13px; box-shadow: 0 8px 25px rgba(0,0,0,.1); }
-.tag-kibbe { top: 50px; left: 5%; }
-.tag-color { top: 270px; right: 0; }
-.tag-venus { bottom: 80px; left: 20%; }
-.marquee { background: var(--black); color: white; padding: 16px 0; overflow: hidden; white-space: nowrap; }
-.marquee-inner { display: inline-block; animation: scroll 18s linear infinite; font-family: "Playfair Display", serif; font-size: 22px; font-style: italic; }
-@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.intro { padding: 140px 8%; text-align: center; max-width: 1100px; margin: auto; }
-.section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--wine); margin-bottom: 20px; }
-.intro h2, .section-heading { font-family: "Playfair Display", serif; font-size: clamp(40px, 5vw, 70px); font-weight: 500; line-height: 1; }
-.intro p { max-width: 720px; margin: 30px auto; font-size: 17px; line-height: 1.7; color: #625b5c; }
-.system { padding: 100px 7%; background: var(--white); }
-.system-header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 60px; }
-.system-header p { max-width: 350px; line-height: 1.6; color: #625b5c; }
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.system-card { min-height: 430px; padding: 35px; border-radius: 25px; display: flex; flex-direction: column; justify-content: space-between; transition: .4s; }
-.system-card:hover { transform: translateY(-10px) rotate(-1deg); }
-.kibbe { background: #ead8dc; }
-.color { background: #d7d0e3; }
-.astro { background: #29202d; color: white; }
-.card-number { font-size: 12px; letter-spacing: 2px; }
-.system-card h3 { font-family: "Playfair Display", serif; font-size: 42px; font-weight: 500; }
-.system-card p { line-height: 1.6; font-size: 15px; opacity: .8; }
-.card-symbol { font-size: 70px; font-family: "Playfair Display", serif; text-align: right; }
-.kibbe-guide { padding: 120px 7%; background: var(--cream); }
-.guide-header { max-width: 760px; margin-bottom: 45px; }
-.guide-header p { margin-top: 22px; color: #625b5c; line-height: 1.7; }
-.kibbe-families { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-.family { min-height: 210px; padding: 22px; border: 1px solid rgba(23,21,22,.12); border-radius: 22px; background: rgba(255,250,246,.72); display: flex; flex-direction: column; justify-content: space-between; transition: .3s; }
-.family:hover { transform: translateY(-6px); }
-.family-line { height: 72px; position: relative; display: flex; align-items: center; justify-content: center; }
-.line-shape { display: block; width: 76px; height: 10px; border-radius: 999px; background: var(--wine); }
-.vertical .line-shape { transform: rotate(90deg); height: 8px; width: 64px; }
-.width .line-shape { width: 82px; }
-.balance .line-shape { width: 56px; }
-.petite .line-shape { width: 38px; height: 38px; border-radius: 50%; }
-.curve .line-shape { width: 62px; height: 24px; border-radius: 50%; }
-.family h4 { font-family: "Playfair Display", serif; font-size: 24px; font-weight: 500; }
-.family p { margin-top: 7px; font-size: 12px; line-height: 1.5; color: #625b5c; }
-.family small { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--wine); }
-.type-note { margin-top: 28px; padding: 18px 20px; border-left: 3px solid var(--wine); background: rgba(255,250,246,.7); font-size: 13px; line-height: 1.6; color: #514a4c; }
-.experience { padding: 140px 7%; }
-.experience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-.experience-copy p { margin-top: 30px; line-height: 1.7; color: #625b5c; max-width: 500px; }
-.steps { margin-top: 40px; display: flex; flex-direction: column; gap: 25px; }
-.step { display: flex; gap: 20px; align-items: flex-start; }
-.step-num { width: 38px; height: 38px; border-radius: 50%; background: var(--wine); color: white; display: grid; place-items: center; flex-shrink: 0; }
-.step h4 { margin-bottom: 5px; }
-.step p { margin: 0; font-size: 14px; }
-.phone-wrapper { display: flex; justify-content: center; }
-.phone { width: 290px; height: 590px; background: #171516; border: 8px solid #171516; border-radius: 40px; padding: 10px; box-shadow: 0 30px 70px rgba(0,0,0,.2); transform: rotate(4deg); }
-.phone-screen { height: 100%; border-radius: 30px; overflow: hidden; background: var(--cream); padding: 25px 18px; }
-.phone-logo { font-family: "Playfair Display", serif; letter-spacing: 3px; text-align: center; margin-bottom: 25px; }
-.profile-circle { width: 100px; height: 100px; border-radius: 50%; margin: auto; background: url("https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80") center/cover; }
-.result-title { text-align: center; font-family: "Playfair Display", serif; font-size: 27px; margin-top: 18px; }
-.result-sub { text-align: center; font-size: 11px; margin-top: 6px; color: var(--wine); letter-spacing: 1px; }
-.result-box { margin-top: 20px; padding: 15px; border-radius: 15px; background: white; font-size: 12px; line-height: 1.5; }
-.palette { display: flex; gap: 7px; margin-top: 12px; }
-.dot { width: 25px; height: 25px; border-radius: 50%; }
-.dot:nth-child(1) { background: #641f38; }
-.dot:nth-child(2) { background: #40203f; }
-.dot:nth-child(3) { background: #8c4f58; }
-.dot:nth-child(4) { background: #c9a66b; }
-.dot:nth-child(5) { background: #171516; }
-.cta { margin: 7%; padding: 110px 30px; background: var(--black); color: white; text-align: center; border-radius: 30px; }
-.cta h2 { font-family: "Playfair Display", serif; font-size: clamp(50px, 7vw, 95px); line-height: .9; font-weight: 500; }
-.cta p { max-width: 500px; margin: 30px auto; color: #c9c0c3; line-height: 1.6; }
-.cta-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
-.cta button, .cta a { padding: 16px 28px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; transition: .3s; }
-.cta .cta-primary { background: white; color: var(--black); }
-.cta .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255,255,255,.2); }
-.cta .cta-test { background: var(--wine); color: white; }
-.cta .cta-test:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(100,31,56,.4); }
-footer { padding: 30px 7%; display: flex; justify-content: space-between; font-size: 12px; border-top: 1px solid rgba(0,0,0,.1); }
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
-.modal.active { display: flex; }
-.modal-content { position: relative; max-width: 520px; width: 100%; background: var(--cream); padding: 55px; border-radius: 25px; text-align: center; }
-.modal-content h2 { font-family: "Playfair Display", serif; font-size: 50px; line-height: .95; font-weight: 500; }
-.modal-content p { margin: 25px auto; color: #625b5c; line-height: 1.6; }
-.close { position: absolute; right: 20px; top: 15px; border: none; background: none; font-size: 30px; cursor: pointer; }
-.email-input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #bbb; background: white; font-family: inherit; }
-.modal-submit { margin-top: 12px; width: 100%; padding: 15px; border: none; border-radius: 10px; background: var(--black); color: white; font-weight: 700; cursor: pointer; }
-.error { color: var(--wine); font-size: 12px; margin-top: 8px; display: none; }
-.success { display: none; }
-@media (max-width: 900px) {
-.hero, .experience-grid { grid-template-columns: 1fr; }
-.hero-visual { height: 540px; }
-.cards { grid-template-columns: 1fr; }
-.kibbe-families { grid-template-columns: 1fr 1fr; }
-.system-header { flex-direction: column; align-items: flex-start; gap: 25px; }
-.nav-links { display: none; }
+@media(min-width:768px) and (max-width:1100px){
+ .hero{min-height:610px}.hero-art{min-height:460px}
+ .system-grid{grid-template-columns:1fr 1fr}.system-piece:nth-child(3){grid-column:1/3;margin:0;min-height:250px}
 }
-@media (max-width: 560px) {
-.hero { padding: 130px 6% 60px; }
-h1 { font-size: 58px; }
-.hero-buttons { flex-direction: column; }
-.fashion-card.card-main { right: 0; width: 260px; height: 370px; }
-.card-small { left: 0; right: auto; top: 330px; }
-.tag-color { right: -10px; }
-.intro, .experience, .kibbe-guide { padding: 90px 6%; }
-.kibbe-families { grid-template-columns: 1fr; }
-.phone { transform: none; }
-.modal-content { padding: 45px 25px; }
-footer { flex-direction: column; gap: 10px; }
-}
-/* VÉNUS editorial identity */
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;1,6..96,500&family=DM+Sans:wght@400;500;600;700&display=swap');
-:root{--cream:#f1ebdd;--black:#292720;--wine:#6b382f;--plum:#494b38;--pink:#c9a18d;--lavender:#b8b09b;--gold:#b99760;--white:#faf6ee;--olive:#747653;--line:rgba(41,39,32,.18)}
-html{scroll-behavior:smooth}body{background:var(--cream);color:var(--black);font-family:'DM Sans',sans-serif}
-nav{padding:18px 6%;background:rgba(241,235,221,.96);backdrop-filter:none;border-bottom:1px solid var(--line)}
-.logo,h1,.intro h2,.section-heading,.system-card h3,.modal-content h2{font-family:'Bodoni Moda',serif}
-.logo{font-size:27px;letter-spacing:5px}.nav-links{gap:34px}.nav-links a{font-size:11px;letter-spacing:1.5px}
-.nav-button{border-radius:0;border-color:var(--black);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase}
-.hero{min-height:780px;padding:150px 8% 90px;grid-template-columns:1.05fr .95fr;gap:5%;background:var(--cream)}.hero::before{display:none}
-.eyebrow,.section-label,.card-number{letter-spacing:2.4px}
-h1{font-size:clamp(58px,7.5vw,108px);line-height:.91;letter-spacing:-3px;font-weight:500;max-width:690px}h1 em{color:var(--wine);font-weight:500}
-.hero-text{font-size:16px;line-height:1.8;max-width:480px;color:#615b50}.hero-buttons{gap:12px}
-.primary-btn,.secondary-btn,.test-btn{border-radius:0;padding:17px 24px;font-size:11px;letter-spacing:1px;text-transform:uppercase}
-.primary-btn{background:var(--black)}.test-btn{background:var(--wine)}.primary-btn:hover,.test-btn:hover{transform:translateY(-2px);box-shadow:none}
-.secondary-btn{border-color:var(--line)}.hero-visual{height:620px}
-.fashion-card{border-radius:0;box-shadow:14px 14px 0 rgba(116,118,83,.18)}.card-main{right:8%;top:42px;width:300px;height:445px}
-.card-small{border-radius:0;width:175px;height:225px;right:59%;top:350px}
-.floating{border-radius:0;background:var(--white);backdrop-filter:none;box-shadow:4px 4px 0 rgba(41,39,32,.12);font-size:11px;letter-spacing:.4px}
-.marquee{background:var(--black);padding:13px 0}.marquee-inner{font-family:'Bodoni Moda',serif;font-size:20px;letter-spacing:.5px}
-.intro{padding:130px 8%;max-width:1000px}.intro h2,.section-heading{font-size:clamp(42px,5.4vw,72px);line-height:1.02}
-.intro p{font-size:15px;line-height:1.9;color:#615b50}
-.system{padding:100px 8%;background:#e8e0d0}.system-header p,.guide-header p{font-size:14px;color:#615b50;line-height:1.8}
-.cards{gap:14px}.system-card{min-height:390px;padding:28px;border-radius:0;transition:transform .3s}.system-card:hover{transform:translateY(-5px)}
-.kibbe{background:#d8c5b8}.color{background:#c6c3ad}.astro{background:#34352c;color:#f8f2e8}
-.system-card h3{font-size:39px}.system-card p{font-size:13px;line-height:1.8}.card-symbol{font-size:62px}
-.kibbe-guide{padding:110px 8%;background:var(--cream)}.family{border-radius:0;background:#faf6ee;border-color:var(--line)}
-.family:hover{transform:translateY(-4px)}.line-shape{background:var(--wine)}
-.cta{background:#34352c;color:var(--cream)}.cta-primary,.cta-test{border-radius:0;text-transform:uppercase;letter-spacing:1px;font-size:11px}
-footer{border-top:1px solid var(--line);background:var(--cream);color:#625b50;font-size:11px;letter-spacing:1px}
-.modal-content{border-radius:0;background:var(--cream);border:1px solid var(--line)}.email-input{border-radius:0;background:var(--white);border:1px solid var(--line)}
-@media(max-width:800px){nav{padding:15px 5%}.nav-links{gap:14px}.nav-links a{font-size:9px}.hero{min-height:auto;padding:125px 7% 60px;grid-template-columns:1fr;gap:28px}h1{font-size:clamp(54px,13vw,82px);letter-spacing:-2px}.hero-text{font-size:14px;margin-top:24px}.hero-visual{height:480px;max-width:520px;width:100%;margin:auto}.card-main{width:58%;height:340px;right:8%;top:20px}.card-small{width:34%;height:190px;right:58%;top:260px}.tag-kibbe{top:20px}.tag-color{top:230px}.tag-venus{bottom:25px}.system-header{display:block}.system-header p{margin-top:20px}.cards{grid-template-columns:1fr}.system-card{min-height:270px}.kibbe-families{grid-template-columns:repeat(2,1fr)}.intro{padding:90px 7%}}
-@media(max-width:480px){.nav-links{display:none}.hero-visual{height:400px}.card-main{height:300px}.card-small{top:230px;height:150px}.floating{padding:9px 12px;font-size:10px}}</style>
+@media(min-width:1200px){.hero-art{min-height:650px}.system-piece{min-height:420px}}
+</style>
 </head>
 <body>
-
-<nav>
-  <div class="logo">VÉNUS</div>
-  <ul class="nav-links">
-    <li><a href="#sistema">Sistema</a></li>
-    <li><a href="#como">Cómo funciona</a></li>
-    <li><a href="#resultado">Resultado</a></li>
-  </ul>
-  <button class="nav-button" onclick="openModal()">Entrar</button>
-</nav>
-
-<section class="hero">
-  <div class="hero-copy">
-    <div class="eyebrow">Your style. Your rules. ✦</div>
-    <h1>Tu estilo<br>no debería<br><em>ser genérico.</em></h1>
-    <p class="hero-text">Descubre qué prendas, colores, siluetas y estéticas realmente funcionan contigo combinando Kibbe, colorimetría y astrología.</p>
-    <div class="hero-buttons">
-      <button class="primary-btn" onclick="openModal()">Descubrir mi estilo →</button>
-      <a class="test-btn" href="test.html">Hacer el test ✦</a>
-      <button class="secondary-btn" onclick="document.querySelector('#como').scrollIntoView()">¿Cómo funciona?</button>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="fashion-card card-main"></div>
-    <div class="fashion-card card-small"></div>
-    <div class="floating tag-kibbe">✦ Soft Gamine</div>
-    <div class="floating tag-color">◉ Deep Autumn</div>
-    <div class="floating tag-venus">♡ Venus in Cancer</div>
-  </div>
+<a class="v-skip" href="#contenido">Saltar al contenido</a>
+<header class="site-head">
+ <a class="site-mark" href="index.html" aria-label="VÉNUS, inicio">VÉNUS</a>
+ <nav class="site-nav" aria-label="Navegación principal">
+  <a href="#sistema">Sistema</a><a href="#archivo">Archivo</a><a href="perfil.html">Mi perfil</a>
+ </nav>
+ <div class="head-index">Estudio de identidad · Nº 001</div>
+</header>
+<main id="contenido">
+<section class="hero" aria-labelledby="hero-title">
+ <div class="hero-copy">
+  <div class="kicker">Archivo de estilo personal / CDMX — 2026</div>
+  <h1 id="hero-title"><span>Vestirse</span><span class="blackletter">es elegir</span><span>una forma</span><span>de existir.</span></h1>
+  <p class="hero-deck">Silueta, color y expresión. Tres lenguajes para leer tu imagen sin convertirla en una fórmula que te encierre.</p>
+  <div class="hero-actions"><a class="action-main" href="app-v2.html">Comenzar el test ↗</a><a class="action-text" href="#sistema">Explorar el método</a></div>
+ </div>
+ <figure class="hero-art">
+  <div class="image-main"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=85" alt="Editorial de moda con silueta estructurada y movimiento de tela"><span class="art-index">PLATE 001 / FORM</span><figcaption class="art-caption">Estudio de forma · Archivo visual VÉNUS</figcaption></div>
+  <div class="image-inset"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=85" alt="Detalle de prendas y estilismo en una composición editorial"></div>
+ </figure>
 </section>
-
-<div class="marquee"><div class="marquee-inner">KIBBE ✦ COLORIMETRÍA ✦ VENUS ✦ LILITH ✦ ESTILO PERSONAL ✦ KIBBE ✦ COLORIMETRÍA ✦ VENUS ✦ LILITH ✦ ESTILO PERSONAL ✦</div></div>
-
-<section class="intro">
-  <div class="section-label">Not another personality test</div>
-  <h2>Porque tu outfit también<br>cuenta quién eres.</h2>
-  <p>Vestirte no es solo elegir prendas bonitas: es decidir qué líneas, colores y códigos visuales quieres comunicar. VÉNUS convierte esos criterios en una guía para que comprar, combinar y construir looks deje de sentirse como adivinar. No te dicta una estética: te da un sistema para construir la tuya.</p>
+<div class="ticker" aria-label="Áreas de exploración"><span>KIBBE</span><span>COLOR</span><span>VENUS / LILITH</span><span>IDENTIDAD</span><span>ESTILO PROPIO</span></div>
+<section class="section" id="sistema">
+ <div class="section-head"><div class="section-no">01 / MÉTODO</div><h2>Tres lecturas.<br>Una identidad en movimiento.</h2><p>La imagen personal no es una etiqueta. Es una conversación entre cuerpo, color, contexto y deseo.</p></div>
+ <div class="system-grid">
+  <article class="system-piece"><div class="piece-no">01 — ESTRUCTURA</div><div><h3 class="piece-title">Kibbe</h3><p class="piece-copy">Líneas, proporciones y siluetas. Una lectura de cómo cae la ropa sobre tu estructura.</p></div><div class="piece-glyph" aria-hidden="true">K</div></article>
+  <article class="system-piece"><div class="piece-no">02 — COLOR</div><div><h3 class="piece-title">Colorimetría</h3><p class="piece-copy">Temperatura, profundidad y contraste para explorar una paleta que acompañe tu presencia.</p></div><div class="piece-glyph" aria-hidden="true">C</div></article>
+  <article class="system-piece"><div class="piece-no">03 — EXPRESIÓN</div><div><h3 class="piece-title">Venus / Lilith</h3><p class="piece-copy">Un lenguaje simbólico para explorar la estética que te atrae y cómo quieres expresarla.</p></div><div class="piece-glyph" aria-hidden="true">V</div></article>
+ </div>
+ <div class="editorial-note">
+  <figure class="note-image"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85" alt="Retrato editorial de moda con prendas de textura y silueta marcada"><figcaption class="art-caption">PLATE 002 / EXPRESSION</figcaption></figure>
+  <div class="note-copy"><div class="kicker">02 / Punto de partida</div><h3>No se trata de encajar. Se trata de leer tus propios códigos.</h3><p>VÉNUS combina herramientas de imagen con referencias culturales y estéticas. El resultado no es una regla universal: es un mapa para experimentar, elegir y construir criterio.</p></div>
+ </div>
 </section>
-
-<section class="system" id="sistema">
-  <div class="system-header">
-    <div>
-      <div class="section-label">The formula</div>
-      <h2 class="section-heading">Tres capas.<br>Una identidad.</h2>
-    </div>
-    <p>Tu estilo no cabe en una sola etiqueta. Por eso combinamos estructura, color y personalidad.</p>
-  </div>
-  <div class="cards">
-    <div class="system-card kibbe">
-      <div class="card-number">01 / SILUETA</div>
-      <div><h3>Kibbe</h3><p>Descubre las líneas, proporciones y siluetas que mejor acompañan tu estructura.</p></div>
-      <div class="card-symbol">♢</div>
-    </div>
-    <div class="system-card color">
-      <div class="card-number">02 / COLOR</div>
-      <div><h3>Colorimetría</h3><p>Encuentra tu paleta ideal para ropa, maquillaje, accesorios y cabello.</p></div>
-      <div class="card-symbol">◐</div>
-    </div>
-    <div class="system-card astro">
-      <div class="card-number">03 / CÓDIGOS</div>
-      <div><h3>Astrología</h3><p>Venus y Lilith funcionan como variables de dirección estética: traducimos tus placements en códigos de sensualidad, contraste, feminidad y actitud.</p></div>
-      <div class="card-symbol">☽</div>
-    </div>
-  </div>
+<section class="section" id="archivo">
+ <div class="section-head"><div class="section-no">02 / ÍNDICE</div><h2>Entra por donde<br>empieza tu curiosidad.</h2><p>Un archivo personal que puedes consultar, editar y llevar a tu propio ritmo.</p></div>
+ <div class="index-list">
+  <div class="index-row"><span class="num">01</span><h3>Test de estilo</h3><a href="app-v2.html">Abrir ↗</a></div>
+  <div class="index-row"><span class="num">02</span><h3>Tu perfil VÉNUS</h3><a href="perfil.html">Consultar ↗</a></div>
+  <div class="index-row"><span class="num">03</span><h3>Glow Up</h3><a href="glowup.html">Explorar ↗</a></div>
+  <div class="index-row"><span class="num">04</span><h3>Archivo visual</h3><a href="visual-test.html">Ver referencias ↗</a></div>
+ </div>
 </section>
-
-<section class="kibbe-guide">
-  <div class="guide-header">
-    <div class="section-label">Cómo leemos la silueta</div>
-    <h2 class="section-heading">Kibbe no es una medida.<br><em>Es una línea visual.</em></h2>
-    <p>En lugar de reducir el cuerpo a peso, talla o proporciones aisladas, VÉNUS observa cómo se combinan estructura, verticalidad, anchura, balance, petite y curva para orientar las líneas de la ropa.</p>
-  </div>
-  <div class="kibbe-families">
-    <div class="family vertical"><div class="family-line"><span class="line-shape"></span></div><div><small>Familia</small><h4>Dramatic</h4><p>D + SD · verticalidad y líneas alargadas.</p></div></div>
-    <div class="family width"><div class="family-line"><span class="line-shape"></span></div><div><small>Familia</small><h4>Natural</h4><p>FN + SN · amplitud y líneas relajadas.</p></div></div>
-    <div class="family balance"><div class="family-line"><span class="line-shape"></span></div><div><small>Familia</small><h4>Classic</h4><p>DC + SC · equilibrio con un sesgo definido.</p></div></div>
-    <div class="family petite"><div class="family-line"><span class="line-shape"></span></div><div><small>Familia</small><h4>Gamine</h4><p>FG + SG · escala compacta y líneas interrumpidas.</p></div></div>
-    <div class="family curve"><div class="family-line"><span class="line-shape"></span></div><div><small>Familia</small><h4>Romantic</h4><p>TR + R · curva y líneas suaves.</p></div></div>
-  </div>
-  <div class="type-note"><strong>Nota:</strong> el sistema actual de David Kibbe suele trabajarse con 10 Image Identities; los tres tipos "puros" de la clasificación original —Natural, Classic y Gamine— se consideran descontinuados en el enfoque actual.</div>
+<section class="final-spread">
+ <div><div class="kicker">03 / Tu siguiente página</div><h2>El estilo<br>es tuyo.</h2></div>
+ <div><p>No necesitas permiso para probar otra silueta, cambiar de paleta o contradecir tu propia estética. Empieza con una lectura. Después, hazla tuya.</p><a href="app-v2.html">Descubrir mi fórmula ↗</a></div>
 </section>
-
-<section class="experience" id="como">
-  <div class="experience-grid">
-    <div class="experience-copy">
-      <div class="section-label">Your algorithm</div>
-      <h2 class="section-heading">Tu estilo.<br>Pero con<br><em>data.</em></h2>
-      <p>Respondes unas preguntas, agregas tus datos y VÉNUS cruza los resultados para construir un perfil visual completamente personalizado.</p>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div><h4>Haz los tests</h4><p>Silueta + paleta + códigos astrológicos.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div><h4>Descubre tu fórmula</h4><p>Cruza estructura, color y códigos para detectar patrones.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div><h4>Construye tu aesthetic</h4><p>Recibes decisiones visuales: prendas, looks, makeup y cabello.</p></div></div>
-      </div>
-    </div>
-    <div class="phone-wrapper" id="resultado">
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="phone-logo">VÉNUS</div>
-          <div class="profile-circle"></div>
-          <div class="result-title">Romantic Rebel</div>
-          <div class="result-sub">SOFT GAMINE · DEEP AUTUMN · VENUS CANCER</div>
-          <div class="result-box"><strong>Your colors</strong><div class="palette"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-          <div class="result-box"><strong>Your silhouettes</strong><p>Waist definition · cropped jackets · playful details · structured curves</p></div>
-          <div class="result-box"><strong>Your codes</strong><p>Romantic · mysterious · playful · high contrast.</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cta">
-  <h2>Stop dressing<br>for everyone else.</h2>
-  <p>Tu estilo no tiene que encajar en una estética que ya existe. VÉNUS combina tus datos para ayudarte a construir una que sí se sienta tuya.</p>
-  <div class="cta-buttons">
-    <button class="cta-primary" onclick="openModal()">Quiero mi fórmula →</button>
-    <a class="cta-test" href="test.html">Hacer el test ✦</a>
-  </div>
-</section>
-
-<footer><span>VÉNUS © 2026</span><span>Kibbe · Colorimetría · Astrología aplicada</span></footer>
-
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal()">×</button>
-    <div id="formView">
-      <h2>Tu estilo<br>empieza aquí.</h2>
-      <p>Déjanos tu email para ser parte de la primera versión de VÉNUS.</p>
-      <form id="waitlistForm">
-        <input class="email-input" id="email" type="email" placeholder="tu@email.com" required>
-        <div class="error" id="emailError">Escribe un email válido.</div>
-        <button cla
+</main>
+<footer class="site-foot"><span>VÉNUS · ESTUDIO DE IMAGEN</span><span>Un archivo, no una sentencia.</span><span><a href="index.html">Volver al inicio ↑</a></span></footer>
+</body></html>
