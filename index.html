@@ -150,7 +150,38 @@ h1 { font-size: 58px; }
 .modal-content { padding: 45px 25px; }
 footer { flex-direction: column; gap: 10px; }
 }
-</style>
+/* VÉNUS editorial identity */
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;1,6..96,500&family=DM+Sans:wght@400;500;600;700&display=swap');
+:root{--cream:#f1ebdd;--black:#292720;--wine:#6b382f;--plum:#494b38;--pink:#c9a18d;--lavender:#b8b09b;--gold:#b99760;--white:#faf6ee;--olive:#747653;--line:rgba(41,39,32,.18)}
+html{scroll-behavior:smooth}body{background:var(--cream);color:var(--black);font-family:'DM Sans',sans-serif}
+nav{padding:18px 6%;background:rgba(241,235,221,.96);backdrop-filter:none;border-bottom:1px solid var(--line)}
+.logo,h1,.intro h2,.section-heading,.system-card h3,.modal-content h2{font-family:'Bodoni Moda',serif}
+.logo{font-size:27px;letter-spacing:5px}.nav-links{gap:34px}.nav-links a{font-size:11px;letter-spacing:1.5px}
+.nav-button{border-radius:0;border-color:var(--black);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.hero{min-height:780px;padding:150px 8% 90px;grid-template-columns:1.05fr .95fr;gap:5%;background:var(--cream)}.hero::before{display:none}
+.eyebrow,.section-label,.card-number{letter-spacing:2.4px}
+h1{font-size:clamp(58px,7.5vw,108px);line-height:.91;letter-spacing:-3px;font-weight:500;max-width:690px}h1 em{color:var(--wine);font-weight:500}
+.hero-text{font-size:16px;line-height:1.8;max-width:480px;color:#615b50}.hero-buttons{gap:12px}
+.primary-btn,.secondary-btn,.test-btn{border-radius:0;padding:17px 24px;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.primary-btn{background:var(--black)}.test-btn{background:var(--wine)}.primary-btn:hover,.test-btn:hover{transform:translateY(-2px);box-shadow:none}
+.secondary-btn{border-color:var(--line)}.hero-visual{height:620px}
+.fashion-card{border-radius:0;box-shadow:14px 14px 0 rgba(116,118,83,.18)}.card-main{right:8%;top:42px;width:300px;height:445px}
+.card-small{border-radius:0;width:175px;height:225px;right:59%;top:350px}
+.floating{border-radius:0;background:var(--white);backdrop-filter:none;box-shadow:4px 4px 0 rgba(41,39,32,.12);font-size:11px;letter-spacing:.4px}
+.marquee{background:var(--black);padding:13px 0}.marquee-inner{font-family:'Bodoni Moda',serif;font-size:20px;letter-spacing:.5px}
+.intro{padding:130px 8%;max-width:1000px}.intro h2,.section-heading{font-size:clamp(42px,5.4vw,72px);line-height:1.02}
+.intro p{font-size:15px;line-height:1.9;color:#615b50}
+.system{padding:100px 8%;background:#e8e0d0}.system-header p,.guide-header p{font-size:14px;color:#615b50;line-height:1.8}
+.cards{gap:14px}.system-card{min-height:390px;padding:28px;border-radius:0;transition:transform .3s}.system-card:hover{transform:translateY(-5px)}
+.kibbe{background:#d8c5b8}.color{background:#c6c3ad}.astro{background:#34352c;color:#f8f2e8}
+.system-card h3{font-size:39px}.system-card p{font-size:13px;line-height:1.8}.card-symbol{font-size:62px}
+.kibbe-guide{padding:110px 8%;background:var(--cream)}.family{border-radius:0;background:#faf6ee;border-color:var(--line)}
+.family:hover{transform:translateY(-4px)}.line-shape{background:var(--wine)}
+.cta{background:#34352c;color:var(--cream)}.cta-primary,.cta-test{border-radius:0;text-transform:uppercase;letter-spacing:1px;font-size:11px}
+footer{border-top:1px solid var(--line);background:var(--cream);color:#625b50;font-size:11px;letter-spacing:1px}
+.modal-content{border-radius:0;background:var(--cream);border:1px solid var(--line)}.email-input{border-radius:0;background:var(--white);border:1px solid var(--line)}
+@media(max-width:800px){nav{padding:15px 5%}.nav-links{gap:14px}.nav-links a{font-size:9px}.hero{min-height:auto;padding:125px 7% 60px;grid-template-columns:1fr;gap:28px}h1{font-size:clamp(54px,13vw,82px);letter-spacing:-2px}.hero-text{font-size:14px;margin-top:24px}.hero-visual{height:480px;max-width:520px;width:100%;margin:auto}.card-main{width:58%;height:340px;right:8%;top:20px}.card-small{width:34%;height:190px;right:58%;top:260px}.tag-kibbe{top:20px}.tag-color{top:230px}.tag-venus{bottom:25px}.system-header{display:block}.system-header p{margin-top:20px}.cards{grid-template-columns:1fr}.system-card{min-height:270px}.kibbe-families{grid-template-columns:repeat(2,1fr)}.intro{padding:90px 7%}}
+@media(max-width:480px){.nav-links{display:none}.hero-visual{height:400px}.card-main{height:300px}.card-small{top:230px;height:150px}.floating{padding:9px 12px;font-size:10px}}</style>
 </head>
 <body>
 
