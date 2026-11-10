@@ -920,7 +920,16 @@ main {
 }
 </style>
   <link rel="stylesheet" href="styles.css">
-</head>
+<style>
+.opt{position:relative;transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease}
+.opt.selected{border:2px solid #e52b50!important;box-shadow:5px 5px 0 #d8f34b;transform:translateY(-2px)}
+.opt.selected::after{content:'✓';position:absolute;right:10px;top:8px;width:23px;height:23px;display:grid;place-items:center;background:#e52b50;color:white;font-weight:800;border-radius:50%;font-size:13px}
+.q-hint{font-size:12px;line-height:1.55;color:#514a4c;background:rgba(40,75,232,.07);border-left:3px solid #284be8;padding:9px 12px;margin:8px 0 16px}
+.progress-meta::after{content:'VÉNUS / TEST';font-family:monospace;letter-spacing:1px;color:#e52b50}
+.opt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:480px){.opt-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.opt{min-width:0;padding:12px 9px}.opt-visual svg{max-width:100%;height:auto}.opt-name{font-size:13px}.opt-desc{font-size:11px;line-height:1.4}}
+@media(prefers-reduced-motion:reduce){.opt{transition:none}}
+</style></head>
 <body>
 
 <nav>
@@ -959,6 +968,18 @@ let gender = null;  /* 'fem' | 'masc' | 'nb' */
 let modIdx = 0;
 let qIdx   = 0;
 const answers = {};
+const VENUS_TEST_KEY = 'venusTestProgressV2';
+function saveTestProgress(){
+  try{localStorage.setItem(VENUS_TEST_KEY,JSON.stringify({gender,modIdx,qIdx,answers,updatedAt:Date.now()}));}catch(e){}
+}
+function restoreTestProgress(){
+  try{
+    const raw=localStorage.getItem(VENUS_TEST_KEY); if(!raw)return false;
+    const p=JSON.parse(raw); if(!p || !p.answers || !p.gender)return false;
+    gender=p.gender; modIdx=Number.isInteger(p.modIdx)?p.modIdx:0; qIdx=Number.isInteger(p.qIdx)?p.qIdx:0;
+    Object.assign(answers,p.answers); return true;
+  }catch(e){return false;}
+}
 let selfieDataURL  = null;
 let selfieAnalysis = null;
 let sampleAPI      = null;
@@ -1036,7 +1057,7 @@ function getModules() {
       {
         id:'height',
         text:'¿Cómo describes tu altura?',
-        hint:'No importa el número — piensa en cómo te sientes en el espacio.',
+        hint:'Usa tu estatura real como referencia. Kibbe no se determina por talla de ropa ni por cómo te sientes en una habitación.',
         cols:2,
         opts:[
           {
@@ -1102,7 +1123,7 @@ function getModules() {
       {
         id:'shoulders',
         text:'¿Cómo son tus hombros comparados con tus caderas?',
-        hint:'De frente — ¿qué línea domina más?',
+        hint:'Mírate de frente con los brazos relajados. Compara el extremo óseo de los hombros con la parte más ancha de la cadera; no compares volumen muscular ni la ropa.',
         cols:2,
         opts:[
           {
@@ -1170,7 +1191,7 @@ function getModules() {
       {
         id:'waist',
         text:'¿Tu cintura se define sola?',
-        hint:'Sin faja ni ropa ajustada — tu cuerpo natural de frente.',
+        hint:'Observa una foto de cuerpo entero, de frente y con ropa sencilla. Mira si el torso se estrecha visiblemente entre costillas y cadera; no hace falta medir.',
         cols:2,
         opts:[
           {
@@ -1236,7 +1257,7 @@ function getModules() {
       {
         id:'texture',
         text:'¿Cómo describirías la energía visual de tus rasgos?',
-        hint:'Facciones, cuerpo, lo que proyectas en una foto.',
+        hint:'Compara contornos en una foto sin filtro: líneas rectas y extremos definidos frente a curvas redondeadas. No uses maquillaje, expresión o personalidad como indicador.',
         cols:2,
         opts:[
           {
@@ -1293,7 +1314,7 @@ function getModules() {
       {
         id:'skin',
         text:'¿Cómo es tu tono de piel?',
-        hint:'Mira tu muñeca bajo luz natural.',
+        hint:'Esta pregunta solo registra profundidad, no temperatura. Obsérvala junto al cuello y el rostro en luz natural indirecta; no uses flash ni filtro.',
         cols:2,
         opts:[
           {
@@ -1337,7 +1358,7 @@ function getModules() {
       {
         id:'undertone',
         text:'¿Qué ves en las venas de tu muñeca?',
-        hint:'Bajo luz natural, no del teléfono.',
+        hint:'Las venas no son una prueba fiable del subtono: la iluminación y la transparencia de la piel cambian su aspecto. Si dudas, elige “difícil de ver”; lo contrastaremos con colores.',
         cols:2,
         opts:[
           {
@@ -1385,7 +1406,7 @@ function getModules() {
       {
         id:'contrast',
         text:'Contraste entre cabello, piel y ojos naturales',
-        hint:'Cabello sin teñir — ¿cuánto contrasta con tu piel?',
+        hint:'Usa tu color natural de cabello y cejas. Compara el contraste general con una foto en blanco y negro; no cuentes el maquillaje ni el tinte actual.',
         cols:1,
         opts:[
           {
@@ -1423,7 +1444,7 @@ function getModules() {
       {
         id:'reaction',
         text:'¿Qué pasa cuando usas algo muy pastel o brillante?',
-        hint:'Tu reacción más honesta.',
+        hint:'Compara dos prendas cerca del rostro, sin maquillaje y con luz natural indirecta. Fíjate si la piel se ve uniforme y los ojos destacan, no cuál color te gusta más.',
         cols:1,
         opts:[
           {
