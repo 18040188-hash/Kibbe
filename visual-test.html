@@ -2888,26 +2888,32 @@ function showMoodboard() {
   }
 
   /* Unsplash image search URLs (keyword-based) */
-  function unsplashURL(q) {
-    const enc = encodeURIComponent(q);
-    return `https://source.unsplash.com/400x500/?${enc}`;
+  function unsplashURL(q, index = 0) {
+    /* Curated editorial archive: stable Unsplash image IDs instead of the
+       retired source.unsplash.com random endpoint. Captions remain result-specific. */
+    const plates = [
+      'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=900&q=85',
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=85'
+    ];
+    return plates[index % plates.length];
   }
 
   const moodImgs = vd.moodImages || [];
   const mosaicHTML = moodImgs.length >= 3
     ? `<div class="mosaic mosaic-3">
         <div class="mosaic-item">
-          <img src="${unsplashURL(moodImgs[0].q)}"
+          <img src="${unsplashURL(moodImgs[0].q, 0)}"
             alt="${moodImgs[0].cap}" loading="lazy">
           <div class="mosaic-cap">${moodImgs[0].cap}</div>
         </div>
         <div class="mosaic-item">
-          <img src="${unsplashURL(moodImgs[1].q)}"
+          <img src="${unsplashURL(moodImgs[1].q, 1)}"
             alt="${moodImgs[1].cap}" loading="lazy">
           <div class="mosaic-cap">${moodImgs[1].cap}</div>
         </div>
         <div class="mosaic-item">
-          <img src="${unsplashURL(moodImgs[2].q)}"
+          <img src="${unsplashURL(moodImgs[2].q, 2)}"
             alt="${moodImgs[2].cap}" loading="lazy">
           <div class="mosaic-cap">${moodImgs[2].cap}</div>
         </div>
