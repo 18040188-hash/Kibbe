@@ -3,7 +3,7 @@
    Translation: blackletter display accents, contrasting editorial serif,
    compact sans captions, broken grids, image-led spreads, print-like rules,
    paper grain and variable density. No test logic lives in this file. */
-@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&family=Special+Elite&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap');
 :root{
  --v-paper:#e9e6dc;--v-paper-light:#f5f2e9;--v-ink:#191816;--v-muted:#666158;
  --v-rule:rgba(25,24,22,.28);--v-accent:#702b31;--v-olive:#68644e;
@@ -220,7 +220,7 @@ main{max-width:1120px!important;padding:42px var(--v-gutter) 80px!important}
    ISSUE 07 — PRINTED SPREAD SYSTEM
    Shared visual language for every VÉNUS page.
    ========================================================= */
-@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Special+Elite&family=Space+Mono:wght@400;700&display=swap');
+
 :root{
  --v-paper:#c9c8c3;--v-paper-light:#deddd7;--v-paper-dark:#aaa9a3;
  --v-ink:#171717;--v-black:#080808;--v-red:#8f1d24;--v-silver:#aaa9a4;
@@ -339,7 +339,7 @@ body:not(.venus-home) .card,body:not(.venus-home) .gender-opt,body:not(.venus-ho
 body:not(.venus-home) .card,body:not(.venus-home) .gender-opt,body:not(.venus-home) .opt,body:not(.venus-home) .stat-card,body:not(.venus-home) .task-card,body:not(.venus-home) .entry-card{border:1px solid var(--v-ink)!important}
 body:not(.venus-home) .btn,body:not(.venus-home) button{border-radius:0!important;box-shadow:none!important}
 body:not(.venus-home) img{filter:grayscale(.75) contrast(1.16) sepia(.12)}
-body:not(.venus-home) .mb-cover,body:not(.venus-home) .story,body:not(.venus-home) .home-hero{background:var(--v-black)!important;color:var(--v-paper-light)!important}
+body:not(.venus-home) .mb-cover,body:not(.venus-home) .story{background:var(--v-black)!important;color:var(--v-paper-light)!important}
 body:not(.venus-home) .opt.selected,body:not(.venus-home) .gender-opt.selected{background:#b8b5ad!important;border-color:var(--v-red)!important}
 body:not(.venus-home) .btn-primary,body:not(.venus-home) .btn-next,body:not(.venus-home) .gender-start,body:not(.venus-home) .btn-wine{background:var(--v-black)!important;border-color:var(--v-black)!important;color:#eee!important}
 body:not(.venus-home) .progress-fill{background:var(--v-red)!important}
