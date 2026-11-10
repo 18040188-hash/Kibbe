@@ -55,3 +55,12 @@ HTML, CSS y JavaScript vanilla; Google Fonts; imágenes de Unsplash; `localStora
 ## Privacidad y límites
 
 El perfil se guarda localmente en el navegador. No existe sincronización entre dispositivos ni cuenta de usuario en servidor. Si se borra el almacenamiento del navegador, el perfil local puede perderse. La Story Card se genera en el dispositivo. La información astrológica solo se presenta si el resultado del test la proporciona; esta versión no calcula una carta natal a partir de fecha, hora y lugar de nacimiento.
+
+
+## Dirección editorial ampliada — Issue 02
+
+La experiencia se acerca más a una revista independiente: el test se presenta como una sección interactiva de la publicación, con masthead, folios, jerarquía editorial, retícula asimétrica en escritorio, numeración de progreso y resultados construidos como una portada y una serie de páginas editoriales. La lectura del cuestionario conserva prioridad funcional: opciones legibles, estados seleccionados claros, controles rectangulares y foco visible.
+
+La galería de inspiración del resultado utiliza una selección más coherente de fotografía de moda editorial alojada en Unsplash. En el test visual, las imágenes dejaron de depender del endpoint aleatorio retirado `source.unsplash.com` y usan identificadores estables de imágenes. Los textos alternativos y captions siguen siendo específicos de cada resultado. El tratamiento fotográfico es selectivo: monocromo, contraste y sepia moderados, sin aplicar un filtro idéntico a todas las imágenes.
+
+En Glow Up, el panel principal adopta una presentación de archivo/editorial mientras conserva la navegación inferior y las interacciones de seguimiento. La capa visual no modifica los datos, cálculos ni el almacenamiento local del producto.
