@@ -888,6 +888,8 @@ function getModules(){
  {id:'wardrobe_budget',text:'¿Qué presupuesto prefieres para construir tu guardarropa?',hint:'No es una evaluación económica. Sirve para sugerir prioridades realistas.',cols:2,opts:venusOpts([['low','Ajustado','Reutilizar, segunda mano y compras puntuales.'],['mid','Moderado','Combinar básicos duraderos con piezas especiales.'],['high','Flexible','Invertir en piezas de mayor calidad.'],['unknown','Prefiero no indicarlo','Recomendaciones sin asumir presupuesto.']])},
  {id:'wardrobe_goal',text:'¿Qué necesitas resolver primero?',hint:'Elige el cambio que tendría mayor impacto en tu día a día.',cols:2,opts:venusOpts([['combine','Combinar mejor lo que ya tengo','Más outfits con menos prendas.'],['gaps','Detectar prendas que me faltan','Una lista corta de compras útiles.'],['identity','Definir mi identidad visual','Coherencia sin perder individualidad.'],['occasion','Vestirme para ocasiones concretas','Looks para estudio, trabajo o eventos.'],['edit','Depurar mi armario','Identificar qué uso y qué no.']])}
  ]});
+ const order=['natural-profile','kibbe-observations','color-12','essences','personal-style','wardrobe-context','venus-sign'];
+ m.sort((a,b)=>order.indexOf(a.key)-order.indexOf(b.key));
  return m;
 }
 
@@ -1363,7 +1365,7 @@ function venusColorAnalysis(){
  const confidence=resolved===3&&!familyMismatch&&profileComplete>=3?'medio':'bajo';
  const profileCheck=naturalUndertone==='unknown'?'No se indicó un subtono natural para contrastar.':undertoneMatch?'La comparación de telas y tu autoobservación de subtono coinciden.':naturalUndertone==='olive'?'El matiz oliva puede requerir drapeado físico adicional; no se fuerza a cálido o frío.':'Tu autoobservación y la comparación de telas no coinciden del todo; conviene revisar con drapeado físico.';
  const note=familyMismatch?'La familia elegida como referencia no coincide con la combinación de temperatura, valor y croma; se priorizó la combinación observada.':derived==='unknown'?'La familia se toma como hipótesis de apoyo porque las tres dimensiones no forman una combinación estacional nítida.':'La familia se infiere de la combinación de temperatura, valor y croma.';
- return {dimensions:d,primary,seasonKey:seasonKeys[primary]||'autumn-soft',neighbors,confidence,profileCheck,profileComplete,naturalUndertone,contrast:answers.profile_contrast||'unknown',family,derivedFamily:derived,familyMismatch,note};
+ return {dimensions:d,primary,seasonKey:seasonKeys[primary]||'pending',neighbors,confidence,profileCheck,profileComplete,naturalUndertone,contrast:answers.profile_contrast||'unknown',family,derivedFamily:derived,familyMismatch,note};
 }
 function venusEssenceAnalysis(){
  const names=['dramatic','natural','classic','gamine','romantic','ingenue','angelic'];
@@ -1844,6 +1846,7 @@ const KIBBE_DATA = {
 };
 
 const SEASON_DATA = {
+  'pending':{name:'Pendiente de confirmar',palette:['#d8cfc0','#b5a99a','#8e8278','#6f625c','#403a37'],paletteNames:['Marfil neutro','Piedra','Topo','Cacao grisáceo','Carbón'],rules:['No se fuerza una estación con señales mixtas.','Repite las comparaciones con telas físicas.','Prueba colores cálidos y fríos junto al rostro.','Registra qué tonos armonizan bajo luz neutra.']},
   'autumn-true':{
     name:'Otoño Verdadero',
     palette:['#5a2c1d','#a34f2b','#b77b32','#59613a','#d0a36b'],
