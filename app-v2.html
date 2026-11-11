@@ -2328,17 +2328,75 @@ function venusSetTie(value){
  saveTestProgress();
  modIdx=1;qIdx=0;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
 }
-function venusResultExplanation(){
- const labels={height:{tall:'estatura alta',medium:'estatura media',petite:'estatura petite'},shoulders:{straight:'hombros y caderas de ancho similar', 'wide-sh':'hombros más anchos','wide-hip':'caderas más anchas',balanced:'proporciones equilibradas'},waist:{yes:'cintura definida',slight:'cintura ligeramente definida',no:'torso más recto'},texture:{sharp:'líneas angulosas',soft:'líneas suaves',mix:'mezcla de líneas',compact:'estructura compacta'},skin:{fair:'piel clara',light:'piel media clara',medium:'piel media u olivácea',deep:'piel profunda'},undertone:{warm:'indicio cálido',cool:'indicio frío',neutral:'indicio neutro',dk:'subtono no concluyente'},contrast:{high:'contraste alto',medium:'contraste medio',low:'contraste bajo'},reaction:{washes:'los pasteles tienden a apagar',flatters:'los colores claros iluminan',depends:'la reacción depende del color'}};
- const explain=(keys)=>keys.filter(k=>answers[k]&&labels[k]?.[answers[k]]).map(k=>labels[k][answers[k]]);
- const body=explain(['height','shoulders','waist','texture']);
- const color=explain(['skin','undertone','contrast','reaction']);
- const confidenceKeys=['height','shoulders','waist','texture'];
- const answered=confidenceKeys.filter(k=>answers[k]&&answers[k]!=='unsure'&&answers[k]!=='dk').length;
- const coherence=Math.round(60+(answered/4)*25+(answers.kibbeTie?10:0));
- const score=Math.min(95,coherence);
- return `<section class="venus-explanation" aria-labelledby="venus-explain-title"><div class="mb-section-head"><div class="mb-section-title" id="venus-explain-title">Cómo llegamos a esta hipótesis</div></div><p><strong>Silueta:</strong> Tus respuestas describen ${body.join(', ')||'señales todavía insuficientes'}. El algoritmo las combina para proponer ${KIBBE_DATA[calcKibbe()]?.name||calcKibbe()}.</p><p><strong>Color:</strong> Registraste ${color.join(', ')||'señales todavía insuficientes'}. La estación es una orientación inicial; los colores deben comprobarse junto al rostro en luz natural.</p><p><strong>Qué quedó menos respaldado:</strong> Las categorías que dependen de señales opuestas a las que elegiste quedan como alternativas menos probables, no como tipos “descartados” de forma definitiva. Kibbe requiere valorar línea, proporción y caída de prendas en conjunto.</p><div class="venus-confidence"><span>Coherencia de respuestas</span><strong>${score}/100</strong><div class="venus-confidence-track"><i style="width:${score}%"></i></div><small>Este indicador mide consistencia del cuestionario, no precisión científica ni certeza del diagnóstico.</small></div></section>`;
+function venusResultExplanation(){return '<section class="venus-explanation"><small>METODOLOGÍA / LECTURA ORIENTATIVA</small><p>Los resultados se presentan por separado. El nivel de evidencia describe la consistencia de tus respuestas, no una precisión estadística. La colorimetría digital debe confirmarse con telas físicas.</p></section>';}
+
+/* Evidence-based-in-the-framework sense: descriptive rules, not a clinical diagnosis. */
+function venusKibbeAnalysis(){
+ const ids=['dramatic','soft-dramatic','flamboyant-natural','soft-natural','dramatic-classic','soft-classic','gamine','soft-gamine','romantic','theatrical-romantic'];
+ const scores=Object.fromEntries(ids.map(x=>[x,0]));
+ const a=answers;
+ if(a.kb_vertical==='long'){scores.dramatic+=3;scores['soft-dramatic']+=3;scores['flamboyant-natural']+=2}
+ if(a.kb_vertical==='compact'){scores.gamine+=2;scores['soft-gamine']+=2;scores.romantic+=1}
+ if(a.kb_vertical==='moderate'){scores['dramatic-classic']+=2;scores['soft-classic']+=2}
+ if(a.kb_frame==='angular'){scores.dramatic+=2;scores['soft-dramatic']+=1;scores.gamine+=1;scores['dramatic-classic']+=1}
+ if(a.kb_frame==='blunt'){scores['flamboyant-natural']+=2;scores['soft-natural']+=2}
+ if(a.kb_frame==='rounded'){scores.romantic+=2;scores['theatrical-romantic']+=2;scores['soft-gamine']+=1}
+ if(a.kb_frame==='balanced'){scores['dramatic-classic']+=2;scores['soft-classic']+=2}
+ if(a.kb_flesh==='soft'){scores.romantic+=2;scores['soft-dramatic']+=2;scores['soft-natural']+=1;scores['soft-gamine']+=1;scores['theatrical-romantic']+=2}
+ if(a.kb_flesh==='lean'){scores.dramatic+=1;scores['dramatic-classic']+=1;scores.gamine+=1}
+ if(a.kb_flesh==='mixed'){scores['soft-classic']+=1;scores['flamboyant-natural']+=1;scores['soft-gamine']+=1}
+ if(a.kb_shoulders==='shoulder'){scores['flamboyant-natural']+=2;scores['soft-natural']+=2;scores.dramatic+=1}
+ if(a.kb_shoulders==='hip'){scores.romantic+=1;scores['soft-gamine']+=1}
+ if(a.kb_shoulders==='even'){scores['soft-classic']+=1;scores['dramatic-classic']+=1}
+ if(a.kb_scale==='large'){scores.dramatic+=1;scores['flamboyant-natural']+=2;scores['soft-dramatic']+=1}
+ if(a.kb_scale==='small'){scores.gamine+=2;scores['soft-gamine']+=2;scores['theatrical-romantic']+=1}
+ if(a.kb_scale==='mixed'){scores['soft-classic']+=1;scores['dramatic-classic']+=1}
+ if(a.kb_balance==='dramatic'){scores.dramatic+=2;scores['soft-dramatic']+=1}
+ if(a.kb_balance==='natural'){scores['flamboyant-natural']+=2;scores['soft-natural']+=2}
+ if(a.kb_balance==='romantic'){scores.romantic+=2;scores['theatrical-romantic']+=1}
+ if(a.kb_balance==='balanced'){scores['dramatic-classic']+=2;scores['soft-classic']+=2}
+ if(a.kb_balance==='mixed'){scores.gamine+=1;scores['soft-gamine']+=1}
+ const sorted=Object.entries(scores).sort((x,y)=>y[1]-x[1]);
+ const obs=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance'];
+ const answered=obs.filter(k=>a[k]).length, gap=sorted[0][1]-sorted[1][1];
+ return {scores,sorted,primary:sorted[0][0],alternatives:sorted.slice(1,3),confidence:answered<4||gap<2?'bajo':gap<4?'medio':'alto',answered,observations:obs.filter(k=>a[k]).map(k=>k+': '+a[k])};
 }
+function venusColorAnalysis(){
+ const dims={temp:[answers.cl_temp1,answers.cl_temp2],value:[answers.cl_value1,answers.cl_value2],chroma:[answers.cl_chroma1,answers.cl_chroma2]};
+ const resolve=a=>a.every(Boolean)&&a[0]===a[1]?a[0]:a.some(Boolean)?'mixto':'sin datos';
+ const d={temp:resolve(dims.temp),value:resolve(dims.value),chroma:resolve(dims.chroma)};
+ const key=[d.temp,d.value,d.chroma].join('|');
+ const map={
+ 'warm|light|bright':['Light Spring','True Spring'],'warm|light|soft':['Light Spring','Soft Autumn'],
+ 'warm|deep|bright':['Bright Spring','Warm Autumn'],'warm|deep|soft':['Warm Autumn','Deep Autumn'],
+ 'cool|light|bright':['Bright Winter','Light Summer'],'cool|light|soft':['Light Summer','Cool Summer'],
+ 'cool|deep|bright':['Deep Winter','Cool Winter'],'cool|deep|soft':['Soft Summer','Deep Winter']
+ };
+ const candidates=map[key]||['Resultado por confirmar','Revisar estaciones vecinas con drapeado'];
+ const consistent=Object.values(d).filter(x=>x!=='mixto'&&x!=='sin datos').length;
+ return {dimensions:d,primary:candidates[0],neighbors:[candidates[1]],confidence:consistent===3?'medio':consistent===2?'bajo':'bajo'};
+}
+function venusEssenceAnalysis(){
+ const names=['dramatic','natural','classic','gamine','romantic','ingenue','angelic'];
+ const count=Object.fromEntries(names.map(n=>[n,0]));
+ ['es_face','es_scale','es_detail','es_energy','es_expression','es_movement','es_finish'].forEach(k=>{if(count[answers[k]]!==undefined)count[answers[k]]++});
+ const total=Object.values(count).reduce((x,y)=>x+y,0)||1;
+ return Object.entries(count).map(([name,n])=>({name,percent:Math.round(n/total*100)})).sort((x,y)=>y.percent-x.percent);
+}
+function venusSignAdvice(sign){
+ const d={aries:'Contrastes decididos, prendas con energía y acentos rojos.',tauro:'Texturas sensoriales, calidad táctil y una paleta natural.',geminis:'Capas ligeras, mezclas inesperadas y accesorios intercambiables.',cancer:'Romanticismo suave, prendas envolventes y detalles nostálgicos.',leo:'Piezas protagonistas, brillo controlado y siluetas expresivas.',virgo:'Cortes precisos, materiales cuidados y detalles funcionales.',libra:'Equilibrio visual, armonía de color y accesorios refinados.',escorpio:'Profundidad, transparencias estratégicas y dramatismo íntimo.',sagitario:'Prendas cómodas y libertad de movimiento.',capricornio:'Sastrería, estructura y piezas duraderas.',acuario:'Diseño experimental, contraste y piezas poco convencionales.',piscis:'Capas fluidas, transparencias y estética onírica.'};
+ return d[sign]||'No se añadió una recomendación astrológica porque el signo no fue indicado.';
+}
+function venusMethodResults(){
+ const k=venusKibbeAnalysis(),c=venusColorAnalysis(),e=venusEssenceAnalysis(),sign=answers.venus_sign||'unknown';
+ const names={'soft-dramatic':'Soft Dramatic','flamboyant-natural':'Flamboyant Natural','soft-natural':'Soft Natural','dramatic-classic':'Dramatic Classic','soft-classic':'Soft Classic','soft-gamine':'Soft Gamine','theatrical-romantic':'Theatrical Romantic'};
+ const label=x=>names[x]||x.charAt(0).toUpperCase()+x.slice(1);
+ const alternatives=k.alternatives.map(x=>label(x[0])).join(' · ');
+ const signals=k.observations.join(' · ');
+ const ess=e.slice(0,3).map(x=>'<li>'+label(x.name)+' · '+x.percent+'%</li>').join('');
+ return '<section class="venus-method-results"><article><small>01 / KIBBE · HIPÓTESIS DE IMAGEN</small><h2>'+label(k.primary)+'</h2><p><b>Nivel de evidencia: '+k.confidence+'</b> · '+k.answered+'/6 observaciones registradas.</p><p><b>Por qué:</b> '+(signals||'No hay suficientes observaciones para proponer un resultado.')+'</p><p><b>Alternativas cercanas:</b> '+(alternatives||'Sin datos suficientes')+'.</p><p><b>Observaciones mixtas:</b> '+(['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance'].filter(x=>answers[x]==='mixed').join(', ')||'No se registraron respuestas mixtas explícitas')+'.</p><small>La puntuación organiza observaciones de estilo; no es una escala clínica ni una validación oficial del sistema Kibbe.</small></article><article><small>02 / COLOR · 12 ESTACIONES</small><h2>'+c.primary+'</h2><p><b>Dimensiones:</b> temperatura '+c.dimensions.temp+' · valor '+c.dimensions.value+' · croma '+c.dimensions.chroma+'.</p><p><b>Estación vecina:</b> '+c.neighbors.join(', ')+'. Nivel de evidencia: '+c.confidence+'.</p><p>Los swatches digitales son orientativos y no sustituyen el drapeado físico bajo luz neutra.</p></article><article><small>03 / ESENCIAS · KITCHENER</small><h2>Mezcla de siete esencias</h2><ul>'+ess+'</ul><p>Porcentajes relativos a siete elecciones de armonía visual; no son mediciones psicométricas validadas.</p></article><article><small>04 / VENUS · RECOMENDACIÓN CREATIVA</small><h2>'+(sign==='unknown'?'Signo no indicado':sign.charAt(0).toUpperCase()+sign.slice(1))+'</h2><p>'+venusSignAdvice(sign)+'</p><p>Esta capa es simbólica y no modifica Kibbe, colorimetría ni esencias.</p></article></section>';
+}
+
 /* ═══════════════════════════════════════════════════════════
    RESULT ENGINE
 ═══════════════════════════════════════════════════════════ */
@@ -3265,6 +3323,7 @@ function copyAltaFormula(){
       </div>
     </div>
     ${venusResultExplanation()}
+    ${venusMethodResults()}
 
     <!-- SELFIE ANALYSIS (if exists) -->
     ${selfieHTML}
