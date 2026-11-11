@@ -1015,13 +1015,8 @@ function goNext() {
   saveTestProgress();
   renderQuestion();
   window.scrollTo({ top:0, behavior:'smooth' });
-  const reveal=document.getElementById('venus-reveal');
-  const swatches=document.getElementById('venus-reveal-swatches');
-  document.getElementById('venus-reveal-title').textContent=vd.name;
-  document.getElementById('venus-reveal-copy').textContent=`${kd.name} · ${sd.name}. ${vd.tagline}`;
-  document.getElementById('venus-reveal-seal').textContent='Venus / Lilith · '+vd.name;
-  swatches.innerHTML=sd.palette.map(c=>`<i style="background:${c}"></i>`).join('');
-  reveal.classList.add('active');
+  // El reveal visual se reserva para el cálculo final del moodboard.
+  // No se ejecuta durante cada avance de pregunta.
 }
 function closeVenusReveal(){
   const reveal=document.getElementById('venus-reveal');
