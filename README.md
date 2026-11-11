@@ -13,23 +13,25 @@ La traducción a VÉNUS es deliberadamente propia: la marca conserva una paleta 
 - **`styles.css`** contiene tokens, tipografías, textura de papel, reglas, estados de foco, controles, componentes y ajustes responsive compartidos.
 - Las páginas HTML cargan el archivo compartido desde el mismo directorio.
 - **`index.html`** tiene composición editorial propia: retícula rota, hero asimétrico, placas visuales, numeración, índice y cierre tipo doble página.
-- El test, resultados, perfil y Glow Up conservan su estructura y comportamiento, pero reciben el lenguaje visual compartido mediante `styles.css`.
+- El test, resultados, perfil y Glow Up reciben el lenguaje visual desde `styles.css`. Los estilos locales se consolidan en la hoja compartida; las páginas mantienen JavaScript inline vanilla.
 
 ### Responsive y accesibilidad
 
 El sistema incluye breakpoints para móvil (hasta 767 px), tablet (768–1100 px) y escritorio (desde 1200 px), con una composición móvil que conserva jerarquía, asimetría y contraste entre texto e imagen. Se incluyen foco visible, enlace para saltar al contenido, textos alternativos en imágenes y soporte para `prefers-reduced-motion`.
 
-La hoja compartida está preparada para 375, 768 y 1440 px. La revisión automatizada o manual en navegador de esos tres viewports debe completarse antes de considerar validada la presentación responsive; la presencia de media queries no equivale por sí sola a una prueba visual.
+La hoja compartida incluye reglas para 375, 768 y 1440 px. La prueba visual manual en esos tres viewports y la revisión con teclado deben registrarse antes de declarar validado el responsive. No se afirma haber completado capturas de QA sin una inspección real.
 
 ## Experiencia principal
 
-- **Test de estilo:** el cuestionario actual de Kibbe y colorimetría conserva su lógica y sus criterios originales.
-- **Reveal cinematográfico:** al terminar el test, aparece una pantalla de resultados con arquetipo, fórmula y swatches.
-- **Guardar identidad VÉNUS:** el nombre es opcional. La fórmula, paleta, prendas y metadatos se guardan en `localStorage`.
-- **Mi perfil VÉNUS:** `perfil.html` recupera la identidad guardada.
-- **Story Card:** genera una imagen PNG vertical de 1080 × 1920, descargable o compartible mediante Web Share API cuando el navegador lo permite.
-- **Inspiración:** búsquedas personalizadas de Pinterest, referencias visuales y acceso manual a ALTA.
-- **Glow Up:** conserva el flujo de plan, diario, evolución y chat.
+- **Test modular V3 (10–15 min):** observaciones Kibbe, colorimetría de 12 estaciones, siete esencias y signo Venus manual.
+- **Resultados separados:** hipótesis Kibbe con alternativas y evidencia cualitativa; estación cromática con dimensiones y vecinas; mezcla porcentual de esencias; recomendación creativa Venus.
+- **Progreso local:** módulo, pregunta y respuestas se guardan en `localStorage` para retomar en el mismo navegador.
+- **Resultados transparentes:** se explican las observaciones y las limitaciones; no se muestran porcentajes inventados de precisión.
+- **Glow Up y perfil:** conservan el flujo de archivo personal, plan de estilo, seguimiento y Story Card.
+
+## Modelo metodológico
+
+Consulta [METODOLOGIA.md](METODOLOGIA.md) para el detalle de variables, reglas, fuentes y límites. Las cuatro capas son independientes: Kibbe no determina color; color no determina esencias; Venus no determina ninguna de las anteriores.
 
 ## Archivos principales
 
@@ -71,3 +73,8 @@ En Glow Up, el panel principal adopta una presentación de archivo/editorial mie
 La portada ahora funciona como una cubierta editorial a doble página: fotografía a sangre en una página y bloque negro tipográfico en la otra, con lomo central, folios, marcas de corte, cruces, créditos de imagen y microtipografía. El resto de la home continúa con spreads asimétricos, departamentos visuales y un cierre de contraportada. La textura combina grano fotográfico y papel gris, con acentos rojo oscuro y plata; las imágenes de Unsplash reciben tratamientos monocromos de alto contraste y duotono discreto.
 
 El mismo archivo `styles.css` se carga desde la portada, el test, el archivo visual, Glow Up y el perfil. En escritorio, el sistema conserva la lectura enfrentada; en móvil, cada spread se convierte en una secuencia vertical para evitar columnas comprimidas. Se mantienen HTML, CSS y JavaScript vanilla, sin nuevas dependencias de ejecución. La lógica de preguntas, resultados y cálculo del test no se modifica en esta entrega.
+
+
+## Capturas de QA
+
+Pendientes de generar tras la inspección visual real de los viewports 375, 768 y 1440 px. No se incluyen capturas simuladas ni placeholders presentados como evidencia.
