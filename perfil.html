@@ -4,7 +4,25 @@ const p=(()=>{try{return JSON.parse(localStorage.getItem('venusSavedLook')||loca
 function esc(v){return String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 if(!p){$('profile').innerHTML='<section class="empty"><div class="eyebrow">Todavía no hay un perfil guardado</div><h1>Tu historia empieza con el test.</h1><p>Completa VÉNUS y guarda tu identidad para verla aquí.</p><a href="app-v2.html">Hacer el test →</a></section>'}
 else{const name=p.displayName||'Tu identidad VÉNUS';$('story-name').textContent=name;$('story-formula').textContent=p.formula||[p.kibbe,p.season,p.vibe].filter(Boolean).join(' · ');$('story-swatches').innerHTML=(p.palette||[]).map(c=>'<i style="background:'+esc(c)+'"></i>').join('');$('details').innerHTML='<div class="name">'+esc(name)+'</div><p>'+esc(p.formula)+'</p><div class="swatches">'+(p.palette||[]).map(c=>'<i style="background:'+esc(c)+'"></i>').join('')+'</div><div class="section"><h2>Tu arquetipo</h2><p>'+esc(p.kibbe)+' · '+esc(p.vibe)+'</p></div><div class="section"><h2>Tu paleta</h2><p>'+esc(p.season)+'</p></div><div class="section"><h2>Dirección de estilo</h2><p>'+esc(p.tagline||p.vibeDescription)+'</p></div><div class="section"><h2>Prendas para explorar</h2><ul>'+Object.values(p.garments||{}).flatMap(v=>v.slice(0,2)).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>'}
-function storyCanvas(){const c=document.createElement('canvas');c.width=1080;c.height=1920;const x=c.getContext('2d');x.fillStyle='#211d1c';x.fillRect(0,0,1080,1920);x.strokeStyle='rgba(201,166,107,.35)';x.lineWidth=2;x.beginPath();x.arc(930,360,300,0,7);x.stroke();x.fillStyle='#c9a66b';x.font='26px sans-serif';x.fillText('VÉNUS · PERSONAL STYLE ARCHIVE',90,145);x.fillStyle='#f1ebdd';x.font='500 100px Georgia';const name=p?.displayName||'Tu identidad';x.fillText(name.slice(0,18),90,570);x.fillStyle='#d7cbbb';x.font='32px sans-serif';x.fillText((p?.formula||'').slice(0,48),90,700);(p?.palette||['#a34f38','#747653','#c9a66b','#e4d9c7']).slice(0,6).forEach((c,i)=>{x.fillStyle=c;x.fillRect(90+i*150,900,132,120)});x.fillStyle='#c9a66b';x.font='28px sans-serif';x.fillText('YOUR STYLE, YOUR ORBIT',90,1730);x.fillText('@VENUS.APP',90,1800);return c}
+function storyCanvas(){
+ const c=document.createElement('canvas');c.width=1080;c.height=1920;const x=c.getContext('2d');
+ x.fillStyle='#171615';x.fillRect(0,0,1080,1920);
+ x.strokeStyle='rgba(243,240,231,.42)';x.lineWidth=2;x.strokeRect(42,42,996,1836);
+ x.strokeStyle='#6f252d';x.lineWidth=8;x.strokeRect(64,64,952,1792);
+ x.fillStyle='#6f252d';x.fillRect(90,120,900,4);
+ x.fillStyle='#f3f0e7';x.font='700 30px Georgia';x.letterSpacing='5px';x.fillText('VÉNUS  /  PERSONAL STYLE JOURNAL',90,190);
+ x.fillStyle='#b9ad9b';x.font='22px monospace';x.fillText('FIG. 01  ·  YOUR PERSONAL ARCHIVE',90,248);
+ x.fillStyle='#f3f0e7';x.font='600 104px Georgia';const name=(p?.displayName||'Tu identidad').slice(0,18);x.fillText(name,90,570);
+ x.fillStyle='#d7cbbb';x.font='italic 42px Georgia';const formula=(p?.formula||'Silueta · color · expresión').slice(0,52);x.fillText(formula,90,690);
+ x.fillStyle='#b9ad9b';x.font='24px monospace';x.fillText('YOUR STYLE IS A LANGUAGE, NOT A RULE.',90,820);
+ (p?.palette||['#6f252d','#747653','#c9a66b','#e4d9c7']).slice(0,6).forEach((color,i)=>{x.fillStyle=color;x.fillRect(90+i*150,960,132,132);x.strokeStyle='rgba(243,240,231,.55)';x.lineWidth=1;x.strokeRect(90+i*150,960,132,132)});
+ x.fillStyle='#f3f0e7';x.font='34px Georgia';x.fillText((p?.kibbe||'Forma')+'  /  '+(p?.season||'Color'),90,1240);
+ x.fillStyle='#b9ad9b';x.font='25px monospace';x.fillText((p?.vibe||'Expresión personal').slice(0,42),90,1310);
+ x.strokeStyle='#6f252d';x.lineWidth=4;x.beginPath();x.moveTo(90,1570);x.lineTo(990,1570);x.stroke();
+ x.fillStyle='#f3f0e7';x.font='700 28px Georgia';x.fillText('YOUR STYLE, YOUR ORBIT',90,1690);
+ x.fillStyle='#b9ad9b';x.font='20px monospace';x.fillText('VÉNUS  ·  INDEPENDENT STYLE JOURNAL  ·  2026',90,1750);
+ return c
+}
 $('download')?.addEventListener('click',()=>{if(!p)return;const a=document.createElement('a');a.download='venus-story-card.png';a.href=storyCanvas().toDataURL('image/png');a.click();$('feedback').textContent='Story Card exportada en 1080 × 1920.'});
 $('share')?.addEventListener('click',()=>{if(!p)return;storyCanvas().toBlob(async b=>{const f=new File([b],'venus-story-card.png',{type:'image/png'});try{if(navigator.canShare?.({files:[f]}))await navigator.share({files:[f],title:'Mi identidad VÉNUS'});else if(navigator.share)await navigator.share({title:'Mi identidad VÉNUS',text:p.formula});else $('feedback').textContent='Tu navegador no permite compartir directamente. Usa Descargar Story Card.'}catch(e){if(e.name!=='AbortError')$('feedback').textContent='No se pudo abrir el menú para compartir.'}})});
 </script><script>document.querySelectorAll("[data-nav-link]").forEach(a=>{const p=new URL(a.href,location.href).pathname.split("/").pop()||"index.html";if(p===(location.pathname.split("/").pop()||"index.html"))a.setAttribute("aria-current","page")});</script></body></html>
