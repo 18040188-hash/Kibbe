@@ -1,0 +1,102 @@
+# METODOLOGÍA VÉNUS — MVP modular
+
+**Versión:** 3.0  
+**Implementación:** HTML, CSS y JavaScript vanilla  
+**Alcance:** cuestionario orientativo de imagen personal; no es diagnóstico clínico ni certificación profesional.
+
+## 1. Principio de diseño
+
+VÉNUS separa cuatro capas que responden preguntas distintas. Ninguna debe corregir ni determinar los resultados de otra:
+
+1. **Kibbe:** hipótesis de líneas y recomendaciones de silueta.
+2. **Colorimetría:** hipótesis de familia estacional a partir de temperatura, valor y croma.
+3. **Esencias de Kitchener:** mezcla descriptiva de siete lenguajes visuales.
+4. **Venus astrológico:** recomendación creativa simbólica, ingresada manualmente.
+
+La experiencia es modular y guarda respuestas, módulo y pregunta actual en `localStorage`. El almacenamiento es local al navegador y no sincroniza entre dispositivos.
+
+## 2. Kibbe: observaciones → hipótesis
+
+### Variables recogidas
+
+- Línea vertical percibida en fotografía frontal de cuerpo entero.
+- Contorno del armazón: anguloso, ancho/romo, redondeado o equilibrado.
+- Distribución general de volumen: lineal, suave o mixta.
+- Relación visual hombros/caderas.
+- Escala de detalle.
+- Impresión general de líneas.
+
+### Regla de interpretación
+
+La matriz de decisión prioriza la combinación de línea vertical y armazón. Las demás observaciones matizan el resultado y permiten reportar alternativas cercanas y contradicciones. La implementación no afirma reproducir el proceso completo de David Kibbe ni sustituye una evaluación experta de líneas y caída de prendas.
+
+El nivel de evidencia es cualitativo:
+- **Bajo:** pocas respuestas o contradicción entre la impresión general y las observaciones principales.
+- **Medio:** observaciones suficientes sin contradicción fuerte.
+- **Alto:** varias observaciones se corroboran entre sí.
+
+Este nivel expresa consistencia interna de las respuestas, no probabilidad estadística de acertar.
+
+### Límites
+
+Kibbe es un sistema de imagen, no una clasificación científica del cuerpo. Las ilustraciones esquemáticas ayudan a comparar líneas; no son plantillas antropométricas ni pruebas diagnósticas. Peso, talla de ropa, belleza y celebridades no se usan como evidencia anatómica.
+
+## 3. Colorimetría: 12 estaciones
+
+La interfaz presenta comparaciones de swatches digitales en cuatro pasos conceptuales:
+
+- **Temperatura:** cálida frente a fría.
+- **Valor:** clara frente a profunda.
+- **Croma:** brillante frente a suavizada.
+- **Familia estacional:** primavera, verano, otoño o invierno.
+
+La familia estacional y las dimensiones se combinan para sugerir una subestación entre las doce: Light/True/Bright Spring; Light/True/Soft Summer; Soft/True/Deep Autumn; Bright/True/Deep Winter. Las estaciones vecinas se muestran como alternativas para revisión.
+
+La dimensión primaria no debe interpretarse como un diagnóstico definitivo. La pantalla, el brillo, el perfil de color del dispositivo, la cámara y la iluminación alteran los swatches. **La prueba recomendada es el drapeado físico con telas, bajo luz neutra y sin maquillaje.**
+
+El nivel de evidencia es bajo cuando las respuestas no son consistentes o faltan dimensiones. La estación es orientativa incluso cuando las respuestas coinciden.
+
+## 4. Siete esencias
+
+Se presentan siete lenguajes visuales: Dramatic, Natural, Classic, Gamine, Romantic, Ingenue y Angelic. Siete preguntas de armonía visual asignan una elección por pregunta. La distribución porcentual se calcula como frecuencia de elecciones sobre el total respondido.
+
+Los porcentajes son una representación descriptiva del cuestionario, **no una escala psicométrica validada ni una medición objetiva de la identidad**. Las esencias pueden coexistir y las recomendaciones se deben probar en prendas reales.
+
+## 5. Venus: recomendación creativa
+
+La persona ingresa manualmente su signo de Venus o selecciona “No lo sé”. El signo solo genera una sugerencia estética simbólica de prendas, texturas o accesorios. No cambia Kibbe, colorimetría ni esencias.
+
+**Fuera del MVP:** cálculo automático de carta natal mediante fecha, hora y lugar de nacimiento. Se considera trabajo futuro, sujeto a una fuente astronómica/astrológica fiable, consentimiento y explicación de la incertidumbre de la hora de nacimiento.
+
+## 6. Experiencia y privacidad
+
+- Cuatro módulos cortos: Kibbe, color, esencias y Venus.
+- Progreso por módulo y pregunta; guardado local en `localStorage`.
+- La persona puede cerrar y retomar en el mismo navegador.
+- No hay cuenta ni sincronización en servidor.
+- No introducir datos sensibles innecesarios.
+- Los resultados se presentan por separado y explican observaciones, alternativas y límites.
+
+## 7. Fuentes consultadas
+
+Estas fuentes orientan la organización conceptual. No implican aval ni validación del algoritmo de VÉNUS.
+
+- The Concept Wardrobe, [Seasonal Color Analysis: Which Colour Season Are You?](https://theconceptwardrobe.com/colour-analysis-comprehensive-guides/seasonal-color-analysis-which-color-season-are-you)
+- The Concept Wardrobe, [The Kibbe Body Type Test](https://theconceptwardrobe.com/kibbe-body-types/the-kibbe-body-type-test)
+- Our Fashion Garden, [Kibbe Body Type Quiz](https://ourfashiongarden.com/kibbe-body-type-quiz/)
+- The Concept Wardrobe, [Capsule Wardrobe: A Comprehensive Guide](https://theconceptwardrobe.com/capsule-wardrobe-a-comprehensive-guide)
+- The Concept Wardrobe, [What Are the 7 Style Essences?](https://theconceptwardrobe.com/7-style-essences/what-are-style-essences)
+- Glamour España, [Qué es el signo Venus y por qué hay que vestir de acuerdo con él](https://www.glamour.es/articulos/que-es-el-signo-venus-y-por-que-hay-que-vestir-de-acuerdo-con-el)
+
+## 8. Validación pendiente
+
+La existencia de breakpoints y reglas responsive no equivale a una prueba visual. Antes de declarar el MVP validado deben completarse pruebas manuales en 375, 768 y 1440 px, además de comprobar navegación por teclado, lector de pantalla, recuperación de progreso, reinicio y contraste. El proyecto no incluye aún un estudio con participantes ni validación externa de resultados.
+
+## 9. Roadmap
+
+- Sesiones de prueba moderadas con participantes diversos.
+- Comparación de resultados con asesoría profesional independiente.
+- Refinamiento de ilustraciones originales y documentación de sus proporciones.
+- Prueba de drapeado físico como complemento de colorimetría.
+- Capturas verificadas de 375, 768 y 1440 px.
+- Cálculo opcional de carta natal con fecha, hora y lugar, fuera del MVP actual.
