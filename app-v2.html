@@ -870,7 +870,7 @@ function getModules(){
 
  // Perfil natural: datos descriptivos, no juicios estéticos.
  m.unshift({key:'natural-profile',icon:'◉',label:'Tus rasgos naturales',title:'Empezamos por tu punto de partida.',sub:'Estos datos ayudan a contextualizar color y proporciones. No determinan por sí solos tu estación ni tu tipo Kibbe.',questions:[
- {id:'profile_height',input:{type:'number',min:120,max:220,step:1},text:'¿Cuánto mides?',hint:'Escribe tu estatura real en centímetros. Este dato se mostrará como contexto; no decide por sí solo tu línea vertical Kibbe.'},
+ {id:'profile_height',optional:true,input:{type:'number',min:120,max:220,step:1},text:'¿Cuánto mides?',hint:'Escribe tu estatura real en centímetros. Este dato se mostrará como contexto; no decide por sí solo tu línea vertical Kibbe.'},
  {id:'profile_hair',text:'¿Cuál es tu color natural de cabello?',hint:'Piensa en tu color de nacimiento o en la raíz sin teñir. Si lo tiñes, elige tu color natural.',cols:2,opts:venusOpts([['black','Negro','Negro natural, de reflejo muy oscuro.'],['dark-brown','Castaño muy oscuro','Casi negro, con reflejos marrones.'],['brown','Castaño','De claro a medio u oscuro.'],['light-brown','Castaño claro / rubio oscuro','Entre castaño y rubio.'],['blonde','Rubio','De rubio oscuro a muy claro.'],['red','Pelirrojo / cobrizo','Reflejos rojizos o cobrizos naturales.'],['grey','Canoso / blanco','Cabello gris, plateado o blanco natural.'],['unknown','No lo sé','Mi color cambia mucho o no puedo identificarlo.']])},
  {id:'profile_eyes',text:'¿De qué color son tus ojos?',hint:'Elige el color predominante del iris, no el efecto de la luz o de lentes de contacto.',cols:2,opts:venusOpts([['dark-brown','Café muy oscuro','Marrón profundo, casi negro.'],['brown','Café','Marrón medio o cálido.'],['hazel','Avellana / miel','Mezcla de marrón, verde o dorado.'],['green','Verdes','Verde claro u oscuro.'],['blue','Azules','Azul claro, medio u oscuro.'],['grey','Grises','Gris o azul grisáceo.'],['mixed','Mixtos','Dos tonos visibles o anillo contrastante.'],['unknown','No lo sé','No identifico un tono dominante.']])},
  {id:'profile_skin_depth',text:'¿Cómo describirías la profundidad de tu tono de piel?',hint:'Esto describe qué tan claro u oscuro se ve tu tono, no su subtono. Considera tu piel habitual sin bronceado reciente.',cols:2,opts:venusOpts([['very-fair','Muy clara','Marfil o porcelana.'],['fair','Clara','Clara a beige claro.'],['medium','Media','Beige medio, oliva medio o dorado medio.'],['tan','Morena / bronceada','Tono medio-profundo o bronceado naturalmente.'],['deep','Profunda','Marrón profundo a muy profundo.'],['unknown','No lo sé','Prefiero no clasificarla.']])},
@@ -897,7 +897,7 @@ function getModules(){
 function totalQuestions() {
   return getModules().reduce((s,m) => s + m.questions.length, 0);
 }
-function answeredCount(){return getModules().reduce((sum,m)=>sum+m.questions.filter(q=>answers[q.id]!==undefined&&answers[q.id]!=='' ).length,0);}
+function answeredCount(){return getModules().reduce((sum,m)=>sum+m.questions.filter(q=>q.optional||(answers[q.id]!==undefined&&answers[q.id]!=='' )).length,0);}
 function updateProgress() {
   const mods   = getModules();
   const total  = totalQuestions();
@@ -943,7 +943,7 @@ function renderQuestion() {
     <div class="q-text">${q.text}</div>
     <div class="q-hint">${q.hint}</div>`;
   if(q.input){
-    html += `<div class="venus-input-wrap"><input class="venus-profile-input" id="venus-profile-input" type="${q.input.type}" min="${q.input.min}" max="${q.input.max}" step="${q.input.step}" value="${answers[q.id]||''}" placeholder="Ej. 162" inputmode="numeric" oninput="selectInput('${q.id}',this.value)"><span>cm</span><small>Entre 120 y 220 cm</small></div>`;
+    html += `<div class="venus-input-wrap"><input class="venus-profile-input" id="venus-profile-input" type="${q.input.type}" min="${q.input.min}" max="${q.input.max}" step="${q.input.step}" value="${answers[q.id]||''}" placeholder="Ej. 162" inputmode="numeric" oninput="selectInput('${q.id}',this.value)"><span>cm</span><small>Entre 120 y 220 cm · Si no conoces tu estatura, puedes continuar sin responder.</small></div>`;
   } else {
     html += `<div class="opt-grid ${gridCls}">`;
 
@@ -989,7 +989,7 @@ function renderQuestion() {
       ${!isFirst
         ? `<button class="btn-back" onclick="goBack()">← Atrás</button>`
         : `<button class="btn-back" onclick="returnToGender()">← Cambiar perfil</button>`}
-      <button class="btn-next ${answers[q.id]?'on':''}"
+      <button class="btn-next ${answers[q.id]||q.optional?'on':''}"
         id="btn-next" onclick="goNext()">
         ${isLastQuestion() ? 'Siguiente paso ✦' : 'Continuar →'}
       </button>
@@ -1029,7 +1029,7 @@ function goNext() {
   const mods = getModules();
   const mod  = mods[modIdx];
   const q    = mod.questions[qIdx];
-  if (!answers[q.id]) return;
+  if (!answers[q.id]&&!q.optional) return;
   if (isLastQuestion()) {
     showSelfieModule();
     return;
@@ -1472,9 +1472,9 @@ function calcSeason(){
  const contrast=answers.profile_contrast||'unknown';
  const value=c.dimensions.value,chroma=c.dimensions.chroma;
  if(family==='spring')return value==='light'?'spring-light':chroma==='bright'?'spring-true':'spring-warm';
- if(family==='summer')return value==='light'?'summer-soft':chroma==='soft'?'summer-soft':'summer-cool';
- if(family==='winter')return contrast==='high'||chroma==='bright'?'winter-clear':value==='deep'?'winter-true':'winter-soft';
- return value==='deep'&&contrast==='high'?'autumn-deep':chroma==='soft'?'autumn-soft':'autumn-deep';
+ if(family==='summer')return value==='light'?'summer-light':chroma==='soft'?'summer-soft':'summer-cool';
+ if(family==='winter')return chroma==='bright'?'winter-clear':value==='deep'?'winter-deep':'winter-true';
+ return value==='deep'&&contrast==='high'?'autumn-deep':chroma==='soft'?'autumn-soft':'autumn-true';
 }
 function calcVibe(){return answers.style_mood||'romantic-mystery';}
 
@@ -1839,6 +1839,25 @@ const KIBBE_DATA = {
 };
 
 const SEASON_DATA = {
+  'autumn-true':{
+    name:'Otoño Verdadero',
+    palette:['#5a2c1d','#a34f2b','#b77b32','#59613a','#d0a36b'],
+    paletteNames:['Cacao cálido','Óxido','Mostaza','Oliva','Camel'],
+    rules:['Cálidos medios y ricos','Terracota, oliva, mostaza y camel','Contraste cálido moderado','Evita fríos azulados muy intensos']
+  },
+  'summer-light':{
+    name:'Verano Claro',
+    palette:['#d9d9e8','#b7c8dc','#e4c7d0','#a8bdc8','#eee9e6'],
+    paletteNames:['Lavanda clara','Azul niebla','Rosa frío','Azul gris','Marfil frío'],
+    rules:['Colores claros, fríos y delicados','Contraste bajo a medio','Pasteles fríos y tonos aireados','Evita tonos muy oscuros o cálidos']
+  },
+  'winter-deep':{
+    name:'Invierno Profundo',
+    palette:['#111522','#26334c','#4b1f3d','#7b2638','#d9dce5'],
+    paletteNames:['Azul tinta','Marino','Ciruela','Borgoña frío','Plata pálida'],
+    rules:['Colores fríos, profundos y definidos','Contraste medio-alto a alto','Azul tinta, ciruela y borgoña frío','Evita tonos cálidos y apagados']
+  },
+
   'autumn-deep':{
     name:'Otoño Profundo',
     palette:['#2d1810','#641f38','#8b4513','#c9813d','#d4a050'],
