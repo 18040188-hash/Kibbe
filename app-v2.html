@@ -848,13 +848,13 @@ function getModules(){
  {id:'kb_face',text:'¿Qué líneas predominan en tus rasgos faciales?',hint:'Este dato solo complementa la lectura. El sistema Kibbe actual prioriza la línea del cuerpo y cómo cae la ropa; el rostro no debe decidir el resultado por sí solo.',cols:2,opts:venusOpts([['angular','Angulosas','Rasgos más rectos o definidos.'],['soft','Suaves','Rasgos más redondeados o delicados.'],['balanced','Equilibradas','No predomina una dirección.'],['mixed','Combinadas','Conviven líneas suaves y marcadas.']])}
  ]},
  {key:'color-12',icon:'◐',label:'Los colores que te favorecen',title:'Encuentra los colores que te iluminan.',sub:'Vamos a comparar tonos para descubrir cuáles hacen que tu rostro se vea más armonioso. La pantalla es una guía; la luz puede cambiar cómo se ven los colores.',questions:[
- {id:'cl_temp1',text:'¿Qué grupo de colores hace que tu rostro se vea mejor?',hint:'Si puedes, acerca prendas de esos colores a tu rostro, sin maquillaje y junto a una ventana. Fíjate en cuál hace que tu piel se vea más uniforme.',cols:2,opts:venusOpts([['warm','Cálidos','Dorado, coral y terracota.',['#D98A45','#C45D43','#E2B65B']],['cool','Fríos','Rosa azulado, frambuesa y azul.',['#B95C83','#526F9D','#A6B6CF']]])},
- {id:'cl_value1',text:'¿Te favorecen más los colores claros o los oscuros?',hint:'Compara tonos claros y oscuros que sean parecidos en intensidad. Elige los que sientas que acompañan mejor tu rostro.',cols:2,opts:venusOpts([['light','Claros','Marfil, rosa pálido y azul cielo.',['#F0DFC1','#E6B8C5','#B9D0DC']],['deep','Profundos','Ciruela, petróleo y chocolate.',['#44243B','#164B50','#493027']]])},
- {id:'cl_chroma1',text:'¿Te quedan mejor los colores vivos o los suaves?',hint:'Compara colores muy vivos con otros más apagados o empolvados. Piensa en cuáles se ven más naturales junto a tu rostro.',cols:2,opts:venusOpts([['bright','Brillantes','Colores limpios y definidos.',['#E33B53','#1768B2','#F0C52B']],['soft','Suavizados','Colores empolvados o grisáceos.',['#B77B82','#8196A2','#A49A78']]])},
- {id:'cl_temp2',text:'Al comparar otros tonos, ¿te ves mejor con colores cálidos o fríos?',hint:'Prueba con otros colores y luz natural. Los cálidos suelen recordar al dorado, coral o terracota; los fríos, al rosa azulado, azul o plateado.',cols:2,opts:venusOpts([['warm','Dorado / cálido','La piel mantiene una apariencia equilibrada.',['#D5A34D','#B65D3D','#8A6A36']],['cool','Plateado / frío','La piel mantiene una apariencia equilibrada.',['#9AA8C3','#B46C91','#52617C']]])},
- {id:'cl_value2',text:'¿Qué te favorece más: los tonos claros o los profundos?',hint:'Observa si los tonos muy claros hacen que tu rostro pierda definición o si los oscuros se ven demasiado fuertes. Elige el grupo que te equilibre.',cols:2,opts:venusOpts([['light','Claro','Los tonos luminosos se integran.',['#F2E5CF','#D6E0E4','#E8C4C9']],['deep','Oscuro','Los tonos profundos se integran.',['#34243D','#173B3C','#3D2B25']]])},
- {id:'cl_chroma2',text:'¿Qué tipo de color se ve más natural en ti?',hint:'Compara colores limpios y brillantes con otros más suaves o mezclados con gris. No elijas por tu color favorito, sino por cómo se ve junto a tu rostro.',cols:2,opts:venusOpts([['bright','Nítido','Colores limpios y definidos.',['#D82E4B','#1765A8','#E6B923']],['soft','Atenuado','Colores mezclados con gris.',['#A86D78','#778D91','#9A8A70']]])}
- ,{id:'cl_family',text:'¿Qué grupo describe mejor los colores que te favorecen?',hint:'Elige el grupo que más se parezca a los colores que te han funcionado en las comparaciones. Si no estás seguro, puedes elegir el más cercano.',cols:2,opts:venusOpts([['spring','Primavera','Cálida, luminosa y clara.',['#F2B84B','#F08062','#78A96B']],['summer','Verano','Fría, suave y ligera.',['#B8C5D8','#C99BAA','#8BA9B4']],['autumn','Otoño','Cálida, profunda y terrosa.',['#A75D36','#687044','#B58A4C']],['winter','Invierno','Fría, definida y de contraste.',['#253C73','#B52C52','#F0E9DF']]])}
+ {id:'cl_temp1',text:'¿Qué grupo de colores hace que tu rostro se vea mejor?',hint:'Si puedes, acerca prendas de esos colores a tu rostro, sin maquillaje y junto a una ventana. Fíjate en cuál hace que tu piel se vea más uniforme.',cols:2,opts:venusOpts([['warm','Cálidos','Dorado, coral y terracota.',['#D98A45','#C45D43','#E2B65B']],['neutral','Neutros','Ni muy dorados ni muy azulados.',['#B79A7A','#9C8B86','#B8AFA0']],['cool','Fríos','Rosa azulado, frambuesa y azul.',['#B95C83','#526F9D','#A6B6CF']]])},
+ {id:'cl_value1',text:'¿Te favorecen más los colores claros o los oscuros?',hint:'Compara tonos claros y oscuros que sean parecidos en intensidad. Elige los que sientas que acompañan mejor tu rostro.',cols:2,opts:venusOpts([['light','Claros','Marfil, rosa pálido y azul cielo.',['#F0DFC1','#E6B8C5','#B9D0DC']],['medium','Medios','Tonos intermedios sin mucha profundidad o luminosidad.',['#B79B82','#9A9A7A','#8A8790']],['deep','Profundos','Ciruela, petróleo y chocolate.',['#44243B','#164B50','#493027']]])},
+ {id:'cl_chroma1',text:'¿Te quedan mejor los colores vivos o los suaves?',hint:'Compara colores muy vivos con otros más apagados o empolvados. Piensa en cuáles se ven más naturales junto a tu rostro.',cols:2,opts:venusOpts([['bright','Brillantes','Colores limpios y definidos.',['#E33B53','#1768B2','#F0C52B']],['medium','Intermedios','Ni muy vivos ni muy apagados.',['#B77B82','#8196A2','#A49A78']],['soft','Suavizados','Colores empolvados o grisáceos.',['#B77B82','#8196A2','#A49A78']]])},
+ {id:'cl_temp2',text:'Al comparar otros tonos, ¿te ves mejor con colores cálidos o fríos?',hint:'Prueba con otros colores y luz natural. Los cálidos suelen recordar al dorado, coral o terracota; los fríos, al rosa azulado, azul o plateado.',cols:2,opts:venusOpts([['warm','Dorado / cálido','La piel mantiene una apariencia equilibrada.',['#D5A34D','#B65D3D','#8A6A36']],['neutral','Neutro','Ambos grupos se ven similares.',['#B79A7A','#9C8B86','#B8AFA0']],['cool','Plateado / frío','La piel mantiene una apariencia equilibrada.',['#9AA8C3','#B46C91','#52617C']]])},
+ {id:'cl_value2',text:'¿Qué te favorece más: los tonos claros o los profundos?',hint:'Observa si los tonos muy claros hacen que tu rostro pierda definición o si los oscuros se ven demasiado fuertes. Elige el grupo que te equilibre.',cols:2,opts:venusOpts([['light','Claro','Los tonos luminosos se integran.',['#F2E5CF','#D6E0E4','#E8C4C9']],['medium','Medio','Los tonos medios se integran mejor.',['#B79B82','#9A9A7A','#8A8790']],['deep','Oscuro','Los tonos profundos se integran.',['#34243D','#173B3C','#3D2B25']]])},
+ {id:'cl_chroma2',text:'¿Qué tipo de color se ve más natural en ti?',hint:'Compara colores limpios y brillantes con otros más suaves o mezclados con gris. No elijas por tu color favorito, sino por cómo se ve junto a tu rostro.',cols:2,opts:venusOpts([['bright','Nítido','Colores limpios y definidos.',['#D82E4B','#1765A8','#E6B923']],['medium','Intermedio','Ni muy saturado ni muy grisáceo.',['#A86D78','#778D91','#9A8A70']],['soft','Atenuado','Colores mezclados con gris.',['#A86D78','#778D91','#9A8A70']]])}
+ ,{id:'cl_family',text:'Si ya conoces tu estación, ¿qué familia coincide con tus comparaciones?',hint:'Es un dato de apoyo, no una respuesta obligatoria basada en intuición. Si no tienes un análisis previo, elige “No lo sé” y VÉNUS estimará la familia a partir de las dimensiones.',cols:2,opts:venusOpts([['spring','Primavera','Cálida, luminosa y clara.',['#F2B84B','#F08062','#78A96B']],['summer','Verano','Fría, suave y ligera.',['#B8C5D8','#C99BAA','#8BA9B4']],['autumn','Otoño','Cálida, profunda y terrosa.',['#A75D36','#687044','#B58A4C']],['winter','Invierno','Fría, definida y de contraste.',['#253C73','#B52C52','#F0E9DF']],['unknown','No lo sé','No tengo un análisis previo.']])}
  ]},
  {key:'essences',icon:'✳',label:'Los detalles que van contigo',title:'Descubre qué estilo visual te acompaña.',sub:'Observa tus rasgos y piensa en las formas, los detalles y las prendas que se ven más naturales en ti. No es un examen de personalidad.',questions:[
  {id:'es_face',text:'¿Qué formas destacan más en tu rostro?',hint:'Mira una foto tuya sin filtros. Fíjate si predominan las líneas marcadas, las formas suaves o una mezcla.',cols:2,opts:venusOpts([['dramatic','Marcadas y alargadas','Líneas rectas, definidas o largas.'],['natural','Naturales y relajadas','Rasgos abiertos, amplios o suaves.'],['classic','Equilibradas','Proporciones proporcionadas y simétricas.'],['romantic','Suaves y redondeadas','Rasgos curvos y suaves.']])},
@@ -1339,24 +1339,31 @@ function venusColorAnalysis(){
  const dims={temp:[answers.cl_temp1,answers.cl_temp2],value:[answers.cl_value1,answers.cl_value2],chroma:[answers.cl_chroma1,answers.cl_chroma2]};
  const resolve=a=>a.every(Boolean)&&a[0]===a[1]?a[0]:a.some(Boolean)?'mixto':'sin datos';
  const d={temp:resolve(dims.temp),value:resolve(dims.value),chroma:resolve(dims.chroma)};
- const family=answers.cl_family||'unknown';
- const sub={
+ const selected=answers.cl_family||'unknown';
+ const derived=(d.temp==='warm'&&d.value==='light'&&d.chroma==='bright')?'spring':
+  (d.temp==='cool'&&d.value==='light'&&d.chroma==='soft')?'summer':
+  (d.temp==='warm'&&d.value==='deep'&&d.chroma==='soft')?'autumn':
+  (d.temp==='cool'&&d.value==='deep'&&d.chroma==='bright')?'winter':'unknown';
+ const family=derived!=='unknown'?derived:selected;
+ const subtype={
  spring:d.value==='light'?'Light Spring':d.chroma==='bright'?'Bright Spring':'True Spring',
  summer:d.value==='light'?'Light Summer':d.chroma==='soft'?'Soft Summer':'True Summer',
  autumn:d.chroma==='soft'?'Soft Autumn':d.value==='deep'?'Deep Autumn':'True Autumn',
- winter:d.chroma==='bright'?'Bright Winter':d.value==='deep'?'Deep Winter':'True Winter'
+ winter:d.value==='deep'?'Deep Winter':d.chroma==='bright'?'Bright Winter':'True Winter'
  };
  const candidates={spring:['Light Spring','True Spring','Bright Spring'],summer:['Light Summer','True Summer','Soft Summer'],autumn:['Soft Autumn','True Autumn','Deep Autumn'],winter:['Deep Winter','True Winter','Bright Winter']};
- const primary=family==='unknown'?'Pendiente de confirmar':sub[family];
- const neighbors=family==='unknown'?['Completa la comparación de familias']:candidates[family].filter(x=>x!==primary);
- const naturalUndertone=answers.profile_undertone||'unknown';
- const drapeUndertone=d.temp;
- const undertoneMatch=(naturalUndertone==='warm'&&drapeUndertone==='warm')||(naturalUndertone==='cool'&&drapeUndertone==='cool')||(naturalUndertone==='neutral'&&drapeUndertone==='mixto');
- const consistent=Object.values(d).filter(x=>x!=='mixto'&&x!=='sin datos').length+(family!=='unknown'?1:0);
+ const seasonKeys={'Light Spring':'spring-light','True Spring':'spring-warm','Bright Spring':'spring-true','Light Summer':'summer-light','True Summer':'summer-cool','Soft Summer':'summer-soft','Soft Autumn':'autumn-soft','True Autumn':'autumn-true','Deep Autumn':'autumn-deep','Deep Winter':'winter-deep','True Winter':'winter-true','Bright Winter':'winter-clear'};
+ const primary=family==='unknown'?'Pendiente de confirmar':subtype[family];
+ const neighbors=family==='unknown'?['Faltan coincidencias claras entre dimensiones']:candidates[family].filter(x=>x!==primary);
+ const naturalUndertone=answers.profile_undertone||'unknown',drapeUndertone=d.temp;
+ const undertoneMatch=(naturalUndertone==='warm'&&drapeUndertone==='warm')||(naturalUndertone==='cool'&&drapeUndertone==='cool')||(naturalUndertone==='neutral'&&drapeUndertone==='neutral');
  const profileComplete=['profile_hair','profile_eyes','profile_skin_depth','profile_undertone','profile_contrast'].filter(k=>answers[k]&&answers[k]!=='unknown').length;
- const confidence=consistent>=4&&profileComplete>=4?'medio':consistent>=3?'medio':'bajo';
+ const resolved=Object.values(d).filter(x=>!['mixto','sin datos'].includes(x)).length;
+ const familyMismatch=derived!=='unknown'&&selected!=='unknown'&&derived!==selected;
+ const confidence=resolved===3&&!familyMismatch&&profileComplete>=3?'medio':'bajo';
  const profileCheck=naturalUndertone==='unknown'?'No se indicó un subtono natural para contrastar.':undertoneMatch?'La comparación de telas y tu autoobservación de subtono coinciden.':naturalUndertone==='olive'?'El matiz oliva puede requerir drapeado físico adicional; no se fuerza a cálido o frío.':'Tu autoobservación y la comparación de telas no coinciden del todo; conviene revisar con drapeado físico.';
- return {dimensions:d,primary,neighbors,confidence,profileCheck,profileComplete,naturalUndertone,contrast:answers.profile_contrast||'unknown'};
+ const note=familyMismatch?'La familia elegida como referencia no coincide con la combinación de temperatura, valor y croma; se priorizó la combinación observada.':derived==='unknown'?'La familia se toma como hipótesis de apoyo porque las tres dimensiones no forman una combinación estacional nítida.':'La familia se infiere de la combinación de temperatura, valor y croma.';
+ return {dimensions:d,primary,seasonKey:seasonKeys[primary]||'autumn-soft',neighbors,confidence,profileCheck,profileComplete,naturalUndertone,contrast:answers.profile_contrast||'unknown',family,derivedFamily:derived,familyMismatch,note};
 }
 function venusEssenceAnalysis(){
  const names=['dramatic','natural','classic','gamine','romantic','ingenue','angelic'];
@@ -1473,15 +1480,7 @@ function calcKibbeScores(){
 }
 function calcKibbe(){const scores=calcKibbeScores();return Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];}
 
-function calcSeason(){
- const c=venusColorAnalysis(),family=answers.cl_family||'autumn';
- const contrast=answers.profile_contrast||'unknown';
- const value=c.dimensions.value,chroma=c.dimensions.chroma;
- if(family==='spring')return value==='light'?'spring-light':chroma==='bright'?'spring-true':'spring-warm';
- if(family==='summer')return value==='light'?'summer-light':chroma==='soft'?'summer-soft':'summer-cool';
- if(family==='winter')return chroma==='bright'?'winter-clear':value==='deep'?'winter-deep':'winter-true';
- return value==='deep'&&contrast==='high'?'autumn-deep':chroma==='soft'?'autumn-soft':'autumn-true';
-}
+function calcSeason(){return venusColorAnalysis().seasonKey;}
 function calcVibe(){return answers.style_mood||'romantic-mystery';}
 
 /* ═══════════════════════════════════════════════════════════
