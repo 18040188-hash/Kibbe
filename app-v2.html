@@ -910,12 +910,8 @@ function updateProgress() {
   document.getElementById('prog-pct').textContent  = pct + '%';
   document.getElementById('prog-label').textContent =
     (labels[modIdx] || '')+' · '+(done)+'/'+total+' observaciones';
-  for (let i = 0; i < 4; i++) {
-    const el = document.getElementById('sd'+i);
-    if (!el) continue;
-    el.className = 'section-dot' +
-      (i < modIdx ? ' done' : i === modIdx ? ' active' : '');
-  }
+  const dots=document.querySelector('.section-dots');
+  if(dots) dots.innerHTML=mods.map((m,i)=>'<div class="section-dot'+(i<modIdx?' done':i===modIdx?' active':'')+'" aria-label="'+m.label+'"></div>').join('');
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -940,6 +936,7 @@ function renderQuestion() {
         <div class="section-sub">
           ${mod.sub.replace('\n','<br>')}
         </div>
+        ${mod.guide ? '<p class="venus-test-guide">'+mod.guide+'</p>' : ''}
       </div>`;
   }
 
@@ -1392,7 +1389,7 @@ function venusMethodResults(){
  const names={'soft-dramatic':'Soft Dramatic','flamboyant-natural':'Flamboyant Natural','soft-natural':'Soft Natural','dramatic-classic':'Dramatic Classic','soft-classic':'Soft Classic','soft-gamine':'Soft Gamine','theatrical-romantic':'Theatrical Romantic'};
  const label=x=>names[x]||String(x||'').replace(/-/g,' ').replace(/\b\w/g,m=>m.toUpperCase());
  const alternatives=k.alternatives.map(x=>label(x[0])).join(' · ');
- const fields={kb_vertical:'Línea vertical',kb_frame:'Estructura',kb_flesh:'Distribución de volumen',kb_shoulders:'Relación hombros/cadera',kb_scale:'Escala de detalle',kb_balance:'Impresión general'};
+ const fields={kb_vertical:'Línea vertical',kb_frame:'Estructura ósea',kb_flesh:'Distribución de volumen',kb_shoulders:'Relación hombros/cadera',kb_scale:'Escala de detalle',kb_balance:'Impresión general',kb_limbs:'Longitud de extremidades',kb_hands_feet:'Escala de manos y pies',kb_waist:'Definición de cintura',kb_face:'Líneas faciales'};
  const observations=k.observations.map(x=>{const p=x.split(': ');return '<li><b>'+label(fields[p[0]]||p[0])+':</b> '+label(p[1])+'</li>'}).join('');
  const ess=e.map(x=>'<div class="venus-essence-row"><div><span>'+label(x.name)+'</span><b>'+x.percent+'%</b></div><i><span style="width:'+x.percent+'%"></span></i></div>').join('');
  const dominant=e.filter(x=>x.percent>0).slice(0,3).map(x=>label(x.name)+' ('+x.percent+'%)').join(' · ');
@@ -1468,7 +1465,7 @@ function calcKibbeScores(){
  if(a.kibbeTie==='mixed')add(['soft-classic','dramatic-classic'],1);
  return score;
 }
-function calcKibbe(){return Object.keys(calcKibbeScores()).sort((a,b)=>calcKibbeScores()[b]-calcKibbeScores()[a])[0];}
+function calcKibbe(){const scores=calcKibbeScores();return Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];}
 
 function calcSeason(){
  const c=venusColorAnalysis(),family=answers.cl_family||'autumn';
@@ -2069,7 +2066,7 @@ function showMoodboard() {
   document.getElementById('prog-fill').style.width = '100%';
   document.getElementById('prog-pct').textContent  = '100%';
   document.getElementById('prog-label').textContent = 'Tu moodboard VÉNUS';
-  for (let i=0; i<4; i++) {
+  for (let i=0; i<getModules().length; i++) {
     const el = document.getElementById('sd'+i);
     if (el) el.className = 'section-dot done';
   }
@@ -2085,8 +2082,16 @@ function showMoodboard() {
   // para que Glow Up pueda recibirla automáticamente.
   try {
     localStorage.setItem('venusGlowUpProfile', JSON.stringify({
-      version: 1,
+      version: 2,
       gender,
+      height: answers.profile_height || null,
+      naturalHair: answers.profile_hair || null,
+      naturalEyes: answers.profile_eyes || null,
+      skinDepth: answers.profile_skin_depth || null,
+      skinUndertone: answers.profile_undertone || null,
+      wardrobeContext: answers.wardrobe_context || null,
+      wardrobeClimate: answers.wardrobe_climate || null,
+      wardrobeGoal: answers.wardrobe_goal || null,
       kibbe: kd.name,
       season: sd.name,
       vibe: vd.name,
