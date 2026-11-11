@@ -133,3 +133,12 @@ Las tres placas vectoriales originales permanecen como interpretación visual pr
 - **Scroll global:** se eliminó el bloqueo global `overflow:hidden` que se había heredado del layout móvil de Glow Up; ahora el scroll interno queda limitado a `body.glowup-page` y las demás páginas usan desplazamiento normal.
 - **Test:** se corrigió un cierre de corchetes en la pregunta de familia estacional del módulo de colorimetría. El error de sintaxis detenía la ejecución de todo el script principal, por lo que no se renderizaba el selector inicial ni podía comenzar el cuestionario.
 - **Validación:** se comprobó la sintaxis de los scripts inline de las cinco páginas. Esta comprobación no sustituye una prueba interactiva completa en dispositivos reales.
+
+
+## Cuestionario y resultados editoriales
+
+El cuestionario permite retroceder entre preguntas y módulos. En la primera pregunta se puede volver a la selección de perfil; si se cambia la selección, se reinicia el progreso anterior para evitar mezclar respuestas de perfiles distintos. El progreso del test continúa guardándose localmente en el navegador.
+
+El resultado se presenta como un atlas editorial personal: hipótesis de silueta con observaciones y alternativas, dimensiones de color con muestras de paleta, distribución de las siete esencias, capa simbólica Venus y una guía práctica de proporciones, prendas, capas, accesorios, detalles, cabello y maquillaje. Las recomendaciones se derivan de los resultados individuales; la referencia Dark Romantic Academia funciona como dirección de arte, no como estética impuesta a todas las personas.
+
+Se corrigió además una referencia a variables fuera de alcance que podía lanzar un error JavaScript al avanzar entre preguntas. Se verificó la sintaxis de los bloques JavaScript después del cambio. Esta comprobación no sustituye una prueba funcional de extremo a extremo en navegador.
