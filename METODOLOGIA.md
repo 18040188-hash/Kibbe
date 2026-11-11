@@ -169,3 +169,19 @@ Se aisló una regla CSS `html, body { height:100%; overflow:hidden }` procedente
 En `app-v2.html`, la pregunta de familia estacional (`cl_family`) tenía un cierre de corchetes incorrecto dentro de las opciones de color. El error producía `SyntaxError: Unexpected token ')'` al analizar el script completo, impidiendo ejecutar `renderGenderScreen()`. Se corrigió el cierre y se validó el parseo de los scripts inline de las cinco páginas.
 
 La validación anterior es estática (parseo JavaScript); queda pendiente la prueba de interacción real y la inspección visual en 375, 768 y 1440 px.
+
+
+## 11. Navegación y retroceso del cuestionario
+
+Cada pregunta, excepto la primera, ofrece una acción de retroceso al elemento anterior. En la primera pregunta se ofrece “Cambiar perfil”, que regresa a la pantalla inicial. Si la persona selecciona un perfil diferente, las respuestas anteriores se reinician para evitar combinar datos recogidos bajo perfiles distintos. El progreso se conserva localmente mientras se mantiene el mismo perfil.
+
+Se eliminó una referencia a variables de resultado que estaban fuera del ámbito de la función de avance. La transición entre preguntas ya no intenta ejecutar el diálogo de revelación antes de calcular el moodboard final.
+
+## 12. Presentación desglosada del resultado
+
+El resultado se organiza como un atlas editorial en dos niveles:
+
+- **Lectura metodológica:** hipótesis de silueta, observaciones usadas, alternativas cercanas y consistencia cualitativa; estación de color, dimensiones de temperatura/valor/croma y estaciones vecinas; porcentaje descriptivo de las siete esencias; recomendación simbólica Venus separada.
+- **Aplicación al guardarropa:** figura esquemática, proporciones, prendas por categoría, capas, accesorios, texturas, elementos de expresión, cabello, maquillaje, puntos a ajustar y una receta orientativa de outfit.
+
+La dirección gráfica toma como referencia la lámina Dark Romantic Academia compartida por la autora: paleta organizada, retícula editorial, captions y fichas por categoría. No se fuerza esa estética sobre todos los resultados. La fórmula y las recomendaciones se mantienen vinculadas a las respuestas individuales. Las sugerencias de prendas son exploratorias, no reglas obligatorias.
