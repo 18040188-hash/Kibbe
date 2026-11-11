@@ -3973,3 +3973,14 @@ img{max-width:100%}
 :where(.spread-page,.mosaic-item) img{transition:transform .35s ease}
 a[href="archivo.html"]{text-decoration-thickness:1px;text-underline-offset:4px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto;animation-duration:.01ms;animation-iteration-count:1;transition-duration:.01ms}}
+
+.glowup-art-direction{margin:22px 0;padding:22px;background:var(--v-paper-light);border:1px solid var(--v-rule)}
+.glowup-art-direction h2{font:600 clamp(28px,4vw,44px)/1 var(--v-editorial);margin:10px 0}
+.glowup-art-direction p{font:13px/1.6 var(--v-body);color:var(--v-muted)}
+.glowup-art-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}
+.glowup-art-grid figure{margin:0;min-width:0;border:1px solid var(--v-rule);padding:6px;background:var(--v-paper)}
+.glowup-art-grid img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .25s ease}
+.glowup-art-grid figure:hover img{transform:scale(1.02)}
+.glowup-art-grid figcaption{font:10px var(--v-caption);letter-spacing:.08em;padding:8px 2px}
+.glowup-art-direction>a{font:10px var(--v-caption);letter-spacing:.12em;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:560px){.glowup-art-grid{grid-template-columns:1fr 1fr}.glowup-art-grid figure:last-child{grid-column:1/-1}.glowup-art-grid figure:last-child img{aspect-ratio:16/9}}
