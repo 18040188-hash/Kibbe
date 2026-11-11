@@ -23,15 +23,14 @@ La hoja compartida incluye reglas para 375, 768 y 1440 px. La prueba visual manu
 
 ## Experiencia principal
 
-- **Test modular V3 (10–15 min):** observaciones Kibbe, colorimetría de 12 estaciones, siete esencias y signo Venus manual.
-- **Resultados separados:** hipótesis Kibbe con alternativas y evidencia cualitativa; estación cromática con dimensiones y vecinas; mezcla porcentual de esencias; recomendación creativa Venus.
-- **Progreso local:** módulo, pregunta y respuestas se guardan en `localStorage` para retomar en el mismo navegador.
-- **Resultados transparentes:** se explican las observaciones y las limitaciones; no se muestran porcentajes inventados de precisión.
-- **Glow Up y perfil:** conservan el flujo de archivo personal, plan de estilo, seguimiento y Story Card.
-
-## Modelo metodológico
-
-Consulta [METODOLOGIA.md](METODOLOGIA.md) para el detalle de variables, reglas, fuentes y límites. Las cuatro capas son independientes: Kibbe no determina color; color no determina esencias; Venus no determina ninguna de las anteriores.
+- **Test modular VÉNUS:** observaciones Kibbe, comparaciones cromáticas, siete esencias de estilo y Venus astrológico ingresado manualmente.
+- **Kibbe:** hipótesis orientativa a partir de línea vertical, estructura, distribución de volumen, proporciones y escala. El resultado muestra alternativas cercanas y nivel cualitativo de evidencia.
+- **Colorimetría:** dimensiones de temperatura, valor y croma, con una comparación estacional complementaria. Las 12 estaciones se presentan como hipótesis que requieren confirmación física.
+- **Esencias:** mezcla relativa de Dramatic, Natural, Classic, Gamine, Romantic, Ingenue y Angelic.
+- **Venus:** recomendación creativa separada que no modifica los resultados de silueta o color.
+- **Progreso:** las respuestas y el módulo actual se guardan en `localStorage` para retomar el cuestionario en el mismo navegador.
+- **Resultados:** explicación de señales, alternativas cercanas, observaciones mixtas y limitaciones.
+- **Perfil y Glow Up:** conservan sus flujos previos y el puente de perfil local.
 
 ## Archivos principales
 
@@ -78,3 +77,19 @@ El mismo archivo `styles.css` se carga desde la portada, el test, el archivo vis
 ## Capturas de QA
 
 Pendientes de generar tras la inspección visual real de los viewports 375, 768 y 1440 px. No se incluyen capturas simuladas ni placeholders presentados como evidencia.
+
+
+## Modelo metodológico V3
+
+Consulta `METODOLOGIA.md` para el detalle de fuentes, variables, reglas de interpretación, límites y roadmap. El test separa cuatro capas:
+
+1. **Kibbe:** hipótesis de imagen basada en observaciones de línea, estructura y proporción; no diagnóstico anatómico.
+2. **Colorimetría:** temperatura, valor y croma, con una pregunta de familia estacional para orientar una de las doce subestaciones.
+3. **Esencias:** distribución relativa de siete lenguajes visuales, basada en elecciones de armonía.
+4. **Venus:** inspiración simbólica opcional, ingresada manualmente.
+
+La confianza se expresa como nivel cualitativo de evidencia y consistencia. No se publican porcentajes de exactitud ni se afirma validación científica.
+
+## Capturas de la interfaz
+
+Las capturas de escritorio y móvil deben añadirse después de la verificación visual final. No se incluyen imágenes simuladas como evidencia de QA.
