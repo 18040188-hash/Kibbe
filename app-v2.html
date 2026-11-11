@@ -23,7 +23,7 @@
 
 <nav>
   <a class="logo" href="index.html">VÉNUS</a>
-  <a class="nav-home" href="index.html">← Inicio</a>
+  <a class="nav-home" href="index.html">← Inicio</a><a class="nav-home" href="archivo.html">Archivo ↗</a>
 </nav>
 
 <main>
@@ -2190,12 +2190,12 @@ function showMoodboard() {
     ['Accesorios', `${formulaQuery} jewelry accessories`]
   ];
   const inspirationPhotos = [
-    ['https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85','Siluetas y styling'],
-    ['https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=700&q=85','Texturas y feminidad'],
-    ['https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85','Retrato y presencia'],
-    ['https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=85','Editorial y actitud'],
-    ['https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85','Color y prendas'],
-    ['https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=85','Inspiración de armario']
+    ['assets/img/venus-editorial-punk.svg','Siluetas y styling'],
+    ['assets/img/venus-editorial-lace.svg','Texturas y feminidad'],
+    ['assets/img/venus-editorial-romantic.svg','Retrato y presencia'],
+    ['assets/img/venus-editorial-punk.svg','Editorial y actitud'],
+    ['assets/img/venus-editorial-lace.svg','Color y prendas'],
+    ['assets/img/venus-editorial-romantic.svg','Inspiración de armario']
   ];
   const galleryHTML = inspirationPhotos.map(([src,cap]) =>
     `<a class="reference-tile" href="${pinBase}${encodeURIComponent(`${formulaQuery} ${cap}`)}" target="_blank" rel="noopener noreferrer">
