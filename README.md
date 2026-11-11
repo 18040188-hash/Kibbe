@@ -93,3 +93,33 @@ La confianza se expresa como nivel cualitativo de evidencia y consistencia. No s
 ## Capturas de la interfaz
 
 Las capturas de escritorio y móvil deben añadirse después de la verificación visual final. No se incluyen imágenes simuladas como evidencia de QA.
+
+## Archivo / Referencias y derechos de imagen
+
+Se añadió `archivo.html`, un índice editorial que documenta las once páginas del PDF de referencias, con folios, captions y notas de procedencia. Las páginas 8–11 contienen 32 fotografías de moda. El PDF no aporta créditos verificables completos ni licencias de publicación para cada imagen, así que esas fotografías se documentan como referencias, pero no se copian al sitio público ni al deploy.
+
+En lugar de republicar fotografías de terceros, se añadieron tres ilustraciones vectoriales originales en `assets/img/`:
+- `venus-editorial-punk.svg`
+- `venus-editorial-lace.svg`
+- `venus-editorial-romantic.svg`
+
+Estas placas reinterpretan la dirección de arte general (punk, corsetería, encaje sugerido, romanticismo y burgundy) sin copiar las imágenes fuente. Se retiraron las URLs de Unsplash de home y del test.
+
+### Extracción local para estudio privado
+
+Para extraer las imágenes originales del PDF en una carpeta local, instala Poppler y ejecuta desde la raíz del repositorio:
+
+```bash
+mkdir -p reference-source/pages-08-11
+pdfimages -f 8 -l 11 -all "referencias visuales.pdf" reference-source/pages-08-11/plate
+```
+
+Esto genera los archivos `plate-000.*` en adelante, conservando la mayor parte de los recursos rasterizados originales. No subas esa carpeta a GitHub/Vercel hasta tener autorización de los titulares de derechos. El índice público no necesita esos archivos.
+
+## Mejoras adicionales
+
+- Se añadió navegación directa a Archivo desde home, test, perfil y Glow Up.
+- Se añadieron microinteracciones discretas en imágenes y spreads; respetan `prefers-reduced-motion`.
+- Se reforzó el foco visible para navegación por teclado.
+- Glow Up ya contiene un diario de estilo y la Story Card de perfil conserva su función de compartir/descargar; ahora conviven con el archivo editorial.
+- Se documenta el límite de derechos en vez de inventar créditos fotográficos.
