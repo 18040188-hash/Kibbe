@@ -1176,7 +1176,7 @@ function startQuiz() {
 /* ═══════════════════════════════════════════════════════════
    MODULES — gender-aware labels
 ═══════════════════════════════════════════════════════════ */
-function getModules() {
+function getLegacyModules() {
   const isMasc = gender === 'masc';
 
   return [
@@ -1862,6 +1862,46 @@ function getModules() {
   ];
 }
 
+
+/* VÉNUS METHOD V3 — new independent observation modules */
+function venusFigure(kind){
+ const d={long:'M45 8 L35 30 L39 75 L31 140 L59 140 L51 75 L55 30 Z',compact:'M45 15 L32 32 L35 76 L29 132 L61 132 L55 76 L58 32 Z',soft:'M45 12 C25 25 31 55 36 78 C27 104 32 136 45 140 C58 136 63 104 54 78 C59 55 65 25 45 12 Z'};
+ return '<svg viewBox="0 0 90 150" role="img" aria-label="Silueta esquemática"><circle cx="45" cy="8" r="8" fill="#702b31"/><path d="'+(d[kind]||d.long)+'" fill="#702b31" opacity=".72"/><path d="M18 42H72 M25 78H65" stroke="#b49a70" stroke-dasharray="3 3"/></svg>';
+}
+function venusOpts(rows){return rows.map(([id,name,desc,colors])=>({id,name,desc,swatches:colors||undefined,visual:colors?undefined:venusFigure(id)}));}
+function getModules(){
+ const m=getLegacyModules();
+ m.push(
+ {key:'kibbe-observations',icon:'◈',label:'Kibbe / observaciones',title:'La línea antes que la etiqueta.',sub:'Observa proporciones y líneas en fotografías neutrales. No evalúes atractivo, peso ni talla.',questions:[
+ {id:'kb_vertical',text:'¿Qué línea domina al mirar tu figura completa?',hint:'Mira una foto frontal de cuerpo entero, cámara a la altura del torso y postura natural.',cols:2,opts:venusOpts([['long','Alargada','La figura se percibe larga y continua.'],['compact','Compacta','La figura se percibe corta o concentrada.'],['moderate','Intermedia','No destaca especialmente ninguna de las dos.']])},
+ {id:'kb_frame',text:'¿Qué describe mejor la estructura de tu armazón?',hint:'Observa hombros, articulaciones y contorno óseo. No uses la anchura de la ropa.',cols:2,opts:venusOpts([['angular','Angulosa','Contornos rectos, estrechos o marcados.'],['blunt','Ancha / roma','Contornos amplios y extremos menos afilados.'],['rounded','Redondeada','Contornos pequeños y curvos.'],['balanced','Equilibrada','Proporciones moderadas, sin extremos.']])},
+ {id:'kb_flesh',text:'¿Cómo se distribuye el volumen sobre tu estructura?',hint:'Observa la silueta sin ropa ajustada ni prendas que compriman. No confundas volumen con salud o peso.',cols:2,opts:venusOpts([['lean','Lineal','La forma se mantiene relativamente recta.'],['soft','Redondeada','Hay curvas suaves visibles en varias zonas.'],['mixed','Combinada','Conviven líneas rectas y curvas.']])},
+ {id:'kb_shoulders',text:'¿Qué relación observas entre hombros y caderas?',hint:'Compara el ancho visual en una foto frontal, con brazos relajados.',cols:2,opts:venusOpts([['shoulder','Hombros dominantes','La línea superior tiene más presencia.'],['hip','Caderas dominantes','La línea inferior tiene más presencia.'],['even','Anchos similares','Ambos extremos se perciben equilibrados.']])},
+ {id:'kb_scale',text:'¿Qué escala de detalle acompaña mejor tus proporciones?',hint:'Compara accesorios y estampados pequeños, medios y grandes. Es una observación complementaria.',cols:2,opts:venusOpts([['large','Escala amplia','Detalles grandes y líneas largas se integran.'],['small','Escala pequeña','Detalles compactos y contrastes pequeños se integran.'],['mixed','Escala media','Las escalas moderadas se sienten equilibradas.']])},
+ {id:'kb_balance',text:'¿Qué impresión general produce tu conjunto de líneas?',hint:'Mira la figura completa, no una zona aislada. Si dudas, elige mixta.',cols:2,opts:venusOpts([['dramatic','Definida y alargada','Predominan verticalidad y ángulos.'],['natural','Relajada y amplia','Predominan amplitud y contornos romos.'],['romantic','Suave y curva','Predominan curvas y redondez.'],['balanced','Simétrica y moderada','No destaca un extremo.'],['mixed','Contraste de líneas','Se combinan rasgos compactos y angulosos.']])}
+ ]},
+ {key:'color-12',icon:'◐',label:'Color / 12 estaciones',title:'El color se observa, no se adivina.',sub:'Compara el efecto visual de cada familia cromática. La pantalla ofrece una aproximación, no un drapeado.',questions:[
+ {id:'cl_temp1',text:'¿Qué grupo armoniza mejor junto al rostro?',hint:'Sin maquillaje y con luz natural indirecta. Observa si la piel se ve más uniforme, no qué color prefieres.',cols:2,opts:venusOpts([['warm','Cálidos','Dorado, coral y terracota.',['#D98A45','#C45D43','#E2B65B']],['cool','Fríos','Rosa azulado, frambuesa y azul.',['#B95C83','#526F9D','#A6B6CF']]])},
+ {id:'cl_value1',text:'¿Qué profundidad mantiene más presencia en tu rostro?',hint:'Compara tonos claros y profundos con saturación similar.',cols:2,opts:venusOpts([['light','Claros','Marfil, rosa pálido y azul cielo.',['#F0DFC1','#E6B8C5','#B9D0DC']],['deep','Profundos','Ciruela, petróleo y chocolate.',['#44243B','#164B50','#493027']]])},
+ {id:'cl_chroma1',text:'¿Qué intensidad se integra mejor?',hint:'Compara colores brillantes frente a tonos suavizados. Busca armonía, no impacto.',cols:2,opts:venusOpts([['bright','Brillantes','Colores limpios y definidos.',['#E33B53','#1768B2','#F0C52B']],['soft','Suavizados','Colores empolvados o grisáceos.',['#B77B82','#8196A2','#A49A78']]])},
+ {id:'cl_temp2',text:'En otra comparación, ¿qué temperatura conserva mejor la luminosidad?',hint:'Repite la comparación con una prenda distinta y evita luces amarillas.',cols:2,opts:venusOpts([['warm','Dorado / cálido','La piel mantiene una apariencia equilibrada.',['#D5A34D','#B65D3D','#8A6A36']],['cool','Plateado / frío','La piel mantiene una apariencia equilibrada.',['#9AA8C3','#B46C91','#52617C']]])},
+ {id:'cl_value2',text:'¿Qué extremo de valor te da más equilibrio?',hint:'Observa si los tonos claros te lavan o si los oscuros endurecen demasiado.',cols:2,opts:venusOpts([['light','Claro','Los tonos luminosos se integran.',['#F2E5CF','#D6E0E4','#E8C4C9']],['deep','Oscuro','Los tonos profundos se integran.',['#34243D','#173B3C','#3D2B25']]])},
+ {id:'cl_chroma2',text:'¿Qué acabado cromático se ve más armónico?',hint:'Compara la claridad del color, no el contraste entre la prenda y el fondo.',cols:2,opts:venusOpts([['bright','Nítido','Colores limpios y definidos.',['#D82E4B','#1765A8','#E6B923']],['soft','Atenuado','Colores mezclados con gris.',['#A86D78','#778D91','#9A8A70']]])}
+ ]},
+ {key:'essences',icon:'✳',label:'Esencias / Kitchener',title:'Siete lenguajes visuales.',sub:'Elige qué lenguaje visual armoniza con tus rasgos y presencia. No es un test de personalidad.',questions:[
+ {id:'es_face',text:'¿Qué tipo de líneas reconoces más en tus rasgos?',hint:'Observa proporciones generales del rostro en una foto sin filtros.',cols:2,opts:venusOpts([['dramatic','Dramatic','Líneas angulosas, definidas o alargadas.'],['natural','Natural','Rasgos abiertos, anchos o relajados.'],['classic','Classic','Proporciones equilibradas y simétricas.'],['romantic','Romantic','Rasgos suaves, redondeados o voluptuosos.']])},
+ {id:'es_scale',text:'¿Qué escala de formas se integra mejor?',hint:'Imagina accesorios y estampados junto a tu rostro.',cols:2,opts:venusOpts([['ingenue','Ingenue','Pequeña, delicada y fina.'],['dramatic','Dramatic','Grande, alargada y marcada.'],['natural','Natural','Amplia, irregular y orgánica.'],['gamine','Gamine','Pequeña, contrastada y geométrica.']])},
+ {id:'es_detail',text:'¿Qué tipo de detalle parece más coherente contigo?',hint:'Piensa en cuello, botones, joyería y acabados cerca del rostro.',cols:2,opts:venusOpts([['romantic','Romantic','Drapeados, curvas y ornamento suave.'],['classic','Classic','Acabados limpios y proporción moderada.'],['ingenue','Ingenue','Detalles pequeños, delicados y redondeados.'],['angelic','Angelic','Líneas etéreas, fluidas y alargadas.']])},
+ {id:'es_energy',text:'¿Qué composición visual se siente más armónica?',hint:'Observa cuál mantiene coherencia con tus rasgos, no cuál te gusta más.',cols:2,opts:venusOpts([['natural','Natural','Texturas táctiles, relajadas y orgánicas.'],['angelic','Angelic','Transparencias, fluidez y verticalidad suave.'],['gamine','Gamine','Contrastes, cortes y asimetrías.'],['romantic','Romantic','Curvas, sensualidad y ornamentación.']])},
+ {id:'es_expression',text:'¿Qué escala de contraste acompaña mejor tu rostro?',hint:'Compara una combinación de alto contraste con otra de transiciones suaves.',cols:2,opts:venusOpts([['dramatic','Alto contraste','Contrastes fuertes y formas definidas.'],['classic','Moderado','Transiciones equilibradas.'],['ingenue','Bajo','Detalles pequeños y delicados.'],['natural','Orgánico','Mezcla irregular y texturas.']])},
+ {id:'es_movement',text:'¿Qué movimiento de prendas se integra mejor?',hint:'Observa cómo caen telas y formas al moverte.',cols:2,opts:venusOpts([['angelic','Fluido','Líneas largas, ligeras y continuas.'],['gamine','Dinámico','Cortes cortos, cambios y ritmo visual.'],['romantic','Drapeado','Movimiento curvo y envolvente.'],['classic','Controlado','Caída limpia y simétrica.']])},
+ {id:'es_finish',text:'¿Qué acabado visual acompaña mejor tus proporciones?',hint:'Esta elección confirma la mezcla general; no define una esencia por sí sola.',cols:2,opts:venusOpts([['dramatic','Escultórico','Geometría y presencia.'],['natural','Texturizado','Materiales naturales y relajados.'],['ingenue','Delicado','Acabados finos y pequeños.'],['angelic','Etéreo','Transparencia y suavidad.']])}
+ ]},
+ {key:'venus-sign',icon:'♀',label:'Venus / capa creativa',title:'Tu Venus, como inspiración.',sub:'Selecciona el signo de Venus de tu carta natal. Este dato no cambia Kibbe ni tu estación cromática.',questions:[{id:'venus_sign',text:'¿En qué signo tienes Venus?',hint:'Consulta tu carta natal. Si no lo sabes, selecciona “No lo sé”; no inventaremos tu posición.',cols:2,opts:venusOpts([['aries','Aries','Estilo audaz y directo.'],['tauro','Tauro','Texturas sensoriales y calidad táctil.'],['geminis','Géminis','Capas ligeras y mezclas inesperadas.'],['cancer','Cáncer','Romanticismo suave y nostalgia.'],['leo','Leo','Piezas protagonistas y brillo.'],['virgo','Virgo','Cortes precisos y detalles cuidados.'],['libra','Libra','Equilibrio visual y armonía.'],['escorpio','Escorpio','Profundidad y dramatismo íntimo.'],['sagitario','Sagitario','Libertad y movimiento.'],['capricornio','Capricornio','Sastrería y piezas duraderas.'],['acuario','Acuario','Diseño experimental y contraste.'],['piscis','Piscis','Capas fluidas y estética onírica.'],['unknown','No lo sé','Continuar sin capa astrológica.']])}]}
+ );
+ return m;
+}
+
 /* ═══════════════════════════════════════════════════════════
    PROGRESS HELPERS
 ═══════════════════════════════════════════════════════════ */
@@ -1989,6 +2029,7 @@ function isLastQuestion() {
 
 function selectOpt(qId, optId) {
   answers[qId] = optId;
+  saveTestProgress();
   renderQuestion();
 }
 
