@@ -945,7 +945,7 @@ function renderQuestion() {
     <div class="q-text">${q.text}</div>
     <div class="q-hint">${q.hint}</div>`;
   if(q.input){
-    html += `<div class="venus-input-wrap"><input class="venus-profile-input" id="venus-profile-input" type="${q.input.type}" min="${q.input.min}" max="${q.input.max}" step="${q.input.step}" value="${answers[q.id]||''}" placeholder="Ej. 162" inputmode="numeric" oninput="selectInput('${q.id}',this.value)"><span>cm</span><small>Entre 120 y 220 cm · Si no conoces tu estatura, puedes continuar sin responder.</small></div>`;
+    html += `<div class="venus-input-wrap"><input class="venus-profile-input" id="venus-profile-input" aria-label="Estatura en centímetros" type="${q.input.type}" min="${q.input.min}" max="${q.input.max}" step="${q.input.step}" value="${answers[q.id]||''}" placeholder="Ej. 162" inputmode="numeric" oninput="selectInput('${q.id}',this.value)"><span>cm</span><small>Entre 120 y 220 cm · Si no conoces tu estatura, puedes continuar sin responder.</small></div>`;
   } else {
     html += `<div class="opt-grid ${gridCls}">`;
 
@@ -2554,10 +2554,8 @@ function restart() {
   document.getElementById('prog-fill').style.width = '0%';
   document.getElementById('prog-pct').textContent  = '0%';
   document.getElementById('prog-label').textContent = 'Elige tu perfil';
-  for (let i=0; i<4; i++) {
-    const el = document.getElementById('sd'+i);
-    if (el) el.className = 'section-dot'+(i===0?' active':'');
-  }
+  const dots=document.querySelector('.section-dots');
+  if(dots)dots.innerHTML=getModules().map((m,i)=>'<div class="section-dot'+(i===0?' active':'')+'" aria-label="'+m.label+'"></div>').join('');
   renderGenderScreen();
   window.scrollTo({ top:0, behavior:'smooth' });
 }
