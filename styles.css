@@ -3984,3 +3984,36 @@ a[href="archivo.html"]{text-decoration-thickness:1px;text-underline-offset:4px}
 .glowup-art-grid figcaption{font:10px var(--v-caption);letter-spacing:.08em;padding:8px 2px}
 .glowup-art-direction>a{font:10px var(--v-caption);letter-spacing:.12em;text-decoration:underline;text-underline-offset:4px}
 @media(max-width:560px){.glowup-art-grid{grid-template-columns:1fr 1fr}.glowup-art-grid figure:last-child{grid-column:1/-1}.glowup-art-grid figure:last-child img{aspect-ratio:16/9}}
+
+
+/* VÉNUS / navegación coherente entre secciones */
+.v-global-header{
+ position:relative;z-index:110;display:flex;align-items:center;justify-content:space-between;
+ gap:18px;flex-wrap:wrap;padding:14px var(--v-gutter);background:var(--v-black);
+ color:var(--v-paper-light);border-bottom:3px double var(--v-silver);
+}
+.v-global-header>.logo{color:var(--v-paper-light);text-decoration:none;flex:0 0 auto}
+.v-global-header>nav{
+ position:static;inset:auto;z-index:auto;width:auto;min-height:0;display:flex;align-items:center;
+ justify-content:flex-end;gap:clamp(10px,1.8vw,24px);flex-wrap:wrap;padding:0;
+ background:transparent;color:var(--v-paper-light);border:0;backdrop-filter:none;
+}
+.v-global-header>nav::after{content:none}
+.v-global-header>nav a,.v-inline-nav a,.masthead-links a{
+ color:inherit;text-decoration:none;font:9px var(--v-body);letter-spacing:.14em;text-transform:uppercase;
+ padding:7px 0;border-bottom:1px solid transparent;transition:color .18s ease,border-color .18s ease;
+}
+.v-global-header>nav a:hover,.v-inline-nav a:hover,.masthead-links a:hover,
+.v-global-header>nav a[aria-current="page"],.v-inline-nav a[aria-current="page"],.masthead-links a[aria-current="page"]{
+ color:var(--v-acid);border-bottom-color:currentColor;
+}
+.v-inline-nav{display:flex;align-items:center;justify-content:flex-end;gap:clamp(8px,1.4vw,18px);flex-wrap:wrap}
+.v-inline-nav a{color:inherit}
+.masthead-links{display:flex;gap:14px;justify-content:flex-end;flex-wrap:wrap;margin-top:4px}
+.masthead-links a{color:var(--v-paper-light);font-size:8px}
+@media(max-width:620px){
+ .v-global-header{align-items:flex-start;gap:10px}
+ .v-global-header>nav{width:100%;justify-content:flex-start;gap:14px}
+ .v-inline-nav{width:100%;justify-content:flex-start;gap:12px}
+ .masthead-links{justify-content:flex-start}
+}
