@@ -863,6 +863,27 @@ function getModules(){
  ]},
  {key:'venus-sign',icon:'♀',label:'Tu toque astrológico',title:'Una inspiración extra para tu estilo.',sub:'Esta parte es opcional y usa la astrología como inspiración. No cambia el resultado de tu silueta ni los colores que te favorecen.',questions:[{id:'venus_sign',text:'¿En qué signo está Venus en tu carta astral?',hint:'Puedes consultarlo en tu carta astral. Si no sabes dónde está, elige “No lo sé” y continúa sin este dato.',cols:2,opts:venusOpts([['aries','Aries','Estilo audaz y directo.'],['tauro','Tauro','Texturas sensoriales y calidad táctil.'],['geminis','Géminis','Capas ligeras y mezclas inesperadas.'],['cancer','Cáncer','Romanticismo suave y nostalgia.'],['leo','Leo','Piezas protagonistas y brillo.'],['virgo','Virgo','Cortes precisos y detalles cuidados.'],['libra','Libra','Equilibrio visual y armonía.'],['escorpio','Escorpio','Profundidad y dramatismo íntimo.'],['sagitario','Sagitario','Libertad y movimiento.'],['capricornio','Capricornio','Sastrería y piezas duraderas.'],['acuario','Acuario','Diseño experimental y contraste.'],['piscis','Piscis','Capas fluidas y estética onírica.'],['unknown','No lo sé','Continuar sin capa astrológica.']])}]}
  );
+
+ // Perfil natural: datos descriptivos, no juicios estéticos.
+ m.unshift({key:'natural-profile',icon:'◉',label:'Tus rasgos naturales',title:'Empezamos por tu punto de partida.',sub:'Estos datos ayudan a contextualizar color y proporciones. No determinan por sí solos tu estación ni tu tipo Kibbe.',questions:[
+ {id:'profile_height',input:{type:'number',min:120,max:220,step:1},text:'¿Cuánto mides?',hint:'Escribe tu estatura real en centímetros. Este dato se mostrará como contexto; no decide por sí solo tu línea vertical Kibbe.'},
+ {id:'profile_hair',text:'¿Cuál es tu color natural de cabello?',hint:'Piensa en tu color de nacimiento o en la raíz sin teñir. Si lo tiñes, elige tu color natural.',cols:2,opts:venusOpts([['black','Negro','Negro natural, de reflejo muy oscuro.'],['dark-brown','Castaño muy oscuro','Casi negro, con reflejos marrones.'],['brown','Castaño','De claro a medio u oscuro.'],['light-brown','Castaño claro / rubio oscuro','Entre castaño y rubio.'],['blonde','Rubio','De rubio oscuro a muy claro.'],['red','Pelirrojo / cobrizo','Reflejos rojizos o cobrizos naturales.'],['grey','Canoso / blanco','Cabello gris, plateado o blanco natural.'],['unknown','No lo sé','Mi color cambia mucho o no puedo identificarlo.']])},
+ {id:'profile_eyes',text:'¿De qué color son tus ojos?',hint:'Elige el color predominante del iris, no el efecto de la luz o de lentes de contacto.',cols:2,opts:venusOpts([['dark-brown','Café muy oscuro','Marrón profundo, casi negro.'],['brown','Café','Marrón medio o cálido.'],['hazel','Avellana / miel','Mezcla de marrón, verde o dorado.'],['green','Verdes','Verde claro u oscuro.'],['blue','Azules','Azul claro, medio u oscuro.'],['grey','Grises','Gris o azul grisáceo.'],['mixed','Mixtos','Dos tonos visibles o anillo contrastante.'],['unknown','No lo sé','No identifico un tono dominante.']])},
+ {id:'profile_skin_depth',text:'¿Cómo describirías la profundidad de tu tono de piel?',hint:'Esto describe qué tan claro u oscuro se ve tu tono, no su subtono. Considera tu piel habitual sin bronceado reciente.',cols:2,opts:venusOpts([['very-fair','Muy clara','Marfil o porcelana.'],['fair','Clara','Clara a beige claro.'],['medium','Media','Beige medio, oliva medio o dorado medio.'],['tan','Morena / bronceada','Tono medio-profundo o bronceado naturalmente.'],['deep','Profunda','Marrón profundo a muy profundo.'],['unknown','No lo sé','Prefiero no clasificarla.']])},
+ {id:'profile_undertone','text':'Al comparar telas junto al rostro, ¿qué subtono parece armonizar mejor?',hint:'Haz la comparación sin maquillaje y con luz natural: marfil/dorado frente a blanco óptico/plata. No uses el color de las venas como única prueba.',cols:2,opts:venusOpts([['warm','Cálido','Marfil, dorado y camel hacen que la piel se vea más uniforme.'],['cool','Frío','Blanco óptico, plata y rosa azulado se integran mejor.'],['neutral','Neutro','Ambos grupos funcionan de forma parecida.'],['olive','Oliva','La piel tiene un matiz verdoso o grisáceo; algunos tonos cálidos y fríos se ven extraños.'],['unknown','No puedo identificarlo','Necesitaría comparar telas físicas.']])},
+ {id:'profile_contrast','text':'¿Qué contraste natural hay entre tu piel, ojos y cabello?',hint:'Compara tus rasgos sin maquillaje ni tinte. El contraste es la diferencia de claridad entre ellos, no la intensidad de tu personalidad.',cols:2,opts:venusOpts([['high','Alto','Por ejemplo, piel clara con cabello y ojos muy oscuros.'],['medium','Medio','Hay diferencias visibles, pero no extremas.'],['low','Bajo','Piel, ojos y cabello tienen profundidades parecidas.'],['unknown','No lo sé','No puedo valorar el contraste.']])}
+ ]});
+ m.push({key:'personal-style',icon:'✳',label:'Tu dirección estética',title:'¿Qué lenguaje visual te representa?',sub:'Aquí no buscamos qué “deberías” vestir. Queremos conocer tus gustos y la imagen que quieres construir.',questions:[
+ {id:'style_mood',text:'¿Qué universo estético te atrae más?',hint:'Elige el que más se acerque a tu gusto actual. Podrás mezclarlo con otros en tu guardarropa.',cols:2,opts:venusOpts([['dark-romantic','Dark Romantic','Romanticismo oscuro, encaje, terciopelo y misterio.'],['femme-fatale','Femme Fatale','Siluetas pulidas, sensualidad y presencia.'],['whimsical-goth','Whimsical Goth','Fantasía, transparencias y oscuridad etérea.'],['romantic-academia','Romantic Academia','Sastrería, libros, tweed y nostalgia.'],['indie-bohemian','Indie Bohemian','Vintage, capas, texturas y libertad.'],['power-goth','Power Goth','Cuero, metal, botas y contraste.'],['dark-academia','Dark Academia','Clásicos oscuros, lana, tartán y estructura.'],['romantic-mystery','Romantic Mystery','Mezcla de suavidad, profundidad y simbolismo.'],['eclectic','Ecléctico / en construcción','No quiero encajar en una sola estética.']])},
+ {id:'style_priority',text:'¿Qué quieres que comunique tu estilo?',hint:'Piensa en cómo quieres sentirte y expresarte al vestirte.',cols:2,opts:venusOpts([['confidence','Seguridad y presencia','Una imagen firme y definida.'],['romance','Romanticismo y suavidad','Una imagen delicada o expresiva.'],['creativity','Creatividad y originalidad','Una imagen experimental y personal.'],['ease','Comodidad y naturalidad','Una imagen práctica y relajada.'],['versatility','Versatilidad y equilibrio','Una imagen adaptable a distintas situaciones.']])},
+ {id:'style_avoid','text':'¿Qué no quieres que tu ropa haga?',hint:'Esto ayuda a evitar recomendaciones que no encajan contigo.',cols:2,opts:venusOpts([['restrict','Sentirme restringida/o','Evitar prendas incómodas o rígidas.'],['plain','Sentirme demasiado básica/o','Quiero textura, personalidad o detalles.'],['overdone','Sentirme demasiado producida/o','Prefiero un estilo fácil de llevar.'],['trend','Parecer que sigo todas las tendencias','Quiero algo propio y duradero.'],['none','No tengo una restricción clara','Estoy abierta/o a explorar.']])}
+ ]});
+ m.push({key:'wardrobe-context',icon:'▤',label:'Tu vida y tu guardarropa',title:'Que tu armario trabaje para ti.',sub:'Una buena cápsula no es una lista universal de prendas: se adapta a tu rutina, clima, presupuesto y gustos.',questions:[
+ {id:'wardrobe_context',text:'¿En qué situaciones necesitas vestirte con más frecuencia?',hint:'Elige la situación que ocupa más espacio en tu semana.',cols:2,opts:venusOpts([['study','Universidad / estudio','Clases, biblioteca y actividades cotidianas.'],['office','Trabajo / oficina','Entornos profesionales o formales.'],['creative','Trabajo creativo / eventos','Producción, arte, reuniones y salidas.'],['casual','Vida cotidiana casual','Mandados, paseos y planes informales.'],['mixed','Una mezcla de todo','Necesito prendas que se adapten a varias situaciones.']])},
+ {id:'wardrobe_climate',text:'¿Qué clima condiciona más tu ropa?',hint:'Piensa en el clima habitual donde vives y te mueves.',cols:2,opts:venusOpts([['hot','Caluroso','Priorizar frescura y capas ligeras.'],['warm','Templado / cálido','Prendas ligeras con alguna capa.'],['cold','Frío','Capas, tejidos cálidos y abrigo.'],['variable','Variable','Necesito prendas que funcionen por capas.']])},
+ {id:'wardrobe_budget',text:'¿Qué presupuesto prefieres para construir tu guardarropa?',hint:'No es una evaluación económica. Sirve para sugerir prioridades realistas.',cols:2,opts:venusOpts([['low','Ajustado','Reutilizar, segunda mano y compras puntuales.'],['mid','Moderado','Combinar básicos duraderos con piezas especiales.'],['high','Flexible','Invertir en piezas de mayor calidad.'],['unknown','Prefiero no indicarlo','Recomendaciones sin asumir presupuesto.']])},
+ {id:'wardrobe_goal',text:'¿Qué necesitas resolver primero?',hint:'Elige el cambio que tendría mayor impacto en tu día a día.',cols:2,opts:venusOpts([['combine','Combinar mejor lo que ya tengo','Más outfits con menos prendas.'],['gaps','Detectar prendas que me faltan','Una lista corta de compras útiles.'],['identity','Definir mi identidad visual','Coherencia sin perder individualidad.'],['occasion','Vestirme para ocasiones concretas','Looks para estudio, trabajo o eventos.'],['edit','Depurar mi armario','Identificar qué uso y qué no.']])}
+ ]});
  return m;
 }
 
@@ -921,10 +942,13 @@ function renderQuestion() {
   const gridCls = q.cols === 1 ? 'cols-1' : 'cols-2';
   html += `<div class="question-block">
     <div class="q-text">${q.text}</div>
-    <div class="q-hint">${q.hint}</div>
-    <div class="opt-grid ${gridCls}">`;
+    <div class="q-hint">${q.hint}</div>`;
+  if(q.input){
+    html += `<div class="venus-input-wrap"><input class="venus-profile-input" id="venus-profile-input" type="${q.input.type}" min="${q.input.min}" max="${q.input.max}" step="${q.input.step}" value="${answers[q.id]||''}" placeholder="Ej. 162" inputmode="numeric" oninput="selectInput('${q.id}',this.value)"><span>cm</span><small>Entre 120 y 220 cm</small></div>`;
+  } else {
+    html += `<div class="opt-grid ${gridCls}">`;
 
-  q.opts.forEach(opt => {
+  if(!q.input) q.opts.forEach(opt => {
     const sel = answers[q.id] === opt.id ? ' selected' : '';
     const isH = q.cols === 1;
     const vis  = opt.swatches
@@ -958,7 +982,8 @@ function renderQuestion() {
     }
   });
 
-  html += `</div></div>`;
+  if(!q.input) html += `</div>`;
+  html += `</div>`;
   html += `
     <div class="nav-btns">
       ${!isFirst
@@ -987,6 +1012,13 @@ function isLastQuestion() {
     qIdx === last.questions.length - 1;
 }
 
+function selectInput(qId,value){
+ const n=Number(value);
+ if(value===''||!Number.isFinite(n)){delete answers[qId];}else if(n>=120&&n<=220){answers[qId]=String(Math.round(n));}
+ saveTestProgress();
+ const btn=document.getElementById('btn-next');
+ if(btn)btn.classList.toggle('on',!!answers[qId]);
+}
 function selectOpt(qId, optId) {
   answers[qId] = optId;
   saveTestProgress();
@@ -1427,39 +1459,17 @@ function calcKibbeScores(){
  if(answers.kibbeTie==='mixed'){score['soft-classic']+=1;score['dramatic-classic']+=1}
  return score;
 }
-function calcKibbe(){
- const scores=calcKibbeScores();
- return Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];
+function calcKibbe(){ return venusKibbeAnalysis().primary; }
+function calcSeason(){
+ const c=venusColorAnalysis(),family=answers.cl_family||'autumn';
+ const contrast=answers.profile_contrast||'unknown';
+ const value=c.dimensions.value,chroma=c.dimensions.chroma;
+ if(family==='spring')return value==='light'?'spring-light':chroma==='bright'?'spring-true':'spring-warm';
+ if(family==='summer')return value==='light'?'summer-soft':chroma==='soft'?'summer-soft':'summer-cool';
+ if(family==='winter')return contrast==='high'||chroma==='bright'?'winter-clear':value==='deep'?'winter-true':'winter-soft';
+ return value==='deep'&&contrast==='high'?'autumn-deep':chroma==='soft'?'autumn-soft':'autumn-deep';
 }
-function calcSeason() {
-  const sk = answers['skin']      || 'medium';
-  const ut = answers['undertone'] || 'warm';
-  const co = answers['contrast']  || 'medium';
-  const re = answers['reaction']  || 'depends';
-  if (ut==='warm'&&co==='high') return 'autumn-deep';
-  if (ut==='warm'&&co==='low')  return 'autumn-soft';
-  if (ut==='warm'&&re==='washes') return 'spring-warm';
-  if (ut==='warm') return 'spring-true';
-  if (ut==='cool'&&co==='high') return 'winter-true';
-  if (ut==='cool'&&sk==='fair') return 'summer-cool';
-  if (ut==='cool') return 'winter-soft';
-  if (co==='high') return 'winter-clear';
-  if (re==='flatters') return 'spring-light';
-  return 'summer-soft';
-}
-function calcVibe() {
-  const at = answers['attract']      || 'mystery';
-  const vi = answers['vibe']         || 'ethereal';
-  const ce = answers['color_energy'] || 'dark';
-  if (at==='mystery'&&ce==='dark')     return 'dark-romantic';
-  if (at==='power'&&ce==='dark')       return 'femme-fatale';
-  if (at==='romantic'&&vi==='ethereal') return 'whimsical-goth';
-  if (at==='romantic'&&vi==='classic') return 'romantic-academia';
-  if (at==='free'&&vi==='rebel')       return 'indie-bohemian';
-  if (at==='power'&&vi==='sensual')    return 'power-goth';
-  if (vi==='classic') return 'dark-academia';
-  return 'romantic-mystery';
-}
+function calcVibe(){const v=answers.style_mood||'romantic-mystery';return v==='eclectic'?'romantic-mystery':v;}
 
 /* ═══════════════════════════════════════════════════════════
    RESULT DATA
