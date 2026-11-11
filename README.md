@@ -117,3 +117,12 @@ Las tres placas vectoriales originales permanecen como interpretación visual pr
 - **Responsive de navegación:** se añadieron reglas específicas para móvil y se evita el desbordamiento horizontal global con `overflow-x: clip`.
 - **QA pendiente:** el código fue revisado estáticamente y el último commit de navegación generó un deployment de producción en estado READY. No se declara prueba manual de clics ni verificación visual en navegador a 375/768/1440 px porque esta sesión no contó con control interactivo del navegador.
 - **Referencias PDF:** el documento adjunto contiene 11 páginas; páginas 1–7 aportan siete placas visuales y páginas 8–11 contienen 32 fotografías. La extracción local generó 39 JPEG optimizados. La publicación de esos binarios en `assets/img/pdf/` y su integración visual deben verificarse por separado antes de considerarlas completadas.
+
+
+## Registro de implementación — 11 nov 2026
+
+- **Navbar compartida:** el menú global se inicializa desde `assets/js/navigation.js` en los cinco documentos y reconoce el enlace de la página activa.
+- **Menú móvil:** el control expone `aria-expanded`, permite cerrar con Escape y se cierra al elegir un destino en pantallas estrechas.
+- **Corrección de marcado:** se cerró explícitamente el elemento `nav` del masthead de Home para evitar que el navegador reconstruya el árbol HTML de forma implícita.
+- **Estado de referencias PDF:** se extrajeron localmente 39 JPEG del documento adjunto (7 placas de páginas 1–7 y 32 fotografías de páginas 8–11). La integración de esos binarios en `assets/img/pdf/` no forma parte de este commit; las páginas actuales continúan usando las placas SVG originales. No se declara completada la integración fotográfica.
+- **QA:** revisión estática de rutas y marcado. La verificación manual de clics y capturas a 375, 768 y 1440 px sigue pendiente de una sesión de navegador interactiva.
