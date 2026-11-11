@@ -834,6 +834,7 @@ function getModules(){
  {id:'cl_temp2',text:'En otra comparación, ¿qué temperatura conserva mejor la luminosidad?',hint:'Repite la comparación con una prenda distinta y evita luces amarillas.',cols:2,opts:venusOpts([['warm','Dorado / cálido','La piel mantiene una apariencia equilibrada.',['#D5A34D','#B65D3D','#8A6A36']],['cool','Plateado / frío','La piel mantiene una apariencia equilibrada.',['#9AA8C3','#B46C91','#52617C']]])},
  {id:'cl_value2',text:'¿Qué extremo de valor te da más equilibrio?',hint:'Observa si los tonos claros te lavan o si los oscuros endurecen demasiado.',cols:2,opts:venusOpts([['light','Claro','Los tonos luminosos se integran.',['#F2E5CF','#D6E0E4','#E8C4C9']],['deep','Oscuro','Los tonos profundos se integran.',['#34243D','#173B3C','#3D2B25']]])},
  {id:'cl_chroma2',text:'¿Qué acabado cromático se ve más armónico?',hint:'Compara la claridad del color, no el contraste entre la prenda y el fondo.',cols:2,opts:venusOpts([['bright','Nítido','Colores limpios y definidos.',['#D82E4B','#1765A8','#E6B923']],['soft','Atenuado','Colores mezclados con gris.',['#A86D78','#778D91','#9A8A70']]])}
+ ,{id:'cl_family',text:'¿Qué familia estacional describe mejor la armonía global?',hint:'Es una comparación de cierre, no una pregunta de gusto. Si no puedes decidir, la evidencia se reportará como baja.',cols:2,opts:venusOpts([['spring','Primavera','Cálida, luminosa y clara.',['#F2B84B','#F08062','#78A96B']],['summer','Verano','Fría, suave y ligera.',['#B8C5D8','#C99BAA','#8BA9B4']],['autumn','Otoño','Cálida, profunda y terrosa.',['#A75D36','#687044','#B58A4C']],['winter','Invierno','Fría, definida y de contraste.',['#253C73','#B52C52','#F0E9DF']])]}
  ]},
  {key:'essences',icon:'✳',label:'Esencias / Kitchener',title:'Siete lenguajes visuales.',sub:'Elige qué lenguaje visual armoniza con tus rasgos y presencia. No es un test de personalidad.',questions:[
  {id:'es_face',text:'¿Qué tipo de líneas reconoces más en tus rasgos?',hint:'Observa proporciones generales del rostro en una foto sin filtros.',cols:2,opts:venusOpts([['dramatic','Dramatic','Líneas angulosas, definidas o alargadas.'],['natural','Natural','Rasgos abiertos, anchos o relajados.'],['classic','Classic','Proporciones equilibradas y simétricas.'],['romantic','Romantic','Rasgos suaves, redondeados o voluptuosos.']])},
@@ -1297,16 +1298,18 @@ function venusColorAnalysis(){
  const dims={temp:[answers.cl_temp1,answers.cl_temp2],value:[answers.cl_value1,answers.cl_value2],chroma:[answers.cl_chroma1,answers.cl_chroma2]};
  const resolve=a=>a.every(Boolean)&&a[0]===a[1]?a[0]:a.some(Boolean)?'mixto':'sin datos';
  const d={temp:resolve(dims.temp),value:resolve(dims.value),chroma:resolve(dims.chroma)};
- const key=[d.temp,d.value,d.chroma].join('|');
- const map={
- 'warm|light|bright':['Light Spring','True Spring'],'warm|light|soft':['Light Spring','Soft Autumn'],
- 'warm|deep|bright':['Bright Spring','Warm Autumn'],'warm|deep|soft':['Warm Autumn','Deep Autumn'],
- 'cool|light|bright':['Bright Winter','Light Summer'],'cool|light|soft':['Light Summer','Cool Summer'],
- 'cool|deep|bright':['Deep Winter','Cool Winter'],'cool|deep|soft':['Soft Summer','Deep Winter']
+ const family=answers.cl_family||'unknown';
+ const sub={
+ spring:d.value==='light'?'Light Spring':d.chroma==='bright'?'Bright Spring':'True Spring',
+ summer:d.value==='light'?'Light Summer':d.chroma==='soft'?'Soft Summer':'True Summer',
+ autumn:d.chroma==='soft'?'Soft Autumn':d.value==='deep'?'Deep Autumn':'True Autumn',
+ winter:d.chroma==='bright'?'Bright Winter':d.value==='deep'?'Deep Winter':'True Winter'
  };
- const candidates=map[key]||['Resultado por confirmar','Revisar estaciones vecinas con drapeado'];
- const consistent=Object.values(d).filter(x=>x!=='mixto'&&x!=='sin datos').length;
- return {dimensions:d,primary:candidates[0],neighbors:[candidates[1]],confidence:consistent===3?'medio':consistent===2?'bajo':'bajo'};
+ const candidates={spring:['Light Spring','True Spring','Bright Spring'],summer:['Light Summer','True Summer','Soft Summer'],autumn:['Soft Autumn','True Autumn','Deep Autumn'],winter:['Deep Winter','True Winter','Bright Winter']};
+ const primary=family==='unknown'?'Pendiente de confirmar':sub[family];
+ const neighbors=family==='unknown'?['Completa la comparación de familias']:candidates[family].filter(x=>x!==primary);
+ const consistent=Object.values(d).filter(x=>x!=='mixto'&&x!=='sin datos').length+(family!=='unknown'?1:0);
+ return {dimensions:d,primary,neighbors,confidence:consistent>=4?'medio':'bajo'};
 }
 function venusEssenceAnalysis(){
  const names=['dramatic','natural','classic','gamine','romantic','ingenue','angelic'];
