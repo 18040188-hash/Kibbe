@@ -13,7 +13,7 @@
 
 <nav>
   <a class="logo" href="index.html">VÉNUS</a>
-  <a class="nav-home" href="index.html">← Inicio</a>
+  <a class="nav-home" href="index.html">← Inicio</a><a class="nav-home" href="archivo.html">Archivo ↗</a>
 </nav>
 
 <main>
@@ -2140,12 +2140,11 @@ function showMoodboard() {
 
   /* Unsplash image search URLs (keyword-based) */
   function unsplashURL(q, index = 0) {
-    /* Curated editorial archive: stable Unsplash image IDs instead of the
-       retired source.unsplash.com random endpoint. Captions remain result-specific. */
+    /* Original VÉNUS vector plates; no third-party stock photography. */
     const plates = [
-      'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85',
-      'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=900&q=85',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=85'
+      'assets/img/venus-editorial-punk.svg',
+      'assets/img/venus-editorial-lace.svg',
+      'assets/img/venus-editorial-romantic.svg'
     ];
     return plates[index % plates.length];
   }
