@@ -835,13 +835,17 @@ function venusOpts(rows){return rows.map(([id,name,desc,colors])=>({id,name,desc
 function getModules(){
  const m=[]; // El test activo utiliza únicamente los módulos metodológicos V3.
  m.push(
- {key:'kibbe-observations',icon:'◈',label:'Tu silueta',title:'Conoce las formas de tu cuerpo.',sub:'No necesitas saber de moda. Solo observa tu silueta y elige lo que más se parezca a ti. No hay respuestas buenas ni malas.',questions:[
+ {key:'kibbe-observations',icon:'◈',label:'Tu silueta',title:'Conoce las formas de tu cuerpo.',sub:'No necesitas saber de moda. Solo observa tu silueta y elige lo que más se parezca a ti. No hay respuestas buenas ni malas.',guide:'Para observarte mejor: usa una foto de cuerpo entero, cámara a la altura del pecho, postura natural y ropa sencilla. Evita selfies desde arriba/abajo y no uses el espejo para juzgar tu línea vertical.',questions:[
  {id:'kb_vertical',text:'Al ver una foto tuya de cuerpo entero, ¿cómo se ve tu silueta?',hint:'Mira una foto de frente, de cuerpo entero y con una postura natural. Fíjate en la forma general, no en tu peso ni en tu talla.',cols:2,opts:venusOpts([['long','Alargada','La figura se percibe larga y continua.'],['compact','Compacta','La figura se percibe corta o concentrada.'],['moderate','Intermedia','No destaca especialmente ninguna de las dos.']])},
  {id:'kb_frame',text:'¿Cómo describirías la forma de tus hombros y huesos?',hint:'Fíjate en si tus hombros y articulaciones se ven más rectos, anchos, redondeados o equilibrados. No tomes como referencia la ropa.',cols:2,opts:venusOpts([['angular','Recta y marcada','Contornos rectos, estrechos o definidos.'],['blunt','Ancha y redondeada','Contornos amplios y menos puntiagudos.'],['rounded','Pequeña y curva','Contornos pequeños y suaves.'],['balanced','Equilibrada','No destaca una forma sobre otra.']])},
  {id:'kb_flesh',text:'¿Tu silueta se ve más recta, curva o una mezcla?',hint:'Observa la forma general de tu cuerpo con ropa cómoda. No hay una forma mejor que otra; solo queremos reconocer las líneas que predominan.',cols:2,opts:venusOpts([['lean','Más recta','La forma se mantiene relativamente recta.'],['soft','Más curva','Se ven curvas suaves en varias zonas.'],['mixed','Una mezcla','Se combinan líneas rectas y curvas.']])},
  {id:'kb_shoulders',text:'¿Qué se ve más ancho: tus hombros, tus caderas o son parecidos?',hint:'En una foto de frente, compara la parte más ancha de tus hombros con la de tus caderas. Mantén los brazos relajados.',cols:2,opts:venusOpts([['shoulder','Hombros más anchos','La parte superior se ve más ancha.'],['hip','Caderas más anchas','La parte inferior se ve más ancha.'],['even','Anchos parecidos','Hombros y caderas se ven equilibrados.']])},
  {id:'kb_scale',text:'¿Qué tamaño de accesorios y estampados sientes que va mejor contigo?',hint:'Imagina cómo se verían en ti unos detalles pequeños, medianos o grandes. Elige el tamaño que se integra mejor con tu imagen.',cols:2,opts:venusOpts([['large','Detalles grandes','Los accesorios y estampados grandes se integran.'],['small','Detalles pequeños','Los accesorios y estampados pequeños se integran.'],['mixed','Detalles medianos','Los tamaños intermedios se sienten equilibrados.']])},
- {id:'kb_balance',text:'En conjunto, ¿cómo describirías tu silueta?',hint:'Piensa en tu figura completa, no en una sola parte. Si reconoces más de una forma, puedes elegir la opción que combine ambas.',cols:2,opts:venusOpts([['dramatic','Alargada y marcada','Predominan las líneas largas y definidas.'],['natural','Relajada y amplia','Predominan las formas amplias y relajadas.'],['romantic','Suave y con curvas','Predominan las curvas y formas redondeadas.'],['balanced','Equilibrada','No destaca una forma sobre otra.'],['mixed','Mezcla de formas','Se combinan rasgos pequeños y angulosos.']])}
+ {id:'kb_balance',text:'En conjunto, ¿cómo describirías tu silueta?',hint:'Piensa en tu figura completa, no en una sola parte. Si reconoces más de una forma, puedes elegir la opción que combine ambas.',cols:2,opts:venusOpts([['dramatic','Alargada y marcada','Predominan las líneas largas y definidas.'],['natural','Relajada y amplia','Predominan las formas amplias y relajadas.'],['romantic','Suave y con curvas','Predominan las curvas y formas redondeadas.'],['balanced','Equilibrada','No destaca una forma sobre otra.'],['mixed','Mezcla de formas','Se combinan rasgos pequeños y angulosos.']])},
+ {id:'kb_limbs',text:'¿Cómo se ven tus brazos y piernas en relación con tu torso?',hint:'Observa proporciones, no peso. Una foto de cuerpo entero tomada a la altura del pecho ayuda a evitar distorsiones.',cols:2,opts:venusOpts([['long','Largos','Extremidades visualmente alargadas.'],['short','Cortos / compactos','Extremidades visualmente más cortas.'],['balanced','Proporcionados','No destacan por su longitud.']])},
+ {id:'kb_hands_feet',text:'¿Qué escala tienen tus manos y pies?',hint:'Compara su escala con el resto de tu estructura, no con la de otras personas.',cols:2,opts:venusOpts([['long','Alargados y estrechos','Dedos largos o estructura fina.'],['broad','Grandes o amplios','Estructura amplia o robusta.'],['small','Pequeños y delicados','Escala pequeña o delicada.'],['balanced','Medios / equilibrados','No destacan por tamaño.']])},
+ {id:'kb_waist',text:'¿Cómo se define tu cintura de forma natural?',hint:'No se trata de buscar una cintura ideal. Observa la línea de tu torso sin ajustar la ropa.',cols:2,opts:venusOpts([['straight','Poco marcada / recta','La línea del torso se mantiene bastante recta.'],['defined','Muy definida','Hay una diferencia clara entre cintura y cadera.'],['moderate','Moderada','Se define, pero sin contraste extremo.']])},
+ {id:'kb_face',text:'¿Qué líneas predominan en tus rasgos faciales?',hint:'Este dato solo complementa la lectura. El sistema Kibbe actual prioriza la línea del cuerpo y cómo cae la ropa; el rostro no debe decidir el resultado por sí solo.',cols:2,opts:venusOpts([['angular','Angulosas','Rasgos más rectos o definidos.'],['soft','Suaves','Rasgos más redondeados o delicados.'],['balanced','Equilibradas','No predomina una dirección.'],['mixed','Combinadas','Conviven líneas suaves y marcadas.']])}
  ]},
  {key:'color-12',icon:'◐',label:'Los colores que te favorecen',title:'Encuentra los colores que te iluminan.',sub:'Vamos a comparar tonos para descubrir cuáles hacen que tu rostro se vea más armonioso. La pantalla es una guía; la luz puede cambiar cómo se ven los colores.',questions:[
  {id:'cl_temp1',text:'¿Qué grupo de colores hace que tu rostro se vea mejor?',hint:'Si puedes, acerca prendas de esos colores a tu rostro, sin maquillaje y junto a una ventana. Fíjate en cuál hace que tu piel se vea más uniforme.',cols:2,opts:venusOpts([['warm','Cálidos','Dorado, coral y terracota.',['#D98A45','#C45D43','#E2B65B']],['cool','Fríos','Rosa azulado, frambuesa y azul.',['#B95C83','#526F9D','#A6B6CF']]])},
@@ -1307,12 +1311,7 @@ JSON exacto a devolver:
 }`;
 }
 
-function venusNeedsTieBreak(){
-  if(answers.kibbeTie)return false;
-  const scores=calcKibbeScores();
-  const ranked=Object.values(scores).sort((a,b)=>b-a);
-  return ranked.length>1 && ranked[0]>0 && ranked[0]-ranked[1]<=1;
-}
+function venusNeedsTieBreak(){if(answers.kibbeTie)return false;const ranked=Object.values(calcKibbeScores()).sort((a,b)=>b-a);return ranked.length>1&&ranked[0]>0&&ranked[0]-ranked[1]<=1;}
 function venusShowTieBreak(){
  const host=document.getElementById('quiz-wrap');
  host.innerHTML=`<div class="section-intro"><div class="section-label">Desempate · Silueta</div><div class="section-title">Una última comparación</div><p class="section-sub">Tus respuestas combinan señales de líneas definidas y suaves. Esta pregunta ayuda a decidir qué rasgo domina visualmente.</p></div>
@@ -1332,39 +1331,12 @@ function venusResultExplanation(){return '<section class="venus-explanation"><sm
 
 /* Evidence-based-in-the-framework sense: descriptive rules, not a clinical diagnosis. */
 function venusKibbeAnalysis(){
- const a=answers;
- const v=a.kb_vertical,f=a.kb_frame,soft=a.kb_flesh==='soft';
- let primary='soft-classic';
- // Transparent decision matrix: vertical line + frame are the primary observations.
- if(v==='long'&&f==='angular')primary=soft?'soft-dramatic':'dramatic';
- else if(v==='long'&&f==='blunt')primary='flamboyant-natural';
- else if(v==='long'&&f==='rounded')primary='soft-dramatic';
- else if(v==='compact'&&f==='angular')primary=soft?'soft-gamine':'gamine';
- else if(v==='compact'&&f==='rounded')primary=soft?'theatrical-romantic':'romantic';
- else if(v==='compact'&&f==='blunt')primary='soft-natural';
- else if(v==='moderate'&&f==='balanced')primary=soft?'soft-classic':'dramatic-classic';
- else if(f==='blunt')primary='soft-natural';
- else if(f==='rounded')primary='romantic';
- else if(f==='angular')primary='dramatic';
- const adjacent={
- dramatic:['dramatic-classic','soft-dramatic'],
- 'soft-dramatic':['dramatic','theatrical-romantic'],
- 'flamboyant-natural':['soft-natural','dramatic'],
- 'soft-natural':['flamboyant-natural','soft-classic'],
- 'dramatic-classic':['soft-classic','dramatic'],
- 'soft-classic':['dramatic-classic','soft-natural'],
- gamine:['soft-gamine','dramatic'],
- 'soft-gamine':['gamine','romantic'],
- romantic:['theatrical-romantic','soft-gamine'],
- 'theatrical-romantic':['romantic','soft-dramatic']
- };
- const obs=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance'];
- const answered=obs.filter(k=>a[k]).length;
- const corroborating=[a.kb_balance==='dramatic'&&v==='long',a.kb_balance==='natural'&&f==='blunt',a.kb_balance==='romantic'&&f==='rounded',a.kb_balance==='balanced'&&f==='balanced'].filter(Boolean).length;
- const contradictions=[a.kb_balance==='dramatic'&&v==='compact',a.kb_balance==='natural'&&f==='angular',a.kb_balance==='romantic'&&f==='blunt',a.kb_balance==='balanced'&&v==='long'].filter(Boolean).length;
- const confidence=answered<4||contradictions>0?'bajo':corroborating>=1&&answered>=5?'alto':'medio';
- const score={};adjacent[primary].forEach((x,i)=>score[x]=2-i);
- return {primary,alternatives:adjacent[primary].map(x=>[x,score[x]]),confidence,answered,observations:obs.filter(k=>a[k]).map(k=>k+': '+a[k]),corroborating,contradictions};
+ const score=calcKibbeScores(),ranked=Object.entries(score).sort((a,b)=>b[1]-a[1]);
+ const primary=ranked[0]?.[0]||'soft-classic',answered=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance','kb_limbs','kb_hands_feet','kb_waist','kb_face'].filter(k=>answers[k]).length;
+ const gap=(ranked[0]?.[1]||0)-(ranked[1]?.[1]||0);
+ const confidence=answered<7||gap<=1?'bajo':answered>=9&&gap>=4?'medio':'medio';
+ const observations=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance','kb_limbs','kb_hands_feet','kb_waist','kb_face'];
+ return {primary,alternatives:ranked.slice(1,3),confidence,answered,observations:observations.filter(k=>answers[k]).map(k=>k+': '+answers[k]),scoreGap:gap};
 }
 function venusColorAnalysis(){
  const dims={temp:[answers.cl_temp1,answers.cl_temp2],value:[answers.cl_value1,answers.cl_value2],chroma:[answers.cl_chroma1,answers.cl_chroma2]};
@@ -1461,26 +1433,43 @@ function venusEditorialBreakdown(kd,sd,vd){
    RESULT ENGINE
 ═══════════════════════════════════════════════════════════ */
 function calcKibbeScores(){
- const h=answers.height,sh=answers.shoulders,w=answers.waist,t=answers.texture;
- const score={dramatic:0,'soft-dramatic':0,'flamboyant-natural':0,'soft-natural':0,'dramatic-classic':0,'soft-classic':0,gamine:0,'soft-gamine':0,romantic:0,'theatrical-romantic':0};
- if(h==='tall'){score.dramatic+=2;score['soft-dramatic']+=2;score['flamboyant-natural']+=1}
- if(h==='petite'){score.gamine+=2;score['soft-gamine']+=2}
- if(sh==='wide-sh'){score['flamboyant-natural']+=2;score['soft-natural']+=2;score['soft-dramatic']+=1}
- if(sh==='straight'){score.dramatic+=1;score['dramatic-classic']+=1}
- if(sh==='balanced'){score['soft-classic']+=2;score['dramatic-classic']+=2}
- if(sh==='wide-hip'){score.romantic+=1;score['soft-gamine']+=1}
- if(w==='yes'){score.romantic+=2;score['theatrical-romantic']+=1;score['soft-classic']+=1;score['soft-gamine']+=1}
- if(w==='no'){score.dramatic+=1;score['dramatic-classic']+=1}
- if(t==='sharp'){score.dramatic+=2;score['dramatic-classic']+=1;score['theatrical-romantic']+=1;score.gamine+=1}
- if(t==='soft'){score.romantic+=2;score['soft-dramatic']+=2;score['soft-natural']+=1;score['soft-gamine']+=2;score['theatrical-romantic']+=2}
- if(t==='mix'){score['soft-classic']+=1;score['flamboyant-natural']+=1;score['dramatic-classic']+=1;score.gamine+=1}
- if(t==='compact'){score.gamine+=2;score['soft-gamine']+=1}
- if(answers.kibbeTie==='defined'){score.dramatic+=2;score['dramatic-classic']+=1;score['flamboyant-natural']+=1}
- if(answers.kibbeTie==='soft'){score.romantic+=2;score['soft-gamine']+=1;score['soft-dramatic']+=1}
- if(answers.kibbeTie==='mixed'){score['soft-classic']+=1;score['dramatic-classic']+=1}
+ const a=answers,score={dramatic:0,'soft-dramatic':0,'flamboyant-natural':0,'soft-natural':0,'dramatic-classic':0,'soft-classic':0,gamine:0,'soft-gamine':0,romantic:0,'theatrical-romantic':0};
+ const add=(keys,n)=>keys.forEach(k=>score[k]+=n);
+ if(a.kb_vertical==='long')add(['dramatic','soft-dramatic','flamboyant-natural'],3);
+ if(a.kb_vertical==='compact')add(['gamine','soft-gamine','romantic'],3);
+ if(a.kb_vertical==='moderate')add(['dramatic-classic','soft-classic'],2);
+ if(a.kb_frame==='angular')add(['dramatic','gamine','theatrical-romantic'],2);
+ if(a.kb_frame==='blunt')add(['flamboyant-natural','soft-natural'],3);
+ if(a.kb_frame==='rounded')add(['romantic','theatrical-romantic','soft-gamine'],2);
+ if(a.kb_frame==='balanced')add(['dramatic-classic','soft-classic'],3);
+ if(a.kb_flesh==='soft')add(['soft-dramatic','soft-natural','soft-classic','soft-gamine','romantic','theatrical-romantic'],1);
+ if(a.kb_flesh==='lean')add(['dramatic','flamboyant-natural','dramatic-classic','gamine'],1);
+ if(a.kb_limbs==='long')add(['dramatic','soft-dramatic','flamboyant-natural'],2);
+ if(a.kb_limbs==='short')add(['gamine','soft-gamine','romantic'],2);
+ if(a.kb_hands_feet==='long')add(['dramatic','flamboyant-natural'],2);
+ if(a.kb_hands_feet==='broad')add(['flamboyant-natural','soft-natural'],2);
+ if(a.kb_hands_feet==='small')add(['gamine','soft-gamine','romantic','theatrical-romantic'],2);
+ if(a.kb_hands_feet==='balanced')add(['dramatic-classic','soft-classic'],1);
+ if(a.kb_waist==='defined')add(['romantic','theatrical-romantic','soft-dramatic'],2);
+ if(a.kb_waist==='straight')add(['dramatic','flamboyant-natural','dramatic-classic'],2);
+ if(a.kb_waist==='moderate')add(['soft-classic','dramatic-classic'],1);
+ if(a.kb_face==='angular')add(['dramatic','gamine','theatrical-romantic'],1);
+ if(a.kb_face==='soft')add(['romantic','soft-gamine','soft-dramatic'],1);
+ if(a.kb_face==='balanced')add(['dramatic-classic','soft-classic'],1);
+ if(a.kb_face==='mixed')add(['gamine','soft-gamine','soft-natural'],1);
+ if(a.kb_scale==='large')add(['dramatic','flamboyant-natural','soft-dramatic'],1);
+ if(a.kb_scale==='small')add(['gamine','soft-gamine','romantic'],1);
+ if(a.kb_balance==='dramatic')add(['dramatic','soft-dramatic'],1);
+ if(a.kb_balance==='natural')add(['flamboyant-natural','soft-natural'],1);
+ if(a.kb_balance==='romantic')add(['romantic','theatrical-romantic'],1);
+ if(a.kb_balance==='balanced')add(['dramatic-classic','soft-classic'],1);
+ if(a.kibbeTie==='defined')add(['dramatic','dramatic-classic','flamboyant-natural'],2);
+ if(a.kibbeTie==='soft')add(['romantic','soft-gamine','soft-dramatic'],2);
+ if(a.kibbeTie==='mixed')add(['soft-classic','dramatic-classic'],1);
  return score;
 }
-function calcKibbe(){ return venusKibbeAnalysis().primary; }
+function calcKibbe(){return Object.keys(calcKibbeScores()).sort((a,b)=>calcKibbeScores()[b]-calcKibbeScores()[a])[0];}
+
 function calcSeason(){
  const c=venusColorAnalysis(),family=answers.cl_family||'autumn';
  const contrast=answers.profile_contrast||'unknown';
