@@ -104,3 +104,21 @@ La existencia de breakpoints y reglas responsive no equivale a una prueba visual
 - Prueba de drapeado físico como complemento de colorimetría.
 - Capturas verificadas de 375, 768 y 1440 px.
 - Cálculo opcional de carta natal con fecha, hora y lugar, fuera del MVP actual.
+
+
+## 11. Archivo visual, procedencia y derechos
+
+El PDF “referencias visuales.pdf” contiene 11 páginas. Las páginas 8–11 reúnen 32 fotografías de moda y estilismo. Se inspeccionaron las páginas renderizadas y se extrajeron técnicamente los recursos rasterizados con Poppler para su inventario. Sin embargo, el documento no identifica de manera verificable a todos los fotógrafos, modelos, diseñadores y titulares de derechos, ni aporta licencias de reproducción. Por ello, las fotografías no se publican en el sitio ni en Vercel.
+
+El sitio incluye `archivo.html`, un índice editorial con una entrada para cada página, captions y numeración. Para las páginas 8–11 se documentan las 32 fotografías individualmente por su contenido visual, sin atribuir autorías desconocidas. Se añadieron tres placas vectoriales originales (`assets/img/venus-editorial-*.svg`) que traducen la dirección de arte a composiciones propias y seguras para el despliegue.
+
+La compilación del PDF se atribuye a Nataly López según los metadatos del archivo. La marca Chrome Hearts aparece en las páginas del documento; esto no significa que VÉNUS esté afiliado, patrocinado ni autorizado por esa marca.
+
+## 12. Mejoras UX y accesibilidad añadidas
+
+- Navegación persistente al Archivo desde home, test, perfil y Glow Up para conectar la dirección de arte con el producto.
+- Microinteracciones de hover en spreads e imágenes para dar respuesta táctil al lenguaje editorial, sin animación obligatoria.
+- Refuerzo de `:focus-visible` para enlaces, controles y elementos interactivos.
+- Regla `prefers-reduced-motion` para minimizar transiciones y animaciones cuando el sistema lo solicita.
+- Se conserva el diario de estilo existente en Glow Up y la Story Card existente en perfil; no se duplican funcionalidades.
+- Se retiraron las referencias remotas a Unsplash de home y test y se reemplazaron por placas vectoriales originales.
