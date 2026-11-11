@@ -1054,6 +1054,7 @@ button.is-loading:after{content:"";position:absolute;width:13px;height:13px;left
 .opt[aria-pressed="true"]{outline:2px solid #17131b;outline-offset:2px}
 </style></head>
 <body>
+<a class="skip-link" href="#quiz-wrap">Saltar al cuestionario</a>
 <div id="venus-reveal" role="dialog" aria-modal="true" aria-labelledby="venus-reveal-title">
   <div class="venus-reveal-card">
     <div class="venus-reveal-kicker">VÉNUS · Tu identidad toma forma</div>
@@ -1169,7 +1170,8 @@ function startQuiz() {
   if (!gender) return;
   document.getElementById('gender-screen').style.display = 'none';
   document.getElementById('quiz-wrap').style.display = 'block';
-  modIdx = 0; qIdx = 0;
+  const restored = restoreTestProgress();
+  if (!restored) { modIdx = 0; qIdx = 0; }
   renderQuestion();
 }
 
@@ -1870,7 +1872,7 @@ function venusFigure(kind){
 }
 function venusOpts(rows){return rows.map(([id,name,desc,colors])=>({id,name,desc,swatches:colors||undefined,visual:colors?undefined:venusFigure(id)}));}
 function getModules(){
- const m=getLegacyModules();
+ const m=[]; // El test activo utiliza únicamente los módulos metodológicos V3.
  m.push(
  {key:'kibbe-observations',icon:'◈',label:'Kibbe / observaciones',title:'La línea antes que la etiqueta.',sub:'Observa proporciones y líneas en fotografías neutrales. No evalúes atractivo, peso ni talla.',questions:[
  {id:'kb_vertical',text:'¿Qué línea domina al mirar tu figura completa?',hint:'Mira una foto frontal de cuerpo entero, cámara a la altura del torso y postura natural.',cols:2,opts:venusOpts([['long','Alargada','La figura se percibe larga y continua.'],['compact','Compacta','La figura se percibe corta o concentrada.'],['moderate','Intermedia','No destaca especialmente ninguna de las dos.']])},
@@ -1916,15 +1918,11 @@ function updateProgress() {
   const total  = totalQuestions();
   const done   = answeredCount();
   const pct    = Math.round((done / total) * 100);
-  const labels = [
-    'Módulo 1 de 3 — Tu silueta',
-    'Módulo 2 de 3 — Tu paleta',
-    'Módulo 3 de 3 — Tu energía'
-  ];
+  const labels = mods.map((m,i)=>'Módulo '+(i+1)+' de '+mods.length+' — '+m.label);
   document.getElementById('prog-fill').style.width = pct + '%';
   document.getElementById('prog-pct').textContent  = pct + '%';
   document.getElementById('prog-label').textContent =
-    labels[modIdx] || '';
+    (labels[modIdx] || '')+' · '+(done)+'/'+total+' observaciones';
   for (let i = 0; i < 4; i++) {
     const el = document.getElementById('sd'+i);
     if (!el) continue;
@@ -2051,6 +2049,7 @@ function goNext() {
     modIdx++;
     qIdx = 0;
   }
+  saveTestProgress();
   renderQuestion();
   window.scrollTo({ top:0, behavior:'smooth' });
   const reveal=document.getElementById('venus-reveal');
