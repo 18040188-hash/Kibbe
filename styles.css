@@ -4184,3 +4184,4 @@ body:not(.glowup-page){height:auto;min-height:100vh;overflow-x:clip;overflow-y:a
 .venus-capsule-plan .venus-fineprint{color:#c7bcae;border-color:rgba(255,255,255,.2)}
 @media(max-width:760px){.venus-natural-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.venus-capsule-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:420px){.venus-natural-grid{grid-template-columns:1fr}.venus-capsule-grid{grid-template-columns:1fr}}
+.venus-test-guide{max-width:720px;margin:14px auto 0;padding:12px 15px;border-left:2px solid var(--wine,#641f38);background:rgba(100,31,56,.06);font-size:12px;line-height:1.65;color:var(--v-muted,#766d60)}
