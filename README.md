@@ -142,3 +142,16 @@ El cuestionario permite retroceder entre preguntas y módulos. En la primera pre
 El resultado se presenta como un atlas editorial personal: hipótesis de silueta con observaciones y alternativas, dimensiones de color con muestras de paleta, distribución de las siete esencias, capa simbólica Venus y una guía práctica de proporciones, prendas, capas, accesorios, detalles, cabello y maquillaje. Las recomendaciones se derivan de los resultados individuales; la referencia Dark Romantic Academia funciona como dirección de arte, no como estética impuesta a todas las personas.
 
 Se corrigió además una referencia a variables fuera de alcance que podía lanzar un error JavaScript al avanzar entre preguntas. Se verificó la sintaxis de los bloques JavaScript después del cambio. Esta comprobación no sustituye una prueba funcional de extremo a extremo en navegador.
+
+
+## Actualización metodológica del test (V3)
+
+El test ahora comienza con una ficha natural opcional/descriptor de estatura y recoge color natural de cabello, ojos, profundidad y subtono de piel y contraste entre rasgos. La estatura se captura en centímetros (120–220 cm) y puede omitirse. Se muestra como dato contextual: no se usa como sustituto de la línea vertical percibida en Kibbe.
+
+El módulo Kibbe amplía la observación a diez señales: línea vertical, estructura, distribución de volumen, relación hombros/cadera, escala, impresión global, longitud de extremidades, escala de manos/pies, definición de cintura y líneas faciales. La puntuación pondera estructura y línea corporal; el rostro es complementario. El test guía a usar una foto de cuerpo entero tomada a la altura del pecho para reducir distorsiones de perspectiva. El resultado es una hipótesis orientativa, no un diagnóstico ni una reproducción oficial del método de David Kibbe.
+
+El análisis de color combina comparaciones de drapeado (temperatura, valor y croma) con rasgos naturales y contraste. Cabello, ojos y profundidad de piel se muestran como contexto, no como atajos deterministas. Se incorporan las doce etiquetas estacionales y se advierte cuando la autoobservación del subtono no coincide con la comparación de telas. Una pantalla no sustituye el drapeado físico con luz neutra.
+
+Las esencias se mantienen como una capa visual independiente, no como personalidad. Se añadió una dirección estética elegida por la persona y un módulo de contexto del guardarropa: rutina, clima, presupuesto y objetivo. El resultado propone una cápsula orientativa por categorías y prioridades, sin imponer un número universal de prendas ni una estética fija.
+
+El progreso usa la clave local `venusTestProgressV3` para evitar mezclar respuestas guardadas con la estructura anterior. La ficha y las respuestas permanecen en el navegador.
