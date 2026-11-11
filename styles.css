@@ -4078,4 +4078,3 @@ html,body{max-width:100%;overflow-x:clip}
 body.glowup-page .shell{height:100%;min-height:0;overflow:hidden}
 body.glowup-page .scroll-area{min-height:0;overscroll-behavior:contain;touch-action:pan-y}
 body:not(.glowup-page){height:auto;min-height:100vh;overflow-x:clip;overflow-y:auto}
-body:not(.glowup-page) main{min-height:0}
