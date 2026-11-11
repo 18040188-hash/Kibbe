@@ -1380,8 +1380,14 @@ function venusColorAnalysis(){
  const candidates={spring:['Light Spring','True Spring','Bright Spring'],summer:['Light Summer','True Summer','Soft Summer'],autumn:['Soft Autumn','True Autumn','Deep Autumn'],winter:['Deep Winter','True Winter','Bright Winter']};
  const primary=family==='unknown'?'Pendiente de confirmar':sub[family];
  const neighbors=family==='unknown'?['Completa la comparación de familias']:candidates[family].filter(x=>x!==primary);
+ const naturalUndertone=answers.profile_undertone||'unknown';
+ const drapeUndertone=d.temp;
+ const undertoneMatch=(naturalUndertone==='warm'&&drapeUndertone==='warm')||(naturalUndertone==='cool'&&drapeUndertone==='cool')||(naturalUndertone==='neutral'&&drapeUndertone==='mixto');
  const consistent=Object.values(d).filter(x=>x!=='mixto'&&x!=='sin datos').length+(family!=='unknown'?1:0);
- return {dimensions:d,primary,neighbors,confidence:consistent>=4?'medio':'bajo'};
+ const profileComplete=['profile_hair','profile_eyes','profile_skin_depth','profile_undertone','profile_contrast'].filter(k=>answers[k]&&answers[k]!=='unknown').length;
+ const confidence=consistent>=4&&profileComplete>=4?'medio':consistent>=3?'medio':'bajo';
+ const profileCheck=naturalUndertone==='unknown'?'No se indicó un subtono natural para contrastar.':undertoneMatch?'La comparación de telas y tu autoobservación de subtono coinciden.':naturalUndertone==='olive'?'El matiz oliva puede requerir drapeado físico adicional; no se fuerza a cálido o frío.':'Tu autoobservación y la comparación de telas no coinciden del todo; conviene revisar con drapeado físico.';
+ return {dimensions:d,primary,neighbors,confidence,profileCheck,profileComplete,naturalUndertone,contrast:answers.profile_contrast||'unknown'};
 }
 function venusEssenceAnalysis(){
  const names=['dramatic','natural','classic','gamine','romantic','ingenue','angelic'];
@@ -1389,6 +1395,21 @@ function venusEssenceAnalysis(){
  ['es_face','es_scale','es_detail','es_energy','es_expression','es_movement','es_finish'].forEach(k=>{if(count[answers[k]]!==undefined)count[answers[k]]++});
  const total=Object.values(count).reduce((x,y)=>x+y,0)||1;
  return Object.entries(count).map(([name,n])=>({name,percent:Math.round(n/total*100)})).sort((x,y)=>y.percent-x.percent);
+}
+
+function venusNaturalProfile(){
+ const labels={profile_hair:{black:'Negro', 'dark-brown':'Castaño muy oscuro',brown:'Castaño','light-brown':'Castaño claro / rubio oscuro',blonde:'Rubio',red:'Pelirrojo / cobrizo',grey:'Canoso / blanco',unknown:'No indicado'},profile_eyes:{'dark-brown':'Café muy oscuro',brown:'Café',hazel:'Avellana / miel',green:'Verde',blue:'Azul',grey:'Gris',mixed:'Mixtos',unknown:'No indicado'},profile_skin_depth:{'very-fair':'Muy clara',fair:'Clara',medium:'Media',tan:'Morena / bronceada',deep:'Profunda',unknown:'No indicado'},profile_undertone:{warm:'Cálido',cool:'Frío',neutral:'Neutro',olive:'Oliva',unknown:'No indicado'},profile_contrast:{high:'Alto',medium:'Medio',low:'Bajo',unknown:'No indicado'}};
+ const entries=[['Estatura',answers.profile_height?answers.profile_height+' cm':'No indicada'],['Cabello natural',labels.profile_hair[answers.profile_hair]||'No indicado'],['Ojos',labels.profile_eyes[answers.profile_eyes]||'No indicado'],['Profundidad de piel',labels.profile_skin_depth[answers.profile_skin_depth]||'No indicada'],['Subtono observado',labels.profile_undertone[answers.profile_undertone]||'No indicado'],['Contraste natural',labels.profile_contrast[answers.profile_contrast]||'No indicado']];
+ return '<section class="venus-breakdown-card venus-natural-card"><small>00 / FICHA NATURAL · CONTEXTO</small><h3>Tus rasgos de partida</h3><div class="venus-natural-grid">'+entries.map(([k,v])=>'<div><small>'+k+'</small><b>'+v+'</b></div>').join('')+'</div><p class="venus-fineprint">Cabello, ojos y piel describen tu coloración natural; no determinan por sí solos una estación. La estatura real tampoco sustituye la lectura de línea vertical Kibbe.</p></section>';
+}
+function venusCapsulePlan(kd,sd,vd){
+ const context={study:'Universidad / estudio',office:'Trabajo / oficina',creative:'Entornos creativos y eventos',casual:'Vida cotidiana',mixed:'Rutina mixta'}[answers.wardrobe_context]||'Rutina mixta';
+ const climate={hot:'Clima caluroso',warm:'Clima templado o cálido',cold:'Clima frío',variable:'Clima variable'}[answers.wardrobe_climate]||'Clima no indicado';
+ const budget={low:'Presupuesto ajustado: prioriza segunda mano, arreglos y combinaciones nuevas con lo que ya tienes.',mid:'Presupuesto moderado: invierte primero en prendas de uso frecuente y reserva el presupuesto para piezas distintivas.',high:'Presupuesto flexible: prioriza ajuste, materiales y durabilidad antes que cantidad.',unknown:'Presupuesto no indicado: comienza con una auditoría y evita compras por impulso.'}[answers.wardrobe_budget]||'Empieza con lo que ya tienes.';
+ const goal={combine:'Recombina las prendas actuales en fórmulas repetibles.',gaps:'Detecta primero los huecos reales antes de comprar.',identity:'Construye una firma visual con siluetas, color y detalles recurrentes.',occasion:'Prioriza conjuntos para tus ocasiones más frecuentes.',edit:'Haz una edición del armario por uso, ajuste y afinidad personal.'}[answers.wardrobe_goal]||'Construye el armario según tu rutina.';
+ const tops=(kd.garments.tops||[]).slice(0,2),bottoms=(kd.garments.bottoms||[]).slice(0,2),layers=(kd.garments.outerwear||[]).slice(0,1),accessories=(kd.garments.accessories||[]).slice(0,1);
+ const avoid=answers.style_avoid==='restrict'?'Evita cortes rígidos o prendas que limiten el movimiento.':answers.style_avoid==='plain'?'Añade una pieza con textura, forma o detalle protagonista.':answers.style_avoid==='overdone'?'Mantén una base sencilla y reserva el detalle para un solo punto focal.':answers.style_avoid==='trend'?'Prioriza prendas combinables y detalles que expresen tu identidad, no microtendencias.':'No hay una restricción declarada; prueba combinaciones antes de descartar prendas.';
+ return '<section class="venus-capsule-plan"><header><small>VÉNUS / WARDROBE EDIT · FIG. 03</small><h2>Una cápsula para tu vida real</h2><p>'+context+' · '+climate+' · '+vd.name+'</p></header><div class="venus-capsule-grid"><article><small>01 / TOPS</small><ul>'+tops.map(x=>'<li>'+x+'</li>').join('')+'</ul></article><article><small>02 / PARTE INFERIOR</small><ul>'+bottoms.map(x=>'<li>'+x+'</li>').join('')+'</ul></article><article><small>03 / CAPAS</small><ul>'+layers.map(x=>'<li>'+x+'</li>').join('')+'</ul></article><article><small>04 / DETALLES</small><ul>'+accessories.map(x=>'<li>'+x+'</li>').join('')+'</ul></article></div><p class="venus-capsule-priority"><b>Tu prioridad:</b> '+goal+'</p><p class="venus-capsule-priority"><b>Color:</b> usa '+sd.name+' como hipótesis cromática para coordinar bases y acentos.</p><p class="venus-capsule-priority"><b>Presupuesto:</b> '+budget+'</p><p class="venus-capsule-priority"><b>Tu límite personal:</b> '+avoid+'</p><p class="venus-fineprint">No existe una lista universal de prendas ni un número mágico para una cápsula. Ajusta esta propuesta a tu rutina, clima, presupuesto y gusto.</p></section>';
 }
 function venusSignAdvice(sign){
  const d={aries:'Contrastes decididos, prendas con energía y acentos rojos.',tauro:'Texturas sensoriales, calidad táctil y una paleta natural.',geminis:'Capas ligeras, mezclas inesperadas y accesorios intercambiables.',cancer:'Romanticismo suave, prendas envolventes y detalles nostálgicos.',leo:'Piezas protagonistas, brillo controlado y siluetas expresivas.',virgo:'Cortes precisos, materiales cuidados y detalles funcionales.',libra:'Equilibrio visual, armonía de color y accesorios refinados.',escorpio:'Profundidad, transparencias estratégicas y dramatismo íntimo.',sagitario:'Prendas cómodas y libertad de movimiento.',capricornio:'Sastrería, estructura y piezas duraderas.',acuario:'Diseño experimental, contraste y piezas poco convencionales.',piscis:'Capas fluidas, transparencias y estética onírica.'};
@@ -2347,8 +2368,10 @@ function copyAltaFormula(){
       </div>
     </div>
     ${venusResultExplanation()}
+    ${venusNaturalProfile()}
     ${venusMethodResults()}
     ${venusEditorialBreakdown(kd,sd,vd)}
+    ${venusCapsulePlan(kd,sd,vd)}
 
     <!-- SELFIE ANALYSIS (if exists) -->
     ${selfieHTML}
