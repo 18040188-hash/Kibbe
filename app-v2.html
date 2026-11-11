@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VÉNUS — Descubre tu fórmula de estilo</title>
+<title>VÉNUS — Descubre tu fórmula de estilo</title><meta name="robots" content="noindex,nofollow,noarchive">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -23,7 +23,7 @@
 
 <nav>
   <a class="logo" href="index.html">VÉNUS</a>
-  <a class="nav-home" href="index.html">← Inicio</a><a class="nav-home" href="archivo.html">Archivo ↗</a>
+  <a class="nav-home" data-nav-link href="index.html">← Inicio</a><a class="nav-home" data-nav-link href="perfil.html">Perfil ↗</a><a class="nav-home" data-nav-link href="glowup.html">Glow Up ↗</a><a class="nav-home" data-nav-link href="archivo.html">Archivo ↗</a>
 </nav>
 
 <main>
@@ -2386,6 +2386,7 @@ function copyAltaFormula(){
     <!-- QUOTE -->
     <div class="quote-block">${vd.quote}</div>
 
+    <section class="mb-section academic-reference-note"><div class="mb-section-head"><span class="mb-section-icon">✦</span><span class="mb-section-title">Archivo de dirección de arte</span></div><p class="archive-academic-label">Material de referencia visual con fines académicos. Reproducido bajo uso educativo para análisis de dirección de arte en el marco del proyecto VÉNUS. Las placas que acompañan el resultado son reinterpretaciones vectoriales originales, no activos de marca.</p><div class="glowup-art-grid"><figure><img src="assets/img/venus-editorial-punk.svg" alt="Reinterpretación vectorial original de dirección punk"><figcaption>FIG. A / PUNK · ORIGINAL</figcaption></figure><figure><img src="assets/img/venus-editorial-lace.svg" alt="Reinterpretación vectorial original de corsetería y encaje"><figcaption>FIG. B / TEXTURA · ORIGINAL</figcaption></figure><figure><img src="assets/img/venus-editorial-romantic.svg" alt="Reinterpretación vectorial original de romanticismo"><figcaption>FIG. C / ROMANCE · ORIGINAL</figcaption></figure></div><a href="archivo.html">Consultar fichas del archivo ↗</a></section>
     <!-- ACTIONS -->
     <div class="result-actions">
       <a class="btn-home" href="glowup.html" onclick="prepareGlowUp()">
@@ -2454,5 +2455,5 @@ function restart() {
 /* ── START ─────────────────────────────────────────────── */
 renderGenderScreen();
 </script>
-</body>
+<script>document.querySelectorAll("[data-nav-link]").forEach(a=>{const p=new URL(a.href,location.href).pathname.split("/").pop()||"index.html";if(p===(location.pathname.split("/").pop()||"index.html"))a.setAttribute("aria-current","page")});</script></body>
 </html>
