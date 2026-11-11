@@ -3963,3 +3963,13 @@ img{max-width:100%}
  .opt-grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
  .opt{min-width:0}
 }
+
+
+/* Archive / original image plates / accessibility refinements */
+:where(a,button,summary,input,select,textarea,[tabindex]):focus-visible{outline:3px solid var(--v-accent);outline-offset:4px}
+:where(.spread-page,.mosaic-item,.result-card,.diary-photo-thumb){transition:transform .28s ease,filter .28s ease,box-shadow .28s ease}
+:where(.spread-page,.mosaic-item,.result-card):hover{filter:contrast(1.04);box-shadow:0 8px 24px rgba(25,18,16,.14)}
+:where(.spread-page,.mosaic-item):hover img{transform:scale(1.018)}
+:where(.spread-page,.mosaic-item) img{transition:transform .35s ease}
+a[href="archivo.html"]{text-decoration-thickness:1px;text-underline-offset:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto;animation-duration:.01ms;animation-iteration-count:1;transition-duration:.01ms}}
