@@ -160,3 +160,12 @@ El menú compartido se inicializa sobre los elementos `[data-global-nav]`, con i
 El PDF adjunto se inspeccionó directamente: 11 páginas, siete placas rasterizadas en las páginas 1–7 y 32 fotografías individuales en las páginas 8–11. Se generaron 39 JPEG locales para preparar su incorporación. **La publicación de esos binarios en `assets/img/pdf/` y su aparición en los moodboards/galerías todavía no está completada**; hasta entonces las páginas conservan las ilustraciones SVG originales. El rótulo académico del Archivo documenta el contexto de uso, pero no se presenta como autorización de terceros.
 
 La revisión realizada en esta entrega es estática. No equivale a una prueba manual de clics ni a QA visual en 375, 768 y 1440 px; esas verificaciones permanecen pendientes.
+
+
+## 15. Incidencia de scroll y ejecución del test — 11 nov 2026
+
+Se aisló una regla CSS `html, body { height:100%; overflow:hidden }` procedente del diseño de pantalla completa de Glow Up que se había aplicado globalmente. Esto bloqueaba el desplazamiento normal en Home, Test, Perfil y Archivo. Se limitó el bloqueo a `html:has(body.glowup-page)` y `body.glowup-page`; el contenedor `.scroll-area` conserva el scroll táctil interno únicamente en Glow Up.
+
+En `app-v2.html`, la pregunta de familia estacional (`cl_family`) tenía un cierre de corchetes incorrecto dentro de las opciones de color. El error producía `SyntaxError: Unexpected token ')'` al analizar el script completo, impidiendo ejecutar `renderGenderScreen()`. Se corrigió el cierre y se validó el parseo de los scripts inline de las cinco páginas.
+
+La validación anterior es estática (parseo JavaScript); queda pendiente la prueba de interacción real y la inspección visual en 375, 768 y 1440 px.
