@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#171717">
-<meta name="description" content="VÉNUS: archivo editorial de silueta, color y expresión personal.">
+<meta name="description" content="VÉNUS: archivo editorial de silueta, color y expresión personal."><meta name="robots" content="noindex,nofollow,noarchive">
 <title>VÉNUS — Personal Style Journal / Part 07</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
 <header class="journal-masthead">
   <a class="journal-logo" href="index.html" aria-label="VÉNUS, inicio">VÉNUS</a>
   <div class="masthead-center">INDEPENDENT STYLE JOURNAL<br><span>CDMX · EST. MMXXVI</span></div>
-  <div class="masthead-issue">PART 07<br>VOL. 001 / 2026<br><a href="archivo.html">ARCHIVO ↗</a></div>
+  <div class="masthead-issue">PART 07<br>VOL. 001 / 2026<br><div class="masthead-links"><a data-nav-link href="app-v2.html">TEST</a><a data-nav-link href="perfil.html">PERFIL</a><a data-nav-link href="glowup.html">GLOW UP</a><a data-nav-link href="archivo.html">ARCHIVO ↗</a></div></div>
 </header>
 <main id="contenido" class="journal-main">
   <section class="cover-spread spread" aria-labelledby="cover-title">
@@ -80,5 +80,5 @@
   </section>
 </main>
 <footer class="journal-footer"><span>VÉNUS / ESTUDIO DE IMAGEN</span><span>PRINTED MATTER FOR DIGITAL BODIES</span><span><a href="archivo.html">ARCHIVO / REFERENCIAS ↗</a> · PAGE 06 · CDMX</span></footer>
-</body>
+<script>document.querySelectorAll("[data-nav-link]").forEach(a=>{const p=new URL(a.href,location.href).pathname.split("/").pop()||"index.html";if(p===(location.pathname.split("/").pop()||"index.html"))a.setAttribute("aria-current","page")});</script></body>
 </html>
