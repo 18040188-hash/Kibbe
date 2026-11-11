@@ -7,7 +7,7 @@
 :root{
  --v-paper:#e9e6dc;--v-paper-light:#f5f2e9;--v-ink:#191816;--v-muted:#666158;
  --v-rule:rgba(25,24,22,.28);--v-accent:#702b31;--v-olive:#68644e;
- --v-white:#fbf9f2;--v-display:'UnifrakturMaguntia',Georgia,serif;
+ --v-white:#fbf9f2;--v-display:'UnifrakturMaguntia',Georgia,serif;--v-blackletter:'UnifrakturMaguntia',Georgia,serif;--v-caption:'Space Mono',monospace;
  --v-editorial:'Cormorant Garamond',Georgia,serif;--v-body:'DM Sans',Arial,sans-serif;
  --v-gutter:clamp(18px,4vw,64px);--v-max:1440px;
 }
@@ -209,7 +209,7 @@ main{max-width:1120px;padding:42px var(--v-gutter) 80px}
    while the text and progress controls remain high-contrast and readable. */
 .home-hero{
  background-color:var(--v-ink);
- background-image:linear-gradient(90deg,rgba(23,22,21,.88) 0%,rgba(23,22,21,.58) 58%,rgba(23,22,21,.3) 100%),url('https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=85');
+ background-image:linear-gradient(90deg,rgba(23,22,21,.88) 0%,rgba(23,22,21,.58) 58%,rgba(23,22,21,.3) 100%),url('assets/img/venus-editorial-punk.svg');
  background-size:cover;background-position:center 35%;
 }
 .home-hero::after{content:"VÉNUS / PLATE 04";font:9px var(--v-body);letter-spacing:.16em;writing-mode:vertical-rl;bottom:18px;left:auto;right:14px;color:rgba(255,255,255,.72)}
@@ -541,7 +541,7 @@ button,.btn,.btn-primary,.btn-next,.gender-start,.reference-btn,.btn-wine,.btn-s
  content:"";display:block;width:100%;height:clamp(150px,23vw,245px);margin:0 0 26px;
  background:
   linear-gradient(115deg,rgba(229,43,80,.22),rgba(40,75,232,.18)),
-  url("https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1500&q=88") center 38%/cover;
+  url("assets/img/venus-editorial-romantic.svg") center 38%/cover;
  border:1px solid var(--v-ink);box-shadow:8px 8px 0 var(--v-acid);
  filter:saturate(1.1) contrast(1.08);
 }
@@ -549,14 +549,14 @@ button,.btn,.btn-primary,.btn-next,.gender-start,.reference-btn,.btn-wine,.btn-s
  content:"";display:block;height:104px;margin:0 0 18px;
  background:
   linear-gradient(90deg,rgba(229,43,80,.28),rgba(40,75,232,.15)),
-  url("https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=82") center 42%/cover;
+  url("assets/img/venus-editorial-punk.svg") center 42%/cover;
  border:1px solid var(--v-ink);box-shadow:5px 5px 0 var(--v-fuchsia);
 }
 .layout>section:first-child::before{
  content:"";display:block;height:150px;margin-bottom:24px;
  background:
   linear-gradient(120deg,rgba(229,43,80,.2),rgba(40,75,232,.15)),
-  url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85") center/cover;
+  url("assets/img/venus-editorial-lace.svg") center/cover;
  border:1px solid var(--v-ink);box-shadow:7px 7px 0 var(--v-acid);
 }
 @media(max-width:767px){
