@@ -4109,3 +4109,15 @@ body:not(.glowup-page){height:auto;min-height:100vh;overflow-x:clip;overflow-y:a
 .archive-photo-grid figcaption span{font:8px var(--v-caption);letter-spacing:.1em;color:var(--v-muted)}
 @media(max-width:720px){.archive-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.venus-source-moodboard-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.home-reference-grid{grid-template-columns:1fr 1fr}.home-reference-grid figure:first-child{grid-column:1/-1}.home-reference-grid img{height:220px}.glowup-reference-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Imágenes de referencia: conservar sus colores originales */
+.home-reference-grid img,
+.glowup-reference-grid img,
+.venus-source-moodboard-grid img,
+.archive-photo-grid img,
+.home-reference-grid figure:hover img,
+.glowup-reference-grid figure:hover img,
+.venus-source-moodboard-grid figure:hover img,
+.archive-photo-grid img:hover{
+  filter:none !important;
+}
