@@ -120,12 +120,22 @@ function selectGender(g, el) {
 
 function startQuiz() {
   if (!gender) return;
+  const selectedGender = gender;
+  const restored = restoreTestProgress();
+  if (!restored || gender !== selectedGender) {
+    Object.keys(answers).forEach(k => delete answers[k]);
+    gender = selectedGender;
+    modIdx = 0; qIdx = 0;
+    try{localStorage.removeItem(VENUS_TEST_KEY);}catch(e){}
+  } else {
+    gender = selectedGender;
+  }
   document.getElementById('gender-screen').style.display = 'none';
   document.getElementById('quiz-wrap').style.display = 'block';
-  const restored = restoreTestProgress();
-  if (!restored) { modIdx = 0; qIdx = 0; }
+  document.getElementById('selfie-wrap').style.display = 'none';
   renderQuestion();
 }
+
 
 /* ═══════════════════════════════════════════════════════════
    MODULES — gender-aware labels
@@ -954,7 +964,7 @@ function renderQuestion() {
     <div class="nav-btns">
       ${!isFirst
         ? `<button class="btn-back" onclick="goBack()">← Atrás</button>`
-        : ''}
+        : `<button class="btn-back" onclick="returnToGender()">← Cambiar perfil</button>`}
       <button class="btn-next ${answers[q.id]?'on':''}"
         id="btn-next" onclick="goNext()">
         ${isLastQuestion() ? 'Siguiente paso ✦' : 'Continuar →'}
@@ -1016,6 +1026,18 @@ function goNext() {
 function closeVenusReveal(){
   const reveal=document.getElementById('venus-reveal');
   if(reveal)reveal.classList.remove('active');
+}
+
+function returnToGender() {
+  document.getElementById('quiz-wrap').style.display = 'none';
+  document.getElementById('selfie-wrap').style.display = 'none';
+  document.getElementById('gender-screen').style.display = 'block';
+  renderGenderScreen();
+  const selected=document.querySelector('.gender-opt[onclick*="'+gender+'"]');
+  if(selected){selected.classList.add('selected');document.getElementById('gender-start')?.classList.add('on');}
+  saveTestProgress();
+  document.getElementById('prog-label').textContent='Puedes cambiar tu perfil antes de continuar';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function goBack() {
@@ -1349,11 +1371,43 @@ function venusSignAdvice(sign){
 function venusMethodResults(){
  const k=venusKibbeAnalysis(),c=venusColorAnalysis(),e=venusEssenceAnalysis(),sign=answers.venus_sign||'unknown';
  const names={'soft-dramatic':'Soft Dramatic','flamboyant-natural':'Flamboyant Natural','soft-natural':'Soft Natural','dramatic-classic':'Dramatic Classic','soft-classic':'Soft Classic','soft-gamine':'Soft Gamine','theatrical-romantic':'Theatrical Romantic'};
- const label=x=>names[x]||x.charAt(0).toUpperCase()+x.slice(1);
+ const label=x=>names[x]||String(x||'').replace(/-/g,' ').replace(/\b\w/g,m=>m.toUpperCase());
  const alternatives=k.alternatives.map(x=>label(x[0])).join(' · ');
- const signals=k.observations.join(' · ');
- const ess=e.slice(0,3).map(x=>'<li>'+label(x.name)+' · '+x.percent+'%</li>').join('');
- return '<section class="venus-method-results"><article><small>01 / KIBBE · HIPÓTESIS DE IMAGEN</small><h2>'+label(k.primary)+'</h2><p><b>Nivel de evidencia: '+k.confidence+'</b> · '+k.answered+'/6 observaciones registradas.</p><p><b>Por qué:</b> '+(signals||'No hay suficientes observaciones para proponer un resultado.')+'</p><p><b>Alternativas cercanas:</b> '+(alternatives||'Sin datos suficientes')+'.</p><p><b>Observaciones mixtas:</b> '+(['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance'].filter(x=>answers[x]==='mixed').join(', ')||'No se registraron respuestas mixtas explícitas')+'.</p><small>La puntuación organiza observaciones de estilo; no es una escala clínica ni una validación oficial del sistema Kibbe.</small></article><article><small>02 / COLOR · 12 ESTACIONES</small><h2>'+c.primary+'</h2><p><b>Dimensión primaria:</b> '+(c.dimensions.temp!=='mixto'&&c.dimensions.temp!=='sin datos'?'temperatura':c.dimensions.value!=='mixto'&&c.dimensions.value!=='sin datos'?'valor':c.dimensions.chroma!=='mixto'&&c.dimensions.chroma!=='sin datos'?'croma':'sin evidencia dominante')+'.</p><p><b>Dimensiones:</b> temperatura '+c.dimensions.temp+' · valor '+c.dimensions.value+' · croma '+c.dimensions.chroma+'.</p><p><b>Estación vecina:</b> '+c.neighbors.join(', ')+'. Nivel de evidencia: '+c.confidence+'.</p><p>Los swatches digitales son orientativos y no sustituyen el drapeado físico bajo luz neutra.</p></article><article><small>03 / ESENCIAS · KITCHENER</small><h2>Mezcla de siete esencias</h2><ul>'+ess+'</ul><p>Porcentajes relativos a siete elecciones de armonía visual; no son mediciones psicométricas validadas.</p></article><article><small>04 / VENUS · RECOMENDACIÓN CREATIVA</small><h2>'+(sign==='unknown'?'Signo no indicado':sign.charAt(0).toUpperCase()+sign.slice(1))+'</h2><p>'+venusSignAdvice(sign)+'</p><p>Esta capa es simbólica y no modifica Kibbe, colorimetría ni esencias.</p></article></section>';
+ const fields={kb_vertical:'Línea vertical',kb_frame:'Estructura',kb_flesh:'Distribución de volumen',kb_shoulders:'Relación hombros/cadera',kb_scale:'Escala de detalle',kb_balance:'Impresión general'};
+ const observations=k.observations.map(x=>{const p=x.split(': ');return '<li><b>'+label(fields[p[0]]||p[0])+':</b> '+label(p[1])+'</li>'}).join('');
+ const ess=e.map(x=>'<div class="venus-essence-row"><div><span>'+label(x.name)+'</span><b>'+x.percent+'%</b></div><i><span style="width:'+x.percent+'%"></span></i></div>').join('');
+ const dominant=e.filter(x=>x.percent>0).slice(0,3).map(x=>label(x.name)+' ('+x.percent+'%)').join(' · ');
+ const dims=[['Temperatura',c.dimensions.temp],['Valor',c.dimensions.value],['Croma',c.dimensions.chroma]];
+ const dimHTML=dims.map(x=>'<div class="venus-dimension"><small>'+x[0]+'</small><b>'+label(x[1])+'</b></div>').join('');
+ const colorEvidence=c.confidence==='medio'?'Hay coincidencias entre varias dimensiones.':'Las respuestas todavía son parciales o mixtas.';
+ return '<section class="venus-method-results venus-breakdown">'+
+ '<header class="venus-breakdown-head"><small>VÉNUS / INFORME PERSONAL · FIG. 01</small><h2>Tu fórmula, desglosada.</h2><p>Una lectura por capas: estructura, color, esencia y expresión. No es una etiqueta cerrada; es un mapa para experimentar.</p></header>'+
+ '<div class="venus-breakdown-grid">'+
+ '<article class="venus-breakdown-card venus-kibbe-card"><small>01 / SILUETA · KIBBE</small><h3>'+label(k.primary)+'</h3><p class="venus-evidence">Evidencia cualitativa: <b>'+label(k.confidence)+'</b> · '+k.answered+'/6 observaciones.</p><ul class="venus-observation-list">'+(observations||'<li>Sin observaciones suficientes.</li>')+'</ul><p><b>Alternativas cercanas</b><br>'+(alternatives||'Pendientes de confirmar')+'</p><p class="venus-fineprint">La lectura organiza tus respuestas; no es una clasificación científica ni una evaluación profesional de caída de prendas.</p></article>'+
+ '<article class="venus-breakdown-card venus-color-card"><small>02 / COLOR · PALETA ESTACIONAL</small><h3>'+c.primary+'</h3><div class="venus-dimensions">'+dimHTML+'</div><div class="venus-breakdown-swatches">'+(window.venusCurrentProfile?.palette||[]).map((color,i)=>'<div><i style="background:'+color+'"></i><small>'+((window.venusCurrentProfile?.paletteNames||[])[i]||'Tono '+(i+1))+'</small></div>').join('')+'</div><p><b>Estaciones vecinas:</b> '+c.neighbors.join(' · ')+'</p><p class="venus-fineprint">'+colorEvidence+' Confirma la paleta con drapeado físico bajo luz neutra.</p></article>'+
+ '<article class="venus-breakdown-card venus-essence-card"><small>03 / ESENCIAS · KITCHENER</small><h3>Tu mezcla visual</h3><p class="venus-dominant">'+(dominant||'Sin datos')+'</p><div class="venus-essence-bars">'+ess+'</div><p class="venus-fineprint">Porcentajes descriptivos de siete elecciones. No son una medición psicométrica.</p></article>'+
+ '<article class="venus-breakdown-card venus-expression-card"><small>04 / EXPRESIÓN · VENUS</small><h3>'+(sign==='unknown'?'Sin signo indicado':label(sign))+'</h3><p>'+venusSignAdvice(sign)+'</p><p class="venus-fineprint">Capa simbólica opcional. No modifica la hipótesis de silueta, la paleta ni las esencias.</p></article>'+
+ '</div></section>';
+}
+
+function venusEditorialBreakdown(kd,sd,vd){
+ const groups=kd.garments||{};
+ const list=(key)=> (groups[key]||[]).map(x=>'<li>'+x+'</li>').join('');
+ const ess=venusEssenceAnalysis();
+ const mix=ess.filter(x=>x.percent>0).slice(0,3).map(x=>x.name).join(' + ');
+ const hair=vd.name.includes('Goth')?'Ondas suaves, textura natural y accesorios metálicos discretos.':vd.name.includes('Academia')?'Capas pulidas, ondas suaves o recogidos bajos con acabado natural.':'Elige un acabado que acompañe tu textura y tus proporciones, sin imponer una tendencia.';
+ const makeup=sd.name.includes('Otoño')?'Tonos cálidos profundos: cacao, terracota, vino y bronce.':'Trabaja con el contraste y la temperatura de tu paleta; prueba primero tonos cercanos al rostro.';
+ const cuts=kd.proportionRules.slice(0,3).map(x=>'<li>'+x+'</li>').join('');
+ const avoid=(kd.avoids||[]).slice(0,4).map(x=>'<li>'+x+'</li>').join('');
+ return '<section class="venus-style-atlas"><div class="venus-atlas-title"><small>VÉNUS / STYLE ATLAS · FIG. 02</small><h2>Cómo llevar tu fórmula al guardarropa</h2><p>'+vd.name+' · '+kd.name+' · '+sd.name+' · '+mix+'</p></div>'+
+ '<div class="venus-atlas-grid">'+
+ '<article class="venus-atlas-panel venus-proportion-panel"><small>A / PROPORCIONES</small><div class="venus-figure">'+kd.svgFigure+'</div><ul>'+cuts+'</ul></article>'+
+ '<article class="venus-atlas-panel"><small>B / PRENDAS CLAVE · TOPS</small><ul>'+list('tops')+'</ul><small>VESTIDOS Y FALDAS</small><ul>'+list('bottoms')+'</ul></article>'+
+ '<article class="venus-atlas-panel"><small>C / CAPAS Y ACCESORIOS</small><small>OUTERWEAR</small><ul>'+list('outerwear')+'</ul><small>ACCESORIOS</small><ul>'+list('accessories')+'</ul></article>'+
+ '<article class="venus-atlas-panel"><small>D / DETALLES QUE SUMAN</small><p>'+vd.desc+'</p><p><b>Texturas y elementos:</b> '+vd.elements.join(' · ')+'</p><p><b>Cabello:</b> '+hair+'</p><p><b>Maquillaje:</b> '+makeup+'</p></article>'+
+ '<article class="venus-atlas-panel venus-avoid-panel"><small>E / QUÉ EVITAR O AJUSTAR</small><ul>'+avoid+'</ul><p>Son sugerencias de estilismo, no prohibiciones. Si una prenda te gusta, la experimentación manda.</p></article>'+
+ '<article class="venus-atlas-panel venus-formula-panel"><small>F / TU RECETA DE OUTFIT</small><p><b>Base:</b> '+(groups.tops||[])[0]||'Una prenda base que te resulte cómoda'+'</p><p><b>Segunda capa:</b> '+((groups.outerwear||[])[0]||'Una capa con estructura o textura')+'</p><p><b>Foco:</b> '+(vd.elements[0]||'Un detalle personal')+'</p><p><b>Color:</b> '+sd.name+' · '+(sd.paletteNames||[]).slice(0,3).join(', ')+'</p></article>'+
+ '</div></section>';
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2290,6 +2344,7 @@ function copyAltaFormula(){
     </div>
     ${venusResultExplanation()}
     ${venusMethodResults()}
+    ${venusEditorialBreakdown(kd,sd,vd)}
 
     <!-- SELFIE ANALYSIS (if exists) -->
     ${selfieHTML}
