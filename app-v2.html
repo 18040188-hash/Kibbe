@@ -1409,7 +1409,7 @@ function venusMethodResults(){
  '<header class="venus-breakdown-head"><small>VÉNUS / INFORME PERSONAL · FIG. 01</small><h2>Tu fórmula, desglosada.</h2><p>Una lectura por capas: estructura, color, esencia y expresión. No es una etiqueta cerrada; es un mapa para experimentar.</p></header>'+
  '<div class="venus-breakdown-grid">'+
  '<article class="venus-breakdown-card venus-kibbe-card"><small>01 / SILUETA · KIBBE</small><h3>'+label(k.primary)+'</h3><p class="venus-evidence">Evidencia cualitativa: <b>'+label(k.confidence)+'</b> · '+k.answered+'/6 observaciones.</p><ul class="venus-observation-list">'+(observations||'<li>Sin observaciones suficientes.</li>')+'</ul><p><b>Alternativas cercanas</b><br>'+(alternatives||'Pendientes de confirmar')+'</p><p class="venus-fineprint">La lectura organiza tus respuestas; no es una clasificación científica ni una evaluación profesional de caída de prendas.</p></article>'+
- '<article class="venus-breakdown-card venus-color-card"><small>02 / COLOR · PALETA ESTACIONAL</small><h3>'+c.primary+'</h3><div class="venus-dimensions">'+dimHTML+'</div><div class="venus-breakdown-swatches">'+(window.venusCurrentProfile?.palette||[]).map((color,i)=>'<div><i style="background:'+color+'"></i><small>'+((window.venusCurrentProfile?.paletteNames||[])[i]||'Tono '+(i+1))+'</small></div>').join('')+'</div><p><b>Estaciones vecinas:</b> '+c.neighbors.join(' · ')+'</p><p class="venus-fineprint">'+colorEvidence+' Confirma la paleta con drapeado físico bajo luz neutra.</p></article>'+
+ '<article class="venus-breakdown-card venus-color-card"><small>02 / COLOR · PALETA ESTACIONAL</small><h3>'+c.primary+'</h3><div class="venus-dimensions">'+dimHTML+'</div><div class="venus-breakdown-swatches">'+(window.venusCurrentProfile?.palette||[]).map((color,i)=>'<div><i style="background:'+color+'"></i><small>'+((window.venusCurrentProfile?.paletteNames||[])[i]||'Tono '+(i+1))+'</small></div>').join('')+'</div><p><b>Estaciones vecinas:</b> '+c.neighbors.join(' · ')+'</p><p class="venus-fineprint">'+colorEvidence+' '+c.note+' '+c.profileCheck+' Confirma la paleta con drapeado físico bajo luz neutra.</p></article>'+
  '<article class="venus-breakdown-card venus-essence-card"><small>03 / ESENCIAS · KITCHENER</small><h3>Tu mezcla visual</h3><p class="venus-dominant">'+(dominant||'Sin datos')+'</p><div class="venus-essence-bars">'+ess+'</div><p class="venus-fineprint">Porcentajes descriptivos de siete elecciones. No son una medición psicométrica.</p></article>'+
  '<article class="venus-breakdown-card venus-expression-card"><small>04 / EXPRESIÓN · VENUS</small><h3>'+(sign==='unknown'?'Sin signo indicado':label(sign))+'</h3><p>'+venusSignAdvice(sign)+'</p><p class="venus-fineprint">Capa simbólica opcional. No modifica la hipótesis de silueta, la paleta ni las esencias.</p></article>'+
  '</div></section>';
@@ -2311,7 +2311,13 @@ function showMoodboard() {
     `<a href="${pinBase}${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`
   ).join('');
   window.venusCurrentProfile = {
-  version:2, gender, kibbe:kd.name, season:sd.name, vibe:vd.name,
+  version:3, gender, height:answers.profile_height||null,
+  naturalHair:answers.profile_hair||null,naturalEyes:answers.profile_eyes||null,
+  skinDepth:answers.profile_skin_depth||null,skinUndertone:answers.profile_undertone||null,
+  naturalContrast:answers.profile_contrast||null,
+  wardrobeContext:answers.wardrobe_context||null,wardrobeClimate:answers.wardrobe_climate||null,
+  wardrobeBudget:answers.wardrobe_budget||null,wardrobeGoal:answers.wardrobe_goal||null,
+  kibbe:kd.name, season:sd.name, vibe:vd.name,
   formula:`${kd.name} · ${sd.name} · ${vd.name}`,
   palette:sd.palette, paletteNames:sd.paletteNames,
   tagline:vd.tagline, vibeDescription:vd.desc,
