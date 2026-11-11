@@ -106,13 +106,12 @@ La existencia de breakpoints y reglas responsive no equivale a una prueba visual
 - Cálculo opcional de carta natal con fecha, hora y lugar, fuera del MVP actual.
 
 
-## 11. Archivo visual, procedencia y derechos
+## 11. Archivo visual y procedencia
 
-El PDF “referencias visuales.pdf” contiene 11 páginas. El PDF contiene 39 objetos rasterizados: una composición de página completa por cada página 1–7 y ocho fotografías independientes por página en las páginas 8–11, para un total de 32 fotografías en esas cuatro páginas. Se inspeccionaron las páginas renderizadas y se extrajeron técnicamente los recursos rasterizados con Poppler para su inventario. Sin embargo, el documento no identifica de manera verificable a todos los fotógrafos, modelos, diseñadores y titulares de derechos, ni aporta licencias de reproducción. Por ello, las fotografías no se publican en el sitio ni en Vercel.
+El PDF “referencias visuales.pdf” contiene once páginas. Para el inventario se extrajeron 39 objetos rasterizados: una composición por página en las páginas 1–7 y ocho imágenes independientes por página en las páginas 8–11 (32 fotografías). El índice documental conserva la numeración de página y figura, captions y notas de procedencia. La autoría individual que no aparece acreditada se identifica como desconocida; no se inventan créditos.
 
-El sitio incluye `archivo.html`, un índice editorial con una entrada para cada página, captions y numeración. Para las páginas 8–11 se documentan las 32 fotografías individualmente por su contenido visual, sin atribuir autorías desconocidas. Se añadieron tres placas vectoriales originales (`assets/img/venus-editorial-*.svg`) que traducen la dirección de arte a composiciones propias y seguras para el despliegue.
+Las tres placas vectoriales originales (`assets/img/venus-editorial-punk.svg`, `venus-editorial-lace.svg` y `venus-editorial-romantic.svg`) son reinterpretaciones de dirección de arte y deben permanecer diferenciadas de las fotografías de referencia. No forman parte del logotipo ni representan a Chrome Hearts u otra marca externa. VÉNUS no afirma afiliación, patrocinio ni autorización de esas marcas.
 
-La compilación del PDF se atribuye a Nataly López según los metadatos del archivo. La marca Chrome Hearts aparece en las páginas del documento; esto no significa que VÉNUS esté afiliado, patrocinado ni autorizado por esa marca.
 
 ## 12. Mejoras UX y accesibilidad añadidas
 
@@ -125,3 +124,17 @@ La compilación del PDF se atribuye a Nataly López según los metadatos del arc
 
 
 Las placas vectoriales originales se integran también en la home, en el moodboard del resultado y en el inicio de Glow Up. La mejora conecta la referencia con la experiencia práctica sin convertir la fotografía de terceros en un recurso público sin licencia.
+
+## 13. Política de uso de imágenes de referencia
+
+El proyecto VÉNUS es un proyecto final escolar de evaluación académica, sin distribución comercial prevista y destinado a revisión por la autora y el profesor evaluador. Dentro de ese contexto, las imágenes del PDF se consideran material de estudio para análisis de dirección de arte. La política de uso del proyecto es:
+
+- Rotular cada aparición de las imágenes con el texto: “Material de referencia visual con fines académicos. Reproducido bajo uso educativo para análisis de dirección de arte en el marco del proyecto VÉNUS.”
+- En `archivo.html`, presentar las imágenes como índice documental, numeradas y acompañadas por una ficha/caption y por la procedencia disponible.
+- En moodboards, resultados y Glow Up, seleccionar referencias de las páginas 8–11 e incluir el rótulo académico en la sección visible.
+- No utilizar las fotografías como identidad de marca, logotipo ni activos originales. No registrarlas como creaciones de VÉNUS ni borrar su procedencia.
+- Mantener las tres ilustraciones SVG originales como interpretación de dirección de arte, diferenciadas visualmente de las fotografías fuente.
+- Si el autor o titular no puede identificarse a partir del documento, declararlo expresamente como no identificado; no inventar nombres ni créditos.
+
+Esta política describe el propósito, el alcance y el tratamiento interno de las imágenes dentro del proyecto. No constituye una determinación legal de *fair use* o de una excepción equivalente en todas las jurisdicciones. El rótulo académico documenta el contexto de uso, pero no sustituye una licencia ni garantiza por sí solo la legalidad de cualquier reproducción. La app incluye directivas `noindex,nofollow,noarchive` y un `robots.txt` restrictivo para desalentar la indexación; estas medidas no convierten una URL pública en un espacio privado ni impiden que terceros accedan al contenido si conocen la dirección.
+
