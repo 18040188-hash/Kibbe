@@ -109,3 +109,11 @@ Las tres placas vectoriales originales permanecen como interpretación visual pr
 - Se reforzó el foco visible para navegación por teclado.
 - Glow Up ya contiene un diario de estilo y la Story Card de perfil conserva su función de compartir/descargar; ahora conviven con el archivo editorial.
 - Se documenta el límite de derechos en vez de inventar créditos fotográficos.
+
+
+## Actualización técnica — noviembre de 2026
+
+- **Navegación global:** se unificaron los cinco destinos (Inicio, Test, Perfil, Glow Up y Archivo) con un script compartido en `assets/js/navigation.js`; el menú móvil expone su estado mediante `aria-expanded` y se marca el enlace de la página actual.
+- **Responsive de navegación:** se añadieron reglas específicas para móvil y se evita el desbordamiento horizontal global con `overflow-x: clip`.
+- **QA pendiente:** el código fue revisado estáticamente y el último commit de navegación generó un deployment de producción en estado READY. No se declara prueba manual de clics ni verificación visual en navegador a 375/768/1440 px porque esta sesión no contó con control interactivo del navegador.
+- **Referencias PDF:** el documento adjunto contiene 11 páginas; páginas 1–7 aportan siete placas visuales y páginas 8–11 contienen 32 fotografías. La extracción local generó 39 JPEG optimizados. La publicación de esos binarios en `assets/img/pdf/` y su integración visual deben verificarse por separado antes de considerarlas completadas.

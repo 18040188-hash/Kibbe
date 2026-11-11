@@ -138,3 +138,16 @@ El proyecto VÉNUS es un proyecto final escolar de evaluación académica, sin d
 
 Esta política describe el propósito, el alcance y el tratamiento interno de las imágenes dentro del proyecto. No constituye una determinación legal de *fair use* o de una excepción equivalente en todas las jurisdicciones. El rótulo académico documenta el contexto de uso, pero no sustituye una licencia ni garantiza por sí solo la legalidad de cualquier reproducción. La app incluye directivas `noindex,nofollow,noarchive` y un `robots.txt` restrictivo para desalentar la indexación; estas medidas no convierten una URL pública en un espacio privado ni impiden que terceros accedan al contenido si conocen la dirección.
 
+
+
+## 9. Referencias visuales y trazabilidad
+
+El PDF de inspiración entregado para este proyecto tiene 11 páginas. La inspección del archivo confirmó siete imágenes/placas en las páginas 1–7 y 32 fotografías individuales en las páginas 8–11. Estas referencias se consideran material de dirección de arte, no evidencia para clasificar tipos corporales, estaciones cromáticas o esencias. No deben intervenir en el scoring ni presentarse como validación empírica de los sistemas.
+
+Las fotografías individuales no tienen atribución completa de autoría/licencia visible en el documento. La nota de uso académico y no comercial es una declaración de contexto, no una autorización ni una sustitución de créditos. Antes de una publicación pública o comercial se deben obtener permisos/licencias o reemplazar las imágenes por material con derechos documentados.
+
+## 10. Navegación y validación
+
+La navegación compartida se implementa en `assets/js/navigation.js`. Los cinco destinos principales son Inicio, Test, Perfil, Glow Up y Archivo. El script asigna `aria-current="page"`, controla el menú móvil y actualiza `aria-expanded`. Los breakpoints de navegación se sitúan en 680 px y 375 px.
+
+La revisión de código confirma que las cinco páginas cargan el script común. El deployment asociado al commit `37c967b79b540ab9cf5469a991248c73c76b9279` fue reportado como READY por Vercel. La comprobación manual de cada clic y las capturas de QA en 375, 768 y 1440 px quedan pendientes de una sesión de navegador interactiva; no se infiere su éxito a partir de que el build esté listo.
