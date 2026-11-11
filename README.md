@@ -96,7 +96,7 @@ Las capturas de escritorio y móvil deben añadirse después de la verificación
 
 ## Archivo / Referencias y derechos de imagen
 
-Se añadió `archivo.html`, un índice editorial que documenta las once páginas del PDF de referencias, con folios, captions y notas de procedencia. La página registra 32 fotografías en las páginas 8–11 mediante fichas individuales; no las reproduce públicamente por falta de licencias verificables. Las páginas 8–11 contienen 32 fotografías de moda. El PDF no aporta créditos verificables completos ni licencias de publicación para cada imagen, así que esas fotografías se documentan como referencias, pero no se copian al sitio público ni al deploy.
+Se añadió `archivo.html`, un índice editorial que documenta las once páginas del PDF de referencias, con folios, captions y notas de procedencia. La página registra 32 fotografías en las páginas 8–11 mediante fichas individuales; no las reproduce públicamente por falta de licencias verificables. El PDF contiene 39 objetos rasterizados extraíbles: un recurso de página en cada una de las páginas 1–7 y ocho fotografías independientes en cada una de las páginas 8–11 (32 fotografías). El PDF no aporta créditos verificables completos ni licencias de publicación para cada imagen, así que esas fotografías se documentan como referencias, pero no se copian al sitio público ni al deploy.
 
 En lugar de republicar fotografías de terceros, se añadieron tres ilustraciones vectoriales originales en `assets/img/`, reutilizadas en home, test, moodboard de resultados y Glow Up:
 - `venus-editorial-punk.svg`
@@ -111,10 +111,10 @@ Para extraer las imágenes originales del PDF en una carpeta local, instala Popp
 
 ```bash
 mkdir -p reference-source/pages-08-11
-pdfimages -f 8 -l 11 -all "referencias visuales.pdf" reference-source/pages-08-11/plate
+pdfimages -f 1 -l 11 -all "referencias visuales.pdf" reference-source/plate
 ```
 
-Esto genera los archivos `plate-000.*` en adelante, conservando la mayor parte de los recursos rasterizados originales. No subas esa carpeta a GitHub/Vercel hasta tener autorización de los titulares de derechos. El índice público no necesita esos archivos.
+Esto genera 39 archivos `plate-000.*` en adelante. Los recursos 1–7 son composiciones rasterizadas de página completa; las páginas 8–11 contienen ocho fotografías independientes por página. Para organizarlos por página, usa `pdfimages -list` y conserva el orden de los objetos. No subas esa carpeta a GitHub/Vercel hasta tener autorización de los titulares de derechos. El índice público no necesita esos archivos.
 
 ## Mejoras adicionales
 
