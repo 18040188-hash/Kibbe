@@ -151,3 +151,12 @@ Las fotografías individuales no tienen atribución completa de autoría/licenci
 La navegación compartida se implementa en `assets/js/navigation.js`. Los cinco destinos principales son Inicio, Test, Perfil, Glow Up y Archivo. El script asigna `aria-current="page"`, controla el menú móvil y actualiza `aria-expanded`. Los breakpoints de navegación se sitúan en 680 px y 375 px.
 
 La revisión de código confirma que las cinco páginas cargan el script común. El deployment asociado al commit `37c967b79b540ab9cf5469a991248c73c76b9279` fue reportado como READY por Vercel. La comprobación manual de cada clic y las capturas de QA en 375, 768 y 1440 px quedan pendientes de una sesión de navegador interactiva; no se infiere su éxito a partir de que el build esté listo.
+
+
+## 14. Registro técnico de navegación y activos — 11 nov 2026
+
+El menú compartido se inicializa sobre los elementos `[data-global-nav]`, con independencia de que el contenedor sea un `nav` dentro del masthead o del topbar. El script marca la página activa, expone el estado con `aria-expanded`, admite cierre con Escape y cierra el menú al seguir un enlace en móvil. Se corrigió el cierre explícito del `nav` en el masthead de Home.
+
+El PDF adjunto se inspeccionó directamente: 11 páginas, siete placas rasterizadas en las páginas 1–7 y 32 fotografías individuales en las páginas 8–11. Se generaron 39 JPEG locales para preparar su incorporación. **La publicación de esos binarios en `assets/img/pdf/` y su aparición en los moodboards/galerías todavía no está completada**; hasta entonces las páginas conservan las ilustraciones SVG originales. El rótulo académico del Archivo documenta el contexto de uso, pero no se presenta como autorización de terceros.
+
+La revisión realizada en esta entrega es estática. No equivale a una prueba manual de clics ni a QA visual en 375, 768 y 1440 px; esas verificaciones permanecen pendientes.
