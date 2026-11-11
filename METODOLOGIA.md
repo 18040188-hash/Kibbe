@@ -122,3 +122,6 @@ La compilación del PDF se atribuye a Nataly López según los metadatos del arc
 - Regla `prefers-reduced-motion` para minimizar transiciones y animaciones cuando el sistema lo solicita.
 - Se conserva el diario de estilo existente en Glow Up y la Story Card existente en perfil; no se duplican funcionalidades.
 - Se retiraron las referencias remotas a Unsplash de home y test y se reemplazaron por placas vectoriales originales.
+
+
+Las placas vectoriales originales se integran también en la home, en el moodboard del resultado y en el inicio de Glow Up. La mejora conecta la referencia con la experiencia práctica sin convertir la fotografía de terceros en un recurso público sin licencia.
