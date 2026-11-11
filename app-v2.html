@@ -1037,7 +1037,7 @@ function goNext() {
   if (qIdx < mod.questions.length - 1) {
     qIdx++;
   } else {
-    if(modIdx===0 && !answers.kibbeTie && venusNeedsTieBreak()){
+    if(mod.key==='kibbe-observations' && !answers.kibbeTie && venusNeedsTieBreak()){
       venusShowTieBreak();saveTestProgress();return;
     }
     modIdx++;
@@ -1326,7 +1326,7 @@ function venusSetTie(value){
  if(value==='defined') answers.texture='sharp';
  if(value==='soft') answers.texture='soft';
  saveTestProgress();
- modIdx=1;qIdx=0;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
+ modIdx=2;qIdx=0;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
 }
 function venusResultExplanation(){return '<section class="venus-explanation"><small>METODOLOGÍA / LECTURA ORIENTATIVA</small><p>Los resultados se presentan por separado. El nivel de evidencia describe la consistencia de tus respuestas, no una precisión estadística. La colorimetría digital debe confirmarse con telas físicas.</p></section>';}
 
