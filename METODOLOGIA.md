@@ -108,7 +108,7 @@ La existencia de breakpoints y reglas responsive no equivale a una prueba visual
 
 ## 11. Archivo visual, procedencia y derechos
 
-El PDF “referencias visuales.pdf” contiene 11 páginas. Las páginas 8–11 reúnen 32 fotografías de moda y estilismo. Se inspeccionaron las páginas renderizadas y se extrajeron técnicamente los recursos rasterizados con Poppler para su inventario. Sin embargo, el documento no identifica de manera verificable a todos los fotógrafos, modelos, diseñadores y titulares de derechos, ni aporta licencias de reproducción. Por ello, las fotografías no se publican en el sitio ni en Vercel.
+El PDF “referencias visuales.pdf” contiene 11 páginas. El PDF contiene 39 objetos rasterizados: una composición de página completa por cada página 1–7 y ocho fotografías independientes por página en las páginas 8–11, para un total de 32 fotografías en esas cuatro páginas. Se inspeccionaron las páginas renderizadas y se extrajeron técnicamente los recursos rasterizados con Poppler para su inventario. Sin embargo, el documento no identifica de manera verificable a todos los fotógrafos, modelos, diseñadores y titulares de derechos, ni aporta licencias de reproducción. Por ello, las fotografías no se publican en el sitio ni en Vercel.
 
 El sitio incluye `archivo.html`, un índice editorial con una entrada para cada página, captions y numeración. Para las páginas 8–11 se documentan las 32 fotografías individualmente por su contenido visual, sin atribuir autorías desconocidas. Se añadieron tres placas vectoriales originales (`assets/img/venus-editorial-*.svg`) que traducen la dirección de arte a composiciones propias y seguras para el despliegue.
 
