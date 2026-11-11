@@ -897,9 +897,7 @@ function getModules(){
 function totalQuestions() {
   return getModules().reduce((s,m) => s + m.questions.length, 0);
 }
-function answeredCount() {
-  return Object.keys(answers).length;
-}
+function answeredCount(){return getModules().reduce((sum,m)=>sum+m.questions.filter(q=>answers[q.id]!==undefined&&answers[q.id]!=='' ).length,0);}
 function updateProgress() {
   const mods   = getModules();
   const total  = totalQuestions();
@@ -1016,7 +1014,7 @@ function isLastQuestion() {
 
 function selectInput(qId,value){
  const n=Number(value);
- if(value===''||!Number.isFinite(n)){delete answers[qId];}else if(n>=120&&n<=220){answers[qId]=String(Math.round(n));}
+ if(value===''||!Number.isFinite(n)){delete answers[qId];}else if(n>=120&&n<=220){answers[qId]=String(Math.round(n));}else{delete answers[qId];}
  saveTestProgress();
  const btn=document.getElementById('btn-next');
  if(btn)btn.classList.toggle('on',!!answers[qId]);
@@ -1316,8 +1314,9 @@ function venusShowTieBreak(){
  <div class="question-block"><div class="q-text">Al probar una prenda de líneas rectas y otra de líneas curvas, ¿cuál suele integrarse mejor con tu silueta?</div><div class="q-hint">Compara prendas de ajuste parecido y observa el conjunto, no si una te gusta más. Si ninguna domina, elige “ambas”.</div><div class="opt-grid cols-1">
  <button class="opt horizontal" type="button" onclick="venusSetTie('defined')"><div class="opt-text"><div class="opt-name">Líneas rectas y definidas</div><div class="opt-desc">Blazers rectos, cortes limpios y estructura se ven naturales en mí.</div></div></button>
  <button class="opt horizontal" type="button" onclick="venusSetTie('soft')"><div class="opt-text"><div class="opt-name">Líneas curvas y suaves</div><div class="opt-desc">Drapeados, curvas y formas redondeadas se integran mejor.</div></div></button>
- <button class="opt horizontal" type="button" onclick="venusSetTie('mixed')"><div class="opt-text"><div class="opt-name">Ambas por igual / no estoy segura/o</div><div class="opt-desc">No identifico una dirección dominante.</div></div></button></div></div>`;
+ <button class="opt horizontal" type="button" onclick="venusSetTie('mixed')"><div class="opt-text"><div class="opt-name">Ambas por igual / no estoy segura/o</div><div class="opt-desc">No identifico una dirección dominante.</div></div></button></div><div class="nav-btns"><button class="btn-back" type="button" onclick="venusBackFromTie()">← Atrás</button></div></div>`;
 }
+function venusBackFromTie(){modIdx=1;qIdx=getModules()[1].questions.length-1;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}
 function venusSetTie(value){
  answers.kibbeTie=value;
  if(value==='defined') answers.texture='sharp';
@@ -1477,7 +1476,7 @@ function calcSeason(){
  if(family==='winter')return contrast==='high'||chroma==='bright'?'winter-clear':value==='deep'?'winter-true':'winter-soft';
  return value==='deep'&&contrast==='high'?'autumn-deep':chroma==='soft'?'autumn-soft':'autumn-deep';
 }
-function calcVibe(){const v=answers.style_mood||'romantic-mystery';return v==='eclectic'?'romantic-mystery':v;}
+function calcVibe(){return answers.style_mood||'romantic-mystery';}
 
 /* ═══════════════════════════════════════════════════════════
    RESULT DATA
@@ -2037,6 +2036,14 @@ const VIBE_DATA = {
     ],
     quote:'"El contraste cuenta historias."'
   },
+  'eclectic':{
+    name:'Ecléctico / En construcción',
+    tagline:'Curiosidad · Mezcla · Identidad propia',
+    desc:'Tu estilo no necesita una sola etiqueta. La clave será construir una base funcional y sumar piezas que expresen tus intereses.',
+    elements:['Mezcla intencional de épocas y texturas','Piezas protagonistas con básicos versátiles','Accesorios personales y hallazgos vintage','Paleta flexible con uno o dos acentos recurrentes'],
+    moodImages:[{q:'eclectic personal style fashion editorial',cap:'Mezcla personal'},{q:'eclectic vintage modern outfit',cap:'Vintage y contemporáneo'},{q:'creative layered fashion accessories',cap:'Capas expresivas'}],
+    quote:'"La coherencia no exige uniformidad."'
+  },
   'romantic-mystery':{
     name:'Romantic Mystery',
     tagline:'Enigma · Feminidad · Contraste',
@@ -2510,6 +2517,7 @@ function restart() {
   selfieDataURL  = null;
   selfieAnalysis = null;
   Object.keys(answers).forEach(k => delete answers[k]);
+  try{localStorage.removeItem(VENUS_TEST_KEY);}catch(e){}
 
   document.getElementById('result-wrap').style.display = 'none';
   document.getElementById('selfie-wrap').style.display = 'none';
