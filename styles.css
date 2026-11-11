@@ -4017,3 +4017,51 @@ a[href="archivo.html"]{text-decoration-thickness:1px;text-underline-offset:4px}
  .v-inline-nav{width:100%;justify-content:flex-start;gap:12px}
  .masthead-links{justify-content:flex-start}
 }
+
+
+/* VÉNUS — navegación global unificada y accesible (2026-11) */
+.v-global-header{position:relative;z-index:120;isolation:isolate}
+.v-global-header>nav[data-global-nav],
+.journal-masthead nav[data-global-nav],
+.topbar nav[data-global-nav]{
+ position:static;inset:auto;z-index:121;display:flex;align-items:center;justify-content:flex-end;
+ gap:clamp(10px,1.5vw,22px);flex-wrap:wrap;width:auto;min-height:0;padding:0;
+ background:transparent;color:inherit;border:0;box-shadow:none;backdrop-filter:none
+}
+.v-global-header>nav[data-global-nav]::after,
+.journal-masthead nav[data-global-nav]::after,
+.topbar nav[data-global-nav]::after{content:none}
+.v-global-header>nav[data-global-nav] a,
+.journal-masthead nav[data-global-nav] a,
+.topbar nav[data-global-nav] a{
+ display:inline-flex;align-items:center;min-height:36px;padding:7px 1px;
+ color:inherit;text-decoration:none;font:9px var(--v-body);letter-spacing:.14em;text-transform:uppercase;
+ border-bottom:1px solid transparent;white-space:nowrap
+}
+.v-global-header>nav[data-global-nav] a:hover,
+.v-global-header>nav[data-global-nav] a[aria-current="page"],
+.journal-masthead nav[data-global-nav] a:hover,
+.journal-masthead nav[data-global-nav] a[aria-current="page"],
+.topbar nav[data-global-nav] a:hover,
+.topbar nav[data-global-nav] a[aria-current="page"]{color:var(--v-accent);border-bottom-color:currentColor}
+.v-menu-toggle{display:none;min-height:40px;padding:8px 12px;border:1px solid currentColor;background:transparent;color:inherit;font:9px var(--v-caption);letter-spacing:.12em;text-transform:uppercase}
+.v-menu-toggle:focus-visible{outline:3px solid var(--v-accent);outline-offset:3px}
+@media(max-width:680px){
+ .v-global-header{align-items:center}
+ .v-global-header .v-menu-toggle{display:inline-flex;margin-left:auto}
+ .v-global-header>nav[data-global-nav]{display:none;flex:1 0 100%;width:100%;justify-content:flex-start;gap:8px 16px;padding:10px 0 4px}
+ .v-global-header>nav[data-global-nav].is-open{display:flex}
+ .journal-masthead{position:relative}
+ .journal-masthead .v-menu-toggle{display:inline-flex;margin-top:8px}
+ .journal-masthead nav[data-global-nav]{display:none;justify-content:flex-start;gap:6px 16px;padding:8px 0}
+ .journal-masthead nav[data-global-nav].is-open{display:flex}
+ .topbar .v-menu-toggle{display:inline-flex}
+ .topbar nav[data-global-nav]{display:none;justify-content:flex-start;gap:6px 14px;padding:8px 0}
+ .topbar nav[data-global-nav].is-open{display:flex}
+}
+@media(max-width:375px){
+ .v-global-header{padding-inline:14px}
+ .v-global-header>nav[data-global-nav] a{font-size:8px;letter-spacing:.1em}
+ .journal-masthead nav[data-global-nav] a,.topbar nav[data-global-nav] a{font-size:8px}
+}
+html,body{max-width:100%;overflow-x:clip}
