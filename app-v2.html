@@ -54,7 +54,7 @@ let gender = null;  /* 'fem' | 'masc' | 'nb' */
 let modIdx = 0;
 let qIdx   = 0;
 const answers = {};
-const VENUS_TEST_KEY = 'venusTestProgressV2';
+const VENUS_TEST_KEY = 'venusTestProgressV3';
 function saveTestProgress(){
   try{localStorage.setItem(VENUS_TEST_KEY,JSON.stringify({gender,modIdx,qIdx,answers,updatedAt:Date.now()}));}catch(e){}
 }
@@ -1439,8 +1439,12 @@ function calcKibbeScores(){
  if(a.kb_frame==='blunt')add(['flamboyant-natural','soft-natural'],3);
  if(a.kb_frame==='rounded')add(['romantic','theatrical-romantic','soft-gamine'],2);
  if(a.kb_frame==='balanced')add(['dramatic-classic','soft-classic'],3);
+ if(a.kb_shoulders==='shoulder')add(['flamboyant-natural','soft-natural','soft-dramatic'],2);
+ if(a.kb_shoulders==='hip')add(['romantic','soft-gamine','theatrical-romantic'],1);
+ if(a.kb_shoulders==='even')add(['dramatic-classic','soft-classic'],1);
  if(a.kb_flesh==='soft')add(['soft-dramatic','soft-natural','soft-classic','soft-gamine','romantic','theatrical-romantic'],1);
  if(a.kb_flesh==='lean')add(['dramatic','flamboyant-natural','dramatic-classic','gamine'],1);
+ if(a.kb_flesh==='mixed')add(['dramatic-classic','soft-classic','gamine','soft-gamine'],1);
  if(a.kb_limbs==='long')add(['dramatic','soft-dramatic','flamboyant-natural'],2);
  if(a.kb_limbs==='short')add(['gamine','soft-gamine','romantic'],2);
  if(a.kb_hands_feet==='long')add(['dramatic','flamboyant-natural'],2);
@@ -1456,6 +1460,8 @@ function calcKibbeScores(){
  if(a.kb_face==='mixed')add(['gamine','soft-gamine','soft-natural'],1);
  if(a.kb_scale==='large')add(['dramatic','flamboyant-natural','soft-dramatic'],1);
  if(a.kb_scale==='small')add(['gamine','soft-gamine','romantic'],1);
+ if(a.kb_scale==='mixed')add(['dramatic-classic','soft-classic'],1);
+ if(a.kb_balance==='mixed')add(['gamine','soft-gamine','soft-classic'],1);
  if(a.kb_balance==='dramatic')add(['dramatic','soft-dramatic'],1);
  if(a.kb_balance==='natural')add(['flamboyant-natural','soft-natural'],1);
  if(a.kb_balance==='romantic')add(['romantic','theatrical-romantic'],1);
