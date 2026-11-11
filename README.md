@@ -146,7 +146,7 @@ Se corrigió además una referencia a variables fuera de alcance que podía lanz
 
 ## Actualización metodológica del test (V3)
 
-El test ahora comienza con una ficha natural opcional/descriptor de estatura y recoge color natural de cabello, ojos, profundidad y subtono de piel y contraste entre rasgos. La estatura se captura en centímetros (120–220 cm) y puede omitirse. Se muestra como dato contextual: no se usa como sustituto de la línea vertical percibida en Kibbe.
+El test ahora se organiza en siete módulos y 38 preguntas. El test comienza con una ficha natural y descriptor opcional de estatura y recoge color natural de cabello, ojos, profundidad y subtono de piel y contraste entre rasgos. La estatura se captura en centímetros (120–220 cm) y puede omitirse. Se muestra como dato contextual: no se usa como sustituto de la línea vertical percibida en Kibbe.
 
 El módulo Kibbe amplía la observación a diez señales: línea vertical, estructura, distribución de volumen, relación hombros/cadera, escala, impresión global, longitud de extremidades, escala de manos/pies, definición de cintura y líneas faciales. La puntuación pondera estructura y línea corporal; el rostro es complementario. El test guía a usar una foto de cuerpo entero tomada a la altura del pecho para reducir distorsiones de perspectiva. El resultado es una hipótesis orientativa, no un diagnóstico ni una reproducción oficial del método de David Kibbe.
 
