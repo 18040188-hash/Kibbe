@@ -122,13 +122,12 @@ function startQuiz() {
   if (!gender) return;
   const selectedGender = gender;
   const restored = restoreTestProgress();
-  if (!restored || gender !== selectedGender) {
+  const sameProfile = restored && gender === selectedGender;
+  if (!sameProfile) {
     Object.keys(answers).forEach(k => delete answers[k]);
     gender = selectedGender;
     modIdx = 0; qIdx = 0;
     try{localStorage.removeItem(VENUS_TEST_KEY);}catch(e){}
-  } else {
-    gender = selectedGender;
   }
   document.getElementById('gender-screen').style.display = 'none';
   document.getElementById('quiz-wrap').style.display = 'block';
