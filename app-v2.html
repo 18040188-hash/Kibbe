@@ -1986,6 +1986,12 @@ const VIBE_DATA = {
 /* ═══════════════════════════════════════════════════════════
    MOODBOARD RENDER
 ═══════════════════════════════════════════════════════════ */
+function calcKibbe(){return venusKibbeAnalysis().primary;}
+function calcSeason(){
+ const n=venusColorAnalysis().primary;
+ const map={'Light Spring':'spring-light','True Spring':'spring-true','Bright Spring':'spring-true','Light Summer':'summer-soft','True Summer':'summer-cool','Soft Summer':'summer-soft','Soft Autumn':'autumn-soft','True Autumn':'autumn-soft','Deep Autumn':'autumn-deep','Deep Winter':'winter-true','True Winter':'winter-true','Bright Winter':'winter-clear'};
+ return map[n]||'autumn-soft';
+}
 function showMoodboard() {
   document.getElementById('selfie-wrap').style.display = 'none';
   document.getElementById('result-wrap').style.display = 'block';
