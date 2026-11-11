@@ -96,9 +96,9 @@ Las capturas de escritorio y móvil deben añadirse después de la verificación
 
 ## Archivo / Referencias y derechos de imagen
 
-Se añadió `archivo.html`, un índice editorial que documenta las once páginas del PDF de referencias, con folios, captions y notas de procedencia. Las páginas 8–11 contienen 32 fotografías de moda. El PDF no aporta créditos verificables completos ni licencias de publicación para cada imagen, así que esas fotografías se documentan como referencias, pero no se copian al sitio público ni al deploy.
+Se añadió `archivo.html`, un índice editorial que documenta las once páginas del PDF de referencias, con folios, captions y notas de procedencia. La página registra 32 fotografías en las páginas 8–11 mediante fichas individuales; no las reproduce públicamente por falta de licencias verificables. Las páginas 8–11 contienen 32 fotografías de moda. El PDF no aporta créditos verificables completos ni licencias de publicación para cada imagen, así que esas fotografías se documentan como referencias, pero no se copian al sitio público ni al deploy.
 
-En lugar de republicar fotografías de terceros, se añadieron tres ilustraciones vectoriales originales en `assets/img/`:
+En lugar de republicar fotografías de terceros, se añadieron tres ilustraciones vectoriales originales en `assets/img/`, reutilizadas en home, test, moodboard de resultados y Glow Up:
 - `venus-editorial-punk.svg`
 - `venus-editorial-lace.svg`
 - `venus-editorial-romantic.svg`
@@ -119,6 +119,7 @@ Esto genera los archivos `plate-000.*` en adelante, conservando la mayor parte d
 ## Mejoras adicionales
 
 - Se añadió navegación directa a Archivo desde home, test, perfil y Glow Up.
+- Glow Up integra un pequeño moodboard de las tres placas originales para conectar el archivo con el diario y el plan de estilo.
 - Se añadieron microinteracciones discretas en imágenes y spreads; respetan `prefers-reduced-motion`.
 - Se reforzó el foco visible para navegación por teclado.
 - Glow Up ya contiene un diario de estilo y la Story Card de perfil conserva su función de compartir/descargar; ahora conviven con el archivo editorial.
