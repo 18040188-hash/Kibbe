@@ -28,7 +28,7 @@ La experiencia es modular y guarda respuestas, módulo y pregunta actual en `loc
 
 ### Regla de interpretación
 
-La matriz de decisión prioriza la combinación de línea vertical y armazón. Las demás observaciones matizan el resultado y permiten reportar alternativas cercanas y contradicciones. La implementación no afirma reproducir el proceso completo de David Kibbe ni sustituye una evaluación experta de líneas y caída de prendas.
+La matriz de decisión prioriza la combinación de línea vertical y armazón. Las demás observaciones matizan el resultado y permiten reportar alternativas cercanas y contradicciones. La implementación es una heurística propia de VÉNUS, no una tabla de puntuación oficial ni una reproducción íntegra del método de Kibbe. La implementación no afirma reproducir el proceso completo de David Kibbe ni sustituye una evaluación experta de líneas y caída de prendas.
 
 El nivel de evidencia es cualitativo:
 - **Bajo:** pocas respuestas o contradicción entre la impresión general y las observaciones principales.
@@ -43,14 +43,14 @@ Kibbe es un sistema de imagen, no una clasificación científica del cuerpo. Las
 
 ## 3. Colorimetría: 12 estaciones
 
-La interfaz presenta comparaciones de swatches digitales en cuatro pasos conceptuales:
+La interfaz presenta comparaciones de swatches digitales en cinco pasos conceptuales:
 
 - **Temperatura:** cálida frente a fría.
 - **Valor:** clara frente a profunda.
 - **Croma:** brillante frente a suavizada.
 - **Familia estacional:** primavera, verano, otoño o invierno.
 
-La familia estacional y las dimensiones se combinan para sugerir una subestación entre las doce: Light/True/Bright Spring; Light/True/Soft Summer; Soft/True/Deep Autumn; Bright/True/Deep Winter. Las estaciones vecinas se muestran como alternativas para revisión.
+La familia estacional y las dimensiones se combinan para sugerir una subestación entre las doce: Light/True/Bright Spring; Light/True/Soft Summer; Soft/True/Deep Autumn; Bright/True/Deep Winter. La subestación sugerida combina la familia elegida con valor y croma observados; si la combinación es ambigua, el resultado queda pendiente de confirmar. Las estaciones vecinas se muestran como alternativas para revisión.
 
 La dimensión primaria no debe interpretarse como un diagnóstico definitivo. La pantalla, el brillo, el perfil de color del dispositivo, la cámara y la iluminación alteran los swatches. **La prueba recomendada es el drapeado físico con telas, bajo luz neutra y sin maquillaje.**
 
@@ -70,7 +70,7 @@ La persona ingresa manualmente su signo de Venus o selecciona “No lo sé”. E
 
 ## 6. Experiencia y privacidad
 
-- Cuatro módulos cortos: Kibbe, color, esencias y Venus.
+- Cuatro módulos: Kibbe, color, esencias y Venus. El tiempo estimado depende del ritmo de observación y no está validado con participantes.
 - Progreso por módulo y pregunta; guardado local en `localStorage`.
 - La persona puede cerrar y retomar en el mismo navegador.
 - No hay cuenta ni sincronización en servidor.
@@ -88,11 +88,15 @@ Estas fuentes orientan la organización conceptual. No implican aval ni validaci
 - The Concept Wardrobe, [What Are the 7 Style Essences?](https://theconceptwardrobe.com/7-style-essences/what-are-style-essences)
 - Glamour España, [Qué es el signo Venus y por qué hay que vestir de acuerdo con él](https://www.glamour.es/articulos/que-es-el-signo-venus-y-por-que-hay-que-vestir-de-acuerdo-con-el)
 
-## 8. Validación pendiente
+## 8. Capturas
+
+No se añaden capturas ficticias. Las capturas de escritorio y móvil deben incorporarse después de ejecutar y revisar la interfaz real en 375, 768 y 1440 px.
+
+## 9. Validación pendiente
 
 La existencia de breakpoints y reglas responsive no equivale a una prueba visual. Antes de declarar el MVP validado deben completarse pruebas manuales en 375, 768 y 1440 px, además de comprobar navegación por teclado, lector de pantalla, recuperación de progreso, reinicio y contraste. El proyecto no incluye aún un estudio con participantes ni validación externa de resultados.
 
-## 9. Roadmap
+## 10. Roadmap
 
 - Sesiones de prueba moderadas con participantes diversos.
 - Comparación de resultados con asesoría profesional independiente.
