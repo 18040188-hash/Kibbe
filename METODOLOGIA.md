@@ -185,3 +185,27 @@ El resultado se organiza como un atlas editorial en dos niveles:
 - **Aplicación al guardarropa:** figura esquemática, proporciones, prendas por categoría, capas, accesorios, texturas, elementos de expresión, cabello, maquillaje, puntos a ajustar y una receta orientativa de outfit.
 
 La dirección gráfica toma como referencia la lámina Dark Romantic Academia compartida por la autora: paleta organizada, retícula editorial, captions y fichas por categoría. No se fuerza esa estética sobre todos los resultados. La fórmula y las recomendaciones se mantienen vinculadas a las respuestas individuales. Las sugerencias de prendas son exploratorias, no reglas obligatorias.
+
+
+## 14. Revisión comparativa de fuentes y cambios VÉNUS V3
+
+### Análisis de color estacional
+La guía de The Concept Wardrobe estructura el análisis alrededor de temperatura (hue), valor y croma, y trata el contraste como un indicador relacionado con el valor. También explica que cabello, ojos y piel componen la coloración natural, y que la estación se obtiene comparando esas dimensiones, no asignando una temporada por un único rasgo. VÉNUS incorpora una ficha de color natural (cabello, ojos, profundidad y subtono de piel, contraste), mantiene preguntas comparativas de drapeado para temperatura/valor/croma y muestra una alerta si el subtono autoobservado no coincide con el resultado de las comparaciones. La pantalla se declara orientativa y recomienda confirmar con telas físicas y luz neutra. Se amplía la cobertura a doce etiquetas estacionales.
+Fuente: https://theconceptwardrobe.com/colour-analysis-comprehensive-guides/seasonal-color-analysis-which-color-season-are-you
+
+### Línea y estructura corporal (Kibbe)
+The Concept Wardrobe separa estructura ósea, carne corporal y rasgos faciales, y explica que la línea vertical es una percepción de proporción, no una conversión directa de centímetros. Our Fashion Garden propone observar fotos de cuerpo entero tomadas a la altura del pecho y comparar contornos ilustrados para reducir la influencia de sombras y perspectivas. VÉNUS añade una guía de captura y diez señales sobre línea, estructura, volumen, hombros/cadera, escala, extremidades, manos/pies, cintura y rasgos faciales. La estatura real se recoge por separado y no decide el tipo. El rostro tiene peso complementario, no sustituye las líneas del cuerpo. La puntuación muestra alternativas y evidencia cualitativa; no se presenta como una clasificación oficial ni como certeza científica.
+Fuentes:
+- https://theconceptwardrobe.com/kibbe-body-types/the-kibbe-body-type-test
+- https://ourfashiongarden.com/kibbe-body-type-quiz/
+
+### Esencias visuales
+The Concept Wardrobe define las esencias como armonía entre líneas naturales del rostro/cuerpo y las líneas de la ropa, y advierte que no son un análisis de personalidad. VÉNUS conserva las siete esencias como capa descriptiva separada de la estética elegida por la persona, evitando deducir personalidad o valor estético de una puntuación.
+Fuente: https://theconceptwardrobe.com/7-style-essences/what-are-style-essences
+
+### Armario cápsula / guardarropa funcional
+La guía de The Concept Wardrobe advierte que una cápsula no debe reducirse a una lista universal ni a un número mágico: debe responder al estilo, la apariencia, el gusto y la vida real de quien la usa. VÉNUS incorpora contexto de estudio/trabajo/vida diaria, clima, presupuesto y objetivo, y propone prendas prioritarias desde el resultado de silueta y color. La recomendación se formula como punto de partida editable, no como lista obligatoria.
+Fuente: https://theconceptwardrobe.com/capsule-wardrobe-a-comprehensive-guide
+
+### Experiencia y facilidad de uso
+Se reorganizó el test en siete módulos progresivos: rasgos naturales, silueta, color, esencias, dirección estética, contexto de guardarropa y capa astrológica opcional. Se añadió entrada numérica validada para estatura (opcional), guardado local V3, guía de fotografía, indicadores de progreso dinámicos, retroceso y opción de no declarar datos de color desconocidos. Las preguntas de perfil incluyen respuestas “No lo sé” para no obligar a adivinar. El resultado incluye ficha natural, informe metodológico, Style Atlas y propuesta de cápsula.
