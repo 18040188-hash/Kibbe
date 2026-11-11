@@ -51,7 +51,7 @@ Abre `index.html` para la portada o `app-v2.html` para iniciar el test. Para pro
 
 ## Tecnologías
 
-HTML, CSS y JavaScript vanilla; Google Fonts; imágenes de Unsplash; `localStorage`; Canvas 2D; Web Share API con fallback de descarga. No se añadieron frameworks ni dependencias de JavaScript.
+HTML, CSS y JavaScript vanilla; Google Fonts; placas vectoriales originales; `localStorage`; Canvas 2D; Web Share API con fallback de descarga. No se añadieron frameworks ni dependencias de JavaScript.
 
 ## Privacidad y límites
 
@@ -94,28 +94,13 @@ La confianza se expresa como nivel cualitativo de evidencia y consistencia. No s
 
 Las capturas de escritorio y móvil deben añadirse después de la verificación visual final. No se incluyen imágenes simuladas como evidencia de QA.
 
-## Archivo / Referencias y derechos de imagen
+## Archivo / Referencias y política académica de imágenes
 
-Se añadió `archivo.html`, un índice editorial que documenta las once páginas del PDF de referencias, con folios, captions y notas de procedencia. La página registra 32 fotografías en las páginas 8–11 mediante fichas individuales; no las reproduce públicamente por falta de licencias verificables. El PDF contiene 39 objetos rasterizados extraíbles: un recurso de página en cada una de las páginas 1–7 y ocho fotografías independientes en cada una de las páginas 8–11 (32 fotografías). El PDF no aporta créditos verificables completos ni licencias de publicación para cada imagen, así que esas fotografías se documentan como referencias, pero no se copian al sitio público ni al deploy.
+El PDF “referencias visuales.pdf” se utiliza como material de estudio en el proyecto final académico VÉNUS. La compilación se atribuye a Nataly López en los metadatos del documento. Las imágenes se muestran exclusivamente como referencias para análisis de dirección de arte, con numeración, fichas y crédito/procedencia cuando está disponible. En el archivo y en cualquier moodboard donde aparezcan debe permanecer visible el rótulo: “Material de referencia visual con fines académicos. Reproducido bajo uso educativo para análisis de dirección de arte en el marco del proyecto VÉNUS.”
 
-En lugar de republicar fotografías de terceros, se añadieron tres ilustraciones vectoriales originales en `assets/img/`, reutilizadas en home, test, moodboard de resultados y Glow Up:
-- `venus-editorial-punk.svg`
-- `venus-editorial-lace.svg`
-- `venus-editorial-romantic.svg`
+La reproducción académica no se presenta como una conclusión jurídica universal ni como licencia comercial. Las imágenes no se usan en el logotipo, no se registran como activos originales de marca y no se atribuyen a VÉNUS. La autoría individual no identificada se marca como tal. La aplicación incorpora `noindex,nofollow,noarchive` y `robots.txt` para reducir su indexación, aunque eso no equivale a control de acceso privado.
 
-Estas placas reinterpretan la dirección de arte general (punk, corsetería, encaje sugerido, romanticismo y burgundy) sin copiar las imágenes fuente. Se retiraron las URLs de Unsplash de home y del test.
-
-### Extracción local para estudio privado
-
-Para extraer las imágenes originales del PDF en una carpeta local, instala Poppler y ejecuta desde la raíz del repositorio:
-
-```bash
-mkdir -p reference-source/pages-08-11
-pdfimages -f 1 -l 11 -all "referencias visuales.pdf" reference-source/plate
-```
-
-Esto genera 39 archivos `plate-000.*` en adelante. Los recursos 1–7 son composiciones rasterizadas de página completa; las páginas 8–11 contienen ocho fotografías independientes por página. Para organizarlos por página, usa `pdfimages -list` y conserva el orden de los objetos. No subas esa carpeta a GitHub/Vercel hasta tener autorización de los titulares de derechos. El índice público no necesita esos archivos.
-
+Las tres placas vectoriales originales permanecen como interpretación visual propia: `assets/img/venus-editorial-punk.svg`, `venus-editorial-lace.svg` y `venus-editorial-romantic.svg`. La Story Card exportable usa ahora el sistema editorial VÉNUS y se genera localmente en el navegador.
 ## Mejoras adicionales
 
 - Se añadió navegación directa a Archivo desde home, test, perfil y Glow Up.
