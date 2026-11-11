@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
   content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>VÉNUS — Glow Up</title>
+<title>VÉNUS — Glow Up</title><meta name="robots" content="noindex,nofollow,noarchive">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -92,8 +92,8 @@
 <div class="shell" id="shell">
   <!-- TOP BAR -->
   <div class="topbar">
-    <div class="topbar-logo">VÉNUS</div>
-    <div class="topbar-tag" id="topbar-tag">Glow Up</div><a class="topbar-tag" href="archivo.html" aria-label="Abrir archivo de referencias">ARCHIVO ↗</a>
+    <a class="topbar-logo" href="index.html" style="text-decoration:none">VÉNUS</a>
+    <div class="topbar-tag" id="topbar-tag">Glow Up</div><div class="v-inline-nav" role="navigation" aria-label="Navegación principal"><a data-nav-link href="index.html">INICIO</a><a data-nav-link href="app-v2.html">TEST</a><a data-nav-link href="perfil.html">PERFIL</a><a data-nav-link href="archivo.html">ARCHIVO ↗</a></div>
   </div>
 
   <!-- SCROLL AREA -->
@@ -1126,5 +1126,5 @@ function showToast(msg) {
 /* ── BOOT ─── */
 init();
 </script>
-</body>
+<script>document.querySelectorAll("[data-nav-link]").forEach(a=>{const p=new URL(a.href,location.href).pathname.split("/").pop()||"index.html";if(p===(location.pathname.split("/").pop()||"index.html"))a.setAttribute("aria-current","page")});</script></body>
 </html>
