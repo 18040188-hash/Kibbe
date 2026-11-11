@@ -126,3 +126,10 @@ Las tres placas vectoriales originales permanecen como interpretación visual pr
 - **Corrección de marcado:** se cerró explícitamente el elemento `nav` del masthead de Home para evitar que el navegador reconstruya el árbol HTML de forma implícita.
 - **Estado de referencias PDF:** se extrajeron localmente 39 JPEG del documento adjunto (7 placas de páginas 1–7 y 32 fotografías de páginas 8–11). La integración de esos binarios en `assets/img/pdf/` no forma parte de este commit; las páginas actuales continúan usando las placas SVG originales. No se declara completada la integración fotográfica.
 - **QA:** revisión estática de rutas y marcado. La verificación manual de clics y capturas a 375, 768 y 1440 px sigue pendiente de una sesión de navegador interactiva.
+
+
+## Corrección de scroll y cuestionario — 11 nov 2026
+
+- **Scroll global:** se eliminó el bloqueo global `overflow:hidden` que se había heredado del layout móvil de Glow Up; ahora el scroll interno queda limitado a `body.glowup-page` y las demás páginas usan desplazamiento normal.
+- **Test:** se corrigió un cierre de corchetes en la pregunta de familia estacional del módulo de colorimetría. El error de sintaxis detenía la ejecución de todo el script principal, por lo que no se renderizaba el selector inicial ni podía comenzar el cuestionario.
+- **Validación:** se comprobó la sintaxis de los scripts inline de las cinco páginas. Esta comprobación no sustituye una prueba interactiva completa en dispositivos reales.
