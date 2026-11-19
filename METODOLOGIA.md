@@ -292,3 +292,8 @@ El título del ADN en Style Lab se construye con texto escapado para evitar que 
 ## 23. Normalización de respuestas de análisis facial
 
 La respuesta de la IA se valida como objeto y se normalizan sus campos antes de mostrarlos: se aceptan cadenas, se limitan longitudes y cantidades de elementos y se descartan estructuras inesperadas. Si la respuesta no es válida, el resultado continúa sin el bloque facial.
+
+
+## 24. Silueta sin datos
+
+Si la persona omite el capítulo de silueta, el test ya no asigna por defecto Dramatic (resultado de empate numérico de cero). Presenta “Pendiente de confirmar”, recomendaciones neutrales y dos tipos como posibilidades exploratorias, con confianza baja. Así no se convierte un capítulo omitido en una conclusión falsa.
