@@ -307,3 +307,8 @@ El diario de Glow Up limita cada entrada a dos fotos, acepta JPG/PNG/WEBP y rech
 ## 26. Resiliencia del diario
 
 Los datos del diario se normalizan al leer tanto localStorage como la base cloud. Campos inesperados se sustituyen por valores seguros y las fotos se filtran por formato, longitud y cantidad antes de renderizar. El respaldo local también valida que el contenido tenga estructura de lista.
+
+
+## 27. Accesibilidad de Style Lab
+
+Las seis pestañas del laboratorio ahora enlazan explícitamente a su panel mediante `aria-controls` y `aria-labelledby`, y todos los paneles tienen `role="tabpanel"`. Se mantiene navegación con flechas izquierda/derecha, con un único listener.
