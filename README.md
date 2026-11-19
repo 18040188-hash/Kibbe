@@ -185,3 +185,12 @@ El Style Lab ahora se presenta como una extensión visual del diagnóstico: hero
 - **Accessibility:** profile selection uses button semantics and pressed states; new controls include visible keyboard focus.
 
 The adaptive logic is rule-based and not a validated scoring model. These refinements are intended to clarify inconsistent self-observations, not to claim scientific precision.
+
+
+## Test experience polish (19 nov 2026)
+
+- Inicio renovado: estima 8–12 minutos, explica que la foto es opcional y ofrece retomar el progreso guardado o empezar desde cero.
+- El test agrega aclaraciones adaptativas de color cuando las comparaciones repetidas no coinciden. Las respuestas de aclaración se usan en la hipótesis de estación, y los resultados mantienen lenguaje de incertidumbre.
+- El capítulo astrológico puede omitirse. La estética sin selección se resuelve como ecléctica/en construcción, sin imponer Romantic Mystery.
+- El resultado genera tres fórmulas de outfit y una checklist de prendas para auditar el armario antes de comprar. La checklist persiste localmente por nombre de prenda, y se puede reiniciar.
+- Kibbe muestra 10 observaciones (se corrigió el contador que decía 6); la consistencia del patrón se marca como heurística, no como confianza estadística.
