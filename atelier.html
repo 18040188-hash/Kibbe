@@ -164,6 +164,8 @@ body{background:var(--lab-bg);color:var(--lab-ink)}
 const KEYS={wardrobe:'venusWardrobeV1',mood:'venusMoodboardV1',experiments:'venusExperimentsV1',profile:'venusGlowUpProfile',saved:'venusSavedLook'};
 const $=id=>document.getElementById(id);
 const safe=(v)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeColor=(v)=>/^#[0-9a-f]{3,8}$/i.test(String(v??''))?String(v):'';
+const safePhoto=(v)=>typeof v==='string'&&v.length<=3000000&&/^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/]+=*$/.test(v)?v:'';
 const uid=()=>globalThis.crypto?.randomUUID?globalThis.crypto.randomUUID():('v-'+Date.now()+'-'+Math.random().toString(36).slice(2));
 const safeImageURL=(v)=>{try{const u=new URL(v,location.href);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}};
 const read=(k)=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch{return []}};
@@ -180,7 +182,7 @@ function profileDna(){
   $('dna-formula').textContent=profile.formula||[profile.kibbe,profile.season,profile.vibe].filter(Boolean).join(' · ');
   $('dna-copy').textContent='Tu test es el punto de partida. Guarda prendas y experimentos para llevar esta fórmula a tu vida cotidiana.';
   const palette=profile.palette||[];
-  $('dna-palette').innerHTML=palette.slice(0,5).map((c,i)=>'<i style="background:'+safe(c)+'"><span>'+safe((profile.paletteNames||[])[i]||c)+'</span></i>').join('');
+  $('dna-palette').innerHTML=palette.slice(0,5).map((c,i)=>'<i style="background:'+safeColor(c)+'"><span>'+safe((profile.paletteNames||[])[i]||c)+'</span></i>').join('');
   $('dna-palette-label').textContent=(profile.season||'Tu color story')+' · '+palette.length+' tonos de referencia';
   const garments=profile.garments||{};
   const picks=Object.entries(garments).flatMap(([cat,arr])=>(arr||[]).slice(0,2).map(item=>({cat,item}))).slice(0,6);
@@ -198,8 +200,8 @@ function profileDna(){
  }
  $('dna-tags').innerHTML=tags.map(t=>'<span class="lab-tag">'+safe(t)+'</span>').join('');
 }
-function renderWardrobe(){ $('wardrobe-list').innerHTML=wardrobe.length?wardrobe.map(x=>'<article class="lab-item">'+(x.photo?'<img alt="" src="'+x.photo+'">':'')+'<div class="lab-meta">'+safe(x.category)+' / '+safe(x.occasion||'')+'</div><h3>'+safe(x.name)+'</h3><p>'+safe([x.color,x.notes].filter(Boolean).join(' · '))+'</p><button class="lab-delete" data-delete="wardrobe" data-id="'+safe(x.id)+'">Eliminar</button></article>').join(''):'<div class="lab-empty">Aún no hay prendas guardadas. Añade algunas para probar fórmulas.</div>'}
-function renderMood(){const q=($('mood-search')?.value||'').trim().toLowerCase();const filtered=mood.filter(x=>[x.title,x.tags,x.note].join(' ').toLowerCase().includes(q));$('mood-list').innerHTML=filtered.length?filtered.map(x=>'<article class="lab-item">'+(x.photo?'<img alt="'+safe(x.title)+'" src="'+x.photo+'">':x.url&&safeImageURL(x.url)?'<img alt="'+safe(x.title)+'" src="'+safeImageURL(x.url)+'" loading="lazy">':'')+'<div class="lab-meta">'+safe(x.tags||'REFERENCIA')+'</div><h3>'+safe(x.title)+'</h3><p>'+safe(x.note||'')+'</p><button class="lab-delete" data-delete="mood" data-id="'+safe(x.id)+'">Eliminar</button></article>').join(''):'<div class="lab-empty">'+(q?'No hay referencias que coincidan.':'Tu moodboard está vacío. Guarda una imagen, URL o una idea visual.')+'</div>'}
+function renderWardrobe(){ $('wardrobe-list').innerHTML=wardrobe.length?wardrobe.map(x=>'<article class="lab-item">'+(safePhoto(x.photo)?'<img alt="" src="'+safePhoto(x.photo)+'">':'')+'<div class="lab-meta">'+safe(x.category)+' / '+safe(x.occasion||'')+'</div><h3>'+safe(x.name)+'</h3><p>'+safe([x.color,x.notes].filter(Boolean).join(' · '))+'</p><button class="lab-delete" data-delete="wardrobe" data-id="'+safe(x.id)+'">Eliminar</button></article>').join(''):'<div class="lab-empty">Aún no hay prendas guardadas. Añade algunas para probar fórmulas.</div>'}
+function renderMood(){const q=($('mood-search')?.value||'').trim().toLowerCase();const filtered=mood.filter(x=>[x.title,x.tags,x.note].join(' ').toLowerCase().includes(q));$('mood-list').innerHTML=filtered.length?filtered.map(x=>'<article class="lab-item">'+(safePhoto(x.photo)?'<img alt="'+safe(x.title)+'" src="'+safePhoto(x.photo)+'">':x.url&&safeImageURL(x.url)?'<img alt="'+safe(x.title)+'" src="'+safeImageURL(x.url)+'" loading="lazy">':'')+'<div class="lab-meta">'+safe(x.tags||'REFERENCIA')+'</div><h3>'+safe(x.title)+'</h3><p>'+safe(x.note||'')+'</p><button class="lab-delete" data-delete="mood" data-id="'+safe(x.id)+'">Eliminar</button></article>').join(''):'<div class="lab-empty">'+(q?'No hay referencias que coincidan.':'Tu moodboard está vacío. Guarda una imagen, URL o una idea visual.')+'</div>'}
 function renderExperiments(){ $('experiment-list').innerHTML=experiments.length?experiments.slice().reverse().map(x=>'<article class="lab-item"><div class="lab-meta">'+safe(x.date||'')+' / '+safe(x.feeling)+'</div><h3>'+safe(x.title)+'</h3><p><b>¿Lo repetiría?</b> '+safe(x.repeat)+'</p><p>'+safe(x.notes||'')+'</p><button class="lab-delete" data-delete="experiments" data-id="'+safe(x.id)+'">Eliminar</button></article>').join(''):'<div class="lab-empty">Aún no registras experimentos.</div>'}
 function renderAll(){profileDna();renderWardrobe();renderMood();renderExperiments();refreshCounts()}
 function tab(name){document.querySelectorAll('.lab-panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+name));document.querySelectorAll('.lab-nav button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));document.querySelector('.lab-nav').scrollIntoView({behavior:'smooth',block:'start'})}
