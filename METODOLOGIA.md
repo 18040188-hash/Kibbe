@@ -297,3 +297,8 @@ La respuesta de la IA se valida como objeto y se normalizan sus campos antes de 
 ## 24. Silueta sin datos
 
 Si la persona omite el capítulo de silueta, el test ya no asigna por defecto Dramatic (resultado de empate numérico de cero). Presenta “Pendiente de confirmar”, recomendaciones neutrales y dos tipos como posibilidades exploratorias, con confianza baja. Así no se convierte un capítulo omitido en una conclusión falsa.
+
+
+## 25. Fotografías del diario
+
+El diario de Glow Up limita cada entrada a dos fotos, acepta JPG/PNG/WEBP y rechaza archivos mayores de 8 MB. Las imágenes se reducen a máximo 900 px y se recomprimen como JPEG antes de almacenarse. Las fotos recuperadas de localStorage se validan por tipo y tamaño codificado. La eliminación se gestiona con delegación de eventos y un atributo de datos, no con JavaScript inline.
