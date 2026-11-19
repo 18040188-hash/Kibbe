@@ -562,6 +562,10 @@ async function loadAll() {
 ═══════════════════════════════════════════════════════════ */
 let obCurrentStep = 0;
 
+function escapeHTML(value){
+ return String(value??'').replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));
+}
+
 function obNext(step) {
   if(step===0&&!document.getElementById('ob-name').value.trim()){
     showToast('Escribe tu nombre para continuar');return;
@@ -572,7 +576,7 @@ function obNext(step) {
   nextEl.classList.add('active');obCurrentStep=next;updateObDots(next);
   if(next===1){
     const name=document.getElementById('ob-name').value.trim();
-    if(name)document.getElementById('ob-title-1').innerHTML='Hola, '+name+' ✦<br>¿Cuál es tu fórmula?';
+    if(name)document.getElementById('ob-title-1').innerHTML='Hola, '+escapeHTML(name)+' ✦<br>¿Cuál es tu fórmula?';
   }
 }
 function obBack(step){
@@ -661,7 +665,7 @@ function renderHomeHeader() {
   if (intentEl) {
     if (profile.intentions?.length) {
       intentEl.innerHTML = profile.intentions.map(i =>
-        `<span class="intention-pill">${i}</span>`
+        `<span class="intention-pill">${escapeHTML(i)}</span>`
       ).join('');
     } else {
       intentEl.textContent = 'Sin intención registrada aún.';
@@ -940,12 +944,12 @@ async function renderDiary(){
   container.innerHTML='<div class="empty-state"><div class="empty-state-icon">◉</div><div class="empty-state-text">Aún no hay entradas.<br>Empieza registrando cómo te sientes hoy.<br><small>Se guardan en este dispositivo.</small></div></div>';return;
  }
  container.innerHTML=entries.map(e=>`
-  <div class="entry-card" id="ec-${e.id}">
-   <div class="entry-header"><div class="entry-date">${e.date}</div>${e.mood?`<div class="entry-mood-badge">${e.mood}</div>`:''}</div>
-   ${e.text?`<div class="entry-text">${e.text}</div>`:''}
-   ${e.photos?.length?`<div class="entry-photos">${e.photos.map(p=>`<img class="entry-photo" src="${p}" alt="Foto de diario">`).join('')}</div>`:''}
-   ${e.aiNote?`<div class="entry-ai">✦ ${e.aiNote}</div>`:''}
-   <button class="entry-delete" onclick="deleteEntry('${e.id}')">Eliminar entrada</button>
+  <div class="entry-card" id="ec-${escapeHTML(e.id)}">
+   <div class="entry-header"><div class="entry-date">${escapeHTML(e.date)}</div>${e.mood?`<div class="entry-mood-badge">${escapeHTML(e.mood)}</div>`:''}</div>
+   ${e.text?`<div class="entry-text">${escapeHTML(e.text)}</div>`:''}
+   ${e.photos?.length?`<div class="entry-photos">${e.photos.map(p=>`<img class="entry-photo" src="${escapeHTML(p)}" alt="Foto de diario">`).join('')}</div>`:''}
+   ${e.aiNote?`<div class="entry-ai">✦ ${escapeHTML(e.aiNote)}</div>`:''}
+   <button class="entry-delete" onclick="deleteEntry('${escapeHTML(e.id)}')">Eliminar entrada</button>
   </div>`).join('');
 }
 
