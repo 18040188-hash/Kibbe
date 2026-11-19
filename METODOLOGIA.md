@@ -272,3 +272,8 @@ La página heredada `visual-test.html` contenía un cierre incorrecto en la list
 ## 19. Seguridad de contenido dinámico y carga de imágenes
 
 La revisión detectó que el nombre del onboarding, las intenciones y las entradas del diario se insertaban directamente en HTML. Se añadió `escapeHTML` antes de renderizar esos datos para reducir el riesgo de inyección de HTML/XSS. El análisis facial generado por IA también se trata como contenido no confiable y se escapa antes de insertarlo en el moodboard. La selfie acepta únicamente JPG, PNG y WEBP, con límite de 8 MB, y comunica el motivo cuando el archivo no es compatible o excede el límite. El smoke test ahora comprueba estos guardarraíles.
+
+
+## 20. Importación del Style Lab
+
+Las imágenes de prendas y moodboard se comprimen al guardarse; al importar respaldos se valida que las fotos sean data URLs de imagen JPG/PNG/WEBP codificadas en base64 y con longitud máxima de 3 MB. Los colores del perfil se restringen a valores hexadecimales. Esto evita que datos de un backup se inserten como atributos o estilos sin validar.
