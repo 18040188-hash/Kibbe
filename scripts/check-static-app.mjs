@@ -51,6 +51,8 @@ const glowup=readFileSync('glowup.html','utf8');
 for(const marker of ['obBack(1)','obBack(2)','venusGlowUpLocalProfile','venusGlowUpPlan','venusGlowUpDiary','function readLocalDiary','function deleteEntry','function escapeHTML','${escapeHTML(e.text)}','${escapeHTML(e.aiNote)}','${escapeHTML(i)}','function safeDiaryPhoto','function compressDiaryPhoto','async function handleDiaryPhotos','data-diary-delete','8*1024*1024','container.onclick=event','Array.isArray(value)?value:[]','photos:Array.isArray(e.photos)?e.photos.map(safeDiaryPhoto)']){
  assert.ok(glowup.includes(marker),'Expected Glow Up resilience feature missing: '+marker);
 }
+const profile=readFileSync('perfil.html','utf8');
+for(const marker of ['const safePalette=','palette.map(c=>\'<i style="background:\'+c','Array.isArray(v)?v.slice(0,2):[]']) assert.ok(profile.includes(marker),'Expected profile data validation missing: '+marker);
 const atelier=readFileSync('atelier.html','utf8');
 for(const marker of ['const safeColor=','const safePhoto=','data:image\\/(?:jpeg|png|webp)','safePhoto(x.photo)','safe(profile.kibbe||']) assert.ok(atelier.includes(marker),'Expected Style Lab import sanitization missing: '+marker);
 assert.equal(atelier.split("document.querySelector('.lab-nav').addEventListener('keydown'").length-1,1,'Duplicate Style Lab keyboard navigation handler');
