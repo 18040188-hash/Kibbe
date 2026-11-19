@@ -6,7 +6,7 @@ const pages = ['index.html','app-v2.html','perfil.html','glowup.html','archivo.h
 for (const page of pages) assert.ok(existsSync(page), 'Missing route: '+page);
 
 function localPath(raw) {
-  if (!raw || raw.startsWith('#') || raw.startsWith('data:') || raw.startsWith('blob:') || raw.startsWith('javascript:') || raw.startsWith('mailto:') || raw.startsWith('tel:') || raw.includes('${') || /^https?:\/\//i.test(raw)) return null;
+  if (!raw || raw.startsWith('#') || raw.startsWith('%23') || raw.startsWith('data:') || raw.startsWith('blob:') || raw.startsWith('javascript:') || raw.startsWith('mailto:') || raw.startsWith('tel:') || raw.includes('${') || /^https?:\/\//i.test(raw)) return null;
   const clean=raw.split(/[?#]/)[0];
   return clean.replace(/^\/+/, '');
 }
