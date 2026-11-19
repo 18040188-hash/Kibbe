@@ -1326,7 +1326,7 @@ function venusKibbeAnalysis(){
  const score=calcKibbeScores(),ranked=Object.entries(score).sort((a,b)=>b[1]-a[1]);
  const primary=ranked[0]?.[0]||'soft-classic',answered=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance','kb_limbs','kb_hands_feet','kb_waist','kb_face'].filter(k=>answers[k]).length;
  const gap=(ranked[0]?.[1]||0)-(ranked[1]?.[1]||0);
- const confidence=answered<7||gap<=1?'bajo':answered>=9&&gap>=4?'medio':'medio';
+ const confidence=answered<7||gap<=1?'bajo':answered>=9&&gap>=4?'alto':'medio';
  const observations=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance','kb_limbs','kb_hands_feet','kb_waist','kb_face'];
  return {primary,alternatives:ranked.slice(1,3),confidence,answered,observations:observations.filter(k=>answers[k]).map(k=>k+': '+answers[k]),scoreGap:gap};
 }
@@ -1386,10 +1386,10 @@ function venusCapsulePlan(kd,sd,vd){
  const formulas='<div class="venus-outfit-formulas"><article><small>LOOK 01 / DIARIO</small><b>'+top1+' + '+bottom1+'</b><p>Base cómoda en un tono neutro de '+sd.name+'; añade un accesorio si quieres marcar intención.</p></article><article><small>LOOK 02 / CAPAS</small><b>'+top2+' + '+bottom2+' + '+layer1+'</b><p>Para '+context.toLowerCase()+'. Ajusta la capa según '+climate.toLowerCase()+'.</p></article><article><small>LOOK 03 / FIRMA</small><b>'+top1+' + '+bottom2+' + '+detail1+'</b><p>Deja que tu estética sea el punto focal; acentos sugeridos: '+accents+'.</p></article></div>';
  const items=[...tops,...bottoms,...layers,...accessories,'Calzado de uso frecuente','Una prenda que ya tienes y te encanta'];
  let state={};try{state=JSON.parse(localStorage.getItem('venusCapsuleChecklistV1')||'{}')}catch(e){}
- const checklist=items.map((item,i)=>'<label class="venus-capsule-check"><input type="checkbox" data-capsule-item="'+i+'" '+(state[i]?'checked':'')+'><span>'+item+'</span></label>').join('');
+ const checklist=items.map((item,i)=>'<label class="venus-capsule-check"><input type="checkbox" data-capsule-item="'+encodeURIComponent(item)+'" '+(state[item]?'checked':'')+'><span>'+item+'</span></label>').join('');
  return '<section class="venus-capsule-plan"><header><small>VÉNUS / WARDROBE EDIT · FIG. 03</small><h2>Una cápsula para tu vida real</h2><p>'+context+' · '+climate+' · '+vd.name+'</p></header>'+formulas+'<div class="venus-capsule-grid"><article><small>01 / TOPS</small><ul>'+tops.map(x=>'<li>'+x+'</li>').join('')+'</ul></article><article><small>02 / PARTE INFERIOR</small><ul>'+bottoms.map(x=>'<li>'+x+'</li>').join('')+'</ul></article><article><small>03 / CAPAS</small><ul>'+layers.map(x=>'<li>'+x+'</li>').join('')+'</ul></article><article><small>04 / DETALLES</small><ul>'+accessories.map(x=>'<li>'+x+'</li>').join('')+'</ul></article></div><div class="venus-capsule-audit"><div class="venus-capsule-audit-head"><div><small>CHECKLIST / ARMARIO ACTUAL</small><h3>Antes de comprar, revisa lo que ya tienes.</h3></div><button type="button" onclick="resetVenusCapsule()">Reiniciar</button></div><div class="venus-capsule-checklist">'+checklist+'</div></div><p class="venus-capsule-priority"><b>Tu prioridad:</b> '+goal+'</p><p class="venus-capsule-priority"><b>Color:</b> usa '+sd.name+' como hipótesis cromática para coordinar bases y acentos.</p><p class="venus-capsule-priority"><b>Presupuesto:</b> '+budget+'</p><p class="venus-capsule-priority"><b>Tu límite personal:</b> '+avoid+'</p><p class="venus-fineprint">No existe una lista universal de prendas ni un número mágico para una cápsula. Ajusta esta propuesta a tu rutina, clima, presupuesto y gusto.</p></section>';
 }
-function toggleVenusCapsuleItem(index,checked){try{const key='venusCapsuleChecklistV1',state=JSON.parse(localStorage.getItem(key)||'{}');state[index]=checked;localStorage.setItem(key,JSON.stringify(state));}catch(e){}}
+function toggleVenusCapsuleItem(item,checked){try{const key='venusCapsuleChecklistV1',state=JSON.parse(localStorage.getItem(key)||'{}');state[decodeURIComponent(item)]=checked;localStorage.setItem(key,JSON.stringify(state));}catch(e){}}
 function resetVenusCapsule(){try{localStorage.removeItem('venusCapsuleChecklistV1')}catch(e){}document.querySelectorAll('[data-capsule-item]').forEach(x=>x.checked=false);}
 function venusSignAdvice(sign){
  const d={aries:'Contrastes decididos, prendas con energía y acentos rojos.',tauro:'Texturas sensoriales, calidad táctil y una paleta natural.',geminis:'Capas ligeras, mezclas inesperadas y accesorios intercambiables.',cancer:'Romanticismo suave, prendas envolventes y detalles nostálgicos.',leo:'Piezas protagonistas, brillo controlado y siluetas expresivas.',virgo:'Cortes precisos, materiales cuidados y detalles funcionales.',libra:'Equilibrio visual, armonía de color y accesorios refinados.',escorpio:'Profundidad, transparencias estratégicas y dramatismo íntimo.',sagitario:'Prendas cómodas y libertad de movimiento.',capricornio:'Sastrería, estructura y piezas duraderas.',acuario:'Diseño experimental, contraste y piezas poco convencionales.',piscis:'Capas fluidas, transparencias y estética onírica.'};
@@ -1486,7 +1486,7 @@ function calcKibbeScores(){
 function calcKibbe(){const scores=calcKibbeScores();return Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];}
 
 function calcSeason(){return venusColorAnalysis().seasonKey;}
-function calcVibe(){return answers.style_mood||'romantic-mystery';}
+function calcVibe(){return answers.style_mood||'eclectic';}
 
 /* ═══════════════════════════════════════════════════════════
    RESULT DATA
