@@ -4237,3 +4237,8 @@ body:not(.glowup-page){height:auto;min-height:100vh;overflow-x:clip;overflow-y:a
 .venus-resume-btn:focus-visible,.btn-skip-module:focus-visible,.venus-capsule-audit button:focus-visible,.venus-capsule-check input:focus-visible{outline:2px solid #d6b98e;outline-offset:3px}
 @media(max-width:760px){.venus-outfit-formulas{grid-template-columns:1fr}.venus-resume-panel{align-items:flex-start;flex-direction:column}.venus-resume-btn{width:100%}}
 @media(max-width:420px){.venus-capsule-checklist{grid-template-columns:1fr}.venus-resume-panel{padding:12px}}
+
+/* Test navigation layout for optional chapter controls */
+.nav-btns{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.nav-btns .btn-back,.nav-btns .btn-next{flex:1 1 130px;min-width:0}
+.nav-btns .btn-skip-module{flex:1 1 100%;width:100%;margin-top:2px}
