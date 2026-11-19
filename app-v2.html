@@ -1353,7 +1353,7 @@ function venusResultExplanation(){return '<section class="venus-explanation"><sm
 /* Evidence-based-in-the-framework sense: descriptive rules, not a clinical diagnosis. */
 function venusKibbeAnalysis(){
  const score=calcKibbeScores(),ranked=Object.entries(score).sort((a,b)=>b[1]-a[1]);
- const primary=ranked[0]?.[0]||'soft-classic',answered=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance','kb_limbs','kb_hands_feet','kb_waist','kb_face'].filter(k=>answers[k]).length;
+ const answered=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance','kb_limbs','kb_hands_feet','kb_waist','kb_face'].filter(k=>answers[k]).length,primary=answered?ranked[0]?.[0]||'soft-classic':'pending';
  const gap=(ranked[0]?.[1]||0)-(ranked[1]?.[1]||0);
  const confidence=answered<7||gap<=1?'bajo':answered>=9&&gap>=4?'alto':'medio';
  const observations=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance','kb_limbs','kb_hands_feet','kb_waist','kb_face'];
@@ -1427,7 +1427,7 @@ function venusSignAdvice(sign){
 function venusMethodResults(){
  const k=venusKibbeAnalysis(),c=venusColorAnalysis(),e=venusEssenceAnalysis(),sign=answers.venus_sign||'unknown';
  const names={'soft-dramatic':'Soft Dramatic','flamboyant-natural':'Flamboyant Natural','soft-natural':'Soft Natural','dramatic-classic':'Dramatic Classic','soft-classic':'Soft Classic','soft-gamine':'Soft Gamine','theatrical-romantic':'Theatrical Romantic'};
- const label=x=>names[x]||String(x||'').replace(/-/g,' ').replace(/\b\w/g,m=>m.toUpperCase());
+ const label=x=>x==='pending'?'Pendiente de confirmar':names[x]||String(x||'').replace(/-/g,' ').replace(/\b\w/g,m=>m.toUpperCase());
  const alternatives=k.alternatives.map(x=>label(x[0])).join(' · ');
  const fields={kb_vertical:'Línea vertical',kb_frame:'Estructura ósea',kb_flesh:'Distribución de volumen',kb_shoulders:'Relación hombros/cadera',kb_scale:'Escala de detalle',kb_balance:'Impresión general',kb_limbs:'Longitud de extremidades',kb_hands_feet:'Escala de manos y pies',kb_waist:'Definición de cintura',kb_face:'Líneas faciales'};
  const observations=k.observations.map(x=>{const p=x.split(': ');return '<li><b>'+label(fields[p[0]]||p[0])+':</b> '+label(p[1])+'</li>'}).join('');
@@ -1512,7 +1512,7 @@ function calcKibbeScores(){
  if(a.kibbeTie==='mixed')add(['soft-classic','dramatic-classic'],1);
  return score;
 }
-function calcKibbe(){const scores=calcKibbeScores();return Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];}
+function calcKibbe(){const keys=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance','kb_limbs','kb_hands_feet','kb_waist','kb_face'];if(!keys.some(k=>answers[k]))return 'pending';const scores=calcKibbeScores();return Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0];}
 
 function calcSeason(){return venusColorAnalysis().seasonKey;}
 function calcVibe(){return answers.style_mood||'eclectic';}
@@ -1521,6 +1521,15 @@ function calcVibe(){return answers.style_mood||'eclectic';}
    RESULT DATA
 ═══════════════════════════════════════════════════════════ */
 const KIBBE_DATA = {
+  'pending':{
+    name:'Pendiente de confirmar',tagline:'Observa antes de etiquetar',
+    desc:'No hay suficientes observaciones de silueta para proponer un tipo. Completa el capítulo o usa las recomendaciones como exploración, no como diagnóstico.',
+    figureDesc:'Lectura aún no definida',
+    proportionRules:['Completa las observaciones de silueta para recibir recomendaciones orientativas.'],
+    garments:{tops:['Pendiente de confirmar'],bottoms:['Pendiente de confirmar'],outerwear:['Pendiente de confirmar'],accessories:['Pendiente de confirmar']},
+    avoids:[],celebs:[],
+    svgFigure:`<svg width="90" height="160" viewBox="0 0 90 160"><rect x="18" y="10" width="54" height="140" fill="none" stroke="#8e8278" stroke-dasharray="5 5"/><text x="45" y="82" text-anchor="middle" fill="#8e8278" font-size="18">?</text></svg>`
+  },
   'dramatic':{
     name:'Dramatic',
     tagline:'Verticalidad · Estructura · Presencia',
