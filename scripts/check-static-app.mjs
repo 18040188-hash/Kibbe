@@ -2,11 +2,29 @@ import { readFileSync, existsSync } from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 
-const pages = ['index.html','app-v2.html','perfil.html','glowup.html','archivo.html','atelier.html'];
+const pages = ['index.html','app-v2.html','perfil.html','glowup.html','archivo.html','atelier.html','visual-test.html','test.html','app.html'];
 for (const page of pages) assert.ok(existsSync(page), 'Missing route: '+page);
+
+function localPath(raw) {
+  if (!raw || raw.startsWith('#') || raw.startsWith('data:') || raw.startsWith('blob:') || raw.startsWith('javascript:') || raw.startsWith('mailto:') || raw.startsWith('tel:') || raw.includes('${') || /^https?:\/\//i.test(raw)) return null;
+  const clean=raw.split(/[?#]/)[0];
+  return clean.replace(/^\/+/, '');
+}
 
 for (const page of pages) {
   const html = readFileSync(page,'utf8');
+  const ids=[...html.matchAll(/\bid=["']([^"']+)["']/g)].map(m=>m[1]);
+  const duplicates=ids.filter((id,i)=>ids.indexOf(id)!==i);
+  assert.deepEqual([...new Set(duplicates)],[], 'Duplicate IDs in '+page);
+  const idSet=new Set(ids);
+  const brokenAnchors=[...html.matchAll(/href=["']#([^"']+)["']/g)].map(m=>m[1]).filter(id=>!idSet.has(id));
+  assert.deepEqual(brokenAnchors,[], 'Broken in-page anchors in '+page);
+
+  for(const [,raw] of html.matchAll(/(?:href|src)=["']([^"']+)["']/g)){
+    const path=localPath(raw);
+    if(path)assert.ok(existsSync(path),'Missing local reference in '+page+': '+raw);
+  }
+
   const matches = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
   let inlineCount = 0;
   for (const [,attrs,source] of matches) {
@@ -16,11 +34,17 @@ for (const page of pages) {
     if (!source.trim()) continue;
     new vm.Script(source,{filename:page+' inline script '+(++inlineCount)});
   }
-  console.log('Syntax OK:',page,'('+inlineCount+' inline scripts)');
+  console.log('Static OK:',page,'('+inlineCount+' inline scripts)');
+}
+
+const css=readFileSync('styles.css','utf8');
+for(const [,raw] of css.matchAll(/url\((?:["']?)([^"')]+)(?:["']?)\)/g)){
+  const path=localPath(raw);
+  if(path)assert.ok(existsSync(path),'Missing local CSS asset: '+raw);
 }
 
 const test = readFileSync('app-v2.html','utf8');
 for (const marker of ['resumeSavedQuiz','cl_temp_refine','cl_value_refine','cl_chroma_refine','skipCurrentModule','venusCapsuleChecklistV1','eclectic']) {
   assert.ok(test.includes(marker),'Expected VÉNUS test feature missing: '+marker);
 }
-console.log('VÉNUS feature smoke checks passed.');
+console.log('VÉNUS smoke checks passed: routes, local assets, anchors, IDs, CSS URLs, scripts and test features.');
