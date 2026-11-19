@@ -282,3 +282,8 @@ Las imágenes de prendas y moodboard se comprimen al guardarse; al importar resp
 ## 21. Flujo de desempate del test
 
 La pregunta de desempate de silueta debe continuar al módulo de color (índice 1), no al módulo de esencias. El botón Atrás vuelve a la última pregunta de silueta, limpia el desempate previo y guarda el progreso para que la persona pueda modificar su decisión. El smoke test verifica ambas transiciones.
+
+
+## 22. Títulos del perfil importado
+
+El título del ADN en Style Lab se construye con texto escapado para evitar que valores importados del perfil se interpreten como HTML. El smoke test incluye esta ruta.
