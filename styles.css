@@ -4190,3 +4190,19 @@ body:not(.glowup-page){height:auto;min-height:100vh;overflow-x:clip;overflow-y:a
 .venus-method-sources summary{cursor:pointer;font:10px var(--v-caption,monospace);letter-spacing:.08em;text-transform:uppercase}
 .venus-method-sources ul{padding-left:18px;line-height:1.8;font-size:11px}
 .venus-method-sources a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+/* ── VÉNUS / Style Lab bridge inside test result ── */
+.result-style-lab{margin:clamp(24px,5vw,54px) 0;border:1px solid var(--v-rule);background:var(--v-paper-light);color:var(--v-ink)}
+.result-style-lab-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--v-rule);font:9px var(--v-caption);letter-spacing:.13em;color:var(--v-muted)}
+.result-style-lab-body{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;padding:clamp(18px,4vw,34px)}
+.result-style-lab-copy{align-self:center}.result-style-lab-kicker{font:9px var(--v-caption);letter-spacing:.15em;color:var(--v-accent)}
+.result-style-lab-copy h2{font:clamp(36px,6vw,70px)/.95 var(--v-editorial);margin:12px 0}.result-style-lab-copy h2 em{color:var(--v-accent);font-style:italic}
+.result-style-lab-copy p{font:14px/1.6 var(--v-body);max-width:460px;color:var(--v-muted)}
+.result-style-lab-link{display:inline-block;margin-top:14px;padding:12px 16px;background:var(--v-ink);color:var(--v-paper-light);text-decoration:none;font:10px var(--v-caption);letter-spacing:.12em;text-transform:uppercase}
+.result-style-lab-link:hover{color:var(--v-paper-light);background:var(--v-accent)}
+.result-style-lab-visual{border:1px solid var(--v-rule);padding:14px;display:flex;flex-direction:column;justify-content:space-between;min-height:260px;background:var(--v-paper)}
+.result-style-lab-palette{display:flex;gap:5px}.result-style-lab-palette i{height:65px;flex:1;border:1px solid rgba(0,0,0,.12)}
+.result-style-lab-visual-formula{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border-top:1px solid var(--v-rule);padding-top:12px}
+.result-style-lab-visual-formula small{font:8px var(--v-caption);letter-spacing:.1em;color:var(--v-muted)}
+.result-style-lab-visual-formula strong{font:17px var(--v-editorial);overflow-wrap:anywhere}
+.result-style-lab-caption{font:9px var(--v-caption);letter-spacing:.12em;color:var(--v-accent);margin-top:16px}
+@media(max-width:650px){.result-style-lab-body{grid-template-columns:1fr}.result-style-lab-visual{min-height:210px}.result-style-lab-palette i{height:48px}.result-style-lab-visual-formula{grid-template-columns:1fr 1fr}.result-style-lab-copy h2{font-size:clamp(38px,12vw,54px)}}
