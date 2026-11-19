@@ -48,7 +48,7 @@ for (const marker of ['resumeSavedQuiz','cl_temp_refine','cl_value_refine','cl_c
   assert.ok(test.includes(marker),'Expected VÉNUS test feature missing: '+marker);
 }
 const glowup=readFileSync('glowup.html','utf8');
-for(const marker of ['obBack(1)','obBack(2)','venusGlowUpLocalProfile','venusGlowUpPlan','venusGlowUpDiary','function readLocalDiary','function deleteEntry']){
+for(const marker of ['obBack(1)','obBack(2)','venusGlowUpLocalProfile','venusGlowUpPlan','venusGlowUpDiary','function readLocalDiary','function deleteEntry','function escapeHTML','${escapeHTML(e.text)}','${escapeHTML(e.aiNote)}','${escapeHTML(i)}']){
  assert.ok(glowup.includes(marker),'Expected Glow Up resilience feature missing: '+marker);
 }
 for(const page of ['index.html','app-v2.html','glowup.html','archivo.html']){
