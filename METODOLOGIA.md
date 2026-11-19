@@ -243,3 +243,14 @@ El inicio distingue **Comenzar desde cero** y **Continuar mi test**. El guardado
 El plan cápsula amplía la orientación a tres fórmulas de outfit que combinan prendas sugeridas, contexto y paleta. Incluye una lista de auditoría para marcar prendas que la persona ya posee; su estado se guarda localmente y puede reiniciarse. Esto busca reducir compras innecesarias y convertir el diagnóstico en una acción cotidiana.
 
 La interfaz comunica el tiempo estimado, la privacidad del guardado local y el carácter opcional de la foto/análisis facial. Se mantienen alternativas de respuesta y la navegación hacia atrás.
+
+
+## 17. Refinamientos de UX y recomendaciones accionables
+
+El inicio indica una duración estimada de 8–12 minutos, explica el almacenamiento local y distingue la acción de retomar del inicio desde cero. La restauración limpia el objeto de respuestas antes de cargar el progreso y limita los índices guardados al cuestionario vigente. Esto evita respuestas residuales y estados fuera de rango.
+
+Las comparaciones de color se repiten en temperatura, valor y croma. Cuando las dos respuestas de una dimensión divergen, VÉNUS añade una pregunta adaptativa y utiliza esa respuesta como aclaración; no elimina la discrepancia original del método. Las conclusiones cromáticas continúan siendo hipótesis para confirmar físicamente. La dirección estética tiene como alternativa ecléctica y el valor por defecto no fuerza Romantic Mystery.
+
+El resultado de cápsula ofrece tres fórmulas de combinación y una checklist de prendas sugeridas. Marcar una pieza no implica comprarla: se usa como auditoría de lo que ya existe. El estado persiste localmente bajo identificadores de prenda para evitar que el progreso se transfiera por posición entre perfiles. Se puede reiniciar. El capítulo astrológico es omitible.
+
+El desglose Kibbe ahora presenta 10 señales, corrigiendo el contador de observaciones. La consistencia se etiqueta como heurística, no como precisión estadística. Las recomendaciones se mantienen exploratorias, sin reglas de prohibición.
