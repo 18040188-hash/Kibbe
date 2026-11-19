@@ -1222,6 +1222,17 @@ async function handleSelfieNext() {
   if (!selfieDataURL) { skipSelfie(); return; }
   await analyzeSelfie();
 }
+function normalizeSelfieAnalysis(raw){
+  if(!raw||typeof raw!=='object')return null;
+  const str=v=>typeof v==='string'?v.slice(0,300):'';
+  return {
+    faceShape:str(raw.faceShape),
+    keyFeatures:Array.isArray(raw.keyFeatures)?raw.keyFeatures.filter(v=>typeof v==='string').slice(0,8).map(str):[],
+    celebrities:Array.isArray(raw.celebrities)?raw.celebrities.filter(v=>v&&typeof v==='object').slice(0,6).map(v=>({name:str(v.name),why:str(v.why)})).filter(v=>v.name):[], 
+    makeupTips:Array.isArray(raw.makeupTips)?raw.makeupTips.filter(v=>v&&typeof v==='object').slice(0,8).map(v=>({area:str(v.area),tip:str(v.tip)})).filter(v=>v.tip):[],
+    styleNote:str(raw.styleNote)
+  };
+}
 function venusEscapeHTML(value){
   return String(value??'').replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));
 }
@@ -1275,7 +1286,7 @@ async function analyzeSelfie() {
       ]}],
       { modelTier:'default' }
     );
-    selfieAnalysis = res;
+    selfieAnalysis = normalizeSelfieAnalysis(res);
   } catch(e) {
     console.warn('Selfie analysis error:', e);
     selfieAnalysis = null;
