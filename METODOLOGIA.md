@@ -287,3 +287,8 @@ La pregunta de desempate de silueta debe continuar al módulo de color (índice 
 ## 22. Títulos del perfil importado
 
 El título del ADN en Style Lab se construye con texto escapado para evitar que valores importados del perfil se interpreten como HTML. El smoke test incluye esta ruta.
+
+
+## 23. Normalización de respuestas de análisis facial
+
+La respuesta de la IA se valida como objeto y se normalizan sus campos antes de mostrarlos: se aceptan cadenas, se limitan longitudes y cantidades de elementos y se descartan estructuras inesperadas. Si la respuesta no es válida, el resultado continúa sin el bloque facial.
