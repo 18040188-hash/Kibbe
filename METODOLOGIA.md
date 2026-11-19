@@ -209,3 +209,20 @@ Fuente: https://theconceptwardrobe.com/capsule-wardrobe-a-comprehensive-guide
 
 ### Experiencia y facilidad de uso
 Se reorganizó el test en siete módulos progresivos y 38 preguntas:  rasgos naturales, silueta, color, esencias, dirección estética, contexto de guardarropa y capa astrológica opcional. Se añadió entrada numérica validada para estatura (opcional), guardado local V3, guía de fotografía, indicadores de progreso dinámicos, retroceso y opción de no declarar datos de color desconocidos. Las preguntas de perfil incluyen respuestas “No lo sé” para no obligar a adivinar. El resultado incluye ficha natural, informe metodológico, Style Atlas y propuesta de cápsula.
+
+
+## 14. Style Lab / herramientas de experimentación
+
+`atelier.html` conecta la fórmula guardada del test con un espacio de trabajo local. Incluye:
+
+- **Style DNA:** recupera la fórmula y contexto guardados en `venusSavedLook` o `venusGlowUpProfile`. Si no hay resultado guardado, permite explorar el resto del laboratorio sin inventar un diagnóstico.
+- **Armario digital:** registro de prendas, categorías, color, ocasión, notas y foto opcional. Las imágenes se redimensionan a un máximo aproximado de 900 px y se comprimen a JPEG antes de almacenarse.
+- **Outfit formulas:** selecciona aleatoriamente prendas existentes de distintas categorías. No interpreta armonía ni utiliza IA; solo ayuda a combinar inventario registrado.
+- **Moodboard:** referencias propias, URL, tags y notas. Las imágenes externas pueden dejar de cargar si la URL cambia o limita hotlinking.
+- **Diario de experimentos:** registra título, fecha, sensación, intención de repetir y aprendizajes.
+- **Shopping check:** compara categoría y color con el inventario y sugiere pensar en combinaciones/costo por uso. No es un recomendador financiero ni conoce el presupuesto real si no se introduce.
+- **Exportaciones:** Style Card PNG y backup/importación JSON.
+
+### Privacidad y límites
+
+Los módulos usan `localStorage` del navegador. No se suben fotos ni notas a un servidor VÉNUS, no hay login, sincronización o IA. Las imágenes comprimidas siguen consumiendo la cuota local de almacenamiento; el usuario puede exportar sus datos antes de borrar el navegador. Los resultados de combinación son reglas heurísticas/aleatorias, no una evaluación profesional. El Style Lab no reemplaza la precisión del test ni pretende validar científicamente estilos.
