@@ -898,11 +898,12 @@ de estilo. Sé cálida y concreta. Sin emojis.`;
     } catch(e) {}
   }
 
-  if (DB) {
-    try {
-      await DB.doc('diary/' + entry.id).set(entry);
-    } catch(e) {}
-  }
+  const localEntries=readLocalDiary();
+  localEntries.unshift(entry);
+  const locallySaved=writeLocalDiary(localEntries);
+  let cloudSaved=false;
+  if(DB){try{await DB.doc('diary/'+entry.id).set(entry);cloudSaved=true;}catch(e){}}
+  if(!locallySaved&&!cloudSaved){showToast('No se pudo guardar. Reduce las fotos o copia tu texto.');return;}
 
   document.getElementById('diary-text').value = '';
   selectedMood = '';
@@ -912,78 +913,40 @@ de estilo. Sé cálida y concreta. Sin emojis.`;
   renderDiaryPhotoRow();
   await renderDiary();
   updateDiaryStat();
-  showToast('Entrada guardada ✦');
+  showToast(cloudSaved?'Entrada guardada ✦':'Entrada guardada en este dispositivo ✦');
 }
 
 async function saveWithAI() {
   await saveDiaryEntry(true);
 }
 
-async function renderDiary() {
-  const container = document.getElementById('diary-entries');
-
-  if (!DB) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-state-icon">◉</div>
-        <div class="empty-state-text">
-          El diario guarda tus entradas<br>
-          en esta sesión.
-        </div>
-      </div>`;
-    return;
-  }
-
-  let entries = [];
-  try {
-    const snap = await DB.collection('diary')
-      .orderBy('id', 'desc')
-      .limit(30)
-      .get();
-    snap.forEach(d => entries.push(d.data()));
-  } catch(e) {}
-
-  updateDiaryStat(entries.length);
-
-  if (!entries.length) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-state-icon">◉</div>
-        <div class="empty-state-text">
-          Aún no hay entradas.<br>
-          Empieza registrando cómo te sientes hoy.
-        </div>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = entries.map(e => `
-    <div class="entry-card" id="ec-${e.id}">
-      <div class="entry-header">
-        <div class="entry-date">${e.date}</div>
-        ${e.mood
-          ? `<div class="entry-mood-badge">${e.mood}</div>`
-          : ''}
-      </div>
-      ${e.text
-        ? `<div class="entry-text">${e.text}</div>`
-        : ''}
-      ${e.photos?.length
-        ? `<div class="entry-photos">
-            ${e.photos.map(p =>
-              `<img class="entry-photo" src="${p}" alt="">`
-            ).join('')}
-          </div>`
-        : ''}
-      ${e.aiNote
-        ? `<div class="entry-ai">✦ ${e.aiNote}</div>`
-        : ''}
-      <button class="entry-delete"
-        onclick="deleteEntry('${e.id}')">
-        Eliminar entrada
-      </button>
-    </div>`
-  ).join('');
+function readLocalDiary(){
+ try{return JSON.parse(localStorage.getItem('venusGlowUpDiary')||'[]')}catch(e){return []}
+}
+function writeLocalDiary(entries){
+ try{
+  const safe=entries.slice(0,25).map((e,i)=>({...e,photos:i<4?(e.photos||[]).slice(0,2):[]}));
+  localStorage.setItem('venusGlowUpDiary',JSON.stringify(safe));return true;
+ }catch(e){return false}
+}
+async function renderDiary(){
+ const container=document.getElementById('diary-entries');
+ let entries=readLocalDiary(),cloudEntries=[];
+ if(DB){try{const snap=await DB.collection('diary').orderBy('id','desc').limit(30).get();snap.forEach(d=>cloudEntries.push(d.data()));}catch(e){}}
+ const merged=new Map(entries.map(e=>[String(e.id),e]));cloudEntries.forEach(e=>merged.set(String(e.id),e));
+ entries=[...merged.values()].sort((a,b)=>Number(b.id)-Number(a.id)).slice(0,30);
+ updateDiaryStat(entries.length);
+ if(!entries.length){
+  container.innerHTML='<div class="empty-state"><div class="empty-state-icon">◉</div><div class="empty-state-text">Aún no hay entradas.<br>Empieza registrando cómo te sientes hoy.<br><small>Se guardan en este dispositivo.</small></div></div>';return;
+ }
+ container.innerHTML=entries.map(e=>`
+  <div class="entry-card" id="ec-${e.id}">
+   <div class="entry-header"><div class="entry-date">${e.date}</div>${e.mood?`<div class="entry-mood-badge">${e.mood}</div>`:''}</div>
+   ${e.text?`<div class="entry-text">${e.text}</div>`:''}
+   ${e.photos?.length?`<div class="entry-photos">${e.photos.map(p=>`<img class="entry-photo" src="${p}" alt="Foto de diario">`).join('')}</div>`:''}
+   ${e.aiNote?`<div class="entry-ai">✦ ${e.aiNote}</div>`:''}
+   <button class="entry-delete" onclick="deleteEntry('${e.id}')">Eliminar entrada</button>
+  </div>`).join('');
 }
 
 function updateDiaryStat(n) {
@@ -992,15 +955,10 @@ function updateDiaryStat(n) {
   }
 }
 
-async function deleteEntry(id) {
-  if (!DB) return;
-  try {
-    await DB.doc('diary/' + id).delete();
-    const el = document.getElementById('ec-' + id);
-    if (el) el.remove();
-    showToast('Entrada eliminada');
-    await renderDiary();
-  } catch(e) {}
+async async function deleteEntry(id){
+ const remaining=readLocalDiary().filter(e=>String(e.id)!==String(id));writeLocalDiary(remaining);
+ if(DB){try{await DB.doc('diary/'+id).delete()}catch(e){}}
+ const el=document.getElementById('ec-'+id);if(el)el.remove();await renderDiary();showToast('Entrada eliminada');
 }
 
 /* ═══════════════════════════════════════════════════════════
