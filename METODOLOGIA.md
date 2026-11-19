@@ -277,3 +277,8 @@ La revisión detectó que el nombre del onboarding, las intenciones y las entrad
 ## 20. Importación del Style Lab
 
 Las imágenes de prendas y moodboard se comprimen al guardarse; al importar respaldos se valida que las fotos sean data URLs de imagen JPG/PNG/WEBP codificadas en base64 y con longitud máxima de 3 MB. Los colores del perfil se restringen a valores hexadecimales. Esto evita que datos de un backup se inserten como atributos o estilos sin validar.
+
+
+## 21. Flujo de desempate del test
+
+La pregunta de desempate de silueta debe continuar al módulo de color (índice 1), no al módulo de esencias. El botón Atrás vuelve a la última pregunta de silueta, limpia el desempate previo y guarda el progreso para que la persona pueda modificar su decisión. El smoke test verifica ambas transiciones.
