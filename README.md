@@ -155,3 +155,17 @@ El análisis de color combina comparaciones de drapeado (temperatura, valor y cr
 Las esencias se mantienen como una capa visual independiente, no como personalidad. Se añadió una dirección estética elegida por la persona y un módulo de contexto del guardarropa: rutina, clima, presupuesto y objetivo. El resultado propone una cápsula orientativa por categorías y prioridades, sin imponer un número universal de prendas ni una estética fija.
 
 El progreso usa la clave local `venusTestProgressV3` para evitar mezclar respuestas guardadas con la estructura anterior. La ficha y las respuestas permanecen en el navegador.
+
+
+## Style Lab — Issue 02
+
+`atelier.html` integra el laboratorio personal de estilo en seis módulos:
+
+- **Style DNA:** recupera la fórmula guardada por el test y contextualiza silueta, color y estética; el resultado se presenta como punto de partida, no como regla.
+- **Armario digital:** inventario local de prendas con categoría, color, ocasión, notas y fotografía opcional. Las fotos se reducen antes de guardarse para moderar el uso de almacenamiento.
+- **Fórmulas de outfit:** combinación aleatoria de piezas registradas, con ocasión e intención, y opción de enviar la propuesta al diario como experimento.
+- **Moodboard:** referencias guardadas con imagen, URL, etiquetas y notas.
+- **Experimentos:** registro de looks, percepción personal y ajustes.
+- **Compras conscientes:** revisión simple de duplicados por categoría/color y recordatorio de compatibilidad con prendas existentes.
+
+Se incluye exportación de Style Card PNG y copia de datos JSON, además de importación de la copia. La persistencia usa localStorage y permanece en el dispositivo/navegador; no existe backend, cuenta ni sincronización. Las fotos pueden ocupar espacio: exporta copia y elimina elementos si el almacenamiento se llena. El generador no usa IA ni hace análisis de imagen; las combinaciones y evaluaciones son reglas sencillas y aleatorias.
