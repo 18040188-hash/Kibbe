@@ -312,3 +312,8 @@ Los datos del diario se normalizan al leer tanto localStorage como la base cloud
 ## 27. Accesibilidad de Style Lab
 
 Las seis pestañas del laboratorio ahora enlazan explícitamente a su panel mediante `aria-controls` y `aria-labelledby`, y todos los paneles tienen `role="tabpanel"`. Se mantiene navegación con flechas izquierda/derecha, con un único listener.
+
+
+## 28. Perfil e integridad de respaldos
+
+La página Perfil valida que la paleta sea una lista de códigos hexadecimales y que las recomendaciones de prendas sean arreglos antes de renderizarlas. Los colores se usan únicamente después de validarlos, evitando estilos dinámicos desde datos importados.
