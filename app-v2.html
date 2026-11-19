@@ -1068,9 +1068,10 @@ function goBack(){
  saveTestProgress();renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
 }
 function skipCurrentModule(){
- const mods=getModules();modIdx=Math.min(modIdx+1,mods.length-1);qIdx=0;
+ const mods=getModules();if(mods[modIdx]?.key==='venus-sign')answers.venus_sign='unknown';
+ modIdx=Math.min(modIdx+1,mods.length-1);qIdx=0;saveTestProgress();
  if(modIdx===mods.length-1&&mods[modIdx].key==='venus-sign'){showSelfieModule();return;}
- saveTestProgress();renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
+ renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
 }
 
 /* ═══════════════════════════════════════════════════════════
