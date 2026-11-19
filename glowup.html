@@ -59,6 +59,7 @@
       onclick="obNext(1)">
       No tengo fórmula aún →
     </button>
+    <button class="btn-text" type="button" onclick="obBack(1)">← Volver</button>
   </div>
 
   <!-- Step 2 -->
@@ -69,22 +70,23 @@
       durante el glow up.
     </div>
     <div class="onboard-chips" id="ob-chips">
-      <div class="onboard-chip"
+      <div class="onboard-chip" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleChip(this)}"
         onclick="toggleChip(this)">Limpiar mi closet</div>
-      <div class="onboard-chip"
+      <div class="onboard-chip" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleChip(this)}"
         onclick="toggleChip(this)">Construir mi estilo</div>
-      <div class="onboard-chip"
+      <div class="onboard-chip" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleChip(this)}"
         onclick="toggleChip(this)">Aceptar mi cuerpo</div>
-      <div class="onboard-chip"
+      <div class="onboard-chip" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleChip(this)}"
         onclick="toggleChip(this)">Comprar con criterio</div>
-      <div class="onboard-chip"
+      <div class="onboard-chip" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleChip(this)}"
         onclick="toggleChip(this)">Aprender maquillaje</div>
-      <div class="onboard-chip"
+      <div class="onboard-chip" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleChip(this)}"
         onclick="toggleChip(this)">Explorar mi identidad</div>
     </div>
     <button class="btn-wine" onclick="finishOnboard()">
       Comenzar mi glow up ✦
     </button>
+    <button class="btn-text" type="button" onclick="obBack(2)">← Volver</button>
   </div>
 </div>
 
@@ -529,12 +531,16 @@ async function init() {
   }
 }
 
-async function loadProfile() {
-  if (!DB) return;
-  try {
-    const snap = await DB.doc('profile').get();
-    if (snap.exists) profile = snap.data();
-  } catch(e) {}
+async function loadProfile(){
+ let local={};try{local=JSON.parse(localStorage.getItem('venusGlowUpLocalProfile')||'{}')}catch(e){}
+ let testProfile={};try{testProfile=JSON.parse(localStorage.getItem('venusGlowUpProfile')||'{}')}catch(e){}
+ const imported=testProfile.formula?{formula:testProfile.formula}: {};
+ profile={...profile,...imported,...local};
+ if(DB){
+  try{const snap=await DB.doc('profile').get();if(snap.exists)profile={...profile,...snap.data(),formula:snap.data().formula||imported.formula||profile.formula};}catch(e){}
+ }
+ const formulaInput=document.getElementById('ob-formula');
+ if(formulaInput&&imported.formula&&!local.formula)formulaInput.value=imported.formula;
 }
 
 async function loadAll() {
@@ -557,23 +563,21 @@ async function loadAll() {
 let obCurrentStep = 0;
 
 function obNext(step) {
-  document.getElementById('ob-step-' + step)
-    .classList.remove('active');
-  const next = step + 1;
-  const nextEl = document.getElementById('ob-step-' + next);
-  if (!nextEl) return;
-  nextEl.classList.add('active');
-  obCurrentStep = next;
-  updateObDots(next);
-
-  if (next === 1) {
-    const name = document.getElementById('ob-name')
-      .value.trim() || '';
-    if (name) {
-      document.getElementById('ob-title-1').innerHTML =
-        'Hola, ' + name + ' ✦<br>¿Cuál es tu fórmula?';
-    }
+  if(step===0&&!document.getElementById('ob-name').value.trim()){
+    showToast('Escribe tu nombre para continuar');return;
   }
+  document.getElementById('ob-step-' + step).classList.remove('active');
+  const next=step+1,nextEl=document.getElementById('ob-step-'+next);
+  if(!nextEl)return;
+  nextEl.classList.add('active');obCurrentStep=next;updateObDots(next);
+  if(next===1){
+    const name=document.getElementById('ob-name').value.trim();
+    if(name)document.getElementById('ob-title-1').innerHTML='Hola, '+name+' ✦<br>¿Cuál es tu fórmula?';
+  }
+}
+function obBack(step){
+ const current=document.getElementById('ob-step-'+step),prev=document.getElementById('ob-step-'+(step-1));
+ if(!current||!prev)return;current.classList.remove('active');prev.classList.add('active');obCurrentStep=step-1;updateObDots(obCurrentStep);
 }
 
 function updateObDots(active) {
@@ -585,8 +589,9 @@ function updateObDots(active) {
   }
 }
 
-function toggleChip(el) {
-  el.classList.toggle('selected');
+function toggleChip(el){
+ el.classList.toggle('selected');
+ el.setAttribute('aria-pressed',el.classList.contains('selected')?'true':'false');
 }
 function finishOnboard() {
   const name    = document.getElementById('ob-name').value.trim();
@@ -599,10 +604,9 @@ function finishOnboard() {
     return;
   }
 
-  profile = { name, formula, intentions: chips };
-  if (DB) {
-    DB.doc('profile').set(profile).catch(() => {});
-  }
+  profile={name,formula,intentions:chips};
+  try{localStorage.setItem('venusGlowUpLocalProfile',JSON.stringify(profile));}catch(e){}
+  if(DB)DB.doc('profile').set(profile).catch(()=>{});
 
   document.getElementById('onboard').classList.add('hidden');
   document.getElementById('shell').style.display = 'flex';
@@ -692,16 +696,13 @@ function renderHome() {
 /* ═══════════════════════════════════════════════════════════
    PLAN
 ═══════════════════════════════════════════════════════════ */
-async function loadPlanState() {
-  if (!DB) return;
-  try {
-    const snap = await DB.doc('planState').get();
-    if (snap.exists) planState = snap.data();
-  } catch(e) {}
+async function loadPlanState(){
+ try{planState=JSON.parse(localStorage.getItem('venusGlowUpPlan')||'{}')}catch(e){planState={}}
+ if(DB){try{const snap=await DB.doc('planState').get();if(snap.exists)planState={...planState,...snap.data()}}catch(e){}}
 }
-
-function savePlanState() {
-  if (DB) DB.doc('planState').set(planState).catch(() => {});
+function savePlanState(){
+ try{localStorage.setItem('venusGlowUpPlan',JSON.stringify(planState))}catch(e){}
+ if(DB)DB.doc('planState').set(planState).catch(()=>{});
 }
 
 function toggleTask(id) {
