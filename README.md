@@ -205,3 +205,5 @@ The adaptive logic is rule-based and not a validated scoring model. These refine
 - Los chips del onboarding tienen foco y activación por teclado.
 - El smoke test ahora comprueba nueve páginas, scripts inline, rutas locales, anchors, IDs duplicados, URLs locales del CSS, rutas de imágenes corregidas y marcadores de persistencia.
 - La auditoría de navegación visual real sigue pendiente de navegador conectado: el acceso al browser local no está disponible en esta sesión; no se reporta como prueba manual completada.
+
+- Se reparó también un error de sintaxis en la página heredada `visual-test.html`, que impedía ejecutar su script; el verificador ampliado lo detectó antes de cerrar la auditoría.
