@@ -845,7 +845,7 @@ function selectMood(el, mood) {
 }
 
 function safeDiaryPhoto(value){
- return typeof value==='string'&&value.length<=3000000&&/^data:image\\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/]+=*$/.test(value)?value:'';
+ return typeof value==='string'&&value.length<=3000000&&/^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+/]+=*$/.test(value)?value:'';
 }
 function compressDiaryPhoto(file){
  return new Promise((resolve,reject)=>{
