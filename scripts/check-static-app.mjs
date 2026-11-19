@@ -54,6 +54,8 @@ for(const marker of ['obBack(1)','obBack(2)','venusGlowUpLocalProfile','venusGlo
 const atelier=readFileSync('atelier.html','utf8');
 for(const marker of ['function safeColor','function safePhoto','data:image\\/(?:jpeg|png|webp)','safePhoto(x.photo)','safe(profile.kibbe)']) assert.ok(atelier.includes(marker),'Expected Style Lab import sanitization missing: '+marker);
 assert.equal(atelier.split("document.querySelector('.lab-nav').addEventListener('keydown'").length-1,1,'Duplicate Style Lab keyboard navigation handler');
+assert.equal((atelier.match(/role="tab" aria-selected=/g)||[]).length,6,'Style Lab tab accessibility attributes missing');
+assert.equal((atelier.match(/role="tabpanel" aria-labelledby=/g)||[]).length,6,'Style Lab panel associations missing');
 for(const page of ['index.html','app-v2.html','glowup.html','archivo.html']){
  const html=readFileSync(page,'utf8');
  assert.ok(!html.includes('/assets/img/PDF/pagina-'),'Legacy broken PDF image path remains in '+page);
