@@ -194,3 +194,14 @@ The adaptive logic is rule-based and not a validated scoring model. These refine
 - El capítulo astrológico puede omitirse. La estética sin selección se resuelve como ecléctica/en construcción, sin imponer Romantic Mystery.
 - El resultado genera tres fórmulas de outfit y una checklist de prendas para auditar el armario antes de comprar. La checklist persiste localmente por nombre de prenda, y se puede reiniciar.
 - Kibbe muestra 10 observaciones (se corrigió el contador que decía 6); la consistencia del patrón se marca como heurística, no como confianza estadística.
+
+
+## User-test audit / 19 nov 2026
+
+- Reparadas 50 referencias a fotografías del PDF: las páginas apuntaban a `/assets/img/PDF/...`, pero los archivos se alojan en `assets/venus_referencias_pdf_paginas_01_11/...`.
+- Glow Up: el onboarding ahora valida el nombre antes de avanzar y permite regresar de los pasos 2 y 3 sin perder selecciones.
+- La fórmula del test se importa desde `venusGlowUpProfile` para precargar el onboarding de Glow Up. El perfil y el progreso del plan se guardan localmente como respaldo cuando el servicio cloud no está disponible.
+- El diario usa almacenamiento local de respaldo, permite ver y eliminar entradas aunque no haya DB, y muestra si el guardado fue local o cloud. Se conserva una ventana de 25 entradas y fotos de las 4 más recientes (máximo 2 por entrada) para controlar el uso de almacenamiento.
+- Los chips del onboarding tienen foco y activación por teclado.
+- El smoke test ahora comprueba nueve páginas, scripts inline, rutas locales, anchors, IDs duplicados, URLs locales del CSS, rutas de imágenes corregidas y marcadores de persistencia.
+- La auditoría de navegación visual real sigue pendiente de navegador conectado: el acceso al browser local no está disponible en esta sesión; no se reporta como prueba manual completada.
