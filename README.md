@@ -174,3 +174,14 @@ Se incluye exportación de Style Card PNG y copia de datos JSON, además de impo
 ### Style Lab visual integration
 
 El Style Lab ahora se presenta como una extensión visual del diagnóstico: hero editorial, resumen del armario/moodboard/diario, Style DNA con fórmula recuperada, paleta en swatches y prendas sugeridas por el perfil. En el resultado del test se añade un puente visual con la paleta y los tres ejes del diagnóstico que enlaza al laboratorio y guarda la fórmula al navegar. El sistema conserva sus herramientas, pero prioriza la exploración visual y no convierte el test en una prescripción.
+
+## UX enhancements — adaptive test and wardrobe actions
+
+- **Explicit resume:** the test landing screen distinguishes starting a new test from continuing saved progress; starting fresh clears stale answers, while resume restores answers and clamps the saved question/module position.
+- **Adaptive color follow-ups:** when repeated draping comparisons conflict in temperature, value or chroma, VÉNUS asks a focused clarification for that dimension. The clarification is incorporated into the color-season hypothesis; if the signals remain mixed, the result stays cautious.
+- **Optional astrology chapter:** can be skipped without blocking the main analysis.
+- **Outfit formulas:** result now provides three combinable outfit formulas based on the recommended garment groups, personal color hypothesis, and wardrobe context.
+- **Wardrobe audit checklist:** users can check off suggested pieces they already own; the checklist persists locally and can be reset.
+- **Accessibility:** profile selection uses button semantics and pressed states; new controls include visible keyboard focus.
+
+The adaptive logic is rule-based and not a validated scoring model. These refinements are intended to clarify inconsistent self-observations, not to claim scientific precision.
