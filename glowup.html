@@ -934,7 +934,7 @@ async function saveWithAI() {
 }
 
 function readLocalDiary(){
- try{return JSON.parse(localStorage.getItem('venusGlowUpDiary')||'[]')}catch(e){return []}
+ try{const value=JSON.parse(localStorage.getItem('venusGlowUpDiary')||'[]');return Array.isArray(value)?value:[]}catch(e){return []}
 }
 function writeLocalDiary(entries){
  try{
@@ -947,7 +947,7 @@ async function renderDiary(){
  let entries=readLocalDiary(),cloudEntries=[];
  if(DB){try{const snap=await DB.collection('diary').orderBy('id','desc').limit(30).get();snap.forEach(d=>cloudEntries.push(d.data()));}catch(e){}}
  const merged=new Map(entries.map(e=>[String(e.id),e]));cloudEntries.forEach(e=>merged.set(String(e.id),e));
- entries=[...merged.values()].sort((a,b)=>Number(b.id)-Number(a.id)).slice(0,30);
+ entries=[...merged.values()].sort((a,b)=>Number(b.id)-Number(a.id)).slice(0,30).map(e=>({...e,photos:Array.isArray(e.photos)?e.photos.map(safeDiaryPhoto).filter(Boolean).slice(0,2):[],text:typeof e.text==='string'?e.text:'',aiNote:typeof e.aiNote==='string'?e.aiNote:'',date:typeof e.date==='string'?e.date:'',mood:typeof e.mood==='string'?e.mood:''}));
  updateDiaryStat(entries.length);
  if(!entries.length){
   container.innerHTML='<div class="empty-state"><div class="empty-state-icon">◉</div><div class="empty-state-text">Aún no hay entradas.<br>Empieza registrando cómo te sientes hoy.<br><small>Se guardan en este dispositivo.</small></div></div>';return;
