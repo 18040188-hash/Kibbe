@@ -51,6 +51,8 @@ const glowup=readFileSync('glowup.html','utf8');
 for(const marker of ['obBack(1)','obBack(2)','venusGlowUpLocalProfile','venusGlowUpPlan','venusGlowUpDiary','function readLocalDiary','function deleteEntry','function escapeHTML','${escapeHTML(e.text)}','${escapeHTML(e.aiNote)}','${escapeHTML(i)}']){
  assert.ok(glowup.includes(marker),'Expected Glow Up resilience feature missing: '+marker);
 }
+const atelier=readFileSync('atelier.html','utf8');
+for(const marker of ['function safeColor','function safePhoto','data:image\\/(?:jpeg|png|webp)','safePhoto(x.photo)']) assert.ok(atelier.includes(marker),'Expected Style Lab import sanitization missing: '+marker);
 for(const page of ['index.html','app-v2.html','glowup.html','archivo.html']){
  const html=readFileSync(page,'utf8');
  assert.ok(!html.includes('/assets/img/PDF/pagina-'),'Legacy broken PDF image path remains in '+page);
