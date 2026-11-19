@@ -955,7 +955,7 @@ function updateDiaryStat(n) {
   }
 }
 
-async async function deleteEntry(id){
+async function deleteEntry(id){
  const remaining=readLocalDiary().filter(e=>String(e.id)!==String(id));writeLocalDiary(remaining);
  if(DB){try{await DB.doc('diary/'+id).delete()}catch(e){}}
  const el=document.getElementById('ec-'+id);if(el)el.remove();await renderDiary();showToast('Entrada eliminada');
