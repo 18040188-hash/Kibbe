@@ -1329,13 +1329,13 @@ function venusShowTieBreak(){
  <button class="opt horizontal" type="button" onclick="venusSetTie('soft')"><div class="opt-text"><div class="opt-name">Líneas curvas y suaves</div><div class="opt-desc">Drapeados, curvas y formas redondeadas se integran mejor.</div></div></button>
  <button class="opt horizontal" type="button" onclick="venusSetTie('mixed')"><div class="opt-text"><div class="opt-name">Ambas por igual / no estoy segura/o</div><div class="opt-desc">No identifico una dirección dominante.</div></div></button></div><div class="nav-btns"><button class="btn-back" type="button" onclick="venusBackFromTie()">← Atrás</button></div></div>`;
 }
-function venusBackFromTie(){modIdx=1;qIdx=getModules()[1].questions.length-1;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}
+function venusBackFromTie(){modIdx=0;qIdx=getModules()[0].questions.length-1;delete answers.kibbeTie;delete answers.texture;saveTestProgress();renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}
 function venusSetTie(value){
  answers.kibbeTie=value;
  if(value==='defined') answers.texture='sharp';
  if(value==='soft') answers.texture='soft';
  saveTestProgress();
- modIdx=2;qIdx=0;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
+ modIdx=1;qIdx=0;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
 }
 function venusResultExplanation(){return '<section class="venus-explanation"><small>METODOLOGÍA / LECTURA ORIENTATIVA</small><p>Los resultados se presentan por separado. El nivel de evidencia describe la consistencia de tus respuestas, no una precisión estadística. La colorimetría digital debe confirmarse con telas físicas.</p><details class="venus-method-sources"><summary>Consultar fuentes metodológicas</summary><ul><li><a href="https://theconceptwardrobe.com/colour-analysis-comprehensive-guides/seasonal-color-analysis-which-color-season-are-you" target="_blank" rel="noopener noreferrer">Análisis estacional: temperatura, valor y croma</a></li><li><a href="https://theconceptwardrobe.com/kibbe-body-types/the-kibbe-body-type-test" target="_blank" rel="noopener noreferrer">Kibbe: estructura, carne y rasgos</a></li><li><a href="https://ourfashiongarden.com/kibbe-body-type-quiz/" target="_blank" rel="noopener noreferrer">Kibbe ilustrado: guía de observación</a></li><li><a href="https://theconceptwardrobe.com/7-style-essences/what-are-style-essences" target="_blank" rel="noopener noreferrer">Las siete esencias visuales</a></li><li><a href="https://theconceptwardrobe.com/capsule-wardrobe-a-comprehensive-guide" target="_blank" rel="noopener noreferrer">Armario cápsula y guardarropa funcional</a></li></ul></details></section>';}
 
