@@ -1357,7 +1357,7 @@ function venusKibbeAnalysis(){
  const gap=(ranked[0]?.[1]||0)-(ranked[1]?.[1]||0);
  const confidence=answered<7||gap<=1?'bajo':answered>=9&&gap>=4?'alto':'medio';
  const observations=['kb_vertical','kb_frame','kb_flesh','kb_shoulders','kb_scale','kb_balance','kb_limbs','kb_hands_feet','kb_waist','kb_face'];
- return {primary,alternatives:ranked.slice(1,3),confidence,answered,observations:observations.filter(k=>answers[k]).map(k=>k+': '+answers[k]),scoreGap:gap};
+ return {primary,alternatives:answered?ranked.slice(1,3):ranked.slice(0,2),confidence,answered,observations:observations.filter(k=>answers[k]).map(k=>k+': '+answers[k]),scoreGap:gap};
 }
 function venusColorAnalysis(){
  const dims={temp:[answers.cl_temp1,answers.cl_temp2],value:[answers.cl_value1,answers.cl_value2],chroma:[answers.cl_chroma1,answers.cl_chroma2]};
