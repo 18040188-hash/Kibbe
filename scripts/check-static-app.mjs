@@ -47,4 +47,12 @@ const test = readFileSync('app-v2.html','utf8');
 for (const marker of ['resumeSavedQuiz','cl_temp_refine','cl_value_refine','cl_chroma_refine','skipCurrentModule','venusCapsuleChecklistV1','eclectic']) {
   assert.ok(test.includes(marker),'Expected VÉNUS test feature missing: '+marker);
 }
-console.log('VÉNUS smoke checks passed: routes, local assets, anchors, IDs, CSS URLs, scripts and test features.');
+const glowup=readFileSync('glowup.html','utf8');
+for(const marker of ['obBack(1)','obBack(2)','venusGlowUpLocalProfile','venusGlowUpPlan','venusGlowUpDiary','function readLocalDiary','function deleteEntry']){
+ assert.ok(glowup.includes(marker),'Expected Glow Up resilience feature missing: '+marker);
+}
+for(const page of ['index.html','app-v2.html','glowup.html','archivo.html']){
+ const html=readFileSync(page,'utf8');
+ assert.ok(!html.includes('/assets/img/PDF/pagina-'),'Legacy broken PDF image path remains in '+page);
+}
+console.log('VÉNUS smoke checks passed: routes, local assets, anchors, IDs, CSS URLs, scripts, test features, Glow Up persistence and image paths.');
