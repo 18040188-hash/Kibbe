@@ -1209,6 +1209,10 @@ async function handleSelfieNext() {
   if (!selfieDataURL) { skipSelfie(); return; }
   await analyzeSelfie();
 }
+function venusEscapeHTML(value){
+  return String(value??'').replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));
+}
+
 async function initSample() {
   if (sampleAPI) return sampleAPI;
   if (!window.claude) return null;
@@ -2220,22 +2224,22 @@ function showMoodboard() {
     const sa = selfieAnalysis;
     const featuresHTML = (sa.keyFeatures||[]).map(f =>
       `<div class="proportion-rule">
-        <div class="pr-dot"></div><span>${f}</span>
+        <div class="pr-dot"></div><span>${venusEscapeHTML(f)}</span>
       </div>`
     ).join('');
     const selfCelebs = (sa.celebrities||[]).map(c =>
       `<div class="celeb-card" style="margin-bottom:8px">
-        <div class="celeb-avatar">${c.name.charAt(0)}</div>
+        <div class="celeb-avatar">${venusEscapeHTML(c.name).charAt(0)}</div>
         <div>
-          <div class="celeb-name">${c.name}</div>
-          <div class="celeb-why">${c.why}</div>
+          <div class="celeb-name">${venusEscapeHTML(c.name)}</div>
+          <div class="celeb-why">${venusEscapeHTML(c.why)}</div>
         </div>
       </div>`
     ).join('');
     const makeupCards = (sa.makeupTips||[]).map(t =>
       `<div class="makeup-card">
-        <div class="makeup-area">${t.area}</div>
-        <div class="makeup-tip">${t.tip}</div>
+        <div class="makeup-area">${venusEscapeHTML(t.area)}</div>
+        <div class="makeup-tip">${venusEscapeHTML(t.tip)}</div>
       </div>`
     ).join('');
 
@@ -2253,7 +2257,7 @@ function showMoodboard() {
         </div>
         ${sa.faceShape
           ? `<div class="face-shape-badge">
-              Forma de rostro: ${sa.faceShape}
+              Forma de rostro: ${venusEscapeHTML(sa.faceShape)}
             </div>`
           : ''}
         <div style="margin:12px 0">${featuresHTML}</div>
@@ -2279,7 +2283,7 @@ function showMoodboard() {
           style="margin-top:10px">${makeupCards}</div>
         ${sa.styleNote
           ? `<div class="quote-block" style="margin-top:14px">
-              ${sa.styleNote}
+              ${venusEscapeHTML(sa.styleNote)}
             </div>`
           : ''}
       </div>`;
