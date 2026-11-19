@@ -97,7 +97,9 @@ body{background:var(--lab-bg);color:var(--lab-ink)}
 (()=> {
 const KEYS={wardrobe:'venusWardrobeV1',mood:'venusMoodboardV1',experiments:'venusExperimentsV1',profile:'venusGlowUpProfile',saved:'venusSavedLook'};
 const $=id=>document.getElementById(id);
-const safe=(v)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));\nconst uid=()=>globalThis.crypto?.randomUUID?globalThis.uid():('v-'+Date.now()+'-'+Math.random().toString(36).slice(2));\nconst safeImageURL=(v)=>{try{const u=new URL(v,location.href);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}};
+const safe=(v)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>globalThis.crypto?.randomUUID?globalThis.crypto.randomUUID():('v-'+Date.now()+'-'+Math.random().toString(36).slice(2));
+const safeImageURL=(v)=>{try{const u=new URL(v,location.href);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}};
 const read=(k)=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch{return []}};
 const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}};
 let wardrobe=read(KEYS.wardrobe),mood=read(KEYS.mood),experiments=read(KEYS.experiments),profile=null,lastOutfit=null;
