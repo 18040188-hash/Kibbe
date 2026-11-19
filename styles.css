@@ -4242,3 +4242,8 @@ body:not(.glowup-page){height:auto;min-height:100vh;overflow-x:clip;overflow-y:a
 .nav-btns{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 .nav-btns .btn-back,.nav-btns .btn-next{flex:1 1 130px;min-width:0}
 .nav-btns .btn-skip-module{flex:1 1 100%;width:100%;margin-top:2px}
+
+/* Glow Up onboarding back navigation and keyboard chips */
+.btn-text{display:block;width:100%;margin-top:10px;background:transparent;border:1px solid var(--border);color:var(--ink);padding:10px 12px;font:11px var(--mono,monospace);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.btn-text:hover{background:var(--paper-dark);transform:translateY(-1px)}
+.onboard-chip[role="button"]:focus-visible{outline:2px solid var(--wine);outline-offset:3px}
