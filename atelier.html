@@ -178,7 +178,7 @@ function profileDna(){
  let tags=[];
  if(profile){
   ['kibbe','season','vibe'].forEach(k=>profile[k]&&tags.push(profile[k]));
-  $('dna-title').innerHTML=(profile.kibbe||'Tu silueta')+'<br><em>'+(profile.vibe||'Tu expresión')+'</em>';
+  $('dna-title').innerHTML=safe(profile.kibbe||'Tu silueta')+'<br><em>'+safe(profile.vibe||'Tu expresión')+'</em>';
   $('dna-formula').textContent=profile.formula||[profile.kibbe,profile.season,profile.vibe].filter(Boolean).join(' · ');
   $('dna-copy').textContent='Tu test es el punto de partida. Guarda prendas y experimentos para llevar esta fórmula a tu vida cotidiana.';
   const palette=profile.palette||[];
