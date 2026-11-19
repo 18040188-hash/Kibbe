@@ -2502,6 +2502,17 @@ function copyAltaFormula(){
     <div class="quote-block">${vd.quote}</div>
 
     <section class="mb-section academic-reference-note"><div class="mb-section-head"><span class="mb-section-icon">✦</span><span class="mb-section-title">Archivo de dirección de arte</span></div><p class="archive-academic-label">Material de referencia visual con fines académicos. Reproducido bajo uso educativo para análisis de dirección de arte en el marco del proyecto VÉNUS. Las placas que acompañan el resultado son reinterpretaciones vectoriales originales, no activos de marca.</p><div class="glowup-art-grid"><figure><img src="assets/img/venus-editorial-punk.svg" alt="Reinterpretación vectorial original de dirección punk"><figcaption>FIG. A / PUNK · ORIGINAL</figcaption></figure><figure><img src="assets/img/venus-editorial-lace.svg" alt="Reinterpretación vectorial original de corsetería y encaje"><figcaption>FIG. B / TEXTURA · ORIGINAL</figcaption></figure><figure><img src="assets/img/venus-editorial-romantic.svg" alt="Reinterpretación vectorial original de romanticismo"><figcaption>FIG. C / ROMANCE · ORIGINAL</figcaption></figure></div><a href="archivo.html">Consultar fichas del archivo ↗</a></section>
+    <section class="result-style-lab" aria-label="Tu estilo en movimiento">
+      <div class="result-style-lab-head"><span>VÉNUS / STYLE LAB</span><span>FIG. 02 · FROM THEORY TO WARDROBE</span></div>
+      <div class="result-style-lab-body">
+        <div class="result-style-lab-copy"><div class="result-style-lab-kicker">Tu siguiente capítulo</div><h2>Del diagnóstico<br><em>al estilo vivido.</em></h2><p>Tu fórmula ya existe. Ahora prueba proporciones, guarda prendas que tienes y crea combinaciones que sí usarías.</p><a class="result-style-lab-link" href="atelier.html" onclick="saveVenusLook()">Abrir mi laboratorio de estilo ↗</a></div>
+        <div class="result-style-lab-visual">
+          <div class="result-style-lab-palette">${(sd.palette||[]).slice(0,5).map((color,i)=>`<i style="background:${color}" title="${(sd.paletteNames||[])[i]||color}"></i>`).join('')}</div>
+          <div class="result-style-lab-visual-formula"><small>SILUETA</small><strong>${kd.name}</strong><small>COLOR</small><strong>${sd.name}</strong><small>EXPRESIÓN</small><strong>${vd.name}</strong></div>
+          <div class="result-style-lab-caption">COLOR STORY / ${sd.name.toUpperCase()}</div>
+        </div>
+      </div>
+    </section>
     <!-- ACTIONS -->
     <div class="result-actions">
       <a class="btn-home" href="atelier.html">
