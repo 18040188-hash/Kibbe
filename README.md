@@ -169,3 +169,8 @@ El progreso usa la clave local `venusTestProgressV3` para evitar mezclar respues
 - **Compras conscientes:** revisión simple de duplicados por categoría/color y recordatorio de compatibilidad con prendas existentes.
 
 Se incluye exportación de Style Card PNG y copia de datos JSON, además de importación de la copia. La persistencia usa localStorage y permanece en el dispositivo/navegador; no existe backend, cuenta ni sincronización. Las fotos pueden ocupar espacio: exporta copia y elimina elementos si el almacenamiento se llena. El generador no usa IA ni hace análisis de imagen; las combinaciones y evaluaciones son reglas sencillas y aleatorias.
+
+
+### Style Lab visual integration
+
+El Style Lab ahora se presenta como una extensión visual del diagnóstico: hero editorial, resumen del armario/moodboard/diario, Style DNA con fórmula recuperada, paleta en swatches y prendas sugeridas por el perfil. En el resultado del test se añade un puente visual con la paleta y los tres ejes del diagnóstico que enlaza al laboratorio y guarda la fórmula al navegar. El sistema conserva sus herramientas, pero prioriza la exploración visual y no convierte el test en una prescripción.
