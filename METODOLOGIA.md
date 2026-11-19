@@ -226,3 +226,10 @@ Se reorganizó el test en siete módulos progresivos y 38 preguntas:  rasgos nat
 ### Privacidad y límites
 
 Los módulos usan `localStorage` del navegador. No se suben fotos ni notas a un servidor VÉNUS, no hay login, sincronización o IA. Las imágenes comprimidas siguen consumiendo la cuota local de almacenamiento; el usuario puede exportar sus datos antes de borrar el navegador. Los resultados de combinación son reglas heurísticas/aleatorias, no una evaluación profesional. El Style Lab no reemplaza la precisión del test ni pretende validar científicamente estilos.
+
+
+## 15. Integración visual del Style Lab con el diagnóstico
+
+La interfaz de `atelier.html` incorpora un hero editorial, contador de inventario/referencias/experimentos, dashboard Style DNA, swatches de la paleta y selección de prendas sugeridas desde `profile.garments`. En el resultado de `app-v2.html` aparece un puente visual hacia el laboratorio que muestra la paleta y silueta/color/expresión del diagnóstico. El CTA guarda el perfil en localStorage antes de navegar para que el laboratorio recupere la fórmula.
+
+La intención es convertir el resultado en acciones de estilo cotidianas: registrar prendas, crear combinaciones, guardar referencias y experimentar. Las recomendaciones siguen siendo heurísticas y las sugerencias de prendas provienen del propio perfil calculado, no de una evaluación visual nueva.
