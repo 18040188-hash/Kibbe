@@ -52,7 +52,7 @@ for(const marker of ['obBack(1)','obBack(2)','venusGlowUpLocalProfile','venusGlo
  assert.ok(glowup.includes(marker),'Expected Glow Up resilience feature missing: '+marker);
 }
 const atelier=readFileSync('atelier.html','utf8');
-for(const marker of ['function safeColor','function safePhoto','data:image\\/(?:jpeg|png|webp)','safePhoto(x.photo)','safe(profile.kibbe)']) assert.ok(atelier.includes(marker),'Expected Style Lab import sanitization missing: '+marker);
+for(const marker of ['const safeColor=','const safePhoto=','data:image\\/(?:jpeg|png|webp)','safePhoto(x.photo)','safe(profile.kibbe||']) assert.ok(atelier.includes(marker),'Expected Style Lab import sanitization missing: '+marker);
 assert.equal(atelier.split("document.querySelector('.lab-nav').addEventListener('keydown'").length-1,1,'Duplicate Style Lab keyboard navigation handler');
 assert.equal((atelier.match(/role="tab" aria-selected=/g)||[]).length,6,'Style Lab tab accessibility attributes missing');
 assert.equal((atelier.match(/role="tabpanel" aria-labelledby=/g)||[]).length,6,'Style Lab panel associations missing');
