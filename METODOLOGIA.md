@@ -233,3 +233,13 @@ Los módulos usan `localStorage` del navegador. No se suben fotos ni notas a un 
 La interfaz de `atelier.html` incorpora un hero editorial, contador de inventario/referencias/experimentos, dashboard Style DNA, swatches de la paleta y selección de prendas sugeridas desde `profile.garments`. En el resultado de `app-v2.html` aparece un puente visual hacia el laboratorio que muestra la paleta y silueta/color/expresión del diagnóstico. El CTA guarda el perfil en localStorage antes de navegar para que el laboratorio recupere la fórmula.
 
 La intención es convertir el resultado en acciones de estilo cotidianas: registrar prendas, crear combinaciones, guardar referencias y experimentar. Las recomendaciones siguen siendo heurísticas y las sugerencias de prendas provienen del propio perfil calculado, no de una evaluación visual nueva.
+
+## 16. Refinamiento adaptativo y uso práctico
+
+La prueba conserva respuestas repetidas para comparar autoobservaciones cromáticas. Cuando las dos respuestas de temperatura, valor o croma no coinciden, se incorpora una pregunta de aclaración específica para esa dimensión. La aclaración reemplaza la señal mixta solo para construir una hipótesis de temporada; si no existe una respuesta clara, el resultado conserva la incertidumbre. El método sigue siendo heurístico y no ha sido validado como instrumento psicométrico.
+
+El inicio distingue **Comenzar desde cero** y **Continuar mi test**. El guardado local se restaura de forma explícita, evitando sobrescribir respuestas por seleccionar un perfil de género. La capa astrológica puede omitirse.
+
+El plan cápsula amplía la orientación a tres fórmulas de outfit que combinan prendas sugeridas, contexto y paleta. Incluye una lista de auditoría para marcar prendas que la persona ya posee; su estado se guarda localmente y puede reiniciarse. Esto busca reducir compras innecesarias y convertir el diagnóstico en una acción cotidiana.
+
+La interfaz comunica el tiempo estimado, la privacidad del guardado local y el carácter opcional de la foto/análisis facial. Se mantienen alternativas de respuesta y la navegación hacia atrás.
