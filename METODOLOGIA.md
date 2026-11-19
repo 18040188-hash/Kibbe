@@ -302,3 +302,8 @@ Si la persona omite el capítulo de silueta, el test ya no asigna por defecto Dr
 ## 25. Fotografías del diario
 
 El diario de Glow Up limita cada entrada a dos fotos, acepta JPG/PNG/WEBP y rechaza archivos mayores de 8 MB. Las imágenes se reducen a máximo 900 px y se recomprimen como JPEG antes de almacenarse. Las fotos recuperadas de localStorage se validan por tipo y tamaño codificado. La eliminación se gestiona con delegación de eventos y un atributo de datos, no con JavaScript inline.
+
+
+## 26. Resiliencia del diario
+
+Los datos del diario se normalizan al leer tanto localStorage como la base cloud. Campos inesperados se sustituyen por valores seguros y las fotos se filtran por formato, longitud y cantidad antes de renderizar. El respaldo local también valida que el contenido tenga estructura de lista.
