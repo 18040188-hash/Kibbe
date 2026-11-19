@@ -48,25 +48,91 @@ body{background:var(--lab-bg);color:var(--lab-ink)}
 @media(max-width:600px){.lab-shell{padding:18px}.lab-card,.lab-card.wide,.lab-card.full{grid-column:1/-1}.lab-list{grid-template-columns:1fr}.lab-form{grid-template-columns:1fr}.lab-form .full{grid-column:auto}.lab-nav{gap:6px}.lab-nav button{flex:1 1 40%}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-</head>
+<style>
+.lab-hero{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:clamp(24px,5vw,70px);padding:clamp(18px,3vw,40px) 0 34px;border-bottom:1px solid var(--v-rule)}
+.lab-hero-copy{min-width:0}.lab-hero .lab-title{font-size:clamp(58px,9vw,118px);margin:22px 0}.lab-hero .lab-title em{color:var(--v-accent);font-family:var(--v-editorial);font-style:italic}
+.lab-hero-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;font:9px var(--v-caption);letter-spacing:.1em;color:var(--v-muted)}
+.lab-hero-meta span{border-bottom:1px solid var(--v-rule);padding-bottom:7px}
+.lab-hero-art{position:relative;min-height:390px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:10px}
+.lab-hero-art figure{margin:0;border:1px solid var(--v-rule);padding:9px;background:var(--v-paper-light)}
+.lab-hero-art img{display:block;width:100%;height:100%;object-fit:cover}
+.lab-art-main{height:360px;transform:rotate(-2deg);z-index:1}.lab-art-side{height:255px;transform:rotate(4deg);margin-top:80px!important}
+.lab-hero-art figcaption{font:9px var(--v-caption);letter-spacing:.12em;padding-top:9px}
+.lab-art-stamp{position:absolute;right:2%;top:0;font:clamp(16px,2vw,25px) var(--v-display);line-height:.9;text-align:center;color:var(--v-accent);transform:rotate(9deg);z-index:2}
+.lab-overview{display:grid;grid-template-columns:repeat(3,.7fr) 1.6fr;gap:0;border-bottom:1px solid var(--v-rule);margin-bottom:26px}
+.lab-overview-item{padding:16px 20px;border-right:1px solid var(--v-rule);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.lab-overview-item span,.lab-overview-item small{font:9px var(--v-caption);letter-spacing:.12em}.lab-overview-item strong{font:clamp(26px,4vw,40px) var(--v-editorial)}.lab-overview-item small{color:var(--v-muted)}
+.lab-overview-note{display:flex;align-items:center;padding:12px 22px;font:italic 17px var(--v-editorial);color:var(--v-muted)}
+.lab-nav{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin:26px 0 22px;border:1px solid var(--v-rule);padding:0}
+.lab-nav button{border:0;border-right:1px solid var(--v-rule);padding:14px 10px;background:transparent;text-align:left;font:10px var(--v-caption);letter-spacing:.08em;transition:background .2s,color .2s}
+.lab-nav button:last-child{border-right:0}.lab-nav button[aria-selected=true]{background:var(--v-ink);color:var(--v-paper);position:relative}
+.lab-nav button[aria-selected=true]::after{content:"↗";float:right;color:#c8a58c}
+.lab-panel{animation:lab-in .25s ease}.lab-panel.active{display:block}
+@keyframes lab-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.lab-dna-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}
+.lab-dna-cover{background:var(--v-ink);color:var(--v-paper-light);padding:clamp(18px,3vw,34px);min-height:520px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.lab-dna-cover::after{content:"V";position:absolute;right:-.12em;bottom:-.35em;font:clamp(240px,35vw,440px) var(--v-display);color:rgba(235,229,216,.045);pointer-events:none}
+.lab-dna-cover-top,.lab-dna-cover-bottom{position:relative;z-index:1}.lab-dna-cover-top{display:flex;justify-content:space-between;font:9px var(--v-caption);letter-spacing:.13em;color:#b9ad9b}
+.lab-dna-cover-middle{max-width:620px;position:relative;z-index:1}.lab-dna-mark{font-size:34px;color:#b78d6b}.lab-dna-cover h2{font:clamp(38px,6vw,72px)/.94 var(--v-editorial);margin:12px 0}.lab-dna-cover p{max-width:500px;color:#d2c6ad;font:15px/1.6 var(--v-body)}
+.lab-dna-formula{font:italic clamp(18px,2.5vw,27px) var(--v-editorial);color:#d9b89a;margin-top:18px}
+.lab-dna-cover .lab-tag{border-color:rgba(245,240,230,.35);color:var(--v-paper-light)}.lab-dna-cover .lab-btn{border-color:var(--v-paper-light);background:var(--v-paper-light);color:var(--v-ink)}.lab-dna-cover .lab-btn.secondary{background:transparent;color:var(--v-paper-light)}
+.lab-dna-side{display:flex;flex-direction:column;gap:16px}
+.lab-dna-palette,.lab-dna-garments{border:1px solid var(--v-rule);padding:20px;background:var(--v-paper-light)}
+.lab-palette{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:16px 0 10px}.lab-palette i{height:80px;border:1px solid rgba(0,0,0,.12);display:block;position:relative}.lab-palette i span{position:absolute;bottom:5px;left:5px;right:5px;font:8px var(--v-caption);writing-mode:vertical-rl;transform:rotate(180deg);color:rgba(255,255,255,.9);text-shadow:0 1px 2px #333}
+.lab-dna-garments h3{font:23px var(--v-editorial);margin:12px 0}.lab-garment-list ul{list-style:none;padding:0;margin:10px 0 16px}.lab-garment-list li{border-bottom:1px solid var(--v-rule);padding:8px 0;font:12px var(--v-body)}.lab-garment-list li::before{content:"✦";color:var(--v-accent);margin-right:8px}
+.lab-dna-note{display:flex;gap:20px;align-items:baseline;border-top:1px solid var(--v-rule);border-bottom:1px solid var(--v-rule);margin:22px 0;padding:16px 0}.lab-dna-note span{font:9px var(--v-caption);letter-spacing:.15em;color:var(--v-accent);white-space:nowrap}.lab-dna-note p{font:italic 20px var(--v-editorial);margin:0}
+.lab-tools-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-bottom:20px}
+.lab-tools-row .lab-note{flex-basis:100%;margin:0}
+.lab-tools-row .lab-btn{font:9px var(--v-caption);text-transform:uppercase;letter-spacing:.08em}
+.lab-card,.lab-item{transition:transform .18s,border-color .18s}.lab-card:hover,.lab-item:hover{transform:translateY(-2px);border-color:var(--v-accent)}
+.lab-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.lab-item{padding:0;overflow:hidden;background:var(--v-paper-light)}.lab-item img{height:240px;max-height:none;object-fit:cover;margin:0}.lab-item .lab-meta,.lab-item h3,.lab-item p,.lab-item .lab-delete{margin-inline:14px}.lab-item .lab-meta{display:block;margin-top:14px}.lab-item h3{margin-top:7px}.lab-item p{margin-bottom:14px}
+.lab-item .lab-delete{margin-bottom:12px}
+.lab-result{background:var(--v-paper-light);border:1px solid var(--v-rule)}
+@media(max-width:900px){.lab-hero{grid-template-columns:1fr}.lab-hero-art{max-width:540px;width:100%;margin:auto}.lab-overview{grid-template-columns:repeat(3,1fr)}.lab-overview-note{grid-column:1/-1;border-top:1px solid var(--v-rule)}.lab-nav{grid-template-columns:repeat(3,1fr)}.lab-nav button:nth-child(3){border-right:0}.lab-nav button:nth-child(-n+3){border-bottom:1px solid var(--v-rule)}.lab-dna-layout{grid-template-columns:1fr}.lab-dna-side{display:grid;grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.lab-hero-art{min-height:300px}.lab-art-main{height:280px}.lab-art-side{height:210px}.lab-overview{grid-template-columns:repeat(3,1fr)}.lab-overview-item{padding:12px 8px;gap:4px;justify-content:center}.lab-overview-item span,.lab-overview-item small{width:100%;text-align:center}.lab-overview-item strong{font-size:30px}.lab-overview-note{padding:12px 8px;text-align:center;justify-content:center}.lab-nav{grid-template-columns:repeat(2,1fr)}.lab-nav button{border-bottom:1px solid var(--v-rule)!important;border-right:1px solid var(--v-rule)!important;padding:12px 9px}.lab-nav button:nth-child(2n){border-right:0!important}.lab-nav button:nth-last-child(-n+2){border-bottom:0!important}.lab-dna-cover{min-height:460px}.lab-dna-side{grid-template-columns:1fr}.lab-palette i{height:55px}.lab-dna-note{display:block}.lab-dna-note p{margin-top:10px}.lab-list{grid-template-columns:repeat(2,minmax(0,1fr))}.lab-item img{height:170px}.lab-shell{padding:16px}.lab-title{font-size:clamp(52px,15vw,88px)}}
+@media(prefers-reduced-motion:reduce){.lab-panel{animation:none}.lab-card:hover,.lab-item:hover{transform:none}}
+</style></head>
 <body>
 <a class="skip-link" href="#lab-main">Saltar al Style Lab</a>
 <header class="v-global-header"><a class="logo" href="index.html" aria-label="VÉNUS, inicio">VÉNUS</a><nav data-global-nav aria-label="Navegación principal"><a data-nav-link href="index.html">INICIO</a><a data-nav-link href="app-v2.html">TEST</a><a data-nav-link href="perfil.html">PERFIL</a><a data-nav-link href="glowup.html">GLOW UP</a><a data-nav-link href="archivo.html">ARCHIVO</a><a data-nav-link aria-current="page" href="atelier.html">STYLE LAB</a></nav></header>
 <main id="lab-main" class="lab-shell">
-<div class="lab-kicker">VÉNUS / ISSUE 02 · PERSONAL STYLE LAB</div>
-<h1 class="lab-title">Style <em>Lab.</em></h1>
-<p class="lab-lede">Tu estilo no es una etiqueta inmóvil. Guarda referencias, prueba fórmulas, registra lo que sí se siente como tú y construye un armario con intención. Todo queda en este dispositivo.</p>
+<section class="lab-hero">
+  <div class="lab-hero-copy">
+    <div class="lab-kicker">VÉNUS / ISSUE 02 · YOUR PERSONAL STYLE ARCHIVE</div>
+    <h1 class="lab-title">Tu estilo,<br><em>en movimiento.</em></h1>
+    <p class="lab-lede">El test te dio una brújula. Aquí conviertes esa lectura en outfits, referencias, prendas reales y experimentos propios.</p>
+    <div class="lab-hero-meta"><span>01 / OBSERVAR</span><span>02 / PROBAR</span><span>03 / REESCRIBIR</span></div>
+  </div>
+  <div class="lab-hero-art" aria-label="Placas visuales originales de VÉNUS">
+    <figure class="lab-art-main"><img src="assets/img/venus-editorial-romantic.svg" alt="Placa original VÉNUS, romanticismo y textura"><figcaption>FIG. 01 / ROMANCE</figcaption></figure>
+    <figure class="lab-art-side"><img src="assets/img/venus-editorial-punk.svg" alt="Placa original VÉNUS, punk"><figcaption>FIG. 02 / PUNK</figcaption></figure>
+    <span class="lab-art-stamp">YOUR<br>STYLE<br>ORBIT</span>
+  </div>
+</section>
+<section class="lab-overview" aria-label="Resumen de tu laboratorio">
+  <div class="lab-overview-item"><span>ARMARIO</span><strong id="wardrobe-count">0</strong><small>PIEZAS</small></div>
+  <div class="lab-overview-item"><span>MOODBOARD</span><strong id="mood-count">0</strong><small>REFERENCIAS</small></div>
+  <div class="lab-overview-item"><span>DIARIO</span><strong id="experiment-count">0</strong><small>EXPERIMENTOS</small></div>
+  <div class="lab-overview-note">Un espacio privado para descubrir qué te gusta en la vida real.</div>
+</section>
 <div class="lab-nav" role="tablist" aria-label="Secciones del Style Lab">
 <button role="tab" aria-selected="true" data-tab="dna">01 · DNA</button><button role="tab" aria-selected="false" data-tab="wardrobe">02 · Armario</button><button role="tab" aria-selected="false" data-tab="outfits">03 · Fórmulas</button><button role="tab" aria-selected="false" data-tab="moodboard">04 · Moodboard</button><button role="tab" aria-selected="false" data-tab="experiments">05 · Experimentos</button><button role="tab" aria-selected="false" data-tab="shopping">06 · Compras</button>
 </div>
 <section class="lab-panel active" id="panel-dna" role="tabpanel">
-<div class="lab-grid">
-<article class="lab-card wide"><small>01 / Tu fórmula</small><h2 id="dna-title">Tu Style DNA aún no está escrito.</h2><p id="dna-copy">Completa el test VÉNUS para conectar tu perfil con este laboratorio. También puedes comenzar a explorar manualmente.</p><div class="lab-dna" id="dna-tags"></div><div class="lab-actions"><a class="lab-btn" href="app-v2.html">Hacer / actualizar test</a><a class="lab-btn secondary" href="perfil.html">Abrir perfil guardado</a></div></article>
-<article class="lab-card"><small>02 / Inventario</small><div class="lab-stat" id="wardrobe-count">0</div><p>Prendas en tu armario digital.</p><button class="lab-btn secondary" data-goto="wardrobe">Añadir prendas</button></article>
-<article class="lab-card"><small>03 / Archivo personal</small><div class="lab-stat" id="mood-count">0</div><p>Referencias guardadas en tu moodboard.</p><button class="lab-btn secondary" data-goto="moodboard">Ver moodboard</button></article>
-<article class="lab-card"><small>04 / Registro</small><div class="lab-stat" id="experiment-count">0</div><p>Experimentos de estilo registrados.</p><button class="lab-btn secondary" data-goto="experiments">Registrar prueba</button></article>
-<article class="lab-card full"><small>Una lectura, no una regla</small><h3>La evidencia de tu test es el punto de partida.</h3><p>La fórmula guardada conecta silueta, paleta y estética. Tus outfits reales y tus notas pueden corregirla con el tiempo. No necesitas obedecer a tu diagnóstico para vestirte.</p><div class="lab-actions"><button class="lab-btn" id="download-card">Descargar Style Card</button><button class="lab-btn secondary" id="export-data">Exportar mis datos (.json)</button><label class="lab-btn secondary" for="import-data">Importar copia (.json)</label><input id="import-data" type="file" accept="application/json" hidden></div><p class="lab-note" id="dna-feedback" aria-live="polite"></p></article>
-</div></section>
+<div class="lab-dna-layout">
+  <article class="lab-dna-cover">
+    <div class="lab-dna-cover-top"><span>VÉNUS / YOUR STYLE DNA</span><span>FIG. 01</span></div>
+    <div class="lab-dna-cover-middle"><div class="lab-dna-mark">✦</div><h2 id="dna-title">Tu fórmula<br>está por descubrir.</h2><p id="dna-copy">Completa el test para traer tu lectura a este espacio.</p><div class="lab-dna-formula" id="dna-formula"></div></div>
+    <div class="lab-dna-cover-bottom"><div id="dna-tags" class="lab-dna"></div><div class="lab-actions"><a class="lab-btn" href="app-v2.html">Actualizar mi test ↗</a><a class="lab-btn secondary" href="perfil.html">Ver perfil completo</a></div></div>
+  </article>
+  <aside class="lab-dna-side">
+    <section class="lab-dna-palette"><div class="lab-label">Tu paleta / Color story</div><div id="dna-palette" class="lab-palette"></div><p id="dna-palette-label" class="lab-note">Los colores aparecen al completar tu test.</p></section>
+    <section class="lab-dna-garments"><div class="lab-label">Prendas clave / Starting point</div><div id="dna-wardrobe-suggestions" class="lab-garment-list"><p class="lab-note">Tu selección de prendas se construirá a partir del resultado.</p></div><button class="lab-btn secondary" data-goto="wardrobe">Construir mi armario →</button></section>
+  </aside>
+</div>
+<section class="lab-dna-note"><span>MANIFESTO /</span><p>El diagnóstico no es una sentencia. Tu estilo se afina cuando lo llevas, lo vives, lo contradices y vuelves a elegir.</p></section>
+<div class="lab-tools-row"><button class="lab-btn secondary" id="download-card">Descargar Style Card</button><button class="lab-btn secondary" id="export-data">Exportar copia (.json)</button><label class="lab-btn secondary" for="import-data">Importar copia (.json)</label><input id="import-data" type="file" accept="application/json" hidden><p class="lab-note" id="dna-feedback" aria-live="polite"></p></div>
+</section>
 <section class="lab-panel" id="panel-wardrobe" role="tabpanel">
 <div class="lab-grid"><article class="lab-card wide"><small>02 / Inventario</small><h2>Lo que ya tienes.</h2><p>Registra piezas que sí usas. Añade categoría, color, ocasión y una foto opcional. La información se guarda localmente.</p>
 <form id="wardrobe-form" class="lab-form">
@@ -108,11 +174,28 @@ function dateToday(){return new Date().toISOString().slice(0,10)}
 function refreshCounts(){$('wardrobe-count').textContent=wardrobe.length;$('mood-count').textContent=mood.length;$('experiment-count').textContent=experiments.length}
 function profileDna(){
  let tags=[];
- if(profile){['kibbe','season','vibe'].forEach(k=>profile[k]&&tags.push(profile[k]));if(profile.formula) $('dna-title').textContent=profile.formula;
+ if(profile){
+  ['kibbe','season','vibe'].forEach(k=>profile[k]&&tags.push(profile[k]));
+  $('dna-title').innerHTML=(profile.kibbe||'Tu silueta')+'<br><em>'+(profile.vibe||'Tu expresión')+'</em>';
+  $('dna-formula').textContent=profile.formula||[profile.kibbe,profile.season,profile.vibe].filter(Boolean).join(' · ');
+  $('dna-copy').textContent='Tu test es el punto de partida. Guarda prendas y experimentos para llevar esta fórmula a tu vida cotidiana.';
+  const palette=profile.palette||[];
+  $('dna-palette').innerHTML=palette.slice(0,5).map((c,i)=>'<i style="background:'+safe(c)+'"><span>'+safe((profile.paletteNames||[])[i]||c)+'</span></i>').join('');
+  $('dna-palette-label').textContent=(profile.season||'Tu color story')+' · '+palette.length+' tonos de referencia';
+  const garments=profile.garments||{};
+  const picks=Object.entries(garments).flatMap(([cat,arr])=>(arr||[]).slice(0,2).map(item=>({cat,item}))).slice(0,6);
+  $('dna-wardrobe-suggestions').innerHTML=picks.length?'<ul>'+picks.map(x=>'<li>'+safe(x.item)+'</li>').join('')+'</ul>':'<p class="lab-note">No hay sugerencias de prendas guardadas en este perfil.</p>';
   const context=[profile.wardrobeContext,profile.wardrobeClimate,profile.wardrobeGoal].filter(Boolean);
   context.forEach(v=>tags.push(v));
-  $('dna-copy').textContent='Fórmula recuperada del test VÉNUS. Úsala como mapa inicial y contrástala con tus looks y experimentos.';
- }else{$('dna-title').textContent='Tu Style DNA aún no está escrito.';$('dna-copy').textContent='Completa el test VÉNUS para conectar tu perfil. Puedes explorar este laboratorio sin diagnóstico.'}
+  $('dna-copy').textContent='Tu resultado VÉNUS conecta silueta, color y estética. Úsalo como brújula y contrástalo con tus looks reales.';
+ }else{
+  $('dna-title').innerHTML='Tu fórmula<br>está por descubrir.';
+  $('dna-formula').textContent='';
+  $('dna-copy').textContent='Completa el test para traer tu lectura a este espacio. Puedes explorar y registrar prendas sin diagnóstico.';
+  $('dna-palette').innerHTML='';
+  $('dna-palette-label').textContent='Los colores aparecen al completar tu test.';
+  $('dna-wardrobe-suggestions').innerHTML='<p class="lab-note">Tu selección de prendas se construirá a partir del resultado.</p>';
+ }
  $('dna-tags').innerHTML=tags.map(t=>'<span class="lab-tag">'+safe(t)+'</span>').join('');
 }
 function renderWardrobe(){ $('wardrobe-list').innerHTML=wardrobe.length?wardrobe.map(x=>'<article class="lab-item">'+(x.photo?'<img alt="" src="'+x.photo+'">':'')+'<div class="lab-meta">'+safe(x.category)+' / '+safe(x.occasion||'')+'</div><h3>'+safe(x.name)+'</h3><p>'+safe([x.color,x.notes].filter(Boolean).join(' · '))+'</p><button class="lab-delete" data-delete="wardrobe" data-id="'+safe(x.id)+'">Eliminar</button></article>').join(''):'<div class="lab-empty">Aún no hay prendas guardadas. Añade algunas para probar fórmulas.</div>'}
