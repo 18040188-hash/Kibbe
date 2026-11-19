@@ -44,7 +44,7 @@ for(const [,raw] of css.matchAll(/url\((?:["']?)([^"')]+)(?:["']?)\)/g)){
 }
 
 const test = readFileSync('app-v2.html','utf8');
-for (const marker of ['resumeSavedQuiz','cl_temp_refine','cl_value_refine','cl_chroma_refine','skipCurrentModule','venusCapsuleChecklistV1','eclectic','function venusEscapeHTML','function normalizeSelfieAnalysis','normalizeSelfieAnalysis(res)','${venusEscapeHTML(f)}','${venusEscapeHTML(c.why)}','${venusEscapeHTML(t.tip)}','${venusEscapeHTML(sa.styleNote)}','8*1024*1024','image/webp','function loadImageFile','modIdx=1;qIdx=0','modIdx=0;qIdx=getModules()[0].questions.length-1','delete answers.kibbeTie']) {
+for (const marker of ['resumeSavedQuiz','cl_temp_refine','cl_value_refine','cl_chroma_refine','skipCurrentModule','venusCapsuleChecklistV1','eclectic','function venusEscapeHTML','function normalizeSelfieAnalysis','normalizeSelfieAnalysis(res)','${venusEscapeHTML(f)}','${venusEscapeHTML(c.why)}','${venusEscapeHTML(t.tip)}','${venusEscapeHTML(sa.styleNote)}','8*1024*1024','image/webp','function loadImageFile','modIdx=1;qIdx=0','modIdx=0;qIdx=getModules()[0].questions.length-1','delete answers.kibbeTie','name:\'Pendiente de confirmar\'','return \'pending\'']) {
   assert.ok(test.includes(marker),'Expected VÉNUS test feature missing: '+marker);
 }
 const glowup=readFileSync('glowup.html','utf8');
