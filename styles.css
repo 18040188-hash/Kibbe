@@ -4206,3 +4206,34 @@ body:not(.glowup-page){height:auto;min-height:100vh;overflow-x:clip;overflow-y:a
 .result-style-lab-visual-formula strong{font:17px var(--v-editorial);overflow-wrap:anywhere}
 .result-style-lab-caption{font:9px var(--v-caption);letter-spacing:.12em;color:var(--v-accent);margin-top:16px}
 @media(max-width:650px){.result-style-lab-body{grid-template-columns:1fr}.result-style-lab-visual{min-height:210px}.result-style-lab-palette i{height:48px}.result-style-lab-visual-formula{grid-template-columns:1fr 1fr}.result-style-lab-copy h2{font-size:clamp(38px,12vw,54px)}}
+
+/* VÉNUS test UX / wardrobe enhancements */
+.venus-test-welcome{max-width:650px;margin:12px auto 22px;line-height:1.7}
+.venus-test-welcome span{display:block;margin-top:12px;font:10px var(--v-caption,monospace);letter-spacing:.1em;text-transform:uppercase;color:var(--v-muted,#766d60)}
+.gender-grid .gender-opt{display:flex;align-items:center;justify-content:center;gap:10px;min-height:86px;cursor:pointer}
+.gender-opt[aria-pressed="true"]{background:#e3d5c9;border:2px solid var(--v-accent);box-shadow:4px 4px 0 var(--v-accent)}
+.gender-opt .gender-icon{font-size:20px}
+.gender-opt .gender-name{display:block}
+.venus-resume-panel{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:18px 0;padding:16px;border:1px solid var(--v-ink);background:var(--v-paper-light);text-align:left}
+.venus-resume-panel small,.venus-capsule-audit small{font:9px var(--v-caption,monospace);letter-spacing:.14em;color:var(--v-accent)}
+.venus-resume-panel p{font:12px/1.6 var(--v-body);margin:5px 0 0}
+.venus-resume-btn,.btn-skip-module{border:1px solid var(--v-ink);background:transparent;color:inherit;padding:12px 15px;font:11px var(--v-caption,monospace);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;flex-shrink:0}
+.venus-resume-btn:hover,.btn-skip-module:hover{background:var(--v-ink);color:var(--v-paper)}
+.venus-privacy-note{font:11px/1.6 var(--v-body);color:var(--v-muted);margin-top:18px}
+.btn-skip-module{border-color:var(--v-rule);color:var(--v-muted)}
+.venus-outfit-formulas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:14px 0;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.22)}
+.venus-outfit-formulas article{padding:15px;background:#201c1a;min-width:0}
+.venus-outfit-formulas small{display:block;margin-bottom:10px}
+.venus-outfit-formulas b{display:block;font:16px/1.4 var(--v-editorial,Georgia);color:#f4eee2}
+.venus-outfit-formulas p{margin:9px 0 0;color:#c7bcae}
+.venus-capsule-audit{border-top:1px solid rgba(255,255,255,.25);margin-top:20px;padding-top:16px}
+.venus-capsule-audit-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.venus-capsule-audit-head h3{font:22px var(--v-editorial,Georgia);margin:6px 0}
+.venus-capsule-audit-head button{background:transparent;border:1px solid rgba(255,255,255,.35);color:#f4eee2;padding:8px 10px;font:10px var(--v-caption,monospace);text-transform:uppercase;cursor:pointer}
+.venus-capsule-checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.venus-capsule-check{display:flex;align-items:flex-start;gap:10px;padding:10px;border:1px solid rgba(255,255,255,.22);font:12px/1.5 var(--v-body);cursor:pointer}
+.venus-capsule-check input{accent-color:#c6a06c;margin:2px 0 0;flex-shrink:0}
+.venus-capsule-check input:checked+span{text-decoration:line-through;opacity:.65}
+.venus-resume-btn:focus-visible,.btn-skip-module:focus-visible,.venus-capsule-audit button:focus-visible,.venus-capsule-check input:focus-visible{outline:2px solid #d6b98e;outline-offset:3px}
+@media(max-width:760px){.venus-outfit-formulas{grid-template-columns:1fr}.venus-resume-panel{align-items:flex-start;flex-direction:column}.venus-resume-btn{width:100%}}
+@media(max-width:420px){.venus-capsule-checklist{grid-template-columns:1fr}.venus-resume-panel{padding:12px}}
