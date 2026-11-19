@@ -267,3 +267,8 @@ El diario usa un respaldo local: fusiona registros locales y cloud cuando ambos 
 El onboarding de Glow Up ofrece botones para volver y chips navegables por teclado. Estas mejoras no sustituyen una prueba manual con navegador: el navegador conectado no estuvo disponible durante esta auditoría, así que la validación interactiva y visual se declara pendiente.
 
 La página heredada `visual-test.html` contenía un cierre incorrecto en la lista de opciones de la pregunta de familia estacional, lo que detenía la ejecución del JavaScript. Se corrigió y se incorporó esa página al smoke test, que compila los scripts inline de las nueve rutas.
+
+
+## 19. Seguridad de contenido dinámico y carga de imágenes
+
+La revisión detectó que el nombre del onboarding, las intenciones y las entradas del diario se insertaban directamente en HTML. Se añadió `escapeHTML` antes de renderizar esos datos para reducir el riesgo de inyección de HTML/XSS. El análisis facial generado por IA también se trata como contenido no confiable y se escapa antes de insertarlo en el moodboard. La selfie acepta únicamente JPG, PNG y WEBP, con límite de 8 MB, y comunica el motivo cuando el archivo no es compatible o excede el límite. El smoke test ahora comprueba estos guardarraíles.
