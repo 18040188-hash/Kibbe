@@ -265,3 +265,5 @@ Glow Up ahora permite volver entre pasos del onboarding, valida el nombre en el 
 El diario usa un respaldo local: fusiona registros locales y cloud cuando ambos existen, guarda entradas y permite eliminarlas sin DB. Se limita a 25 entradas; conserva fotos de las cuatro entradas más recientes, máximo dos por entrada, para reducir el riesgo de exceder cuota de almacenamiento. Si falla el guardado local y cloud, se informa y no se limpia el borrador.
 
 El onboarding de Glow Up ofrece botones para volver y chips navegables por teclado. Estas mejoras no sustituyen una prueba manual con navegador: el navegador conectado no estuvo disponible durante esta auditoría, así que la validación interactiva y visual se declara pendiente.
+
+La página heredada `visual-test.html` contenía un cierre incorrecto en la lista de opciones de la pregunta de familia estacional, lo que detenía la ejecución del JavaScript. Se corrigió y se incorporó esa página al smoke test, que compila los scripts inline de las nueve rutas.
