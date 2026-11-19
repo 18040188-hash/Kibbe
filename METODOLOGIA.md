@@ -254,3 +254,14 @@ Las comparaciones de color se repiten en temperatura, valor y croma. Cuando las 
 El resultado de cápsula ofrece tres fórmulas de combinación y una checklist de prendas sugeridas. Marcar una pieza no implica comprarla: se usa como auditoría de lo que ya existe. El estado persiste localmente bajo identificadores de prenda para evitar que el progreso se transfiera por posición entre perfiles. Se puede reiniciar. El capítulo astrológico es omitible.
 
 El desglose Kibbe ahora presenta 10 señales, corrigiendo el contador de observaciones. La consistencia se etiqueta como heurística, no como precisión estadística. Las recomendaciones se mantienen exploratorias, sin reglas de prohibición.
+
+
+## 18. Auditoría de experiencia de usuario y resiliencia
+
+La revisión estática detectó rutas de imagen incorrectas: las referencias pedían `/assets/img/PDF/pagina-XX/fig-XX-YY.png`, mientras que los archivos existentes están en `/assets/venus_referencias_pdf_paginas_01_11/pagina-XX/fig-XX-YY.png`. Se corrigieron las 50 referencias en home, test, Glow Up y Archivo.
+
+Glow Up ahora permite volver entre pasos del onboarding, valida el nombre en el primer paso y preserva las selecciones. El perfil se puede recuperar desde localStorage y el puente del test (`venusGlowUpProfile`), y el progreso del plan tiene respaldo local. Esto evita que el flujo dependa exclusivamente del proveedor DB.
+
+El diario usa un respaldo local: fusiona registros locales y cloud cuando ambos existen, guarda entradas y permite eliminarlas sin DB. Se limita a 25 entradas; conserva fotos de las cuatro entradas más recientes, máximo dos por entrada, para reducir el riesgo de exceder cuota de almacenamiento. Si falla el guardado local y cloud, se informa y no se limpia el borrador.
+
+El onboarding de Glow Up ofrece botones para volver y chips navegables por teclado. Estas mejoras no sustituyen una prueba manual con navegador: el navegador conectado no estuvo disponible durante esta auditoría, así que la validación interactiva y visual se declara pendiente.
