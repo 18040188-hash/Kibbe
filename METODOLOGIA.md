@@ -317,3 +317,8 @@ Las seis pestañas del laboratorio ahora enlazan explícitamente a su panel medi
 ## 28. Perfil e integridad de respaldos
 
 La página Perfil valida que la paleta sea una lista de códigos hexadecimales y que las recomendaciones de prendas sean arreglos antes de renderizarlas. Los colores se usan únicamente después de validarlos, evitando estilos dinámicos desde datos importados.
+
+
+## 29. Story Card del perfil
+
+La tarjeta de perfil valida la paleta antes de usarla como color y normaliza las recomendaciones de prendas como arreglos. La exportación visual usa la paleta validada o colores neutros si no hay datos válidos.
