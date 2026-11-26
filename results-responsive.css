@@ -1,0 +1,122 @@
+/* VÉNUS — resultados legibles y adaptables
+   Ajustes aislados para el informe final del test.
+   No modifica cálculos, respuestas ni persistencia. */
+
+#result-wrap{
+  display:block;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  min-height:0;
+  height:auto;
+  margin-inline:auto;
+  overflow:visible;
+}
+#result-wrap *,
+#result-wrap *::before,
+#result-wrap *::after{box-sizing:border-box}
+#result-wrap :where(h1,h2,h3,h4,p,li,small,b,strong,span,a){
+  max-width:100%;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  hyphens:auto;
+}
+#result-wrap :where(p,li){line-height:1.65}
+#result-wrap img,
+#result-wrap svg{max-width:100%}
+#result-wrap .venus-breakdown,
+#result-wrap .venus-style-atlas,
+#result-wrap .venus-method-results,
+#result-wrap .venus-explanation,
+#result-wrap .venus-capsule-plan,
+#result-wrap .result-style-lab,
+#result-wrap .venus-natural-card{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+}
+#result-wrap .venus-method-results,
+#result-wrap .venus-breakdown-grid,
+#result-wrap .venus-atlas-grid,
+#result-wrap .venus-natural-grid,
+#result-wrap .venus-capsule-grid,
+#result-wrap .venus-outfit-formulas,
+#result-wrap .result-style-lab-body,
+#result-wrap .venus-dimensions,
+#result-wrap .venus-breakdown-swatches{
+  min-width:0;
+}
+#result-wrap .venus-breakdown-grid,
+#result-wrap .venus-atlas-grid{align-items:stretch}
+#result-wrap .venus-breakdown-card,
+#result-wrap .venus-atlas-panel,
+#result-wrap .venus-natural-grid>div,
+#result-wrap .venus-capsule-grid>article,
+#result-wrap .venus-outfit-formulas>article{
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+#result-wrap .venus-breakdown-card h3,
+#result-wrap .venus-breakdown-head h2,
+#result-wrap .venus-atlas-title h2,
+#result-wrap .venus-capsule-plan h2{
+  line-height:1.08;
+  overflow-wrap:anywhere;
+}
+#result-wrap .venus-breakdown-card>small,
+#result-wrap .venus-atlas-panel>small,
+#result-wrap .venus-breakdown-head>small,
+#result-wrap .venus-atlas-title>small{
+  display:block;
+  line-height:1.55;
+  letter-spacing:.12em;
+  white-space:normal;
+}
+#result-wrap .venus-observation-list,
+#result-wrap .venus-atlas-panel ul,
+#result-wrap .venus-capsule-grid ul{padding-inline-start:1.15rem}
+#result-wrap .venus-breakdown-swatches>div{min-width:0}
+#result-wrap .venus-breakdown-swatches small{
+  display:block;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  line-height:1.4;
+}
+#result-wrap .venus-figure{min-width:0}
+#result-wrap .venus-figure svg{display:block;max-width:100%;height:auto;margin-inline:auto}
+#result-wrap .result-style-lab-visual{min-width:0}
+#result-wrap .result-style-lab-visual-formula>*{min-width:0;overflow-wrap:anywhere}
+
+@media(max-width:760px){
+  #result-wrap{grid-column:1/-1}
+  #result-wrap .venus-breakdown-grid{grid-template-columns:minmax(0,1fr)}
+  #result-wrap .venus-atlas-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #result-wrap .venus-breakdown-card,
+  #result-wrap .venus-atlas-panel{padding:clamp(16px,4vw,22px)}
+  #result-wrap .venus-breakdown-head,
+  #result-wrap .venus-atlas-title{padding:18px 0}
+  #result-wrap .venus-breakdown-head h2,
+  #result-wrap .venus-atlas-title h2{font-size:clamp(30px,7vw,42px)}
+  #result-wrap .venus-natural-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #result-wrap .venus-capsule-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #result-wrap .venus-outfit-formulas{grid-template-columns:minmax(0,1fr)}
+  #result-wrap .result-style-lab-body{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:520px){
+  #result-wrap .venus-atlas-grid{grid-template-columns:minmax(0,1fr)}
+  #result-wrap .venus-dimensions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #result-wrap .venus-breakdown-swatches{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  #result-wrap .venus-breakdown-swatches i{height:42px}
+  #result-wrap .venus-natural-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #result-wrap .venus-capsule-grid{grid-template-columns:minmax(0,1fr)}
+  #result-wrap .result-style-lab-visual-formula{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #result-wrap .venus-breakdown-card p,
+  #result-wrap .venus-atlas-panel p{font-size:13px;line-height:1.7}
+  #result-wrap .venus-breakdown-head p,
+  #result-wrap .venus-atlas-title p{font-size:13px;line-height:1.7}
+}
+@media(max-width:360px){
+  #result-wrap .venus-natural-grid{grid-template-columns:minmax(0,1fr)}
+  #result-wrap .venus-dimensions{grid-template-columns:minmax(0,1fr)}
+  #result-wrap .venus-breakdown-swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
