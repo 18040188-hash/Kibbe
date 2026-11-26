@@ -120,3 +120,34 @@
   #result-wrap .venus-dimensions{grid-template-columns:minmax(0,1fr)}
   #result-wrap .venus-breakdown-swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+
+/* FIX 02 — El encabezado y la cuadrícula son filas completas.
+   .venus-method-results es un grid; sin esta regla, el header
+   ocupaba una columna y la cuadrícula anidada otra, creando
+   tres columnas visuales y comprimiendo todo el texto. */
+#result-wrap .venus-method-results{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  width:100%;
+  max-width:100%;
+}
+#result-wrap .venus-method-results > .venus-breakdown-head,
+#result-wrap .venus-method-results > .venus-breakdown-grid{
+  grid-column:1 / -1;
+  width:100%;
+  min-width:0;
+}
+#result-wrap .venus-method-results > .venus-breakdown-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+#result-wrap .venus-method-results .venus-breakdown-card{
+  min-width:0;
+  overflow-wrap:break-word;
+}
+@media(max-width:760px){
+  #result-wrap .venus-method-results > .venus-breakdown-grid{
+    grid-template-columns:minmax(0,1fr);
+  }
+}
