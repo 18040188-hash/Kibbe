@@ -151,3 +151,89 @@
     grid-template-columns:minmax(0,1fr);
   }
 }
+
+
+/* FIX 03 — Replanteo del informe: tarjetas legibles, no tabla comprimida.
+   Se elimina el corte agresivo de palabras y se da aire a cada bloque. */
+#result-wrap,
+#result-wrap *{
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:none;
+}
+#result-wrap :where(h1,h2,h3,h4,p,li,small,b,strong,span){
+  word-break:normal;
+  hyphens:none;
+  overflow-wrap:break-word;
+}
+#result-wrap .venus-atlas-grid,
+#result-wrap .venus-capsule-grid,
+#result-wrap .venus-outfit-formulas{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  border:0;
+  background:transparent;
+  align-items:stretch;
+}
+#result-wrap .venus-atlas-panel,
+#result-wrap .venus-capsule-grid article,
+#result-wrap .venus-outfit-formulas article{
+  min-width:0;
+  padding:clamp(18px,2.5vw,28px);
+  border:1px solid var(--v-rule,#c9bdab);
+  background:var(--v-paper-light,#f6f0e5);
+  color:var(--v-ink,#211d1b);
+}
+#result-wrap .venus-atlas-panel p,
+#result-wrap .venus-atlas-panel li,
+#result-wrap .venus-capsule-grid li,
+#result-wrap .venus-outfit-formulas p{
+  font-size:14px;
+  line-height:1.75;
+  overflow-wrap:break-word;
+}
+#result-wrap .venus-atlas-panel ul,
+#result-wrap .venus-capsule-grid ul{
+  padding-left:1.2rem;
+  margin-block:12px;
+}
+#result-wrap .venus-atlas-panel small,
+#result-wrap .venus-capsule-grid small,
+#result-wrap .venus-outfit-formulas small{
+  display:block;
+  line-height:1.5;
+  white-space:normal;
+  overflow-wrap:break-word;
+}
+#result-wrap .venus-formula-panel{
+  background:#211d1b;
+  color:#f5f2e9;
+  border-color:#92764d;
+}
+#result-wrap .venus-formula-panel>small{color:#d4b78c}
+#result-wrap .venus-capsule-grid article{
+  background:#201c1a;
+  color:#f4eee2;
+  border-color:rgba(255,255,255,.25);
+}
+#result-wrap .venus-outfit-formulas article{
+  background:#eee7da;
+}
+#result-wrap .venus-atlas-title,
+#result-wrap .venus-capsule-plan>header{
+  min-width:0;
+}
+#result-wrap .venus-atlas-title h2,
+#result-wrap .venus-capsule-plan h2{
+  overflow-wrap:break-word;
+  line-height:1.12;
+}
+@media(max-width:760px){
+  #result-wrap .venus-atlas-grid,
+  #result-wrap .venus-capsule-grid,
+  #result-wrap .venus-outfit-formulas{
+    grid-template-columns:minmax(0,1fr);
+    gap:12px;
+  }
+}
